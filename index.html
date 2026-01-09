@@ -743,6 +743,12 @@
         <button class="close-btn" onclick="closeDonationModal()">×</button>
       </div>
       <div class="donation-body">
+        <div id="install-prompt" style="display:none; margin-bottom:15px; padding:12px; background:var(--panel-2); border:2px solid var(--accent); border-radius:4px;">
+          <div style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold;">📱 Instalar como App</div>
+          <div style="font-size:9px; color:var(--muted); margin-bottom:8px;">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</div>
+          <button class="btn btn-primary" style="width:100%; padding:8px; font-size:9px; margin-bottom:4px;" onclick="installApp()">Instalar</button>
+          <button class="btn btn-secondary" style="width:100%; padding:8px; font-size:9px;" onclick="dismissInstallPrompt()">Ahora no</button>
+        </div>
         <div class="donation-widget">
           <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="346" height="623" frameborder="0">No se puede cargar el widget</iframe>
         </div>
@@ -793,7 +799,7 @@
       legendary: '#ff8000'
     };
 
-    // ====== Funciones de Tabs ======
+    // ====== Funciones de Tabs (SPA - Single Page Application) ======
     function switchTab(tabId) {
       // Esconder todos los tabs
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -802,7 +808,39 @@
       // Mostrar tab seleccionado
       document.getElementById(tabId).classList.add('active');
       // Activar botón
-      event.target.classList.add('active');
+      if (event && event.target) event.target.classList.add('active');
+      // Actualizar URL para SPA
+      const tabName = tabId.replace('tab-', '');
+      history.pushState({ tab: tabName }, '', `#${tabName}`);
+    }
+    
+    // Manejar navegación con el botón atrás/adelante
+    window.addEventListener('popstate', function(event) {
+      if (event.state && event.state.tab) {
+        switchTabNoHistory('tab-' + event.state.tab);
+      }
+    });
+    
+    // Cambiar tab sin actualizar historial
+    function switchTabNoHistory(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      // Buscar y activar botón correspondiente
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        if (btn.onclick && btn.onclick.toString().includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+    
+    // Inicializar SPA con URL
+    function initSPA() {
+      const hash = window.location.hash.slice(1);
+      if (hash && document.getElementById('tab-' + hash)) {
+        switchTabNoHistory('tab-' + hash);
+        history.replaceState({ tab: hash }, '', `#${hash}`);
+      }
     }
 
     // ====== Funciones de UI ======
@@ -1607,6 +1645,44 @@
       }
     });
 
+    // ====== PWA Install Prompt ======
+    let deferredPrompt = null;
+    let installPromptShown = false;
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (!localStorage.getItem('pwa_dismissed')) {
+        showInstallPrompt();
+      }
+    });
+    
+    function showInstallPrompt() {
+      const prompt = document.getElementById('install-prompt');
+      if (prompt && !installPromptShown) {
+        prompt.style.display = 'block';
+        installPromptShown = true;
+      }
+    }
+    
+    function installApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('App instalada correctamente');
+            localStorage.setItem('pwa_dismissed', 'true');
+          }
+          deferredPrompt = null;
+        });
+      }
+    }
+    
+    function dismissInstallPrompt() {
+      document.getElementById('install-prompt').style.display = 'none';
+      localStorage.setItem('pwa_dismissed', 'true');
+    }
+
     // Init
     window.onload = () => {
       renderUnitsSelector('ing-rarity');
@@ -1614,9 +1690,7 @@
       renderIngredients();
       renderBook();
       renderUnitsList();
-      
-      // Las pestañas funcionan igual en todas las pantallas
-      // Solo el contenido activo se muestra
+      initSPA();
     };
   </script>
 </body>
