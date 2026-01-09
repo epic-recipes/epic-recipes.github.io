@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#12141d">
+  <meta name="description" content="Gestor de recetas con análisis de costos y rentabilidad">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23e0c36c' width='192' height='192'/><path fill='%2312141d' d='M96 48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 80c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z'/><circle cx='96' cy='96' r='12' fill='%23e0c36c'/></svg>">
   <title>Recetario Épico — Daniel E. F. G.</title>
   <style>
     /* ====== Estética Pixel RPG Evolucionada ====== */
@@ -1691,6 +1695,18 @@
       renderBook();
       renderUnitsList();
       initSPA();
+      
+      // Registrar Service Worker para PWA
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registrado:', registration);
+          })
+          .catch((error) => {
+            console.log('Error al registrar Service Worker:', error);
+          });
+      }
+    };
     };
   </script>
 </body>
