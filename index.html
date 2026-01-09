@@ -445,6 +445,7 @@
       </div>
       <div style="display:flex; gap:8px; align-items:center">
         <button class="btn btn-secondary donate-btn" onclick="openDonationModal()">Donar</button>
+        <button class="btn btn-secondary" style="padding:8px 10px; font-size:11px" onclick="switchTab('tab-config')">⚙️</button>
       </div>
     </header>
 
@@ -453,7 +454,7 @@
       <button class="tab-button" onclick="switchTab('tab-ingredientes')">Ingredientes</button>
       <button class="tab-button" onclick="switchTab('tab-receta')">Crear Receta</button>
       <button class="tab-button active" onclick="switchTab('tab-libro')">Mis Recetas</button>
-      <button class="tab-button" onclick="switchTab('tab-config')">Configuración</button>
+      
     </div>
 
     <!-- TAB 1: INGREDIENTES -->
@@ -466,15 +467,28 @@
             <input type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate">
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
-            <div class="form-group">
-              <label>Precio (€)</label>
-              <input type="number" id="ing-cost" placeholder="0.00" step="0.01">
+              <div class="form-group">
+                <label>Precio (€)</label>
+                <input type="number" id="ing-cost" placeholder="0.00" step="0.01">
+              </div>
+              <div class="form-group">
+                <label>Unidad</label>
+                <select id="ing-rarity"></select>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Unidad</label>
-              <select id="ing-rarity"></select>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
+              <div class="form-group">
+                <label>Tipo de Precio</label>
+                <select id="ing-price-type" onchange="togglePackInput('ing-price-type','ing-pack-size')">
+                  <option value="unit">Por unidad</option>
+                  <option value="pack">Por pack</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Tamaño del Pack (cantidad)</label>
+                <input type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
+              </div>
             </div>
-          </div>
           <div class="btn-grid">
             <button class="btn btn-primary" onclick="addIngredient()">Añadir</button>
             <button class="btn btn-danger" onclick="clearIngredients()">Vaciar</button>
@@ -607,6 +621,19 @@
           <div class="form-group">
             <label>Unidad</label>
             <select id="ing-rarity-desk"></select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
+          <div class="form-group">
+            <label>Tipo de Precio</label>
+            <select id="ing-price-type-desk" onchange="togglePackInput('ing-price-type-desk','ing-pack-size-desk')">
+              <option value="unit">Por unidad</option>
+              <option value="pack">Por pack</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tamaño del Pack (cantidad)</label>
+            <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="1" step="1">
           </div>
         </div>
         <div class="btn-grid">
@@ -816,7 +843,7 @@
             </div>
             <div class="detail-row">
               <span class="detail-label">Costo: ${i.name}</span>
-              <span class="detail-value">${(i.cost * i.qty).toFixed(2)}€</span>
+              <span class="detail-value">${(getUnitCost(i) * i.qty).toFixed(2)}€</span>
             </div>
           `).join('')}
         </div>
@@ -901,13 +928,18 @@
       const cost = parseFloat(document.getElementById('ing-cost').value);
       const rarity = document.getElementById('ing-rarity').value;
 
+      const priceType = document.getElementById('ing-price-type') ? document.getElementById('ing-price-type').value : 'unit';
+      const packSize = document.getElementById('ing-pack-size') ? parseInt(document.getElementById('ing-pack-size').value) || 1 : 1;
+
       if (!name || isNaN(cost)) return showToast("Faltan datos del ingrediente");
 
-      ingredients.push({ id: Date.now(), name, cost, rarity });
+      ingredients.push({ id: Date.now(), name, cost, rarity, priceType, packSize });
       saveState();
       renderIngredients();
       document.getElementById('ing-name').value = '';
       document.getElementById('ing-cost').value = '';
+      if (document.getElementById('ing-price-type')) document.getElementById('ing-price-type').value = 'unit';
+      if (document.getElementById('ing-pack-size')) document.getElementById('ing-pack-size').value = '1';
       showToast(`${name} añadido a la despensa`);
     }
 
@@ -932,10 +964,12 @@
         // Listado lateral móvil
         const card = document.createElement('div');
         card.className = 'card';
+        const unitPrice = getUnitCost(ing);
+        const priceExtra = ing.priceType === 'pack' ? ` — Pack: ${ing.cost.toFixed(2)}€ / ${ing.packSize}` : '';
         card.innerHTML = `
           <div class="card-info">
             <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>${ing.name}</b>
-            <span>Precio: ${ing.cost.toFixed(2)}€ (${getUnitLabel(ing.rarity)})</span>
+            <span>Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="deleteIngredient(${ing.id})">X</button>
         `;
@@ -983,10 +1017,12 @@
         // Listado lateral escritorio
         const card = document.createElement('div');
         card.className = 'card';
+        const unitPrice = getUnitCost(ing);
+        const priceExtra = ing.priceType === 'pack' ? ` — Pack: ${ing.cost.toFixed(2)}€ / ${ing.packSize}` : '';
         card.innerHTML = `
           <div class="card-info">
             <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span>${ing.name}</b>
-            <span>Precio: ${ing.cost.toFixed(2)}€ (${getUnitLabel(ing.rarity)})</span>
+            <span>Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="deleteIngredientDesk(${ing.id})">X</button>
         `;
@@ -1048,10 +1084,11 @@
       activeRecipe.items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'card';
+        const unitPrice = getUnitCost(item);
         card.innerHTML = `
           <div class="card-info">
             <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
-            <span>Costo: ${(item.cost * item.qty).toFixed(2)}€</span>
+            <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipe(${index})">-</button>
         `;
@@ -1070,7 +1107,7 @@
 
     function updateStats() {
       const price = parseFloat(document.getElementById('rec-price').value) || 0;
-      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
       
       const profit = price - cost;
       const margin = price > 0 ? (profit / price) * 100 : 0;
@@ -1096,7 +1133,7 @@
 
       if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
 
-      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
       recipeBook.unshift({
         id: Date.now(),
@@ -1139,10 +1176,11 @@
       activeRecipe.items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'card';
+        const unitPrice = getUnitCost(item);
         card.innerHTML = `
           <div class="card-info">
             <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
-            <span>Costo: ${(item.cost * item.qty).toFixed(2)}€</span>
+            <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipeDesk(${index})">-</button>
         `;
@@ -1158,7 +1196,7 @@
 
     function updateStatsDesk() {
       const price = parseFloat(document.getElementById('rec-price-desk').value) || 0;
-      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
       
       const profit = price - cost;
       const margin = price > 0 ? (profit / price) * 100 : 0;
@@ -1184,7 +1222,7 @@
 
       if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
 
-      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
       recipeBook.unshift({
         id: Date.now(),
@@ -1394,6 +1432,28 @@
       return units[rarity] || 'kg';
     }
 
+    // Devuelve el coste por 1 unidad del ingrediente (tiene en cuenta packs)
+    function getUnitCost(item) {
+      if (!item) return 0;
+      const priceType = item.priceType || 'unit';
+      const packSize = parseFloat(item.packSize) || 1;
+      const cost = parseFloat(item.cost) || 0;
+      if (priceType === 'pack' && packSize > 0) return cost / packSize;
+      return cost;
+    }
+
+    // Muestra u oculta el input de tamaño de pack según tipo de precio
+    function togglePackInput(selectId, packInputId) {
+      const sel = document.getElementById(selectId);
+      const pack = document.getElementById(packInputId);
+      if (!sel || !pack) return;
+      if (sel.value === 'pack') {
+        pack.parentElement.style.display = 'block';
+      } else {
+        pack.parentElement.style.display = 'block'; // lo mantenemos visible por simplicidad
+      }
+    }
+
     function saveState() {
       if (!configLoaded) {
         localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
@@ -1436,9 +1496,15 @@
 
     const DEFAULT_UNITS = {
       'kilogramo': 'kg',
+      'gramo': 'g',
       'litro': 'L',
+      'mililitro': 'ml',
       'unidad': 'Unidad',
-      'mililitro': 'ml'
+      'pieza': 'pz',
+      'cucharada': 'cda',
+      'cucharadita': 'cc',
+      'pizca': 'pizca',
+      'paquete': 'pack'
     };
 
     function getCustomUnits() {
