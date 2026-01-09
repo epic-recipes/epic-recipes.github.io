@@ -441,6 +441,18 @@
 <body>
   <div class="crt"></div>
   
+  <!-- PWA Install Banner -->
+  <div id="install-banner" style="display:none; position:fixed; top:0; left:0; right:0; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); padding:12px 16px; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.5); color:var(--shadow);">
+    <div style="max-width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:11px;">
+      <div style="flex:1;">
+        <div style="font-weight:bold; margin-bottom:4px;">📱 Instalar Recetario Épico</div>
+        <div style="font-size:9px; opacity:0.9;">Acceso rápido sin necesidad de navegador</div>
+      </div>
+      <button class="btn" style="padding:6px 12px; font-size:9px; white-space:nowrap; background:var(--shadow); color:var(--accent); border:1px solid var(--accent);" onclick="installApp()">Instalar</button>
+      <button class="btn" style="padding:6px 12px; font-size:9px; white-space:nowrap; background:transparent; color:var(--shadow); border:1px solid var(--shadow); cursor:pointer;" onclick="dismissInstallBanner()">✕</button>
+    </div>
+  </div>
+  
   <div class="container">
     <header>
       <div class="title">
@@ -751,7 +763,7 @@
           <div style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold;">📱 Instalar como App</div>
           <div style="font-size:9px; color:var(--muted); margin-bottom:8px;">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</div>
           <button class="btn btn-primary" style="width:100%; padding:8px; font-size:9px; margin-bottom:4px;" onclick="installApp()">Instalar</button>
-          <button class="btn btn-secondary" style="width:100%; padding:8px; font-size:9px;" onclick="dismissInstallPrompt()">Ahora no</button>
+          <button class="btn btn-secondary" style="width:100%; padding:8px; font-size:9px;" onclick="dismissInstallBanner()">Ahora no</button>
         </div>
         <div class="donation-widget">
           <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="346" height="623" frameborder="0">No se puede cargar el widget</iframe>
@@ -1657,15 +1669,20 @@
       e.preventDefault();
       deferredPrompt = e;
       if (!localStorage.getItem('pwa_dismissed')) {
-        showInstallPrompt();
+        showInstallBanner();
       }
     });
     
-    function showInstallPrompt() {
-      const prompt = document.getElementById('install-prompt');
-      if (prompt && !installPromptShown) {
-        prompt.style.display = 'block';
+    function showInstallBanner() {
+      const banner = document.getElementById('install-banner');
+      if (banner && !installPromptShown) {
+        banner.style.display = 'block';
         installPromptShown = true;
+        // Ajustar el padding del container para dejar espacio al banner
+        const container = document.querySelector('.container');
+        if (container) {
+          container.style.marginTop = '80px';
+        }
       }
     }
     
@@ -1675,6 +1692,7 @@
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             showToast('App instalada correctamente');
+            dismissInstallBanner();
             localStorage.setItem('pwa_dismissed', 'true');
           }
           deferredPrompt = null;
@@ -1682,8 +1700,15 @@
       }
     }
     
-    function dismissInstallPrompt() {
-      document.getElementById('install-prompt').style.display = 'none';
+    function dismissInstallBanner() {
+      const banner = document.getElementById('install-banner');
+      if (banner) {
+        banner.style.display = 'none';
+      }
+      const container = document.querySelector('.container');
+      if (container) {
+        container.style.marginTop = '0';
+      }
       localStorage.setItem('pwa_dismissed', 'true');
     }
 
