@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recetario Épico — Daniel E. F. G.</title>
+  <style>
+    /* ====== Estética Pixel RPG Evolucionada ====== */
+    :root {
+      --bg: #12141d;
+      --panel: #1c212e;
+      --panel-2: #252d3d;
+      --accent: #e0c36c;
+      --accent-2: #6cd0e0;
+      --success: #9bd17c;
+      --danger: #e06c75;
+      --text: #e6e6e6;
+      --muted: #7e879a;
+      --grid: #3a4256;
+      --shadow: #080a0e;
+      
+      /* Rarezas */
+      --common: #a9b0c2;
+      --rare: #4fa3ff;
+      --epic: #a335ee;
+      --legendary: #ff8000;
+    }
+
+    @font-face {
+      font-family: "PressStart";
+      src: local("Press Start 2P"), local("PressStart2P");
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "PressStart", monospace;
+      margin: 0;
+      overflow-x: hidden;
+      image-rendering: pixelated;
+    }
+
+    /* CRT Effect */
+    .crt {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 3px 100%;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 4px double var(--grid);
+      padding-bottom: 10px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .gem-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      box-shadow: 0 4px var(--shadow);
+    }
+
+    h1 { font-size: 18px; margin: 0; text-shadow: 2px 2px var(--shadow); }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 4px solid var(--grid);
+      box-shadow: 0 8px var(--shadow);
+      padding: 15px;
+      position: relative;
+    }
+
+    .panel h2 {
+      margin: 0 0 15px 0;
+      font-size: 14px;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-group { margin-bottom: 12px; }
+    
+    label {
+      font-size: 11px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      background: var(--panel-2);
+      border: 3px solid var(--grid);
+      color: var(--text);
+      padding: 10px;
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    .btn-grid {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 11px;
+      cursor: pointer;
+      border: 3px solid #000;
+      box-shadow: 0 4px #000;
+      text-transform: uppercase;
+      transition: transform 0.1s;
+    }
+
+    .btn:active { transform: translateY(2px); box-shadow: 0 2px #000; }
+
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-secondary { background: var(--panel-2); color: #fff; border-color: var(--grid); }
+    .btn-success { background: var(--success); color: #000; }
+    .btn-danger { background: var(--danger); color: #000; }
+
+    .divider {
+      height: 4px;
+      background: var(--grid);
+      margin: 15px 0;
+      border-top: 2px solid var(--shadow);
+    }
+
+    /* Listas e Items */
+    .list-container {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .card {
+      background: #151924;
+      border: 3px solid var(--grid);
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-info b { font-size: 12px; display: block; margin-bottom: 4px; }
+    .card-info span { font-size: 11px; color: var(--muted); }
+
+    .rarity-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 6px;
+      border-radius: 2px;
+    }
+
+    .stats-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .stat-card {
+      background: var(--panel-2);
+      padding: 10px;
+      border: 2px solid var(--grid);
+    }
+
+    .stat-val { font-size: 14px; color: var(--success); }
+    .stat-label { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; }
+
+    /* Inventory Grid */
+    .inv-slots {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .inv-slot {
+      aspect-ratio: 1/1;
+      background: #0d1017;
+      border: 2px solid var(--grid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      position: relative;
+    }
+
+    .inv-item {
+      width: 70%;
+      height: 70%;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    }
+
+    /* Toast */
+    #toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 200;
+    }
+
+    .toast {
+      background: var(--panel-2);
+      border: 3px solid var(--accent);
+      padding: 12px;
+      font-size: 11px;
+      margin-top: 10px;
+      box-shadow: 0 4px var(--shadow);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 15px;
+      border-bottom: 4px double var(--grid);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .tab-button {
+      padding: 8px 12px;
+      font-family: inherit;
+      font-size: 11px;
+      cursor: pointer;
+      border: 3px solid var(--grid);
+      background: var(--panel-2);
+      color: var(--text);
+      text-transform: uppercase;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-button.active {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Modal para detalles de receta */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--panel);
+      border: 4px solid var(--grid);
+      box-shadow: 0 8px var(--shadow);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 4px double var(--grid);
+      padding-bottom: 10px;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--accent);
+    }
+
+    /* Donation modal - widget embebido + controles laterales */
+    .donation-modal .modal-content {
+      max-width: 780px;
+      width: 92vw;
+      padding: 14px;
+      border-radius: 8px;
+      box-shadow: 0 12px rgba(0,0,0,0.6);
+      overflow-y: auto;
+    }
+
+    .donation-body {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .donation-widget { flex: 0 0 346px; }
+    .donation-widget iframe { width:346px; height:623px; border:0; border-radius:4px; box-shadow: 0 6px rgba(0,0,0,0.6); display:block; }
+
+    .donation-controls { flex: 1 1 300px; display:flex; flex-direction:column; gap:10px; align-items:stretch; }
+    .donation-controls .card { background: transparent; border: 2px solid var(--grid); padding: 10px; }
+    .donation-controls .label { font-size:12px; color:var(--muted); }
+    .donation-controls .value { font-weight:bold; color:var(--accent); word-break:break-all; }
+
+    .donation-actions { display:flex; gap:8px; justify-content:flex-end; }
+    .donation-actions .copy-btn { padding:8px 10px; }
+
+    @media (max-width: 820px) {
+      .donation-body { flex-direction: column; align-items: center; }
+      .donation-controls { width: 100%; max-width: 420px; }
+      .donation-widget iframe { width: min(346px, 92vw); height: min(623px, calc(100vh - 140px)); }
+    }
+    .copy-btn { padding:6px 8px; font-size:11px; border:2px solid var(--grid); background:var(--panel-2); color:var(--text); cursor:pointer; border-radius:4px }
+
+    /* Recipe hint */
+    .recipe-hint { font-size:10px; color:var(--muted); margin-top:6px }
+    .panel.clickable { cursor: pointer; }
+
+    .close-btn {
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--text);
+      background: none;
+      border: none;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn:hover {
+      color: var(--danger);
+    }
+
+    .recipe-details {
+      margin-bottom: 15px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 2px dashed var(--grid);
+      font-size: 12px;
+    }
+
+    .detail-label {
+      color: var(--muted);
+    }
+
+    .detail-value {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    @media (max-width: 850px) {
+      .main-grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .tab-button { flex: 1; }
+    }
+
+    @media (min-width: 851px) {
+      .tab-button { flex: 1; }
+      /* En escritorio, mostrar tabs dentro de dos columnas cuando es tab-content */
+      #tab-ingredientes .main-grid,
+      #tab-receta .main-grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="crt"></div>
+  
+  <div class="container">
+    <header>
+      <div class="title">
+        <div class="gem-icon"></div>
+        <h1>RECETARIO ÉPICO</h1>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center">
+        <button class="btn btn-secondary donate-btn" onclick="openDonationModal()">Donar</button>
+      </div>
+    </header>
+
+    <!-- TABS NAVIGATION para MÓVIL -->
+    <div class="tabs-nav" id="tabs-nav">
+      <button class="tab-button" onclick="switchTab('tab-ingredientes')">Ingredientes</button>
+      <button class="tab-button" onclick="switchTab('tab-receta')">Crear Receta</button>
+      <button class="tab-button active" onclick="switchTab('tab-libro')">Mis Recetas</button>
+      <button class="tab-button" onclick="switchTab('tab-config')">Configuración</button>
+    </div>
+
+    <!-- TAB 1: INGREDIENTES -->
+    <div id="tab-ingredientes" class="tab-content">
+      <div class="main-grid" style="grid-template-columns: 1fr;">
+        <section class="panel">
+          <h2>Ingredientes</h2>
+          <div class="form-group">
+            <label>Nombre del Ingrediente</label>
+            <input type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+            <div class="form-group">
+              <label>Precio (€)</label>
+              <input type="number" id="ing-cost" placeholder="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+              <label>Unidad</label>
+              <select id="ing-rarity"></select>
+            </div>
+          </div>
+          <div class="btn-grid">
+            <button class="btn btn-primary" onclick="addIngredient()">Añadir</button>
+            <button class="btn btn-danger" onclick="clearIngredients()">Vaciar</button>
+          </div>
+
+          <div class="divider"></div>
+          <label>Despensa</label>
+          <div class="list-container" id="ing-list">
+            <!-- Listado de ingredientes -->
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- TAB 2: CREAR RECETA -->
+    <div id="tab-receta" class="tab-content">
+      <div class="main-grid" style="grid-template-columns: 1fr;">
+        <section class="panel">
+          <h2>Creador de Recetas</h2>
+          <div class="form-group">
+            <label>Nombre del Plato</label>
+            <input type="text" id="rec-name" placeholder="Pasta a la Carbonara">
+          </div>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+            <div class="form-group">
+              <label>Ingrediente</label>
+              <select id="rec-ing-select"></select>
+            </div>
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input type="number" id="rec-qty" value="100" min="0.01" step="0.1">
+            </div>
+          </div>
+
+          <div class="btn-grid">
+            <button class="btn btn-success" onclick="addToRecipe()">Añadir</button>
+            <button class="btn btn-danger" onclick="clearActiveRecipe()">Limpiar</button>
+          </div>
+
+          <div class="divider"></div>
+          <label>Ingredientes Seleccionados</label>
+          <div class="list-container" id="rec-items-list" style="max-height: 180px;"></div>
+
+          <div class="form-group" style="margin-top:15px">
+            <label>Precio del Plato (€)</label>
+            <input type="number" id="rec-price" placeholder="0.00" step="0.01" oninput="updateStats()">
+          </div>
+
+          <div class="stats-box">
+            <div class="stat-card">
+              <span class="stat-label">Costo Ingredientes</span>
+              <div class="stat-val" id="stat-cost">0.00€</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Beneficio Neto</span>
+              <div class="stat-val" id="stat-profit">0.00€</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Margen %</span>
+              <div class="stat-val" id="stat-margin">0%</div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Rentabilidad</span>
+              <div class="stat-val" id="stat-roi">0.00x</div>
+            </div>
+          </div>
+
+          <div class="btn-grid" style="margin-top:20px">
+            <button class="btn btn-primary" style="flex:1" onclick="saveRecipe()">Guardar Receta</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- TAB 3: LIBRO DE RECETAS -->
+    <div id="tab-libro" class="tab-content active">
+      <section class="panel">
+        <h2>Mis Recetas</h2>
+        <div id="recipe-book" class="list-container" style="max-height: 600px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+          <!-- Recetas guardadas -->
+        </div>
+        <input type="file" id="file-input" style="display:none;" accept=".json" onchange="handleFileImport()">
+      </section>
+    </div>
+
+    <!-- TAB 4: CONFIGURACIÓN -->
+    <div id="tab-config" class="tab-content">
+      <section class="panel">
+        <h2>Configuración</h2>
+        
+        <h3 style="color: var(--accent); font-size: 11px; margin: 15px 0 10px 0; text-transform: uppercase;">Unidades de Medida</h3>
+        <div id="units-list" style="margin-bottom: 15px; max-height: 200px; overflow-y: auto;"></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+          <div class="form-group" style="margin-bottom: 5px;">
+            <label style="font-size: 8px; margin-bottom: 3px;">Nombre de Unidad</label>
+            <input type="text" id="unit-key" placeholder="kilogramo" style="padding: 6px; font-size: 9px;">
+          </div>
+          <div class="form-group" style="margin-bottom: 5px;">
+            <label style="font-size: 8px; margin-bottom: 3px;">Símbolo</label>
+            <input type="text" id="unit-value" placeholder="kg" style="padding: 6px; font-size: 9px;">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addCustomUnit()" style="width: 100%; padding: 6px; font-size: 9px;">Agregar</button>
+        <button class="btn btn-secondary" onclick="resetUnits()" style="width: 100%; margin-top: 3px; padding: 6px; font-size: 9px;">Restaurar</button>
+        
+        <div class="divider" style="margin: 20px 0;"></div>
+        
+        <h3 style="color: var(--accent); font-size: 11px; margin: 15px 0 10px 0; text-transform: uppercase;">Datos</h3>
+        <button class="btn btn-primary" style="width: 100%;" onclick="exportRecipeBook()">Exportar Todo (Recetas + Ingredientes)</button>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 5px;" onclick="importRecipeBook()">Importar Datos</button>
+        <button class="btn btn-danger" style="width: 100%; margin-top: 5px;" onclick="resetAllData()">Limpiar Todo (⚠️)</button>
+      </section>
+    </div>
+
+    <!-- VISTA ORIGINAL ESCRITORIO -->
+    <div class="main-grid" id="desktop-view" style="display: none;">
+      <!-- PANEL IZQUIERDO: INGREDIENTES -->
+      <section class="panel">
+        <h2>Ingredientes</h2>
+        <div class="form-group">
+          <label>Nombre del Ingrediente</label>
+          <input type="text" id="ing-name-desk" placeholder="Ej: Carne de Res, Ajo, Tomate">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+          <div class="form-group">
+            <label>Precio (€)</label>
+            <input type="number" id="ing-cost-desk" placeholder="0.00" step="0.01">
+          </div>
+          <div class="form-group">
+            <label>Unidad</label>
+            <select id="ing-rarity-desk"></select>
+          </div>
+        </div>
+        <div class="btn-grid">
+          <button class="btn btn-primary" onclick="addIngredientDesk()">Añadir</button>
+          <button class="btn btn-danger" onclick="clearIngredientsDesk()">Vaciar</button>
+        </div>
+
+        <div class="divider"></div>
+        <label>Despensa</label>
+        <div class="list-container" id="ing-list-desk">
+          <!-- Listado de ingredientes -->
+        </div>
+      </section>
+
+      <!-- PANEL DERECHO: COCINA -->
+      <section class="panel">
+        <h2>Creador de Recetas</h2>
+        <div class="form-group">
+          <label>Nombre del Plato</label>
+          <input type="text" id="rec-name-desk" placeholder="Pasta a la Carbonara">
+        </div>
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+          <div class="form-group">
+            <label>Ingrediente</label>
+            <select id="rec-ing-select-desk"></select>
+          </div>
+          <div class="form-group">
+            <label>Cantidad</label>
+            <input type="number" id="rec-qty-desk" value="100" min="0.01" step="0.1">
+          </div>
+        </div>
+
+        <div class="btn-grid">
+          <button class="btn btn-success" onclick="addToRecipeDesk()">Añadir</button>
+          <button class="btn btn-danger" onclick="clearActiveRecipeDesk()">Limpiar</button>
+        </div>
+
+        <div class="divider"></div>
+        <label>Ingredientes Seleccionados</label>
+        <div class="list-container" id="rec-items-list-desk" style="max-height: 180px;"></div>
+
+        <div class="form-group" style="margin-top:15px">
+          <label>Precio del Plato (€)</label>
+          <input type="number" id="rec-price-desk" placeholder="0.00" step="0.01" oninput="updateStatsDesk()">
+        </div>
+
+        <div class="stats-box">
+          <div class="stat-card">
+            <span class="stat-label">Costo Ingredientes</span>
+            <div class="stat-val" id="stat-cost-desk">0.00€</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Beneficio Neto</span>
+            <div class="stat-val" id="stat-profit-desk">0.00€</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Margen %</span>
+            <div class="stat-val" id="stat-margin-desk">0%</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Rentabilidad</span>
+            <div class="stat-val" id="stat-roi-desk">0.00x</div>
+          </div>
+        </div>
+
+        <div class="btn-grid" style="margin-top:20px">
+          <button class="btn btn-primary" style="flex:1" onclick="saveRecipeDesk()">Guardar Receta</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- RECETAS GUARDADAS ESCRITORIO -->
+    <section class="panel" style="margin-top:20px; display: none;" id="recipe-book-section-desk">
+      <h2>Mis Recetas
+        <div style="display:flex; gap:5px; justify-self:end">
+          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px" onclick="exportRecipeBook()">Exportar JSON</button>
+          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px" onclick="importRecipeBook()">Importar JSON</button>
+        </div>
+      </h2>
+      <div id="recipe-book-desk" class="list-container" style="max-height: 400px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+        <!-- Recetas guardadas -->
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL para ver detalles de receta -->
+  <div id="recipe-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-recipe-name">Nombre de la Receta</h3>
+        <button class="close-btn" onclick="closeRecipeModal()">×</button>
+      </div>
+      <div id="modal-recipe-details" class="recipe-details"></div>
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary" style="flex: 1;" onclick="closeRecipeModal()">Cerrar</button>
+        <button class="btn btn-danger" style="flex: 1;" onclick="deleteFromModalRecipe()">Borrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL de Donaciones -->
+  <div id="donation-modal" class="modal donation-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Donaciones</h3>
+        <button class="close-btn" onclick="closeDonationModal()">×</button>
+      </div>
+      <div class="donation-body">
+        <div class="donation-widget">
+          <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="346" height="623" frameborder="0">No se puede cargar el widget</iframe>
+        </div>
+
+        <div class="donation-controls">
+          <div class="card">
+            <div class="label">Apoya el proyecto</div>
+            <div style="margin-top:8px; font-size:11px; color:var(--muted)">Puedes donar mediante el widget o usando estos métodos P2P</div>
+          </div>
+
+          <div class="card">
+            <div class="label">Digicel</div>
+            <div class="value">+5977479759</div>
+            <div class="donation-actions">
+              <button class="copy-btn" onclick="copyToClipboard('+5977479759')">Copiar</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="label">Cartera Crypto - USDC (Polygon Network)</div>
+            <div id="crypto-address" class="value">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
+            <div class="donation-actions">
+              <button class="copy-btn" onclick="copyToClipboard(document.getElementById('crypto-address').innerText)">Copiar</button>
+              <a class="btn btn-secondary" style="padding:6px 8px; font-size:10px; text-decoration:none; color:inherit;" href="#" onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()">Ver en Polygonscan</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script>
+    // ====== Lógica de Estado ======
+    let ingredients = JSON.parse(localStorage.getItem('rpg_ing') || '[]');
+    let activeRecipe = { items: [] };
+    let recipeBook = JSON.parse(localStorage.getItem('rpg_book') || '[]');
+    let configLoaded = false;
+    let currentRecipeModal = null;
+
+    // Constantes de color
+    const RARITY_COLORS = {
+      common: '#a9b0c2',
+      rare: '#4fa3ff',
+      epic: '#a335ee',
+      legendary: '#ff8000'
+    };
+
+    // ====== Funciones de Tabs ======
+    function switchTab(tabId) {
+      // Esconder todos los tabs
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      // Remover clase active de botones
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      // Mostrar tab seleccionado
+      document.getElementById(tabId).classList.add('active');
+      // Activar botón
+      event.target.classList.add('active');
+    }
+
+    // ====== Funciones de UI ======
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerText = `> ${msg}`;
+      container.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    // reloj eliminado - no se usa en header
+
+    // ====== Funciones de Modal ======
+    function openRecipeModal(id) {
+      const recipe = recipeBook.find(r => r.id === id);
+      if (!recipe) return;
+
+      currentRecipeModal = recipe;
+      const modal = document.getElementById('recipe-modal');
+      const modalName = document.getElementById('modal-recipe-name');
+      const modalDetails = document.getElementById('modal-recipe-details');
+
+      modalName.textContent = recipe.name;
+
+      const profit = recipe.price - recipe.cost;
+      const margin = recipe.price > 0 ? (profit / recipe.price) * 100 : 0;
+      const roi = recipe.cost > 0 ? recipe.price / recipe.cost : 0;
+
+      let detailsHTML = `
+        <div style="margin-bottom: 15px;">
+          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Ingredientes</h4>
+          ${recipe.items.map(i => `
+            <div class="detail-row">
+              <span class="detail-label">${i.name}</span>
+              <span class="detail-value">${i.qty} ${getUnitLabel(i.rarity)}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Costo: ${i.name}</span>
+              <span class="detail-value">${(i.cost * i.qty).toFixed(2)}€</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="divider"></div>
+        <div style="margin-bottom: 15px;">
+          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Análisis Financiero</h4>
+          <div class="detail-row">
+            <span class="detail-label">Costo Total</span>
+            <span class="detail-value" style="color: var(--danger)">${recipe.cost.toFixed(2)}€</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Precio Venta</span>
+            <span class="detail-value" style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ganancia Neta</span>
+            <span class="detail-value" style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Margen de Ganancia</span>
+            <span class="detail-value">${margin.toFixed(1)}%</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Rentabilidad (ROI)</span>
+            <span class="detail-value">${roi.toFixed(2)}x</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ganancia por €</span>
+            <span class="detail-value">${(profit / recipe.price).toFixed(2)}€</span>
+          </div>
+        </div>
+      `;
+
+      modalDetails.innerHTML = detailsHTML;
+      modal.classList.add('active');
+    }
+
+    function closeRecipeModal() {
+      document.getElementById('recipe-modal').classList.remove('active');
+      currentRecipeModal = null;
+    }
+
+    function deleteFromModalRecipe() {
+      if (!currentRecipeModal) return;
+      if (confirm(`¿Eliminar la receta "${currentRecipeModal.name}"?`)) {
+        recipeBook = recipeBook.filter(r => r.id !== currentRecipeModal.id);
+        localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+        renderBook();
+        closeRecipeModal();
+        showToast(`Receta "${currentRecipeModal.name}" eliminada`);
+      }
+    }
+
+    // ====== Donaciones ======
+    function openDonationModal() {
+      document.getElementById('donation-modal').classList.add('active');
+    }
+
+    function closeDonationModal() {
+      document.getElementById('donation-modal').classList.remove('active');
+    }
+
+    function copyToClipboard(text) {
+      try {
+        navigator.clipboard.writeText(text.toString());
+        showToast('Copiado al portapapeles');
+      } catch (err) {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        showToast('Copiado al portapapeles');
+      }
+    }
+
+    // ====== Manejo de Ingredientes - MÓVIL ======
+    function addIngredient() {
+      const name = document.getElementById('ing-name').value.trim();
+      const cost = parseFloat(document.getElementById('ing-cost').value);
+      const rarity = document.getElementById('ing-rarity').value;
+
+      if (!name || isNaN(cost)) return showToast("Faltan datos del ingrediente");
+
+      ingredients.push({ id: Date.now(), name, cost, rarity });
+      saveState();
+      renderIngredients();
+      document.getElementById('ing-name').value = '';
+      document.getElementById('ing-cost').value = '';
+      showToast(`${name} añadido a la despensa`);
+    }
+
+    function deleteIngredient(id) {
+      const ing = ingredients.find(i => i.id === id);
+      if (confirm(`¿Eliminar "${ing.name}" de la despensa?`)) {
+        ingredients = ingredients.filter(i => i.id !== id);
+        saveState();
+        renderIngredients();
+        showToast(`${ing.name} eliminado de la despensa`);
+      }
+    }
+
+    function renderIngredients() {
+      const list = document.getElementById('ing-list');
+      const select = document.getElementById('rec-ing-select');
+      
+      list.innerHTML = '';
+      select.innerHTML = '<option value="">-- Escoger --</option>';
+
+      ingredients.forEach(ing => {
+        // Listado lateral móvil
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-info">
+            <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>${ing.name}</b>
+            <span>Precio: ${ing.cost.toFixed(2)}€ (${getUnitLabel(ing.rarity)})</span>
+          </div>
+          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="deleteIngredient(${ing.id})">X</button>
+        `;
+        list.appendChild(card);
+
+        // Selector en receta - Mostrar UNIDAD DE MEDIDA
+        const opt = document.createElement('option');
+        opt.value = ing.id;
+        opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
+        select.appendChild(opt);
+      });
+
+      // Actualizar selectores de unidades
+      renderUnitsSelector('ing-rarity');
+      renderUnitsSelector('ing-rarity-desk');
+      
+      // Sincronizar con versión desktop
+      renderIngredientsDesk();
+    }
+
+    // ====== Manejo de Ingredientes - ESCRITORIO ======
+    function addIngredientDesk() {
+      const name = document.getElementById('ing-name-desk').value.trim();
+      const cost = parseFloat(document.getElementById('ing-cost-desk').value);
+      const rarity = document.getElementById('ing-rarity-desk').value;
+
+      if (!name || isNaN(cost)) return showToast("Faltan datos del ingrediente");
+
+      ingredients.push({ id: Date.now(), name, cost, rarity });
+      saveState();
+      renderIngredients();
+      document.getElementById('ing-name-desk').value = '';
+      document.getElementById('ing-cost-desk').value = '';
+      showToast(`${name} añadido a la despensa`);
+    }
+
+    function renderIngredientsDesk() {
+      const list = document.getElementById('ing-list-desk');
+      const select = document.getElementById('rec-ing-select-desk');
+      
+      list.innerHTML = '';
+      select.innerHTML = '<option value="">-- Escoger --</option>';
+
+      ingredients.forEach(ing => {
+        // Listado lateral escritorio
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-info">
+            <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span>${ing.name}</b>
+            <span>Precio: ${ing.cost.toFixed(2)}€ (${getUnitLabel(ing.rarity)})</span>
+          </div>
+          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="deleteIngredientDesk(${ing.id})">X</button>
+        `;
+        list.appendChild(card);
+
+        // Selector en receta - Mostrar UNIDAD DE MEDIDA
+        const opt = document.createElement('option');
+        opt.value = ing.id;
+        opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
+        select.appendChild(opt);
+      });
+    }
+
+    function deleteIngredientDesk(id) {
+      const ing = ingredients.find(i => i.id === id);
+      if (confirm(`¿Eliminar "${ing.name}" de la despensa?`)) {
+        ingredients = ingredients.filter(i => i.id !== id);
+        saveState();
+        renderIngredients();
+        showToast(`${ing.name} eliminado de la despensa`);
+      }
+    }
+
+    function clearIngredientsDesk() {
+      if(confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
+        ingredients = [];
+        if (!configLoaded) {
+          localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+        }
+        renderIngredients();
+        showToast("Despensa vaciada");
+      }
+    }
+
+    // ====== Manejo de Recetas - MÓVIL ======
+    function addToRecipe() {
+      const ingId = parseInt(document.getElementById('rec-ing-select').value);
+      const qty = parseFloat(document.getElementById('rec-qty').value);
+      
+      if (!ingId || isNaN(qty) || qty < 1) return showToast("Selección inválida");
+
+      const ing = ingredients.find(i => i.id === ingId);
+      const existing = activeRecipe.items.find(i => i.id === ingId);
+
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        activeRecipe.items.push({ ...ing, qty });
+      }
+
+      renderActiveRecipe();
+      showToast(`${ing.name} x${qty} en la mesa`);
+    }
+
+    function renderActiveRecipe() {
+      const list = document.getElementById('rec-items-list');
+      list.innerHTML = '';
+      
+      activeRecipe.items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-info">
+            <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
+            <span>Costo: ${(item.cost * item.qty).toFixed(2)}€</span>
+          </div>
+          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipe(${index})">-</button>
+        `;
+        list.appendChild(card);
+      });
+      updateStats();
+      
+      // Sincronizar con escritorio
+      renderActiveRecipeDesk();
+    }
+
+    function removeFromRecipe(index) {
+      activeRecipe.items.splice(index, 1);
+      renderActiveRecipe();
+    }
+
+    function updateStats() {
+      const price = parseFloat(document.getElementById('rec-price').value) || 0;
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      
+      const profit = price - cost;
+      const margin = price > 0 ? (profit / price) * 100 : 0;
+      const roi = cost > 0 ? price / cost : 0;
+
+      document.getElementById('stat-cost').innerText = cost.toFixed(2) + '€';
+      document.getElementById('stat-profit').innerText = profit.toFixed(2) + '€';
+      document.getElementById('stat-profit').style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
+      document.getElementById('stat-margin').innerText = margin.toFixed(1) + '%';
+      document.getElementById('stat-roi').innerText = roi.toFixed(2) + 'x';
+    }
+
+    function clearActiveRecipe() {
+      activeRecipe = { items: [] };
+      document.getElementById('rec-name').value = '';
+      document.getElementById('rec-price').value = '';
+      renderActiveRecipe();
+    }
+
+    function saveRecipe() {
+      const name = document.getElementById('rec-name').value.trim();
+      const price = parseFloat(document.getElementById('rec-price').value) || 0;
+
+      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+
+      recipeBook.unshift({
+        id: Date.now(),
+        name,
+        items: [...activeRecipe.items],
+        price,
+        cost
+      });
+
+      localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+      renderBook();
+      clearActiveRecipe();
+      showToast("Receta guardada");
+    }
+
+    // ====== Manejo de Recetas - ESCRITORIO ======
+    function addToRecipeDesk() {
+      const ingId = parseInt(document.getElementById('rec-ing-select-desk').value);
+      const qty = parseFloat(document.getElementById('rec-qty-desk').value);
+      
+      if (!ingId || isNaN(qty) || qty < 1) return showToast("Selección inválida");
+
+      const ing = ingredients.find(i => i.id === ingId);
+      const existing = activeRecipe.items.find(i => i.id === ingId);
+
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        activeRecipe.items.push({ ...ing, qty });
+      }
+
+      renderActiveRecipe();
+      showToast(`${ing.name} x${qty} en la mesa`);
+    }
+
+    function renderActiveRecipeDesk() {
+      const list = document.getElementById('rec-items-list-desk');
+      list.innerHTML = '';
+      
+      activeRecipe.items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-info">
+            <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
+            <span>Costo: ${(item.cost * item.qty).toFixed(2)}€</span>
+          </div>
+          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipeDesk(${index})">-</button>
+        `;
+        list.appendChild(card);
+      });
+      updateStatsDesk();
+    }
+
+    function removeFromRecipeDesk(index) {
+      activeRecipe.items.splice(index, 1);
+      renderActiveRecipe();
+    }
+
+    function updateStatsDesk() {
+      const price = parseFloat(document.getElementById('rec-price-desk').value) || 0;
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+      
+      const profit = price - cost;
+      const margin = price > 0 ? (profit / price) * 100 : 0;
+      const roi = cost > 0 ? price / cost : 0;
+
+      document.getElementById('stat-cost-desk').innerText = cost.toFixed(2) + '€';
+      document.getElementById('stat-profit-desk').innerText = profit.toFixed(2) + '€';
+      document.getElementById('stat-profit-desk').style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
+      document.getElementById('stat-margin-desk').innerText = margin.toFixed(1) + '%';
+      document.getElementById('stat-roi-desk').innerText = roi.toFixed(2) + 'x';
+    }
+
+    function clearActiveRecipeDesk() {
+      activeRecipe = { items: [] };
+      document.getElementById('rec-name-desk').value = '';
+      document.getElementById('rec-price-desk').value = '';
+      renderActiveRecipe();
+    }
+
+    function saveRecipeDesk() {
+      const name = document.getElementById('rec-name-desk').value.trim();
+      const price = parseFloat(document.getElementById('rec-price-desk').value) || 0;
+
+      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (curr.cost * curr.qty), 0);
+
+      recipeBook.unshift({
+        id: Date.now(),
+        name,
+        items: [...activeRecipe.items],
+        price,
+        cost
+      });
+
+      localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+      renderBook();
+      clearActiveRecipeDesk();
+      showToast("Receta guardada");
+    }
+
+    // ====== Libro de Recetas ======
+    function renderBook() {
+      const container = document.getElementById('recipe-book');
+      container.innerHTML = '';
+
+      recipeBook.forEach(rec => {
+        const div = document.createElement('div');
+        div.className = 'panel clickable';
+        div.style.border = '2px solid var(--grid)';
+        div.innerHTML = `
+          <div style="font-size:11px; color:var(--accent); margin-bottom:8px">${rec.name}</div>
+          <div style="font-size:8px; color:var(--muted); line-height:1.4">
+            ${rec.items.map(i => `${i.name} ${i.qty} ${getUnitLabel(i.rarity)}`).join('<br>')}
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex; justify-content:space-between; font-size:9px">
+            <span style="color:var(--success)">Venta: ${rec.price.toFixed(2)}€</span>
+            <span style="color:var(--danger)">Costo: ${rec.cost.toFixed(2)}€</span>
+          </div>
+          <div class="recipe-hint">Pulsa para ver detalles</div>
+        `;
+        div.onclick = () => openRecipeModal(rec.id);
+        container.appendChild(div);
+      });
+
+      // Sincronizar con escritorio
+      renderBookDesk();
+    }
+
+    function renderBookDesk() {
+      const container = document.getElementById('recipe-book-desk');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      recipeBook.forEach(rec => {
+        const div = document.createElement('div');
+        div.className = 'panel';
+        div.style.border = '2px solid var(--grid)';
+        div.style.cursor = 'pointer';
+        div.innerHTML = `
+          <div style="font-size:11px; color:var(--accent); margin-bottom:8px">${rec.name}</div>
+          <div style="font-size:8px; color:var(--muted); line-height:1.4">
+            ${rec.items.map(i => `${i.name} ${i.qty} ${getUnitLabel(i.rarity)}`).join('<br>')}
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex; justify-content:space-between; font-size:9px">
+            <span style="color:var(--success)">Venta: ${rec.price.toFixed(2)}€</span>
+            <span style="color:var(--danger)">Costo: ${rec.cost.toFixed(2)}€</span>
+          </div>
+        `;
+        div.onclick = () => openRecipeModal(rec.id);
+        container.appendChild(div);
+      });
+    }
+
+    function deleteFromBook(id) {
+      const rec = recipeBook.find(r => r.id === id);
+      if (confirm(`¿Eliminar la receta "${rec.name}"?`)) {
+        recipeBook = recipeBook.filter(r => r.id !== id);
+        localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+        renderBook();
+        showToast(`Receta "${rec.name}" eliminada`);
+      }
+    }
+
+    // ====== Exportar/Importar ======
+    function exportRecipeBook() {
+      if (recipeBook.length === 0 && Object.keys(ingredients).length === 0) return showToast("No hay datos para exportar");
+      
+      // Incluir recetas, ingredientes y unidades personalizadas
+      const data = {
+        recetas: recipeBook,
+        ingredientes: ingredients,
+        unidades: customUnits,
+        exportDate: new Date().toISOString()
+      };
+      
+      const jsonData = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `recetas_${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Recetario, productos y configuración exportados");
+    }
+
+    function importRecipeBook() {
+      document.getElementById('file-input').click();
+    }
+
+    function handleFileImport() {
+      const file = document.getElementById('file-input').files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          
+          // Soporte para formato antiguo (solo array) y nuevo (objeto con recetas e ingredientes)
+          let importedRecipes = Array.isArray(imported) ? imported : (imported.recetas || []);
+          let importedIngredients = imported.ingredientes || [];
+          let importedUnits = imported.unidades || {};
+
+          if (!Array.isArray(importedRecipes)) return showToast("Formato JSON inválido");
+
+          // Importar ingredientes
+          if (importedIngredients.length > 0) {
+            const mergeIngs = confirm(
+              `Se encontraron ${importedIngredients.length} ingredientes.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`
+            );
+            
+            if (mergeIngs) {
+              // Unificar ingredientes (evitar duplicados por nombre)
+              const existingNames = new Set(ingredients.map(i => i.name.toLowerCase()));
+              importedIngredients.forEach(newIng => {
+                if (!existingNames.has(newIng.name.toLowerCase())) {
+                  ingredients.push(newIng);
+                  existingNames.add(newIng.name.toLowerCase());
+                }
+              });
+              showToast(`${importedIngredients.length} ingrediente(s) importado(s)`);
+            } else {
+              ingredients = importedIngredients;
+              showToast("Ingredientes reemplazados");
+            }
+            saveState();
+            renderIngredients();
+          }
+
+          // Importar unidades personalizadas
+          if (Object.keys(importedUnits).length > 0) {
+            const mergeUnitsChoice = confirm(
+              `Se encontraron ${Object.keys(importedUnits).length} unidades personalizadas.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`
+            );
+            
+            if (mergeUnitsChoice) {
+              // Unificar unidades
+              customUnits = Object.assign({}, customUnits, importedUnits);
+              showToast("Unidades unificadas");
+            } else {
+              customUnits = importedUnits;
+              showToast("Unidades reemplazadas");
+            }
+            localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+            renderUnitsList();
+            renderIngredients();
+          }
+
+          // Importar recetas
+          if (recipeBook.length > 0 && importedRecipes.length > 0) {
+            const mergeChoice = confirm(
+              "Ya tienes recetas guardadas.\n\n¿Reemplazar (OK) o unificar (Cancelar)?"
+            );
+            
+            if (mergeChoice) {
+              recipeBook = importedRecipes;
+            } else {
+              const mergedNames = new Set(recipeBook.map(r => r.name.toLowerCase()));
+              importedRecipes.forEach(newRec => {
+                if (!mergedNames.has(newRec.name.toLowerCase())) {
+                  recipeBook.push(newRec);
+                  mergedNames.add(newRec.name.toLowerCase());
+                }
+              });
+              showToast("Recetas unificadas (duplicados eliminados)");
+            }
+          } else if (importedRecipes.length > 0) {
+            recipeBook = importedRecipes;
+          }
+
+          configLoaded = true;
+          localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+          renderBook();
+          showToast(`${importedRecipes.length} receta(s) importada(s)`);
+        } catch (err) {
+          showToast("Error al leer el archivo JSON");
+        }
+      };
+      reader.readAsText(file);
+      document.getElementById('file-input').value = '';
+    }
+
+    // ====== Utilidades ======
+    function getUnitLabel(rarity) {
+      const units = getCustomUnits();
+      return units[rarity] || 'kg';
+    }
+
+    function saveState() {
+      if (!configLoaded) {
+        localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+      }
+    }
+
+    function seedData() {
+      if (ingredients.length > 0 && !confirm("¿Reemplazar ingredientes actuales con datos de demo?")) return;
+      
+      ingredients = [
+        { id: 1, name: "Pechuga de Pollo", cost: 8.5, rarity: "common" },
+        { id: 2, name: "Filete de Res Premium", cost: 16.0, rarity: "rare" },
+        { id: 3, name: "Salmón Noruego", cost: 24.0, rarity: "epic" },
+        { id: 4, name: "Jamón Ibérico", cost: 42.0, rarity: "legendary" },
+        { id: 5, name: "Tomates", cost: 2.0, rarity: "common" },
+        { id: 6, name: "Queso Parmesano", cost: 18.0, rarity: "rare" },
+        { id: 7, name: "Champiñones Silvestres", cost: 12.0, rarity: "epic" },
+        { id: 8, name: "Trufa Negra", cost: 85.0, rarity: "legendary" }
+      ];
+      if (!configLoaded) {
+        localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+      }
+      renderIngredients();
+      showToast("Ingredientes de demo cargados");
+    }
+
+    function clearIngredients() {
+      if(confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
+        ingredients = [];
+        if (!configLoaded) {
+          localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+        }
+        renderIngredients();
+        showToast("Despensa vaciada");
+      }
+    }
+
+    // ====== Gestión de Unidades de Medida ======
+    let customUnits = JSON.parse(localStorage.getItem('rpg_units') || '{}');
+
+    const DEFAULT_UNITS = {
+      'kilogramo': 'kg',
+      'litro': 'L',
+      'unidad': 'Unidad',
+      'mililitro': 'ml'
+    };
+
+    function getCustomUnits() {
+      return Object.assign({}, DEFAULT_UNITS, customUnits);
+    }
+
+    function renderUnitsSelector(selectId) {
+      const select = document.getElementById(selectId);
+      if (!select) return;
+      
+      const units = getCustomUnits();
+      select.innerHTML = '<option value="">-- Seleccionar unidad --</option>';
+      
+      Object.entries(units).forEach(([key, value]) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.innerText = `${key} (${value})`;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderUnitsList() {
+      const list = document.getElementById('units-list');
+      if (!list) return;
+      
+      list.innerHTML = '';
+      const units = getCustomUnits();
+      
+      Object.entries(units).forEach(([key, value]) => {
+        const div = document.createElement('div');
+        div.style.cssText = 'background: #151924; border: 2px solid var(--grid); padding: 6px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 9px;';
+        div.innerHTML = `
+          <div>
+            <span style="color: var(--accent); font-weight: bold;">${key}</span>
+            <span style="color: var(--muted); margin-left: 8px;">= ${value}</span>
+          </div>
+          ${customUnits[key] ? `<button class="btn btn-danger" style="padding:2px 6px; font-size:7px">X</button>` : '<span style="color:var(--muted); font-size:7px;">Por defecto</span>'}
+        `;
+        if (customUnits[key]) {
+          div.querySelector('button').onclick = () => deleteCustomUnit(key);
+        }
+        list.appendChild(div);
+      });
+    }
+
+    function addCustomUnit() {
+      const key = document.getElementById('unit-key').value.trim();
+      const value = document.getElementById('unit-value').value.trim();
+
+      if (!key || !value) return showToast("Completa todos los campos");
+
+      customUnits[key] = value;
+      localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+      renderUnitsList();
+      document.getElementById('unit-key').value = '';
+      document.getElementById('unit-value').value = '';
+      showToast(`Unidad "${key}" agregada`);
+      
+      // Renderizar de nuevo los ingredientes para actualizar unidades
+      renderIngredients();
+    }
+
+    function deleteCustomUnit(key) {
+      if (confirm(`¿Eliminar la unidad personalizada "${key}"?`)) {
+        delete customUnits[key];
+        localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+        renderUnitsList();
+        renderIngredients();
+        showToast(`Unidad "${key}" eliminada`);
+      }
+    }
+
+    function resetUnits() {
+      if (confirm("¿Restaurar las unidades por defecto? Se perderán las personalizadas.")) {
+        customUnits = {};
+        localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+        renderUnitsList();
+        renderIngredients();
+        showToast("Unidades restauradas a valores por defecto");
+      }
+    }
+
+    function resetAllData() {
+      if (confirm("⚠️ ¿SEGURO? Esto eliminará TODOS los datos (recetas e ingredientes). Esta acción NO se puede deshacer.")) {
+        if (confirm("Confirma una vez más para estar completamente seguro...")) {
+          ingredients = [];
+          recipeBook = [];
+          customUnits = {};
+          localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+          localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+          localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+          renderIngredients();
+          renderBook();
+          renderUnitsList();
+          showToast("Todos los datos han sido eliminados");
+        }
+      }
+    }
+
+    // Cerrar modal al hacer click fuera
+    window.addEventListener('click', (event) => {
+      const modal = document.getElementById('recipe-modal');
+      if (event.target === modal) {
+        closeRecipeModal();
+      }
+    });
+
+    // Init
+    window.onload = () => {
+      renderUnitsSelector('ing-rarity');
+      renderUnitsSelector('ing-rarity-desk');
+      renderIngredients();
+      renderBook();
+      renderUnitsList();
+      
+      // Las pestañas funcionan igual en todas las pantallas
+      // Solo el contenido activo se muestra
+    };
+  </script>
+</body>
+</html>
