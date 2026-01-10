@@ -1,0 +1,107 @@
+{
+  "app_name": "Epic Recipe Book",
+  "app_description": "Recipe manager with cost and profitability analysis",
+  
+  "nav": {
+    "ingredients": "Ingredients",
+    "create_recipe": "Create Recipe",
+    "my_recipes": "My Recipes",
+    "settings": "Settings"
+  },
+  
+  "ingredients": {
+    "title": "Ingredients",
+    "ingredient_name": "Ingredient Name",
+    "ingredient_name_placeholder": "E.g: Beef, Garlic, Tomato",
+    "price": "Price (€)",
+    "unit": "Unit",
+    "price_type": "Price Type",
+    "per_unit": "Per Unit",
+    "per_pack": "Per Pack",
+    "pack_size": "Pack Size",
+    "add_button": "Add Ingredient",
+    "no_ingredients": "No ingredients added",
+    "list_title": "Ingredients List",
+    "rarity": "Rarity",
+    "price_per_unit": "Price/Unit",
+    "delete_button": "Delete",
+    "edit_button": "Edit"
+  },
+  
+  "recipe": {
+    "title": "Create Recipe",
+    "recipe_name": "Recipe Name",
+    "recipe_name_placeholder": "E.g: Beef Stew",
+    "selected_ingredients": "Selected Ingredients",
+    "ingredient_cost": "Ingredients Cost",
+    "quantity": "Quantity",
+    "units": "Units",
+    "add_recipe": "Add Recipe",
+    "no_selected": "No ingredients selected",
+    "clear": "Clear",
+    "calculate": "Calculate Cost"
+  },
+  
+  "book": {
+    "title": "My Recipes",
+    "no_recipes": "No recipes saved",
+    "recipe_detail": "Recipe Details",
+    "close": "Close",
+    "delete": "Delete Recipe",
+    "export": "Export",
+    "ingredients_used": "Ingredients Used",
+    "total_cost": "Total Cost",
+    "cost_per_unit": "Cost per Unit"
+  },
+  
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "export_all": "Export All (Recipes + Ingredients)",
+    "import_data": "Import Data",
+    "clear_all": "Clear All",
+    "confirm_clear": "Are you sure you want to delete all data?",
+    "units": {
+      "kilogramo": "Kilogram",
+      "gramo": "Gram",
+      "litro": "Liter",
+      "mililitro": "Milliliter",
+      "unidad": "Unit"
+    }
+  },
+  
+  "donation": {
+    "title": "Donations",
+    "install_app": "📱 Install as App",
+    "install_description": "Save Recipe Book on your device for quick access without internet",
+    "install_button": "Install",
+    "later": "Not now",
+    "support_project": "Support the project",
+    "support_description": "I'm an independent developer and I need your help. You can donate via the widget or using these P2P methods",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Top Up",
+    "crypto_label": "Crypto Wallet - USDC (Polygon Network)",
+    "copy_button": "Copy",
+    "view_on_explorer": "View on Polygonscan"
+  },
+  
+  "toasts": {
+    "ingredient_added": "Ingredient added",
+    "ingredient_updated": "Ingredient updated",
+    "ingredient_deleted": "Ingredient deleted",
+    "recipe_added": "Recipe added",
+    "recipe_deleted": "Recipe deleted",
+    "data_exported": "Data exported",
+    "data_imported": "Data imported",
+    "data_cleared": "All data has been deleted",
+    "app_installed": "App installed successfully",
+    "error": "Error"
+  },
+  
+  "stats": {
+    "cost_label": "Cost",
+    "profit_label": "Profit",
+    "roi_label": "ROI",
+    "margin_label": "Margin"
+  }
+}

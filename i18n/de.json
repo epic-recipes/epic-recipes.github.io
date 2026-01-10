@@ -1,0 +1,107 @@
+{
+  "app_name": "Episches Rezeptbuch",
+  "app_description": "Rezeptverwaltung mit Kosten- und Rentabilitätsanalyse",
+  
+  "nav": {
+    "ingredients": "Zutaten",
+    "create_recipe": "Rezept Erstellen",
+    "my_recipes": "Meine Rezepte",
+    "settings": "Einstellungen"
+  },
+  
+  "ingredients": {
+    "title": "Zutaten",
+    "ingredient_name": "Zutatname",
+    "ingredient_name_placeholder": "Z.B: Rindfleisch, Knoblauch, Tomate",
+    "price": "Preis (€)",
+    "unit": "Einheit",
+    "price_type": "Preistyp",
+    "per_unit": "Pro Einheit",
+    "per_pack": "Pro Packung",
+    "pack_size": "Packungsgröße",
+    "add_button": "Zutat Hinzufügen",
+    "no_ingredients": "Keine Zutaten hinzugefügt",
+    "list_title": "Zutatenliste",
+    "rarity": "Seltenheit",
+    "price_per_unit": "Preis/Einheit",
+    "delete_button": "Löschen",
+    "edit_button": "Bearbeiten"
+  },
+  
+  "recipe": {
+    "title": "Rezept Erstellen",
+    "recipe_name": "Rezeptname",
+    "recipe_name_placeholder": "Z.B: Rindeintopf",
+    "selected_ingredients": "Ausgewählte Zutaten",
+    "ingredient_cost": "Zutatenkosten",
+    "quantity": "Menge",
+    "units": "Einheiten",
+    "add_recipe": "Rezept Hinzufügen",
+    "no_selected": "Keine Zutaten ausgewählt",
+    "clear": "Löschen",
+    "calculate": "Kosten Berechnen"
+  },
+  
+  "book": {
+    "title": "Meine Rezepte",
+    "no_recipes": "Keine Rezepte gespeichert",
+    "recipe_detail": "Rezeptdetails",
+    "close": "Schließen",
+    "delete": "Rezept Löschen",
+    "export": "Exportieren",
+    "ingredients_used": "Verwendete Zutaten",
+    "total_cost": "Gesamtkosten",
+    "cost_per_unit": "Kosten pro Einheit"
+  },
+  
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "export_all": "Alles Exportieren (Rezepte + Zutaten)",
+    "import_data": "Daten Importieren",
+    "clear_all": "Alles Löschen",
+    "confirm_clear": "Sind Sie sicher, dass Sie alle Daten löschen möchten?",
+    "units": {
+      "kilogramo": "Kilogramm",
+      "gramo": "Gramm",
+      "litro": "Liter",
+      "mililitro": "Milliliter",
+      "unidad": "Einheit"
+    }
+  },
+  
+  "donation": {
+    "title": "Spenden",
+    "install_app": "📱 Als App Installieren",
+    "install_description": "Speichern Sie das Rezeptbuch auf Ihrem Gerät für schnellen Zugriff offline",
+    "install_button": "Installieren",
+    "later": "Später",
+    "support_project": "Projekt Unterstützen",
+    "support_description": "Ich bin ein unabhängiger Entwickler und brauche deine Hilfe. Sie können über das Widget spenden oder diese P2P-Methoden verwenden",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Aufladen",
+    "crypto_label": "Kryptowallet - USDC (Polygon Netzwerk)",
+    "copy_button": "Kopieren",
+    "view_on_explorer": "Auf Polygonscan anzeigen"
+  },
+  
+  "toasts": {
+    "ingredient_added": "Zutat hinzugefügt",
+    "ingredient_updated": "Zutat aktualisiert",
+    "ingredient_deleted": "Zutat gelöscht",
+    "recipe_added": "Rezept hinzugefügt",
+    "recipe_deleted": "Rezept gelöscht",
+    "data_exported": "Daten exportiert",
+    "data_imported": "Daten importiert",
+    "data_cleared": "Alle Daten wurden gelöscht",
+    "app_installed": "App erfolgreich installiert",
+    "error": "Fehler"
+  },
+  
+  "stats": {
+    "cost_label": "Kosten",
+    "profit_label": "Gewinn",
+    "roi_label": "ROI",
+    "margin_label": "Marge"
+  }
+}

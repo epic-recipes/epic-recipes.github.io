@@ -1,0 +1,107 @@
+{
+  "app_name": "Ricettario Epico",
+  "app_description": "Gestore di ricette con analisi dei costi e della redditività",
+  
+  "nav": {
+    "ingredients": "Ingredienti",
+    "create_recipe": "Crea Ricetta",
+    "my_recipes": "Le Mie Ricette",
+    "settings": "Impostazioni"
+  },
+  
+  "ingredients": {
+    "title": "Ingredienti",
+    "ingredient_name": "Nome Ingrediente",
+    "ingredient_name_placeholder": "Es: Manzo, Aglio, Pomodoro",
+    "price": "Prezzo (€)",
+    "unit": "Unità",
+    "price_type": "Tipo di Prezzo",
+    "per_unit": "Per Unità",
+    "per_pack": "Per Confezione",
+    "pack_size": "Dimensione Confezione",
+    "add_button": "Aggiungi Ingrediente",
+    "no_ingredients": "Nessun ingrediente aggiunto",
+    "list_title": "Elenco Ingredienti",
+    "rarity": "Rarità",
+    "price_per_unit": "Prezzo/Unità",
+    "delete_button": "Elimina",
+    "edit_button": "Modifica"
+  },
+  
+  "recipe": {
+    "title": "Crea Ricetta",
+    "recipe_name": "Nome Ricetta",
+    "recipe_name_placeholder": "Es: Stufato di Manzo",
+    "selected_ingredients": "Ingredienti Selezionati",
+    "ingredient_cost": "Costo Ingredienti",
+    "quantity": "Quantità",
+    "units": "Unità",
+    "add_recipe": "Aggiungi Ricetta",
+    "no_selected": "Nessun ingrediente selezionato",
+    "clear": "Cancella",
+    "calculate": "Calcola Costo"
+  },
+  
+  "book": {
+    "title": "Le Mie Ricette",
+    "no_recipes": "Nessuna ricetta salvata",
+    "recipe_detail": "Dettagli Ricetta",
+    "close": "Chiudi",
+    "delete": "Elimina Ricetta",
+    "export": "Esporta",
+    "ingredients_used": "Ingredienti Utilizzati",
+    "total_cost": "Costo Totale",
+    "cost_per_unit": "Costo per Unità"
+  },
+  
+  "settings": {
+    "title": "Impostazioni",
+    "language": "Lingua",
+    "export_all": "Esporta Tutto (Ricette + Ingredienti)",
+    "import_data": "Importa Dati",
+    "clear_all": "Cancella Tutto",
+    "confirm_clear": "Sei sicuro di voler eliminare tutti i dati?",
+    "units": {
+      "kilogramo": "Chilogrammo",
+      "gramo": "Grammo",
+      "litro": "Litro",
+      "mililitro": "Millilitro",
+      "unidad": "Unità"
+    }
+  },
+  
+  "donation": {
+    "title": "Donazioni",
+    "install_app": "📱 Installa come App",
+    "install_description": "Salva Ricettario sul tuo dispositivo per accesso veloce offline",
+    "install_button": "Installa",
+    "later": "Più tardi",
+    "support_project": "Supporta il progetto",
+    "support_description": "Sono uno sviluppatore indipendente e ho bisogno del tuo aiuto. Puoi donare tramite il widget o utilizzando questi metodi P2P",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Ricarica",
+    "crypto_label": "Portafoglio Crypto - USDC (Rete Polygon)",
+    "copy_button": "Copia",
+    "view_on_explorer": "Visualizza su Polygonscan"
+  },
+  
+  "toasts": {
+    "ingredient_added": "Ingrediente aggiunto",
+    "ingredient_updated": "Ingrediente aggiornato",
+    "ingredient_deleted": "Ingrediente eliminato",
+    "recipe_added": "Ricetta aggiunta",
+    "recipe_deleted": "Ricetta eliminata",
+    "data_exported": "Dati esportati",
+    "data_imported": "Dati importati",
+    "data_cleared": "Tutti i dati sono stati eliminati",
+    "app_installed": "App installata con successo",
+    "error": "Errore"
+  },
+  
+  "stats": {
+    "cost_label": "Costo",
+    "profit_label": "Profitto",
+    "roi_label": "ROI",
+    "margin_label": "Margine"
+  }
+}
