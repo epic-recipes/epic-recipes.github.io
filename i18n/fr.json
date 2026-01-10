@@ -1,0 +1,107 @@
+{
+  "app_name": "Livre de Recettes Épique",
+  "app_description": "Gestionnaire de recettes avec analyse des coûts et de la rentabilité",
+  
+  "nav": {
+    "ingredients": "Ingrédients",
+    "create_recipe": "Créer une Recette",
+    "my_recipes": "Mes Recettes",
+    "settings": "Paramètres"
+  },
+  
+  "ingredients": {
+    "title": "Ingrédients",
+    "ingredient_name": "Nom de l'Ingrédient",
+    "ingredient_name_placeholder": "Ex: Viande de Boeuf, Ail, Tomate",
+    "price": "Prix (€)",
+    "unit": "Unité",
+    "price_type": "Type de Prix",
+    "per_unit": "Par Unité",
+    "per_pack": "Par Paquet",
+    "pack_size": "Taille du Paquet",
+    "add_button": "Ajouter Ingrédient",
+    "no_ingredients": "Aucun ingrédient ajouté",
+    "list_title": "Liste des Ingrédients",
+    "rarity": "Rareté",
+    "price_per_unit": "Prix/Unité",
+    "delete_button": "Supprimer",
+    "edit_button": "Éditer"
+  },
+  
+  "recipe": {
+    "title": "Créer une Recette",
+    "recipe_name": "Nom de la Recette",
+    "recipe_name_placeholder": "Ex: Ragoût de Boeuf",
+    "selected_ingredients": "Ingrédients Sélectionnés",
+    "ingredient_cost": "Coût des Ingrédients",
+    "quantity": "Quantité",
+    "units": "Unités",
+    "add_recipe": "Ajouter Recette",
+    "no_selected": "Aucun ingrédient sélectionné",
+    "clear": "Effacer",
+    "calculate": "Calculer le Coût"
+  },
+  
+  "book": {
+    "title": "Mes Recettes",
+    "no_recipes": "Aucune recette enregistrée",
+    "recipe_detail": "Détails de la Recette",
+    "close": "Fermer",
+    "delete": "Supprimer Recette",
+    "export": "Exporter",
+    "ingredients_used": "Ingrédients Utilisés",
+    "total_cost": "Coût Total",
+    "cost_per_unit": "Coût par Unité"
+  },
+  
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "export_all": "Exporter Tout (Recettes + Ingrédients)",
+    "import_data": "Importer les Données",
+    "clear_all": "Effacer Tout",
+    "confirm_clear": "Êtes-vous sûr de vouloir supprimer toutes les données?",
+    "units": {
+      "kilogramo": "Kilogramme",
+      "gramo": "Gramme",
+      "litro": "Litre",
+      "mililitro": "Millilitre",
+      "unidad": "Unité"
+    }
+  },
+  
+  "donation": {
+    "title": "Dons",
+    "install_app": "📱 Installer comme Application",
+    "install_description": "Enregistrez le Livre de Recettes sur votre appareil pour un accès rapide hors ligne",
+    "install_button": "Installer",
+    "later": "Plus tard",
+    "support_project": "Soutenir le projet",
+    "support_description": "Je suis un développeur indépendant et j'ai besoin de votre aide. Vous pouvez donner via le widget ou en utilisant ces méthodes P2P",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Recharger",
+    "crypto_label": "Portefeuille Crypto - USDC (Réseau Polygon)",
+    "copy_button": "Copier",
+    "view_on_explorer": "Voir sur Polygonscan"
+  },
+  
+  "toasts": {
+    "ingredient_added": "Ingrédient ajouté",
+    "ingredient_updated": "Ingrédient mis à jour",
+    "ingredient_deleted": "Ingrédient supprimé",
+    "recipe_added": "Recette ajoutée",
+    "recipe_deleted": "Recette supprimée",
+    "data_exported": "Données exportées",
+    "data_imported": "Données importées",
+    "data_cleared": "Toutes les données ont été supprimées",
+    "app_installed": "Application installée avec succès",
+    "error": "Erreur"
+  },
+  
+  "stats": {
+    "cost_label": "Coût",
+    "profit_label": "Profit",
+    "roi_label": "ROI",
+    "margin_label": "Marge"
+  }
+}
