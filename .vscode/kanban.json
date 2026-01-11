@@ -1,0 +1,61 @@
+{
+    "title": "Kanban",
+    "cols": [
+        {
+            "title": "Bugs",
+            "tasks": [],
+            "id": "k615impxy2kj40m97gf8p69f",
+            "color": "#eb144c"
+        },
+        {
+            "title": "To-Do",
+            "tasks": [
+                {
+                    "text": "Boton de compartir receta",
+                    "id": "r1qqns6e68v08y9jjzcpgeho"
+                },
+                {
+                    "text": "Boton de compartir la app",
+                    "id": "jkf1tz0kzknj3jchcljkhzsk"
+                },
+                {
+                    "text": "Poder modificar los ingredientes.",
+                    "id": "vxcjwtdx16ezcjo65oamfoh3"
+                },
+                {
+                    "text": "Precio del plato y precio por porciones",
+                    "id": "g25qyuyco2pn011bfuvz64q6"
+                },
+                {
+                    "text": "En el modo sm en el cuadro de donaciones las columna se ubican una debajo de otra",
+                    "id": "fvjhfdk60ssoi9z54znox1r0"
+                },
+                {
+                    "text": "Unidades de medida y sus equivalencias con otras unidades. Para conversiones",
+                    "id": "yh1qpdot2uzn67wfoo4fsfta"
+                },
+                {
+                    "text": "Todas las confirmaciones de operaciones se muetran como modal dentro de la app.\n",
+                    "id": "v5iq8fabgsx7meadlcopy3hb"
+                }
+            ],
+            "id": "pobfg8zzh94vuova9o61sc6z",
+            "color": "#fcb900"
+        },
+        {
+            "title": "Doing",
+            "tasks": [],
+            "id": "np1kwkipcv3cy2h31j0ly5jz",
+            "color": "#0693e3"
+        },
+        {
+            "title": "Done",
+            "tasks": [],
+            "id": "eej4lipjmh32xrzl7z6rgh19",
+            "color": "#00d084"
+        }
+    ],
+    "autosave": true,
+    "saveToFile": true,
+    "timestamp": 1768097328102
+}
