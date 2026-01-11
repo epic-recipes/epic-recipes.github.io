@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#12141d">
   <meta name="description" content="Gestor de recetas con análisis de costos y rentabilidad">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23e0c36c' width='192' height='192'/><path fill='%2312141d' d='M96 48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 80c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z'/><circle cx='96' cy='96' r='12' fill='%23e0c36c'/></svg>">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23e0c36c' width='192' height='192'/><path fill='%2312141d' d='M96 48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 80c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z'/><circle cx='96' cy='96' r='12' fill='%23e0c36c'/></svg>">
   <title>Recetario Épico — Daniel E. F. G.</title>
   <style>
     /* ====== Estética Pixel RPG Evolucionada ====== */
@@ -22,7 +24,7 @@
       --muted: #7e879a;
       --grid: #3a4256;
       --shadow: #080a0e;
-      
+
       /* Rarezas */
       --common: #a9b0c2;
       --rare: #4fa3ff;
@@ -35,9 +37,12 @@
       src: local("Press Start 2P"), local("PressStart2P");
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       background: var(--bg);
       color: var(--text);
@@ -52,8 +57,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
       background-size: 100% 3px, 3px 100%;
       z-index: 100;
       opacity: 0.4;
@@ -88,7 +93,11 @@
       box-shadow: 0 4px var(--shadow);
     }
 
-    h1 { font-size: 18px; margin: 0; text-shadow: 2px 2px var(--shadow); }
+    h1 {
+      font-size: 18px;
+      margin: 0;
+      text-shadow: 2px 2px var(--shadow);
+    }
 
     .main-grid {
       display: grid;
@@ -113,8 +122,10 @@
       justify-content: space-between;
     }
 
-    .form-group { margin-bottom: 12px; }
-    
+    .form-group {
+      margin-bottom: 12px;
+    }
+
     label {
       font-size: 11px;
       color: var(--muted);
@@ -122,7 +133,8 @@
       margin-bottom: 6px;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       background: var(--panel-2);
       border: 3px solid var(--grid);
@@ -133,7 +145,9 @@
       outline: none;
     }
 
-    input:focus { border-color: var(--accent); }
+    input:focus {
+      border-color: var(--accent);
+    }
 
     .btn-grid {
       display: flex;
@@ -154,9 +168,9 @@
       font-weight: bold;
     }
 
-    .btn:active { 
-      transform: translateY(2px); 
-      box-shadow: 0 2px #000; 
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px #000;
     }
 
     .btn:disabled {
@@ -164,10 +178,26 @@
       cursor: not-allowed;
     }
 
-    .btn-primary { background: var(--accent); color: #000; }
-    .btn-secondary { background: var(--panel-2); color: #fff; border-color: var(--grid); }
-    .btn-success { background: var(--success); color: #000; }
-    .btn-danger { background: var(--danger); color: #000; }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: var(--panel-2);
+      color: #fff;
+      border-color: var(--grid);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #000;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #000;
+    }
 
     .divider {
       height: 4px;
@@ -193,8 +223,16 @@
       align-items: center;
     }
 
-    .card-info b { font-size: 12px; display: block; margin-bottom: 4px; }
-    .card-info span { font-size: 11px; color: var(--muted); }
+    .card-info b {
+      font-size: 12px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .card-info span {
+      font-size: 11px;
+      color: var(--muted);
+    }
 
     .rarity-dot {
       display: inline-block;
@@ -217,8 +255,17 @@
       border: 2px solid var(--grid);
     }
 
-    .stat-val { font-size: 14px; color: var(--success); }
-    .stat-label { font-size: 10px; color: var(--muted); display: block; margin-bottom: 4px; }
+    .stat-val {
+      font-size: 14px;
+      color: var(--success);
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
 
     /* Inventory Grid */
     .inv-slots {
@@ -264,8 +311,13 @@
     }
 
     @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
     }
 
     /* Tabs Navigation */
@@ -304,7 +356,7 @@
       border-color: #000;
       box-shadow: 0 4px #000;
     }
-    
+
     .tab-button.active:active {
       transform: translateY(2px);
       box-shadow: 0 2px #000;
@@ -370,7 +422,7 @@
       width: 92vw;
       padding: 14px;
       border-radius: 8px;
-      box-shadow: 0 12px rgba(0,0,0,0.6);
+      box-shadow: 0 12px rgba(0, 0, 0, 0.6);
       overflow-y: auto;
     }
 
@@ -382,20 +434,55 @@
       flex-wrap: nowrap;
     }
 
-    .donation-widget { flex: 0 0 346px; }
-    .donation-widget iframe { width:346px; height:623px; border:0; border-radius:4px; box-shadow: 0 6px rgba(0,0,0,0.6); display:block; }
+    .donation-widget {
+      flex: 0 0 346px;
+    }
 
-    .donation-controls { flex: 1 1 300px; display:flex; flex-direction:column; gap:10px; align-items:stretch; }
-    .donation-controls .card { background: transparent; border: 2px solid var(--grid); padding: 10px; }
-    .donation-controls .label { font-size:12px; color:var(--muted); }
-    .donation-controls .value { font-weight:bold; color:var(--accent); word-break:break-all; }
+    .donation-widget iframe {
+      width: 346px;
+      height: 623px;
+      border: 0;
+      border-radius: 4px;
+      box-shadow: 0 6px rgba(0, 0, 0, 0.6);
+      display: block;
+    }
 
-    .donation-actions { display:flex; gap:8px; justify-content:flex-end; flex-wrap: wrap; }
+    .donation-controls {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
 
-    .copy-btn { 
-      padding: 8px 12px; 
-      font-size: 11px; 
-      border: 3px solid #000; 
+    .donation-controls .card {
+      background: transparent;
+      border: 2px solid var(--grid);
+      padding: 10px;
+    }
+
+    .donation-controls .label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .donation-controls .value {
+      font-weight: bold;
+      color: var(--accent);
+      word-break: break-all;
+    }
+
+    .donation-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      padding: 8px 12px;
+      font-size: 11px;
+      border: 3px solid #000;
       background: var(--accent);
       color: #000;
       cursor: pointer;
@@ -404,20 +491,27 @@
       transition: transform 0.05s, box-shadow 0.05s;
       text-transform: uppercase;
     }
-    
+
     .copy-btn:active {
       transform: translateY(2px);
       box-shadow: 0 2px #000;
     }
-    
+
     .copy-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
 
     /* Recipe hint */
-    .recipe-hint { font-size:10px; color:var(--muted); margin-top:6px }
-    .panel.clickable { cursor: pointer; }
+    .recipe-hint {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 6px
+    }
+
+    .panel.clickable {
+      cursor: pointer;
+    }
 
     .close-btn {
       font-size: 20px;
@@ -467,13 +561,26 @@
     }
 
     @media (max-width: 850px) {
-      .main-grid { grid-template-columns: 1fr; }
-      header { flex-direction: column; gap: 10px; align-items: flex-start; }
-      .tab-button { flex: 1; }
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .tab-button {
+        flex: 1;
+      }
     }
 
     @media (min-width: 851px) {
-      .tab-button { flex: 1; }
+      .tab-button {
+        flex: 1;
+      }
+
       /* En escritorio, mostrar tabs dentro de dos columnas cuando es tab-content */
       #tab-ingredientes .main-grid,
       #tab-receta .main-grid {
@@ -482,24 +589,33 @@
     }
   </style>
 </head>
+
 <body>
   <div class="crt"></div>
-  
+
   <!-- PWA Install Banner + Language Selector -->
-  <div id="install-banner" style="display:none; position:fixed; top:0; left:0; right:0; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); padding:12px 16px; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.5); color:var(--shadow);">
-    <div style="max-width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:11px;">
+  <div id="install-banner"
+    style="display:none; position:fixed; top:0; left:0; right:0; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); padding:12px 16px; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.5); color:var(--shadow);">
+    <div
+      style="max-width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:11px;">
       <div style="flex:1;">
         <div style="font-weight:bold; margin-bottom:4px;" data-i18n="donation.install_app">📱 Instalar como App</div>
-        <div style="font-size:9px; opacity:0.9;" data-i18n="donation.install_description">Acceso rápido sin necesidad de navegador</div>
+        <div style="font-size:9px; opacity:0.9;" data-i18n="donation.install_description">Acceso rápido sin necesidad de
+          navegador</div>
       </div>
-      <button class="btn btn-success" style="padding:8px 12px; font-size:10px; white-space:nowrap;" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-      <button class="btn btn-secondary" style="padding:6px 10px; font-size:10px; white-space:nowrap;" onclick="dismissInstallBanner()">✕</button>
+      <button class="btn btn-success" style="padding:8px 12px; font-size:10px; white-space:nowrap;"
+        onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+      <button class="btn btn-secondary" style="padding:6px 10px; font-size:10px; white-space:nowrap;"
+        onclick="dismissInstallBanner()">✕</button>
     </div>
   </div>
 
   <!-- Language Selector Bar -->
-  <div id="lang-bar" style="position:fixed; top:80px; right:16px; z-index:999; background:var(--panel); border:2px solid var(--accent); padding:8px; display:none;">
-    <select id="lang-select" style="background:var(--panel); color:var(--accent); border:1px solid var(--accent); padding:4px 8px; font-size:9px; cursor:pointer;" onchange="changeLanguage(this.value)">
+  <div id="lang-bar"
+    style="position:fixed; top:80px; right:16px; z-index:999; background:var(--panel); border:2px solid var(--accent); padding:8px; display:none;">
+    <select id="lang-select"
+      style="background:var(--panel); color:var(--accent); border:1px solid var(--accent); padding:4px 8px; font-size:9px; cursor:pointer;"
+      onchange="changeLanguage(this.value)">
       <option value="es">Español</option>
       <option value="en">English</option>
       <option value="fr">Français</option>
@@ -508,7 +624,7 @@
       <option value="pt">Português</option>
     </select>
   </div>
-  
+
   <div class="container">
     <header>
       <div class="title">
@@ -516,18 +632,22 @@
         <h1 data-i18n="app_name">RECETARIO ÉPICO</h1>
       </div>
       <div style="display:flex; gap:8px; align-items:center">
-        <button class="btn btn-secondary" style="padding:8px 10px; font-size:11px" onclick="toggleLangBar()" title="Cambiar idioma">🌐</button>
-        <button class="btn btn-secondary donate-btn" onclick="openDonationModal()" data-i18n="donation.title">Donar</button>
-        <button class="btn btn-secondary" style="padding:8px 10px; font-size:11px" onclick="switchTab('tab-config')">⚙️</button>
+        <button class="btn btn-secondary" style="padding:8px 10px; font-size:11px" onclick="toggleLangBar()"
+          title="Cambiar idioma">🌐</button>
+        <button class="btn btn-secondary donate-btn" onclick="openDonationModal()"
+          data-i18n="donation.title">Donar</button>
+        <button class="btn btn-secondary" style="padding:8px 10px; font-size:11px"
+          onclick="switchTab('tab-config')">⚙️</button>
       </div>
     </header>
 
     <!-- TABS NAVIGATION para MÓVIL -->
     <div class="tabs-nav" id="tabs-nav">
-      <button class="tab-button" onclick="switchTab('tab-ingredientes')" data-i18n="nav.ingredients">Ingredientes</button>
+      <button class="tab-button" onclick="switchTab('tab-ingredientes')"
+        data-i18n="nav.ingredients">Ingredientes</button>
       <button class="tab-button" onclick="switchTab('tab-receta')" data-i18n="nav.create_recipe">Crear Receta</button>
       <button class="tab-button active" onclick="switchTab('tab-libro')" data-i18n="nav.my_recipes">Mis Recetas</button>
-      
+
     </div>
 
     <!-- TAB 1: INGREDIENTES -->
@@ -537,31 +657,32 @@
           <h2 data-i18n="ingredients.title">Ingredientes</h2>
           <div class="form-group">
             <label data-i18n="ingredients.ingredient_name">Nombre del Ingrediente</label>
-            <input type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate" data-i18n="ingredients.ingredient_name_placeholder">
+            <input type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate"
+              data-i18n="ingredients.ingredient_name_placeholder">
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
-              <div class="form-group">
-                <label data-i18n="ingredients.price">Precio (€)</label>
-                <input type="number" id="ing-cost" placeholder="0.00" step="0.01">
-              </div>
-              <div class="form-group">
-                <label data-i18n="ingredients.unit">Unidad</label>
-                <select id="ing-rarity"></select>
-              </div>
+            <div class="form-group">
+              <label data-i18n="ingredients.price">Precio (€)</label>
+              <input type="number" id="ing-cost" placeholder="0.00" step="0.01">
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
-              <div class="form-group">
-                <label data-i18n="ingredients.price_type">Tipo de Precio</label>
-                <select id="ing-price-type" onchange="togglePackInput('ing-price-type','ing-pack-size')">
-                  <option value="unit" data-i18n="ingredients.per_unit">Por unidad</option>
-                  <option value="pack" data-i18n="ingredients.per_pack">Por pack</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
-                <input type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
-              </div>
+            <div class="form-group">
+              <label data-i18n="ingredients.unit">Unidad</label>
+              <select id="ing-rarity"></select>
             </div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
+            <div class="form-group">
+              <label data-i18n="ingredients.price_type">Tipo de Precio</label>
+              <select id="ing-price-type" onchange="togglePackInput('ing-price-type','ing-pack-size')">
+                <option value="unit" data-i18n="ingredients.per_unit">Por unidad</option>
+                <option value="pack" data-i18n="ingredients.per_pack">Por pack</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
+              <input type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
+            </div>
+          </div>
           <div class="btn-grid">
             <button class="btn btn-primary" onclick="addIngredient()" data-i18n="ingredients.add_button">Añadir</button>
             <button class="btn btn-danger" onclick="clearIngredients()">Vaciar</button>
@@ -585,7 +706,7 @@
             <label>Nombre del Plato</label>
             <input type="text" id="rec-name" placeholder="Pasta a la Carbonara">
           </div>
-          
+
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
             <div class="form-group">
               <label>Ingrediente</label>
@@ -641,7 +762,8 @@
     <div id="tab-libro" class="tab-content active">
       <section class="panel">
         <h2 data-i18n="book.title">Mis Recetas</h2>
-        <div id="recipe-book" class="list-container" style="max-height: 600px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+        <div id="recipe-book" class="list-container"
+          style="max-height: 600px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
           <!-- Recetas guardadas -->
         </div>
         <input type="file" id="file-input" style="display:none;" accept=".json" onchange="handleFileImport()">
@@ -652,8 +774,9 @@
     <div id="tab-config" class="tab-content">
       <section class="panel">
         <h2 data-i18n="settings.title">Configuración</h2>
-        
-        <h3 style="color: var(--accent); font-size: 11px; margin: 15px 0 10px 0; text-transform: uppercase;">Unidades de Medida</h3>
+
+        <h3 style="color: var(--accent); font-size: 11px; margin: 15px 0 10px 0; text-transform: uppercase;">Unidades de
+          Medida</h3>
         <div id="units-list" style="margin-bottom: 15px; max-height: 200px; overflow-y: auto;"></div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
           <div class="form-group" style="margin-bottom: 5px;">
@@ -665,15 +788,20 @@
             <input type="text" id="unit-value" placeholder="kg" style="padding: 6px; font-size: 9px;">
           </div>
         </div>
-        <button class="btn btn-primary" onclick="addCustomUnit()" style="width: 100%; padding: 6px; font-size: 9px;">Agregar</button>
-        <button class="btn btn-secondary" onclick="resetUnits()" style="width: 100%; margin-top: 3px; padding: 6px; font-size: 9px;">Restaurar</button>
-        
+        <button class="btn btn-primary" onclick="addCustomUnit()"
+          style="width: 100%; padding: 6px; font-size: 9px;">Agregar</button>
+        <button class="btn btn-secondary" onclick="resetUnits()"
+          style="width: 100%; margin-top: 3px; padding: 6px; font-size: 9px;">Restaurar</button>
+
         <div class="divider" style="margin: 20px 0;"></div>
-        
+
         <h3 style="color: var(--accent); font-size: 11px; margin: 15px 0 10px 0; text-transform: uppercase;">Datos</h3>
-        <button class="btn btn-primary" style="width: 100%;" onclick="exportRecipeBook()" data-i18n="settings.export_all">Exportar Todo (Recetas + Ingredientes)</button>
-        <button class="btn btn-primary" style="width: 100%; margin-top: 5px;" onclick="importRecipeBook()" data-i18n="settings.import_data">Importar Datos</button>
-        <button class="btn btn-danger" style="width: 100%; margin-top: 5px;" onclick="resetAllData()" data-i18n="settings.clear_all">Limpiar Todo (⚠️)</button>
+        <button class="btn btn-primary" style="width: 100%;" onclick="exportRecipeBook()"
+          data-i18n="settings.export_all">Exportar Todo (Recetas + Ingredientes)</button>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 5px;" onclick="importRecipeBook()"
+          data-i18n="settings.import_data">Importar Datos</button>
+        <button class="btn btn-danger" style="width: 100%; margin-top: 5px;" onclick="resetAllData()"
+          data-i18n="settings.clear_all">Limpiar Todo (⚠️)</button>
       </section>
     </div>
 
@@ -728,7 +856,7 @@
           <label>Nombre del Plato</label>
           <input type="text" id="rec-name-desk" placeholder="Pasta a la Carbonara">
         </div>
-        
+
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
           <div class="form-group">
             <label>Ingrediente</label>
@@ -783,11 +911,14 @@
     <section class="panel" style="margin-top:20px; display: none;" id="recipe-book-section-desk">
       <h2>Mis Recetas
         <div style="display:flex; gap:5px; justify-self:end">
-          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px" onclick="exportRecipeBook()">Exportar JSON</button>
-          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px" onclick="importRecipeBook()">Importar JSON</button>
+          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
+            onclick="exportRecipeBook()">Exportar JSON</button>
+          <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
+            onclick="importRecipeBook()">Importar JSON</button>
         </div>
       </h2>
-      <div id="recipe-book-desk" class="list-container" style="max-height: 400px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+      <div id="recipe-book-desk" class="list-container"
+        style="max-height: 400px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
         <!-- Recetas guardadas -->
       </div>
     </section>
@@ -815,49 +946,80 @@
         <h3 data-i18n="donation.title">Donaciones</h3>
         <button class="close-btn" onclick="closeDonationModal()">×</button>
       </div>
-      <div class="donation-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-height: 650px; overflow-y: auto;">
+      <div class="donation-body"
+        style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-height: 650px; overflow-y: auto;">
         <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <!-- Sección PWA Install -->
-          <div id="install-prompt" style="display:none; padding:12px; background:var(--panel-2); border:3px solid var(--accent); box-shadow: 0 4px #000;">
-            <div style="font-size:12px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;" data-i18n="donation.install_app">📱 Instalar App</div>
-            <div style="font-size:10px; color:var(--text); margin-bottom:10px; line-height:1.4;" data-i18n="donation.install_description">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</div>
+          <div id="install-prompt"
+            style="display:none; padding:12px; background:var(--panel-2); border:3px solid var(--accent); box-shadow: 0 4px #000;">
+            <div
+              style="font-size:12px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;"
+              data-i18n="donation.install_app">📱 Instalar App</div>
+            <div style="font-size:10px; color:var(--text); margin-bottom:10px; line-height:1.4;"
+              data-i18n="donation.install_description">Guarda Recetario en tu dispositivo para acceso rápido sin
+              conexión</div>
             <div style="display: flex; gap: 6px; flex-direction: column;">
-              <button class="btn btn-primary" style="width:100%; padding:8px; font-size:10px;" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-              <button class="btn btn-secondary" style="width:100%; padding:8px; font-size:10px;" onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
+              <button class="btn btn-primary" style="width:100%; padding:8px; font-size:10px;" onclick="installApp()"
+                data-i18n="donation.install_button">Instalar</button>
+              <button class="btn btn-secondary" style="width:100%; padding:8px; font-size:10px;"
+                onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
             </div>
           </div>
 
           <!-- Sección Mensaje Motivacional -->
           <div style="padding:12px; background:var(--panel-2); border:3px solid var(--grid); box-shadow: 0 4px #000;">
-            <div style="font-size:12px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;" data-i18n="donation.support_project">Apoya el Proyecto</div>
-            <div style="font-size:10px; color:var(--text); line-height:1.5;" data-i18n="donation.support_description">Soy un desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos métodos P2P</div>
+            <div
+              style="font-size:12px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;"
+              data-i18n="donation.support_project">Apoya el Proyecto</div>
+            <div style="font-size:10px; color:var(--text); line-height:1.5;" data-i18n="donation.support_description">
+              Soy un desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos
+              métodos P2P</div>
           </div>
 
           <!-- Sección Digicel -->
           <div style="padding:12px; background:var(--panel-2); border:3px solid var(--grid); box-shadow: 0 4px #000;">
-            <div style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;" data-i18n="donation.digicel_label">Digicel</div>
-            <div style="font-size:12px; color:var(--accent); margin-bottom:10px; word-break: break-all; font-weight: bold;">+5977479759</div>
+            <div
+              style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;"
+              data-i18n="donation.digicel_label">Digicel</div>
+            <div
+              style="font-size:12px; color:var(--accent); margin-bottom:10px; word-break: break-all; font-weight: bold;">
+              +5977479759</div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-              <button class="btn btn-primary" style="padding:8px 12px; font-size:10px; flex:1; min-width:80px;" onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-              <a class="btn btn-success" style="padding:8px 12px; font-size:10px; text-decoration:none; color:#000; flex:1; min-width:80px; text-align:center;" href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup">Recargar</a>
+              <button class="btn btn-primary" style="padding:8px 12px; font-size:10px; flex:1; min-width:80px;"
+                onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
+              <a class="btn btn-success"
+                style="padding:8px 12px; font-size:10px; text-decoration:none; color:#000; flex:1; min-width:80px; text-align:center;"
+                href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup">Recargar</a>
             </div>
           </div>
 
           <!-- Sección Crypto -->
           <div style="padding:12px; background:var(--panel-2); border:3px solid var(--grid); box-shadow: 0 4px #000;">
-            <div style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;" data-i18n="donation.crypto_label">USDC (Polygon)</div>
-            <div id="crypto-address" style="font-size:9px; color:var(--accent); margin-bottom:10px; word-break: break-all; background:var(--panel); padding:8px; border:2px solid var(--grid); font-family: monospace; line-height: 1.4;">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
+            <div
+              style="font-size:11px; color:var(--accent); margin-bottom:8px; font-weight:bold; text-transform: uppercase;"
+              data-i18n="donation.crypto_label">USDC (Polygon)</div>
+            <div id="crypto-address"
+              style="font-size:9px; color:var(--accent); margin-bottom:10px; word-break: break-all; background:var(--panel); padding:8px; border:2px solid var(--grid); font-family: monospace; line-height: 1.4;">
+              0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-              <button class="btn btn-primary" style="padding:8px 12px; font-size:10px; flex:1; min-width:80px;" onclick="copyToClipboard(document.getElementById('crypto-address').innerText)" data-i18n="donation.copy_button">Copiar</button>
-              <a class="btn btn-secondary" style="padding:8px 12px; font-size:9px; text-decoration:none; color:inherit; flex:1; min-width:80px; text-align:center;" href="#" onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()" data-i18n="donation.view_on_explorer">Polygonscan</a>
+              <button class="btn btn-primary" style="padding:8px 12px; font-size:10px; flex:1; min-width:80px;"
+                onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
+                data-i18n="donation.copy_button">Copiar</button>
+              <a class="btn btn-secondary"
+                style="padding:8px 12px; font-size:9px; text-decoration:none; color:inherit; flex:1; min-width:80px; text-align:center;"
+                href="#"
+                onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
+                data-i18n="donation.view_on_explorer">Polygonscan</a>
             </div>
           </div>
         </div>
 
         <!-- COLUMNA DERECHA: WIDGET -->
-        <div style="display: flex; align-items: center; justify-content: center; background: var(--panel); border: 3px solid var(--grid); box-shadow: 0 4px #000; padding: 10px; overflow: hidden;">
-          <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="100%" height="600" frameborder="0" style="border: none;">No se puede cargar el widget</iframe>
+        <div
+          style="display: flex; align-items: center; justify-content: center; background: var(--panel); border: 3px solid var(--grid); box-shadow: 0 4px #000; padding: 10px; overflow: hidden;">
+          <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
+            width="100%" height="600" frameborder="0" style="border: none;">No se puede cargar el widget</iframe>
         </div>
       </div>
     </div>
@@ -953,14 +1115,14 @@
       const tabName = tabId.replace('tab-', '');
       history.pushState({ tab: tabName }, '', `#${tabName}`);
     }
-    
+
     // Manejar navegación con el botón atrás/adelante
-    window.addEventListener('popstate', function(event) {
+    window.addEventListener('popstate', function (event) {
       if (event.state && event.state.tab) {
         switchTabNoHistory('tab-' + event.state.tab);
       }
     });
-    
+
     // Cambiar tab sin actualizar historial
     function switchTabNoHistory(tabId) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -973,7 +1135,7 @@
         }
       });
     }
-    
+
     // Inicializar SPA con URL
     function initSPA() {
       const hash = window.location.hash.slice(1);
@@ -1134,7 +1296,7 @@
     function renderIngredients() {
       const list = document.getElementById('ing-list');
       const select = document.getElementById('rec-ing-select');
-      
+
       list.innerHTML = '';
       select.innerHTML = '<option value="">-- Escoger --</option>';
 
@@ -1163,7 +1325,7 @@
       // Actualizar selectores de unidades
       renderUnitsSelector('ing-rarity');
       renderUnitsSelector('ing-rarity-desk');
-      
+
       // Sincronizar con versión desktop
       renderIngredientsDesk();
     }
@@ -1187,7 +1349,7 @@
     function renderIngredientsDesk() {
       const list = document.getElementById('ing-list-desk');
       const select = document.getElementById('rec-ing-select-desk');
-      
+
       list.innerHTML = '';
       select.innerHTML = '<option value="">-- Escoger --</option>';
 
@@ -1225,7 +1387,7 @@
     }
 
     function clearIngredientsDesk() {
-      if(confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
+      if (confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
         ingredients = [];
         if (!configLoaded) {
           localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
@@ -1239,7 +1401,7 @@
     function addToRecipe() {
       const ingId = parseInt(document.getElementById('rec-ing-select').value);
       const qty = parseFloat(document.getElementById('rec-qty').value);
-      
+
       if (!ingId || isNaN(qty) || qty < 1) return showToast(t('toasts.error', 'Selección inválida'));
 
       const ing = ingredients.find(i => i.id === ingId);
@@ -1258,7 +1420,7 @@
     function renderActiveRecipe() {
       const list = document.getElementById('rec-items-list');
       list.innerHTML = '';
-      
+
       activeRecipe.items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -1273,7 +1435,7 @@
         list.appendChild(card);
       });
       updateStats();
-      
+
       // Sincronizar con escritorio
       renderActiveRecipeDesk();
     }
@@ -1286,7 +1448,7 @@
     function updateStats() {
       const price = parseFloat(document.getElementById('rec-price').value) || 0;
       const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
-      
+
       const profit = price - cost;
       const margin = price > 0 ? (profit / price) * 100 : 0;
       const roi = cost > 0 ? price / cost : 0;
@@ -1331,7 +1493,7 @@
     function addToRecipeDesk() {
       const ingId = parseInt(document.getElementById('rec-ing-select-desk').value);
       const qty = parseFloat(document.getElementById('rec-qty-desk').value);
-      
+
       if (!ingId || isNaN(qty) || qty < 1) return showToast(t('toasts.error', 'Selección inválida'));
 
       const ing = ingredients.find(i => i.id === ingId);
@@ -1350,7 +1512,7 @@
     function renderActiveRecipeDesk() {
       const list = document.getElementById('rec-items-list-desk');
       list.innerHTML = '';
-      
+
       activeRecipe.items.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -1375,7 +1537,7 @@
     function updateStatsDesk() {
       const price = parseFloat(document.getElementById('rec-price-desk').value) || 0;
       const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
-      
+
       const profit = price - cost;
       const margin = price > 0 ? (profit / price) * 100 : 0;
       const roi = cost > 0 ? price / cost : 0;
@@ -1485,7 +1647,7 @@
     // ====== Exportar/Importar ======
     function exportRecipeBook() {
       if (recipeBook.length === 0 && Object.keys(ingredients).length === 0) return showToast("No hay datos para exportar");
-      
+
       // Incluir recetas, ingredientes y unidades personalizadas
       const data = {
         recetas: recipeBook,
@@ -1493,13 +1655,13 @@
         unidades: customUnits,
         exportDate: new Date().toISOString()
       };
-      
+
       const jsonData = JSON.stringify(data, null, 2);
       const blob = new Blob([jsonData], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `recetas_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `recetas_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -1519,7 +1681,7 @@
       reader.onload = (e) => {
         try {
           const imported = JSON.parse(e.target.result);
-          
+
           // Soporte para formato antiguo (solo array) y nuevo (objeto con recetas e ingredientes)
           let importedRecipes = Array.isArray(imported) ? imported : (imported.recetas || []);
           let importedIngredients = imported.ingredientes || [];
@@ -1532,7 +1694,7 @@
             const mergeIngs = confirm(
               `Se encontraron ${importedIngredients.length} ingredientes.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`
             );
-            
+
             if (mergeIngs) {
               // Unificar ingredientes (evitar duplicados por nombre)
               const existingNames = new Set(ingredients.map(i => i.name.toLowerCase()));
@@ -1556,7 +1718,7 @@
             const mergeUnitsChoice = confirm(
               `Se encontraron ${Object.keys(importedUnits).length} unidades personalizadas.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`
             );
-            
+
             if (mergeUnitsChoice) {
               // Unificar unidades
               customUnits = Object.assign({}, customUnits, importedUnits);
@@ -1575,7 +1737,7 @@
             const mergeChoice = confirm(
               "Ya tienes recetas guardadas.\n\n¿Reemplazar (OK) o unificar (Cancelar)?"
             );
-            
+
             if (mergeChoice) {
               recipeBook = importedRecipes;
             } else {
@@ -1640,7 +1802,7 @@
 
     function seedData() {
       if (ingredients.length > 0 && !confirm("¿Reemplazar ingredientes actuales con datos de demo?")) return;
-      
+
       ingredients = [
         { id: 1, name: "Pechuga de Pollo", cost: 8.5, rarity: "common" },
         { id: 2, name: "Filete de Res Premium", cost: 16.0, rarity: "rare" },
@@ -1659,7 +1821,7 @@
     }
 
     function clearIngredients() {
-      if(confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
+      if (confirm("¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.")) {
         ingredients = [];
         if (!configLoaded) {
           localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
@@ -1692,10 +1854,10 @@
     function renderUnitsSelector(selectId) {
       const select = document.getElementById(selectId);
       if (!select) return;
-      
+
       const units = getCustomUnits();
       select.innerHTML = '<option value="">-- Seleccionar unidad --</option>';
-      
+
       Object.entries(units).forEach(([key, value]) => {
         const opt = document.createElement('option');
         opt.value = key;
@@ -1707,10 +1869,10 @@
     function renderUnitsList() {
       const list = document.getElementById('units-list');
       if (!list) return;
-      
+
       list.innerHTML = '';
       const units = getCustomUnits();
-      
+
       Object.entries(units).forEach(([key, value]) => {
         const div = document.createElement('div');
         div.style.cssText = 'background: #151924; border: 2px solid var(--grid); padding: 6px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 9px;';
@@ -1740,7 +1902,7 @@
       document.getElementById('unit-key').value = '';
       document.getElementById('unit-value').value = '';
       showToast(t('toasts.ingredient_added', `Unidad "${key}" agregada`));
-      
+
       // Renderizar de nuevo los ingredientes para actualizar unidades
       renderIngredients();
     }
@@ -1793,7 +1955,7 @@
     // ====== PWA Install Prompt ======
     let deferredPrompt = null;
     let installPromptShown = false;
-    
+
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
@@ -1801,7 +1963,7 @@
         showInstallBanner();
       }
     });
-    
+
     function showInstallBanner() {
       const banner = document.getElementById('install-banner');
       if (banner && !installPromptShown) {
@@ -1814,7 +1976,7 @@
         }
       }
     }
-    
+
     function installApp() {
       if (deferredPrompt) {
         deferredPrompt.prompt();
@@ -1828,7 +1990,7 @@
         });
       }
     }
-    
+
     function dismissInstallBanner() {
       const banner = document.getElementById('install-banner');
       if (banner) {
@@ -1851,7 +2013,7 @@
       renderBook();
       renderUnitsList();
       initSPA();
-      
+
       // Registrar Service Worker para PWA
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
@@ -1864,32 +2026,15 @@
       }
     };
   </script>
- <div style="position: absolute; z-index: 99999">
-      <input autocomplete="off" type="checkbox" id="aadsstickymk93u7sw" hidden />
-      <div style="padding-top: 0; padding-bottom: auto;">
-        <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;bottom:0;left:0;right:0;margin:auto">
-          <label for="aadsstickymk93u7sw" style="top: 50%;transform: translateY(-50%);right:24px;; position: absolute;border-radius: 4px; background: rgba(248, 248, 249, 0.70); padding: 4px;z-index: 99999;cursor:pointer">
-            <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-              <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-            </svg>
-          </label>
-          <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-                          <div style="width: 70%;margin:auto;text-align:left;position: absolute;left: 0;right: 0; top:-24px">
-                            <a style="display:inline-block;font-size: 13px;color: #263238;padding: 4px 10px;background: #F8F8F9;text-decoration: none; border-radius: 4px 4px 0 0;"
-                              id="frame-link"
-                              target="_blank"
-                              href="https://aads.com/campaigns/new?source_id=2420971&source_type=ad_unit&partner=2420971">
-                              Advertise here
-                            </a>
-                          </div>
-                        <iframe data-aa=2420971 src=//acceptable.a-ads.com/2420971/?size=Adaptive style='border:0; padding:0; width:70%; height:auto; overflow:hidden; margin: auto'></iframe>
-                    </div>
-        </div>
-        <style>
-      #aadsstickymk93u7sw:checked + div {
-        display: none;
-      }
-    </style>
-    </div></div>
+  <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+    <iframe data-aa='2420971' src='//acceptable.a-ads.com/2420971/?size=Adaptive'
+      style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+    <div style="width: 70%;margin:auto;position: absolute;left: 0;right: 0">
+      <a target="_blank"
+        style="display:inline-block;font-size: 13px;color: #263238;padding: 4px 10px;background: #F8F8F9;text-decoration: none; border-radius: 0 0 4px 4px;"
+        id="frame-link"
+        href="https://aads.com/campaigns/new/?source_id=2420971&source_type=ad_unit&partner=2420971">Advertise here</a>
+    </div>
+  </div>
 </body>
 </html>
