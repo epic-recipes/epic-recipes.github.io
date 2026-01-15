@@ -711,7 +711,7 @@
     <div id="tab-receta" class="tab-content">
       <div class="main-grid" style="grid-template-columns: 1fr;">
         <section class="panel">
-          <h2>Creador de Recetas</h2>
+          <h2 data-i18n="recipe.title">Creador de Recetas</h2>
           <div class="form-group">
             <label data-i18n="recipe.recipe_name">Nombre del Plato</label>
             <input type="text" id="rec-name" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
@@ -916,7 +916,7 @@
 
       <!-- PANEL DERECHO: COCINA -->
       <section class="panel">
-        <h2>Creador de Recetas</h2>
+        <h2 data-i18n="recipe.title">Creador de Recetas</h2>
         <div class="form-group">
           <label data-i18n="recipe.recipe_name">Nombre del Plato</label>
           <input type="text" id="rec-name-desk" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
@@ -1670,7 +1670,7 @@
       const select = document.getElementById('rec-ing-select');
 
       list.innerHTML = '';
-      select.innerHTML = '<option value="">-- Escoger --</option>';
+      select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
 
       ingredients.forEach(ing => {
         // Listado lateral móvil
@@ -1726,7 +1726,7 @@
       const select = document.getElementById('rec-ing-select-desk');
 
       list.innerHTML = '';
-      select.innerHTML = '<option value="">-- Escoger --</option>';
+      select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
 
       ingredients.forEach(ing => {
         // Listado lateral escritorio
@@ -1840,6 +1840,12 @@
           if (!availableUnits.includes(from)) availableUnits.push(from);
         }
       });
+
+      // Agregar placeholder
+      const placeholderOpt = document.createElement('option');
+      placeholderOpt.value = '';
+      placeholderOpt.textContent = t('recipe.select_unit');
+      unitSelect.appendChild(placeholderOpt);
 
       availableUnits.forEach(unit => {
         const opt = document.createElement('option');
@@ -1986,6 +1992,12 @@
           if (!availableUnits.includes(from)) availableUnits.push(from);
         }
       });
+
+      // Agregar placeholder
+      const placeholderOpt = document.createElement('option');
+      placeholderOpt.value = '';
+      placeholderOpt.textContent = t('recipe.select_unit');
+      unitSelect.appendChild(placeholderOpt);
 
       availableUnits.forEach(unit => {
         const opt = document.createElement('option');
@@ -2603,7 +2615,7 @@
       if (!select) return;
 
       const units = getCustomUnits();
-      select.innerHTML = '<option value="">-- Seleccionar unidad --</option>';
+      select.innerHTML = '<option value="">' + t('ingredients.select_unit') + '</option>';
 
       Object.entries(units).forEach(([key, value]) => {
         const opt = document.createElement('option');
