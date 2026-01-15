@@ -1,0 +1,183 @@
+{
+  "app_name": "Epiki Koki Buku",
+  "app_description": "Koki manejer nanga kosto nanga profit analisis",
+
+  "nav": {
+    "ingredients": "Ingridienti",
+    "create_recipe": "Meki Resep",
+    "my_recipes": "Mi Resep",
+    "settings": "Seting"
+  },
+
+  "ingredients": {
+    "title": "Ingridienti",
+    "ingredient_name": "Ingridienti Nen",
+    "ingredient_name_placeholder": "Fosi: Bifo, Ajo, Tomati",
+    "price": "Pris (€)",
+    "unit": "Yunit",
+    "price_type": "Pris Sortu",
+    "per_unit": "Per yunit",
+    "per_pack": "Per pak",
+    "pack_size": "Pak Sise (owantu)",
+    "add_button": "Adi",
+    "clear_button": "Krasi",
+    "no_ingredients": "No ingridienti abi",
+    "list_title": "Koki Skapu",
+    "rarity": "Sari",
+    "price_per_unit": "Pris/Yunit",
+    "delete_button": "Trowe",
+    "edit_button": "Kenki",
+    "update_button": "Update"
+  },
+
+  "recipe": {
+    "title": "Resep Meker",
+    "recipe_name": "Njan Nen",
+    "recipe_name_placeholder": "Spaghetti Carbonara",
+    "selected_ingredients": "Piki Ingridienti",
+    "ingredient": "Ingridienti",
+    "quantity": "Owantu",
+    "unit": "Yunit",
+    "add_button": "Adi",
+    "clear_button": "Krasi",
+    "price": "Njan Pris (€)",
+    "portions": "Porti",
+    "instructions": "Koki Metodi",
+    "instructions_placeholder": "Taki fa yu e koki a resep...",
+    "save_button": "Seif Resep",
+    "stats": {
+      "cost": "Ingridienti Kosto",
+      "profit": "Neti Profit",
+      "price_per_portion": "Pris per Porti",
+      "margin": "Margin %",
+      "roi": "Profit"
+    }
+  },
+
+  "book": {
+    "title": "Mi Resep",
+    "export_json": "Export JSON",
+    "import_json": "Import JSON",
+    "import_recipe": "Import Resep",
+    "no_recipes": "No resep seif",
+    "recipe_detail": "Resep Deta",
+    "close": "Kibri",
+    "share": "Sari",
+    "export": "Export JSON",
+    "delete": "Trowe",
+    "ingredients_used": "Ingridienti Yu Yusi",
+    "total_cost": "Tota Kosto",
+    "sale_price": "Seli Pris",
+    "net_profit": "Neti Profit",
+    "profit_margin": "Profit Margin",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Profit per €",
+    "portions": "porti"
+  },
+
+  "settings": {
+    "title": "Seting",
+    "units_title": "Miti Yunit",
+    "unit_name": "Yunit Nen",
+    "symbol": "Simbol",
+    "add_unit": "Adi",
+    "reset_units": "Reset",
+    "conversions_title": "Yunit Equivalent",
+    "from": "Fu",
+    "to": "Na",
+    "factor": "Faktor",
+    "add_conversion": "Adi Konversi",
+    "reset_conversions": "Reset",
+    "export_units": "Export Yunit",
+    "import_units": "Import Yunit",
+    "data_title": "Data",
+    "export_all": "Export Ala (Resep + Ingridienti)",
+    "import_data": "Import Data",
+    "clear_all": "Krasi Ala (⚠️)"
+  },
+
+  "donation": {
+    "title": "Donasi",
+    "install_app": "📱 Install leki App",
+    "install_description": "Fasi akses srefi no abi browser",
+    "install_button": "Install",
+    "later": "No now",
+    "support_project": "Help a Proyek",
+    "support_description": "Mi na wan independent developer nanga mi abi yu help fanowdu. Yu kan donasi nanga a widget ofu yusi desi P2P metodu",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Top up",
+    "crypto_label": "USDC (Polygon)",
+    "copy_button": "Kopi",
+    "view_on_explorer": "Polygonscan"
+  },
+
+  "toasts": {
+    "ingredient_added": "Ingridienti adi na koki skapu",
+    "ingredient_updated": "Ingridienti update",
+    "ingredient_deleted": "Ingridienti trowe fu koki skapu",
+    "recipe_added": "Resep seif",
+    "recipe_deleted": "Resep trowe",
+    "data_exported": "Koki buku, produk nanga seting export",
+    "units_exported": "Yunit nanga equivalent export",
+    "data_imported": "Data import bun",
+    "units_imported": "Yunit nanga equivalent import",
+    "data_cleared": "Ala data trowe",
+    "error": "No bon piki",
+    "shared": "Sari bun!",
+    "copied": "Link kopi na clipboard",
+    "copy_error": "No kan kopi. Sari nanga anu: "
+  },
+
+  "confirm": {
+    "delete_ingredient": "Trowe \"{name}\" fu koki skapu?",
+    "clear_ingredients": "Yu siki fu krasi a koki skapu? A wroko disi no kan undo.",
+    "delete_recipe": "Trowe resep \"{name}\"?",
+    "clear_all": "⚠️ YU SIKI? Disi o trowe ALA data (resep nanga ingridienti). A WROKO DISI NO KAN UNDO.",
+    "confirm_again": "Konfirm wantron fu siki komplet...",
+    "merge_or_replace": "Abi data fu bifo.\n\nMergi (OK) ofu replace (Cancel)?",
+    "replace_ingredient": "Ingridienti \"{name}\" abi kaba. Replace?",
+    "replace_recipe": "Resep nanga nen \"{name}\" abi kaba. Replace?",
+    "replace_unit": "Yunit \"{name}\" abi kaba. Replace?",
+    "replace_conversion": "Equivalent \"{key}\" abi kaba. Replace?",
+    "delete_unit": "Trowe custom yunit \"{name}\"?",
+    "delete_conversion": "Trowe konversi \"{key}\"?"
+  },
+
+  "desktop": {
+    "ingredients": "Ingridienti",
+    "recipe_creator": "Resep Meker",
+    "my_recipes": "Mi Resep",
+    "recipe_name": "Njan Nen",
+    "add_ingredient": "Adi",
+    "clear_recipe": "Krasi",
+    "save_recipe": "Seif Resep",
+    "export_json": "Export JSON",
+    "import_json": "Import JSON",
+    "import_recipe": "Import Resep"
+  },
+
+  "modal": {
+    "recipe_name": "Resep Nen",
+    "close": "Kibri",
+    "share": "Sari",
+    "export": "Export JSON",
+    "delete": "Trowe",
+    "ingredients": "Ingridienti",
+    "preparation": "Koki Metodi",
+    "financial_analysis": "Financial Analisis",
+    "total_cost": "Tota Kosto",
+    "sale_price": "Seli Pris",
+    "net_profit": "Neti Profit",
+    "profit_margin": "Profit Margin",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Profit per €"
+  },
+
+  "stats": {
+    "cost_label": "Ingridienti Kosto",
+    "profit_label": "Neti Profit",
+    "price_per_portion": "Pris per Porti",
+    "margin_label": "Margin %",
+    "roi_label": "Profit"
+  }
+}

@@ -1,107 +1,188 @@
 {
   "app_name": "Recetario Épico",
   "app_description": "Gestor de recetas con análisis de costos y rentabilidad",
-  
+
   "nav": {
     "ingredients": "Ingredientes",
     "create_recipe": "Crear Receta",
     "my_recipes": "Mis Recetas",
     "settings": "Configuración"
   },
-  
+
   "ingredients": {
     "title": "Ingredientes",
     "ingredient_name": "Nombre del Ingrediente",
     "ingredient_name_placeholder": "Ej: Carne de Res, Ajo, Tomate",
     "price": "Precio (€)",
+    "price_placeholder": "0.00",
     "unit": "Unidad",
     "price_type": "Tipo de Precio",
-    "per_unit": "Por Unidad",
-    "per_pack": "Por Paquete",
-    "pack_size": "Tamaño del Paquete",
-    "add_button": "Agregar Ingrediente",
+    "per_unit": "Por unidad",
+    "per_pack": "Por pack",
+    "pack_size": "Tamaño del Pack (cantidad)",
+    "pack_size_placeholder": "1",
+    "add_button": "Añadir",
+    "clear_button": "Vaciar",
     "no_ingredients": "No hay ingredientes agregados",
-    "list_title": "Listado de Ingredientes",
+    "list_title": "Despensa",
     "rarity": "Rareza",
     "price_per_unit": "Precio/Unidad",
     "delete_button": "Eliminar",
-    "edit_button": "Editar"
+    "edit_button": "Editar",
+    "update_button": "Actualizar"
   },
-  
+
   "recipe": {
-    "title": "Crear Receta",
-    "recipe_name": "Nombre de la Receta",
-    "recipe_name_placeholder": "Ej: Estofado de Res",
+    "title": "Creador de Recetas",
+    "recipe_name": "Nombre del Plato",
+    "recipe_name_placeholder": "Pasta a la Carbonara",
     "selected_ingredients": "Ingredientes Seleccionados",
-    "ingredient_cost": "Costo Ingredientes",
+    "ingredient": "Ingrediente",
     "quantity": "Cantidad",
-    "units": "Unidades",
-    "add_recipe": "Agregar Receta",
-    "no_selected": "Sin ingredientes seleccionados",
-    "clear": "Limpiar",
-    "calculate": "Calcular Costo"
+    "quantity_placeholder": "100",
+    "unit": "Unidad",
+    "add_button": "Añadir",
+    "clear_button": "Limpiar",
+    "price": "Precio del Plato (€)",
+    "price_placeholder": "0.00",
+    "portions": "Porciones",
+    "portions_placeholder": "1",
+    "instructions": "Método de Preparación",
+    "instructions_placeholder": "Describe los pasos para preparar la receta...",
+    "save_button": "Guardar Receta",
+    "stats": {
+      "cost": "Costo Ingredientes",
+      "profit": "Beneficio Neto",
+      "price_per_portion": "Precio por Porción",
+      "margin": "Margen %",
+      "roi": "Rentabilidad"
+    }
   },
-  
+
   "book": {
     "title": "Mis Recetas",
+    "export_json": "Exportar JSON",
+    "import_json": "Importar JSON",
+    "import_recipe": "Importar Receta",
     "no_recipes": "No hay recetas guardadas",
     "recipe_detail": "Detalles de la Receta",
     "close": "Cerrar",
-    "delete": "Eliminar Receta",
-    "export": "Exportar",
+    "share": "Compartir",
+    "export": "Exportar JSON",
+    "delete": "Borrar",
     "ingredients_used": "Ingredientes Utilizados",
     "total_cost": "Costo Total",
-    "cost_per_unit": "Costo por Unidad"
+    "sale_price": "Precio Venta",
+    "net_profit": "Ganancia Neta",
+    "profit_margin": "Margen de Ganancia",
+    "roi": "Rentabilidad (ROI)",
+    "profit_per_euro": "Ganancia por €",
+    "portions": "porciones"
   },
-  
+
   "settings": {
     "title": "Configuración",
-    "language": "Idioma",
+    "units_title": "Unidades de Medida",
+    "unit_name": "Nombre de Unidad",
+    "symbol": "Símbolo",
+    "add_unit": "Agregar",
+    "reset_units": "Restaurar",
+    "conversions_title": "Equivalencias de Unidades",
+    "from": "De",
+    "to": "A",
+    "factor": "Factor",
+    "add_conversion": "Agregar Conversión",
+    "reset_conversions": "Restaurar",
+    "export_units": "Exportar Unidades",
+    "import_units": "Importar Unidades",
+    "data_title": "Datos",
     "export_all": "Exportar Todo (Recetas + Ingredientes)",
     "import_data": "Importar Datos",
-    "clear_all": "Limpiar Todo",
-    "confirm_clear": "¿Está seguro de que desea eliminar todos los datos?",
-    "units": {
-      "kilogramo": "Kilogramo",
-      "gramo": "Gramo",
-      "litro": "Litro",
-      "mililitro": "Mililitro",
-      "unidad": "Unidad"
-    }
+    "clear_all": "Limpiar Todo (⚠️)"
   },
-  
+
   "donation": {
     "title": "Donaciones",
     "install_app": "📱 Instalar como App",
-    "install_description": "Guarda Recetario en tu dispositivo para acceso rápido sin conexión",
+    "install_description": "Acceso rápido sin necesidad de navegador",
     "install_button": "Instalar",
     "later": "Ahora no",
-    "support_project": "Apoya el proyecto",
+    "support_project": "Apoya el Proyecto",
     "support_description": "Soy un desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos métodos P2P",
     "digicel_label": "Digicel",
     "digicel_topup": "Recargar",
-    "crypto_label": "Cartera Crypto - USDC (Polygon Network)",
+    "crypto_label": "USDC (Polygon)",
     "copy_button": "Copiar",
-    "view_on_explorer": "Ver en Polygonscan"
+    "view_on_explorer": "Polygonscan"
   },
-  
+
   "toasts": {
-    "ingredient_added": "Ingrediente agregado",
+    "ingredient_added": "Ingrediente añadido a la despensa",
     "ingredient_updated": "Ingrediente actualizado",
-    "ingredient_deleted": "Ingrediente eliminado",
-    "recipe_added": "Receta agregada",
+    "ingredient_deleted": "Ingrediente eliminado de la despensa",
+    "recipe_added": "Receta guardada",
     "recipe_deleted": "Receta eliminada",
-    "data_exported": "Datos exportados",
-    "data_imported": "Datos importados",
+    "data_exported": "Recetario, productos y configuración exportados",
+    "units_exported": "Unidades y equivalencias exportadas",
+    "data_imported": "Datos importados correctamente",
+    "units_imported": "Unidades y equivalencias importadas",
     "data_cleared": "Todos los datos han sido eliminados",
-    "app_installed": "App instalada correctamente",
-    "error": "Error"
+    "error": "Selección inválida",
+    "shared": "¡Compartido exitosamente!",
+    "copied": "Enlace copiado al portapapeles",
+    "copy_error": "No se pudo copiar. Comparte manualmente: "
   },
-  
+
+  "confirm": {
+    "delete_ingredient": "¿Eliminar \"{name}\" de la despensa?",
+    "clear_ingredients": "¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.",
+    "delete_recipe": "¿Eliminar la receta \"{name}\"?",
+    "clear_all": "⚠️ ¿SEGURO? Esto eliminará TODOS los datos (recetas e ingredientes). Esta acción NO se puede deshacer.",
+    "confirm_again": "Confirma una vez más para estar completamente seguro...",
+    "merge_or_replace": "Se encontraron datos existentes.\n\n¿Unificar (OK) o reemplazar (Cancelar)?",
+    "replace_ingredient": "El ingrediente \"{name}\" ya existe. ¿Reemplazar?",
+    "replace_recipe": "Ya existe una receta con el nombre \"{name}\". ¿Reemplazar?",
+    "replace_unit": "La unidad \"{name}\" ya existe. ¿Reemplazar?",
+    "replace_conversion": "La equivalencia \"{key}\" ya existe. ¿Reemplazar?",
+    "delete_unit": "¿Eliminar la unidad personalizada \"{name}\"?",
+    "delete_conversion": "¿Eliminar la conversión \"{key}\"?"
+  },
+
+  "desktop": {
+    "ingredients": "Ingredientes",
+    "recipe_creator": "Creador de Recetas",
+    "my_recipes": "Mis Recetas",
+    "recipe_name": "Nombre del Plato",
+    "add_ingredient": "Añadir",
+    "clear_recipe": "Limpiar",
+    "save_recipe": "Guardar Receta",
+    "export_json": "Exportar JSON",
+    "import_json": "Importar JSON",
+    "import_recipe": "Importar Receta"
+  },
+
+  "modal": {
+    "recipe_name": "Nombre de la Receta",
+    "close": "Cerrar",
+    "share": "Compartir",
+    "export": "Exportar JSON",
+    "delete": "Borrar",
+    "ingredients": "Ingredientes",
+    "preparation": "Método de Preparación",
+    "financial_analysis": "Análisis Financiero",
+    "total_cost": "Costo Total",
+    "sale_price": "Precio Venta",
+    "net_profit": "Ganancia Neta",
+    "profit_margin": "Margen de Ganancia",
+    "roi": "Rentabilidad (ROI)",
+    "profit_per_euro": "Ganancia por €"
+  },
+
   "stats": {
-    "cost_label": "Costo",
-    "profit_label": "Ganancia",
-    "roi_label": "ROI",
-    "margin_label": "Margen"
+    "cost_label": "Costo Ingredientes",
+    "profit_label": "Beneficio Neto",
+    "price_per_portion": "Precio por Porción",
+    "margin_label": "Margen %",
+    "roi_label": "Rentabilidad"
   }
 }

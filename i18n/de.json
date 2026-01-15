@@ -1,14 +1,14 @@
 {
   "app_name": "Episches Rezeptbuch",
   "app_description": "Rezeptverwaltung mit Kosten- und Rentabilitätsanalyse",
-  
+
   "nav": {
     "ingredients": "Zutaten",
     "create_recipe": "Rezept Erstellen",
     "my_recipes": "Meine Rezepte",
     "settings": "Einstellungen"
   },
-  
+
   "ingredients": {
     "title": "Zutaten",
     "ingredient_name": "Zutatname",
@@ -18,90 +18,166 @@
     "price_type": "Preistyp",
     "per_unit": "Pro Einheit",
     "per_pack": "Pro Packung",
-    "pack_size": "Packungsgröße",
-    "add_button": "Zutat Hinzufügen",
+    "pack_size": "Packungsgröße (Menge)",
+    "add_button": "Hinzufügen",
+    "clear_button": "Löschen",
     "no_ingredients": "Keine Zutaten hinzugefügt",
-    "list_title": "Zutatenliste",
+    "list_title": "Vorratskammer",
     "rarity": "Seltenheit",
     "price_per_unit": "Preis/Einheit",
     "delete_button": "Löschen",
-    "edit_button": "Bearbeiten"
+    "edit_button": "Bearbeiten",
+    "update_button": "Aktualisieren"
   },
-  
+
   "recipe": {
-    "title": "Rezept Erstellen",
-    "recipe_name": "Rezeptname",
-    "recipe_name_placeholder": "Z.B: Rindeintopf",
+    "title": "Rezept-Ersteller",
+    "recipe_name": "Gerichtsname",
+    "recipe_name_placeholder": "Spaghetti Carbonara",
     "selected_ingredients": "Ausgewählte Zutaten",
-    "ingredient_cost": "Zutatenkosten",
+    "ingredient": "Zutat",
     "quantity": "Menge",
-    "units": "Einheiten",
-    "add_recipe": "Rezept Hinzufügen",
-    "no_selected": "Keine Zutaten ausgewählt",
-    "clear": "Löschen",
-    "calculate": "Kosten Berechnen"
+    "unit": "Einheit",
+    "add_button": "Hinzufügen",
+    "clear_button": "Löschen",
+    "price": "Gerichtspreis (€)",
+    "portions": "Portionen",
+    "instructions": "Zubereitungsmethode",
+    "instructions_placeholder": "Beschreiben Sie die Schritte zur Zubereitung des Rezepts...",
+    "save_button": "Rezept Speichern",
+    "stats": {
+      "cost": "Zutatenkosten",
+      "profit": "Nettogewinn",
+      "price_per_portion": "Preis pro Portion",
+      "margin": "Marge %",
+      "roi": "Rentabilität"
+    }
   },
-  
+
   "book": {
     "title": "Meine Rezepte",
+    "export_json": "JSON Exportieren",
+    "import_json": "JSON Importieren",
+    "import_recipe": "Rezept Importieren",
     "no_recipes": "Keine Rezepte gespeichert",
     "recipe_detail": "Rezeptdetails",
     "close": "Schließen",
-    "delete": "Rezept Löschen",
-    "export": "Exportieren",
+    "share": "Teilen",
+    "export": "JSON Exportieren",
+    "delete": "Löschen",
     "ingredients_used": "Verwendete Zutaten",
     "total_cost": "Gesamtkosten",
-    "cost_per_unit": "Kosten pro Einheit"
+    "sale_price": "Verkaufspreis",
+    "net_profit": "Nettogewinn",
+    "profit_margin": "Gewinnmarge",
+    "roi": "Kapitalrendite (ROI)",
+    "profit_per_euro": "Gewinn pro €",
+    "portions": "Portionen"
   },
-  
+
   "settings": {
     "title": "Einstellungen",
-    "language": "Sprache",
+    "units_title": "Maßeinheiten",
+    "unit_name": "Einheitenname",
+    "symbol": "Symbol",
+    "add_unit": "Hinzufügen",
+    "reset_units": "Zurücksetzen",
+    "conversions_title": "Einheitenäquivalenzen",
+    "from": "Von",
+    "to": "Zu",
+    "factor": "Faktor",
+    "add_conversion": "Umrechnung Hinzufügen",
+    "reset_conversions": "Zurücksetzen",
+    "export_units": "Einheiten Exportieren",
+    "import_units": "Einheiten Importieren",
+    "data_title": "Daten",
     "export_all": "Alles Exportieren (Rezepte + Zutaten)",
     "import_data": "Daten Importieren",
-    "clear_all": "Alles Löschen",
-    "confirm_clear": "Sind Sie sicher, dass Sie alle Daten löschen möchten?",
-    "units": {
-      "kilogramo": "Kilogramm",
-      "gramo": "Gramm",
-      "litro": "Liter",
-      "mililitro": "Milliliter",
-      "unidad": "Einheit"
-    }
+    "clear_all": "Alles Löschen (⚠️)"
   },
-  
+
   "donation": {
     "title": "Spenden",
     "install_app": "📱 Als App Installieren",
-    "install_description": "Speichern Sie das Rezeptbuch auf Ihrem Gerät für schnellen Zugriff offline",
+    "install_description": "Speichern Sie das Rezeptbuch auf Ihrem Gerät für schnellen Offline-Zugriff",
     "install_button": "Installieren",
     "later": "Später",
     "support_project": "Projekt Unterstützen",
-    "support_description": "Ich bin ein unabhängiger Entwickler und brauche deine Hilfe. Sie können über das Widget spenden oder diese P2P-Methoden verwenden",
+    "support_description": "Ich bin ein unabhängiger Entwickler und brauche Ihre Hilfe. Sie können über das Widget spenden oder diese P2P-Methoden verwenden",
     "digicel_label": "Digicel",
     "digicel_topup": "Aufladen",
-    "crypto_label": "Kryptowallet - USDC (Polygon Netzwerk)",
+    "crypto_label": "USDC (Polygon)",
     "copy_button": "Kopieren",
-    "view_on_explorer": "Auf Polygonscan anzeigen"
+    "view_on_explorer": "Polygonscan"
   },
-  
+
   "toasts": {
-    "ingredient_added": "Zutat hinzugefügt",
+    "ingredient_added": "Zutat zur Vorratskammer hinzugefügt",
     "ingredient_updated": "Zutat aktualisiert",
-    "ingredient_deleted": "Zutat gelöscht",
-    "recipe_added": "Rezept hinzugefügt",
+    "ingredient_deleted": "Zutat aus Vorratskammer entfernt",
+    "recipe_added": "Rezept gespeichert",
     "recipe_deleted": "Rezept gelöscht",
-    "data_exported": "Daten exportiert",
-    "data_imported": "Daten importiert",
+    "data_exported": "Rezeptbuch, Produkte und Einstellungen exportiert",
+    "units_exported": "Einheiten und Äquivalenzen exportiert",
+    "data_imported": "Daten erfolgreich importiert",
+    "units_imported": "Einheiten und Äquivalenzen importiert",
     "data_cleared": "Alle Daten wurden gelöscht",
-    "app_installed": "App erfolgreich installiert",
-    "error": "Fehler"
+    "error": "Ungültige Auswahl",
+    "shared": "Erfolgreich geteilt!",
+    "copied": "Link in Zwischenablage kopiert",
+    "copy_error": "Konnte nicht kopieren. Manuell teilen: "
   },
-  
+
+  "confirm": {
+    "delete_ingredient": "\"{name}\" aus Vorratskammer entfernen?",
+    "clear_ingredients": "Sind Sie sicher, dass Sie die Vorratskammer leeren möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "delete_recipe": "Rezept \"{name}\" löschen?",
+    "clear_all": "⚠️ SIND SIE SICHER? Dies wird ALLE Daten löschen (Rezepte und Zutaten). Diese Aktion KANN NICHT rückgängig gemacht werden.",
+    "confirm_again": "Bestätigen Sie noch einmal, um absolut sicher zu sein...",
+    "merge_or_replace": "Vorhandene Daten gefunden.\n\nZusammenführen (OK) oder ersetzen (Abbrechen)?",
+    "replace_ingredient": "Zutat \"{name}\" existiert bereits. Ersetzen?",
+    "replace_recipe": "Rezept mit Name \"{name}\" existiert bereits. Ersetzen?",
+    "replace_unit": "Einheit \"{name}\" existiert bereits. Ersetzen?",
+    "replace_conversion": "Äquivalenz \"{key}\" existiert bereits. Ersetzen?",
+    "delete_unit": "Benutzerdefinierte Einheit \"{name}\" löschen?",
+    "delete_conversion": "Umrechnung \"{key}\" löschen?"
+  },
+
+  "desktop": {
+    "ingredients": "Zutaten",
+    "recipe_creator": "Rezept-Ersteller",
+    "my_recipes": "Meine Rezepte",
+    "recipe_name": "Gerichtsname",
+    "add_ingredient": "Hinzufügen",
+    "clear_recipe": "Löschen",
+    "save_recipe": "Rezept Speichern",
+    "export_json": "JSON Exportieren",
+    "import_json": "JSON Importieren",
+    "import_recipe": "Rezept Importieren"
+  },
+
+  "modal": {
+    "recipe_name": "Rezeptname",
+    "close": "Schließen",
+    "share": "Teilen",
+    "export": "JSON Exportieren",
+    "delete": "Löschen",
+    "ingredients": "Zutaten",
+    "preparation": "Zubereitungsmethode",
+    "financial_analysis": "Finanzanalyse",
+    "total_cost": "Gesamtkosten",
+    "sale_price": "Verkaufspreis",
+    "net_profit": "Nettogewinn",
+    "profit_margin": "Gewinnmarge",
+    "roi": "Kapitalrendite (ROI)",
+    "profit_per_euro": "Gewinn pro €"
+  },
+
   "stats": {
-    "cost_label": "Kosten",
-    "profit_label": "Gewinn",
-    "roi_label": "ROI",
-    "margin_label": "Marge"
+    "cost_label": "Zutatenkosten",
+    "profit_label": "Nettogewinn",
+    "price_per_portion": "Preis pro Portion",
+    "margin_label": "Marge %",
+    "roi_label": "Rentabilität"
   }
 }

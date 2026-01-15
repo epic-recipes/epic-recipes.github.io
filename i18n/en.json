@@ -1,14 +1,14 @@
 {
   "app_name": "Epic Recipe Book",
   "app_description": "Recipe manager with cost and profitability analysis",
-  
+
   "nav": {
     "ingredients": "Ingredients",
     "create_recipe": "Create Recipe",
     "my_recipes": "My Recipes",
     "settings": "Settings"
   },
-  
+
   "ingredients": {
     "title": "Ingredients",
     "ingredient_name": "Ingredient Name",
@@ -16,92 +16,168 @@
     "price": "Price (€)",
     "unit": "Unit",
     "price_type": "Price Type",
-    "per_unit": "Per Unit",
-    "per_pack": "Per Pack",
-    "pack_size": "Pack Size",
-    "add_button": "Add Ingredient",
+    "per_unit": "Per unit",
+    "per_pack": "Per pack",
+    "pack_size": "Pack Size (quantity)",
+    "add_button": "Add",
+    "clear_button": "Clear",
     "no_ingredients": "No ingredients added",
-    "list_title": "Ingredients List",
+    "list_title": "Pantry",
     "rarity": "Rarity",
     "price_per_unit": "Price/Unit",
     "delete_button": "Delete",
-    "edit_button": "Edit"
+    "edit_button": "Edit",
+    "update_button": "Update"
   },
-  
+
   "recipe": {
-    "title": "Create Recipe",
-    "recipe_name": "Recipe Name",
-    "recipe_name_placeholder": "E.g: Beef Stew",
+    "title": "Recipe Creator",
+    "recipe_name": "Dish Name",
+    "recipe_name_placeholder": "Spaghetti Carbonara",
     "selected_ingredients": "Selected Ingredients",
-    "ingredient_cost": "Ingredients Cost",
+    "ingredient": "Ingredient",
     "quantity": "Quantity",
-    "units": "Units",
-    "add_recipe": "Add Recipe",
-    "no_selected": "No ingredients selected",
-    "clear": "Clear",
-    "calculate": "Calculate Cost"
+    "unit": "Unit",
+    "add_button": "Add",
+    "clear_button": "Clear",
+    "price": "Dish Price (€)",
+    "portions": "Portions",
+    "instructions": "Preparation Method",
+    "instructions_placeholder": "Describe the steps to prepare the recipe...",
+    "save_button": "Save Recipe",
+    "stats": {
+      "cost": "Ingredients Cost",
+      "profit": "Net Profit",
+      "price_per_portion": "Price per Portion",
+      "margin": "Margin %",
+      "roi": "Profitability"
+    }
   },
-  
+
   "book": {
     "title": "My Recipes",
+    "export_json": "Export JSON",
+    "import_json": "Import JSON",
+    "import_recipe": "Import Recipe",
     "no_recipes": "No recipes saved",
     "recipe_detail": "Recipe Details",
     "close": "Close",
-    "delete": "Delete Recipe",
-    "export": "Export",
+    "share": "Share",
+    "export": "Export JSON",
+    "delete": "Delete",
     "ingredients_used": "Ingredients Used",
     "total_cost": "Total Cost",
-    "cost_per_unit": "Cost per Unit"
+    "sale_price": "Sale Price",
+    "net_profit": "Net Profit",
+    "profit_margin": "Profit Margin",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Profit per €",
+    "portions": "portions"
   },
-  
+
   "settings": {
     "title": "Settings",
-    "language": "Language",
+    "units_title": "Units of Measure",
+    "unit_name": "Unit Name",
+    "symbol": "Symbol",
+    "add_unit": "Add",
+    "reset_units": "Reset",
+    "conversions_title": "Unit Equivalences",
+    "from": "From",
+    "to": "To",
+    "factor": "Factor",
+    "add_conversion": "Add Conversion",
+    "reset_conversions": "Reset",
+    "export_units": "Export Units",
+    "import_units": "Import Units",
+    "data_title": "Data",
     "export_all": "Export All (Recipes + Ingredients)",
     "import_data": "Import Data",
-    "clear_all": "Clear All",
-    "confirm_clear": "Are you sure you want to delete all data?",
-    "units": {
-      "kilogramo": "Kilogram",
-      "gramo": "Gram",
-      "litro": "Liter",
-      "mililitro": "Milliliter",
-      "unidad": "Unit"
-    }
+    "clear_all": "Clear All (⚠️)"
   },
-  
+
   "donation": {
     "title": "Donations",
     "install_app": "📱 Install as App",
-    "install_description": "Save Recipe Book on your device for quick access without internet",
+    "install_description": "Save Recipe Book on your device for quick offline access",
     "install_button": "Install",
     "later": "Not now",
-    "support_project": "Support the project",
-    "support_description": "I'm an independent developer and I need your help. You can donate via the widget or using these P2P methods",
+    "support_project": "Support the Project",
+    "support_description": "I'm an independent developer and need your help. You can donate through the widget or using these P2P methods",
     "digicel_label": "Digicel",
-    "digicel_topup": "Top Up",
-    "crypto_label": "Crypto Wallet - USDC (Polygon Network)",
+    "digicel_topup": "Top up",
+    "crypto_label": "USDC (Polygon)",
     "copy_button": "Copy",
-    "view_on_explorer": "View on Polygonscan"
+    "view_on_explorer": "Polygonscan"
   },
-  
+
   "toasts": {
-    "ingredient_added": "Ingredient added",
+    "ingredient_added": "Ingredient added to pantry",
     "ingredient_updated": "Ingredient updated",
-    "ingredient_deleted": "Ingredient deleted",
-    "recipe_added": "Recipe added",
+    "ingredient_deleted": "Ingredient removed from pantry",
+    "recipe_added": "Recipe saved",
     "recipe_deleted": "Recipe deleted",
-    "data_exported": "Data exported",
-    "data_imported": "Data imported",
+    "data_exported": "Recipe book, products and settings exported",
+    "units_exported": "Units and equivalences exported",
+    "data_imported": "Data imported successfully",
+    "units_imported": "Units and equivalences imported",
     "data_cleared": "All data has been deleted",
-    "app_installed": "App installed successfully",
-    "error": "Error"
+    "error": "Invalid selection",
+    "shared": "Shared successfully!",
+    "copied": "Link copied to clipboard",
+    "copy_error": "Could not copy. Share manually: "
   },
-  
+
+  "confirm": {
+    "delete_ingredient": "Remove \"{name}\" from pantry?",
+    "clear_ingredients": "Are you sure you want to clear the pantry? This action cannot be undone.",
+    "delete_recipe": "Delete recipe \"{name}\"?",
+    "clear_all": "⚠️ ARE YOU SURE? This will delete ALL data (recipes and ingredients). This action CANNOT be undone.",
+    "confirm_again": "Confirm once more to be completely sure...",
+    "merge_or_replace": "Existing data found.\n\nMerge (OK) or replace (Cancel)?",
+    "replace_ingredient": "Ingredient \"{name}\" already exists. Replace?",
+    "replace_recipe": "Recipe with name \"{name}\" already exists. Replace?",
+    "replace_unit": "Unit \"{name}\" already exists. Replace?",
+    "replace_conversion": "Equivalence \"{key}\" already exists. Replace?",
+    "delete_unit": "Delete custom unit \"{name}\"?",
+    "delete_conversion": "Delete conversion \"{key}\"?"
+  },
+
+  "desktop": {
+    "ingredients": "Ingredients",
+    "recipe_creator": "Recipe Creator",
+    "my_recipes": "My Recipes",
+    "recipe_name": "Dish Name",
+    "add_ingredient": "Add",
+    "clear_recipe": "Clear",
+    "save_recipe": "Save Recipe",
+    "export_json": "Export JSON",
+    "import_json": "Import JSON",
+    "import_recipe": "Import Recipe"
+  },
+
+  "modal": {
+    "recipe_name": "Recipe Name",
+    "close": "Close",
+    "share": "Share",
+    "export": "Export JSON",
+    "delete": "Delete",
+    "ingredients": "Ingredients",
+    "preparation": "Preparation Method",
+    "financial_analysis": "Financial Analysis",
+    "total_cost": "Total Cost",
+    "sale_price": "Sale Price",
+    "net_profit": "Net Profit",
+    "profit_margin": "Profit Margin",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Profit per €"
+  },
+
   "stats": {
-    "cost_label": "Cost",
-    "profit_label": "Profit",
-    "roi_label": "ROI",
-    "margin_label": "Margin"
+    "cost_label": "Ingredients Cost",
+    "profit_label": "Net Profit",
+    "price_per_portion": "Price per Portion",
+    "margin_label": "Margin %",
+    "roi_label": "Profitability"
   }
 }

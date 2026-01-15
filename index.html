@@ -629,6 +629,8 @@
       <option value="de">Deutsch</option>
       <option value="it">Italiano</option>
       <option value="pt">Português</option>
+      <option value="nl">Nederlands</option>
+      <option value="srn">Sranantongo</option>
     </select>
   </div>
 
@@ -731,54 +733,54 @@
           </div>
 
           <div class="btn-grid">
-            <button class="btn btn-success" onclick="addToRecipe()">Añadir</button>
-            <button class="btn btn-danger" onclick="clearActiveRecipe()">Limpiar</button>
+            <button class="btn btn-success" onclick="addToRecipe()" data-i18n="recipe.add_button">Añadir</button>
+            <button class="btn btn-danger" onclick="clearActiveRecipe()" data-i18n="recipe.clear_button">Limpiar</button>
           </div>
 
           <div class="divider"></div>
-          <label>Ingredientes Seleccionados</label>
+          <label data-i18n="recipe.selected_ingredients">Ingredientes Seleccionados</label>
           <div class="list-container" id="rec-items-list" style="max-height: 180px;"></div>
 
           <div class="form-group" style="margin-top:15px">
-            <label>Precio del Plato (€)</label>
+            <label data-i18n="recipe.price">Precio del Plato (€)</label>
             <input type="number" id="rec-price" placeholder="0.00" step="0.01" oninput="updateStats()">
           </div>
 
           <div class="form-group">
-            <label>Porciones</label>
+            <label data-i18n="recipe.portions">Porciones</label>
             <input type="number" id="rec-portions" placeholder="1" value="1" min="1" step="1" oninput="updateStats()">
           </div>
 
           <div class="form-group">
-            <label>Método de Preparación</label>
+            <label data-i18n="recipe.instructions">Método de Preparación</label>
             <textarea id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="4"></textarea>
           </div>
 
           <div class="stats-box">
             <div class="stat-card">
-              <span class="stat-label">Costo Ingredientes</span>
+              <span class="stat-label" data-i18n="recipe.stats.cost">Costo Ingredientes</span>
               <div class="stat-val" id="stat-cost">0.00€</div>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Beneficio Neto</span>
+              <span class="stat-label" data-i18n="recipe.stats.profit">Beneficio Neto</span>
               <div class="stat-val" id="stat-profit">0.00€</div>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Precio por Porción</span>
+              <span class="stat-label" data-i18n="recipe.stats.price_per_portion">Precio por Porción</span>
               <div class="stat-val" id="stat-price-per-portion">0.00€</div>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Margen %</span>
+              <span class="stat-label" data-i18n="recipe.stats.margin">Margen %</span>
               <div class="stat-val" id="stat-margin">0%</div>
             </div>
             <div class="stat-card">
-              <span class="stat-label">Rentabilidad</span>
+              <span class="stat-label" data-i18n="recipe.stats.roi">Rentabilidad</span>
               <div class="stat-val" id="stat-roi">0.00x</div>
             </div>
           </div>
 
           <div class="btn-grid" style="margin-top:20px">
-            <button class="btn btn-primary" style="flex:1" onclick="saveRecipe()">Guardar Receta</button>
+            <button class="btn btn-primary" style="flex:1" onclick="saveRecipe()" data-i18n="recipe.save_button">Guardar Receta</button>
           </div>
         </section>
       </div>
@@ -872,7 +874,7 @@
     <div class="main-grid" id="desktop-view" style="display: none;">
       <!-- PANEL IZQUIERDO: INGREDIENTES -->
       <section class="panel">
-        <h2>Ingredientes</h2>
+        <h2 data-i18n="desktop.ingredients">Ingredientes</h2>
         <div class="form-group">
           <label>Nombre del Ingrediente</label>
           <input type="text" id="ing-name-desk" placeholder="Ej: Carne de Res, Ajo, Tomate">
@@ -901,7 +903,7 @@
           </div>
         </div>
         <div class="btn-grid">
-          <button class="btn btn-primary" onclick="addIngredientDesk()">Añadir</button>
+          <button class="btn btn-primary" onclick="addIngredientDesk()" data-i18n="desktop.add_ingredient">Añadir</button>
           <button class="btn btn-danger" onclick="clearIngredientsDesk()">Vaciar</button>
         </div>
 
@@ -936,61 +938,61 @@
         </div>
 
         <div class="btn-grid">
-          <button class="btn btn-success" onclick="addToRecipeDesk()">Añadir</button>
-          <button class="btn btn-danger" onclick="clearActiveRecipeDesk()">Limpiar</button>
+          <button class="btn btn-success" onclick="addToRecipeDesk()" data-i18n="recipe.add_button">Añadir</button>
+          <button class="btn btn-danger" onclick="clearActiveRecipeDesk()" data-i18n="desktop.clear_recipe">Limpiar</button>
         </div>
 
         <div class="divider"></div>
-        <label>Ingredientes Seleccionados</label>
+        <label data-i18n="recipe.selected_ingredients">Ingredientes Seleccionados</label>
         <div class="list-container" id="rec-items-list-desk" style="max-height: 180px;"></div>
 
         <div class="form-group" style="margin-top:15px">
-          <label>Precio del Plato (€)</label>
+          <label data-i18n="recipe.price">Precio del Plato (€)</label>
           <input type="number" id="rec-price-desk" placeholder="0.00" step="0.01" oninput="updateStatsDesk()">
         </div>
 
         <div class="form-group">
-          <label>Porciones</label>
+          <label data-i18n="recipe.portions">Porciones</label>
           <input type="number" id="rec-portions-desk" placeholder="1" value="1" min="1" step="1" oninput="updateStatsDesk()">
         </div>
 
         <div class="form-group">
-          <label>Método de Preparación</label>
+          <label data-i18n="recipe.instructions">Método de Preparación</label>
           <textarea id="rec-instructions-desk" placeholder="Describe los pasos para preparar la receta..." rows="4"></textarea>
         </div>
 
         <div class="stats-box">
           <div class="stat-card">
-            <span class="stat-label">Costo Ingredientes</span>
+            <span class="stat-label" data-i18n="recipe.stats.cost">Costo Ingredientes</span>
             <div class="stat-val" id="stat-cost-desk">0.00€</div>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Beneficio Neto</span>
+            <span class="stat-label" data-i18n="recipe.stats.profit">Beneficio Neto</span>
             <div class="stat-val" id="stat-profit-desk">0.00€</div>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Precio por Porción</span>
+            <span class="stat-label" data-i18n="recipe.stats.price_per_portion">Precio por Porción</span>
             <div class="stat-val" id="stat-price-per-portion-desk">0.00€</div>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Margen %</span>
+            <span class="stat-label" data-i18n="recipe.stats.margin">Margen %</span>
             <div class="stat-val" id="stat-margin-desk">0%</div>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Rentabilidad</span>
+            <span class="stat-label" data-i18n="recipe.stats.roi">Rentabilidad</span>
             <div class="stat-val" id="stat-roi-desk">0.00x</div>
           </div>
         </div>
 
         <div class="btn-grid" style="margin-top:20px">
-          <button class="btn btn-primary" style="flex:1" onclick="saveRecipeDesk()">Guardar Receta</button>
+          <button class="btn btn-primary" style="flex:1" onclick="saveRecipeDesk()" data-i18n="desktop.save_recipe">Guardar Receta</button>
         </div>
       </section>
     </div>
 
     <!-- RECETAS GUARDADAS ESCRITORIO -->
     <section class="panel" style="margin-top:20px; display: none;" id="recipe-book-section-desk">
-      <h2>Mis Recetas
+      <h2 data-i18n="desktop.my_recipes">Mis Recetas
         <div style="display:flex; gap:5px; justify-self:end">
           <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
             onclick="exportRecipeBook()">Exportar JSON</button>

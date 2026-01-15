@@ -1,14 +1,14 @@
 {
   "app_name": "Livro de Receitas Épico",
   "app_description": "Gerenciador de receitas com análise de custos e lucratividade",
-  
+
   "nav": {
     "ingredients": "Ingredientes",
     "create_recipe": "Criar Receita",
     "my_recipes": "Minhas Receitas",
     "settings": "Configurações"
   },
-  
+
   "ingredients": {
     "title": "Ingredientes",
     "ingredient_name": "Nome do Ingrediente",
@@ -16,92 +16,168 @@
     "price": "Preço (€)",
     "unit": "Unidade",
     "price_type": "Tipo de Preço",
-    "per_unit": "Por Unidade",
-    "per_pack": "Por Pacote",
-    "pack_size": "Tamanho do Pacote",
-    "add_button": "Adicionar Ingrediente",
+    "per_unit": "Por unidade",
+    "per_pack": "Por pacote",
+    "pack_size": "Tamanho do Pacote (quantidade)",
+    "add_button": "Adicionar",
+    "clear_button": "Limpar",
     "no_ingredients": "Nenhum ingrediente adicionado",
-    "list_title": "Lista de Ingredientes",
+    "list_title": "Despensa",
     "rarity": "Raridade",
     "price_per_unit": "Preço/Unidade",
     "delete_button": "Deletar",
-    "edit_button": "Editar"
+    "edit_button": "Editar",
+    "update_button": "Atualizar"
   },
-  
+
   "recipe": {
-    "title": "Criar Receita",
-    "recipe_name": "Nome da Receita",
-    "recipe_name_placeholder": "Ex: Ensopado de Carne",
+    "title": "Criador de Receitas",
+    "recipe_name": "Nome do Prato",
+    "recipe_name_placeholder": "Spaghetti Carbonara",
     "selected_ingredients": "Ingredientes Selecionados",
-    "ingredient_cost": "Custo de Ingredientes",
+    "ingredient": "Ingrediente",
     "quantity": "Quantidade",
-    "units": "Unidades",
-    "add_recipe": "Adicionar Receita",
-    "no_selected": "Nenhum ingrediente selecionado",
-    "clear": "Limpar",
-    "calculate": "Calcular Custo"
+    "unit": "Unidade",
+    "add_button": "Adicionar",
+    "clear_button": "Limpar",
+    "price": "Preço do Prato (€)",
+    "portions": "Porções",
+    "instructions": "Método de Preparo",
+    "instructions_placeholder": "Descreva os passos para preparar a receita...",
+    "save_button": "Salvar Receita",
+    "stats": {
+      "cost": "Custo dos Ingredientes",
+      "profit": "Lucro Líquido",
+      "price_per_portion": "Preço por Porção",
+      "margin": "Margem %",
+      "roi": "Lucratividade"
+    }
   },
-  
+
   "book": {
     "title": "Minhas Receitas",
+    "export_json": "Exportar JSON",
+    "import_json": "Importar JSON",
+    "import_recipe": "Importar Receita",
     "no_recipes": "Nenhuma receita salva",
     "recipe_detail": "Detalhes da Receita",
     "close": "Fechar",
-    "delete": "Deletar Receita",
-    "export": "Exportar",
+    "share": "Compartilhar",
+    "export": "Exportar JSON",
+    "delete": "Deletar",
     "ingredients_used": "Ingredientes Utilizados",
     "total_cost": "Custo Total",
-    "cost_per_unit": "Custo por Unidade"
+    "sale_price": "Preço de Venda",
+    "net_profit": "Lucro Líquido",
+    "profit_margin": "Margem de Lucro",
+    "roi": "Retorno sobre Investimento (ROI)",
+    "profit_per_euro": "Lucro por €",
+    "portions": "porções"
   },
-  
+
   "settings": {
     "title": "Configurações",
-    "language": "Idioma",
+    "units_title": "Unidades de Medida",
+    "unit_name": "Nome da Unidade",
+    "symbol": "Símbolo",
+    "add_unit": "Adicionar",
+    "reset_units": "Redefinir",
+    "conversions_title": "Equivalências de Unidades",
+    "from": "De",
+    "to": "Para",
+    "factor": "Fator",
+    "add_conversion": "Adicionar Conversão",
+    "reset_conversions": "Redefinir",
+    "export_units": "Exportar Unidades",
+    "import_units": "Importar Unidades",
+    "data_title": "Dados",
     "export_all": "Exportar Tudo (Receitas + Ingredientes)",
     "import_data": "Importar Dados",
-    "clear_all": "Limpar Tudo",
-    "confirm_clear": "Tem certeza de que deseja deletar todos os dados?",
-    "units": {
-      "kilogramo": "Quilograma",
-      "gramo": "Grama",
-      "litro": "Litro",
-      "mililitro": "Mililitro",
-      "unidad": "Unidade"
-    }
+    "clear_all": "Limpar Tudo (⚠️)"
   },
-  
+
   "donation": {
     "title": "Doações",
     "install_app": "📱 Instalar como App",
     "install_description": "Salve Livro de Receitas no seu dispositivo para acesso rápido offline",
     "install_button": "Instalar",
     "later": "Depois",
-    "support_project": "Suporte o projeto",
+    "support_project": "Apoie o Projeto",
     "support_description": "Sou um desenvolvedor independente e preciso da sua ajuda. Você pode doar via widget ou usando estes métodos P2P",
     "digicel_label": "Digicel",
     "digicel_topup": "Recarregar",
-    "crypto_label": "Carteira Cripto - USDC (Rede Polygon)",
+    "crypto_label": "USDC (Polygon)",
     "copy_button": "Copiar",
-    "view_on_explorer": "Visualizar no Polygonscan"
+    "view_on_explorer": "Polygonscan"
   },
-  
+
   "toasts": {
-    "ingredient_added": "Ingrediente adicionado",
+    "ingredient_added": "Ingrediente adicionado à despensa",
     "ingredient_updated": "Ingrediente atualizado",
-    "ingredient_deleted": "Ingrediente deletado",
-    "recipe_added": "Receita adicionada",
+    "ingredient_deleted": "Ingrediente removido da despensa",
+    "recipe_added": "Receita salva",
     "recipe_deleted": "Receita deletada",
-    "data_exported": "Dados exportados",
-    "data_imported": "Dados importados",
+    "data_exported": "Livro de receitas, produtos e configurações exportados",
+    "units_exported": "Unidades e equivalências exportadas",
+    "data_imported": "Dados importados com sucesso",
+    "units_imported": "Unidades e equivalências importadas",
     "data_cleared": "Todos os dados foram deletados",
-    "app_installed": "App instalado com sucesso",
-    "error": "Erro"
+    "error": "Seleção inválida",
+    "shared": "Compartilhado com sucesso!",
+    "copied": "Link copiado para a área de transferência",
+    "copy_error": "Não foi possível copiar. Compartilhe manualmente: "
   },
-  
+
+  "confirm": {
+    "delete_ingredient": "Remover \"{name}\" da despensa?",
+    "clear_ingredients": "Tem certeza de que deseja limpar a despensa? Esta ação não pode ser desfeita.",
+    "delete_recipe": "Deletar receita \"{name}\"?",
+    "clear_all": "⚠️ TEM CERTEZA? Isso deletará TODOS os dados (receitas e ingredientes). Esta ação NÃO PODE ser desfeita.",
+    "confirm_again": "Confirme mais uma vez para ter certeza absoluta...",
+    "merge_or_replace": "Dados existentes encontrados.\n\nMesclar (OK) ou substituir (Cancelar)?",
+    "replace_ingredient": "Ingrediente \"{name}\" já existe. Substituir?",
+    "replace_recipe": "Receita com nome \"{name}\" já existe. Substituir?",
+    "replace_unit": "Unidade \"{name}\" já existe. Substituir?",
+    "replace_conversion": "Equivalência \"{key}\" já existe. Substituir?",
+    "delete_unit": "Deletar unidade personalizada \"{name}\"?",
+    "delete_conversion": "Deletar conversão \"{key}\"?"
+  },
+
+  "desktop": {
+    "ingredients": "Ingredientes",
+    "recipe_creator": "Criador de Receitas",
+    "my_recipes": "Minhas Receitas",
+    "recipe_name": "Nome do Prato",
+    "add_ingredient": "Adicionar",
+    "clear_recipe": "Limpar",
+    "save_recipe": "Salvar Receita",
+    "export_json": "Exportar JSON",
+    "import_json": "Importar JSON",
+    "import_recipe": "Importar Receita"
+  },
+
+  "modal": {
+    "recipe_name": "Nome da Receita",
+    "close": "Fechar",
+    "share": "Compartilhar",
+    "export": "Exportar JSON",
+    "delete": "Deletar",
+    "ingredients": "Ingredientes",
+    "preparation": "Método de Preparo",
+    "financial_analysis": "Análise Financeira",
+    "total_cost": "Custo Total",
+    "sale_price": "Preço de Venda",
+    "net_profit": "Lucro Líquido",
+    "profit_margin": "Margem de Lucro",
+    "roi": "Retorno sobre Investimento (ROI)",
+    "profit_per_euro": "Lucro por €"
+  },
+
   "stats": {
-    "cost_label": "Custo",
-    "profit_label": "Lucro",
-    "roi_label": "ROI",
-    "margin_label": "Margem"
+    "cost_label": "Custo dos Ingredientes",
+    "profit_label": "Lucro Líquido",
+    "price_per_portion": "Preço por Porção",
+    "margin_label": "Margem %",
+    "roi_label": "Lucratividade"
   }
 }

@@ -1,0 +1,183 @@
+{
+  "app_name": "Episch Receptenboek",
+  "app_description": "Receptenbeheerder met kosten- en winstgevendheidsanalyse",
+
+  "nav": {
+    "ingredients": "Ingrediënten",
+    "create_recipe": "Recept Maken",
+    "my_recipes": "Mijn Recepten",
+    "settings": "Instellingen"
+  },
+
+  "ingredients": {
+    "title": "Ingrediënten",
+    "ingredient_name": "Naam Ingrediënt",
+    "ingredient_name_placeholder": "Bv: Rundvlees, Knoflook, Tomaat",
+    "price": "Prijs (€)",
+    "unit": "Eenheid",
+    "price_type": "Prijs Type",
+    "per_unit": "Per eenheid",
+    "per_pack": "Per pak",
+    "pack_size": "Pak Grootte (hoeveelheid)",
+    "add_button": "Toevoegen",
+    "clear_button": "Wissen",
+    "no_ingredients": "Geen ingrediënten toegevoegd",
+    "list_title": "Voorraadkast",
+    "rarity": "Zeldzaamheid",
+    "price_per_unit": "Prijs/Eenheid",
+    "delete_button": "Verwijderen",
+    "edit_button": "Bewerken",
+    "update_button": "Bijwerken"
+  },
+
+  "recipe": {
+    "title": "Receptenmaker",
+    "recipe_name": "Naam van het Gerecht",
+    "recipe_name_placeholder": "Spaghetti Carbonara",
+    "selected_ingredients": "Geselecteerde Ingrediënten",
+    "ingredient": "Ingrediënt",
+    "quantity": "Hoeveelheid",
+    "unit": "Eenheid",
+    "add_button": "Toevoegen",
+    "clear_button": "Wissen",
+    "price": "Prijs van het Gerecht (€)",
+    "portions": "Porties",
+    "instructions": "Bereidingsmethode",
+    "instructions_placeholder": "Beschrijf de stappen om het recept te bereiden...",
+    "save_button": "Recept Opslaan",
+    "stats": {
+      "cost": "Kosten Ingrediënten",
+      "profit": "Nettowinst",
+      "price_per_portion": "Prijs per Portie",
+      "margin": "Marge %",
+      "roi": "Winstgevendheid"
+    }
+  },
+
+  "book": {
+    "title": "Mijn Recepten",
+    "export_json": "JSON Exporteren",
+    "import_json": "JSON Importeren",
+    "import_recipe": "Recept Importeren",
+    "no_recipes": "Geen recepten opgeslagen",
+    "recipe_detail": "Recept Details",
+    "close": "Sluiten",
+    "share": "Delen",
+    "export": "JSON Exporteren",
+    "delete": "Verwijderen",
+    "ingredients_used": "Gebruikte Ingrediënten",
+    "total_cost": "Totale Kosten",
+    "sale_price": "Verkoopprijs",
+    "net_profit": "Nettowinst",
+    "profit_margin": "Winstmarge",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Winst per €",
+    "portions": "porties"
+  },
+
+  "settings": {
+    "title": "Instellingen",
+    "units_title": "Maateenheden",
+    "unit_name": "Naam Eenheid",
+    "symbol": "Symbool",
+    "add_unit": "Toevoegen",
+    "reset_units": "Herstellen",
+    "conversions_title": "Eenheidsequivalenties",
+    "from": "Van",
+    "to": "Naar",
+    "factor": "Factor",
+    "add_conversion": "Conversie Toevoegen",
+    "reset_conversions": "Herstellen",
+    "export_units": "Eenheden Exporteren",
+    "import_units": "Eenheden Importeren",
+    "data_title": "Gegevens",
+    "export_all": "Alles Exporteren (Recepten + Ingrediënten)",
+    "import_data": "Gegevens Importeren",
+    "clear_all": "Alles Wissen (⚠️)"
+  },
+
+  "donation": {
+    "title": "Donaties",
+    "install_app": "📱 Als App Installeren",
+    "install_description": "Snelle toegang zonder browser nodig te hebben",
+    "install_button": "Installeren",
+    "later": "Niet nu",
+    "support_project": "Ondersteun het Project",
+    "support_description": "Ik ben een onafhankelijke ontwikkelaar en heb je hulp nodig. Je kunt doneren via de widget of deze P2P-methoden gebruiken",
+    "digicel_label": "Digicel",
+    "digicel_topup": "Opladen",
+    "crypto_label": "USDC (Polygon)",
+    "copy_button": "Kopiëren",
+    "view_on_explorer": "Polygonscan"
+  },
+
+  "toasts": {
+    "ingredient_added": "Ingrediënt toegevoegd aan voorraadkast",
+    "ingredient_updated": "Ingrediënt bijgewerkt",
+    "ingredient_deleted": "Ingrediënt verwijderd uit voorraadkast",
+    "recipe_added": "Recept opgeslagen",
+    "recipe_deleted": "Recept verwijderd",
+    "data_exported": "Receptenboek, producten en instellingen geëxporteerd",
+    "units_exported": "Eenheden en equivalenties geëxporteerd",
+    "data_imported": "Gegevens succesvol geïmporteerd",
+    "units_imported": "Eenheden en equivalenties geïmporteerd",
+    "data_cleared": "Alle gegevens zijn verwijderd",
+    "error": "Ongeldige selectie",
+    "shared": "Succesvol gedeeld!",
+    "copied": "Link gekopieerd naar klembord",
+    "copy_error": "Kon niet kopiëren. Deel handmatig: "
+  },
+
+  "confirm": {
+    "delete_ingredient": "\"{name}\" uit voorraadkast verwijderen?",
+    "clear_ingredients": "Weet je zeker dat je de voorraadkast wilt legen? Deze actie kan niet ongedaan worden gemaakt.",
+    "delete_recipe": "Recept \"{name}\" verwijderen?",
+    "clear_all": "⚠️ WEET JE HET ZEKER? Dit zal ALLE gegevens verwijderen (recepten en ingrediënten). Deze actie KAN NIET ongedaan worden gemaakt.",
+    "confirm_again": "Bevestig nog een keer om volledig zeker te zijn...",
+    "merge_or_replace": "Bestaande gegevens gevonden.\n\nSamenvoegen (OK) of vervangen (Annuleren)?",
+    "replace_ingredient": "Ingrediënt \"{name}\" bestaat al. Vervangen?",
+    "replace_recipe": "Recept met naam \"{name}\" bestaat al. Vervangen?",
+    "replace_unit": "Eenheid \"{name}\" bestaat al. Vervangen?",
+    "replace_conversion": "Equivalentie \"{key}\" bestaat al. Vervangen?",
+    "delete_unit": "Aangepaste eenheid \"{name}\" verwijderen?",
+    "delete_conversion": "Conversie \"{key}\" verwijderen?"
+  },
+
+  "desktop": {
+    "ingredients": "Ingrediënten",
+    "recipe_creator": "Receptenmaker",
+    "my_recipes": "Mijn Recepten",
+    "recipe_name": "Naam van het Gerecht",
+    "add_ingredient": "Toevoegen",
+    "clear_recipe": "Wissen",
+    "save_recipe": "Recept Opslaan",
+    "export_json": "JSON Exporteren",
+    "import_json": "JSON Importeren",
+    "import_recipe": "Recept Importeren"
+  },
+
+  "modal": {
+    "recipe_name": "Receptnaam",
+    "close": "Sluiten",
+    "share": "Delen",
+    "export": "JSON Exporteren",
+    "delete": "Verwijderen",
+    "ingredients": "Ingrediënten",
+    "preparation": "Bereidingsmethode",
+    "financial_analysis": "Financiële Analyse",
+    "total_cost": "Totale Kosten",
+    "sale_price": "Verkoopprijs",
+    "net_profit": "Nettowinst",
+    "profit_margin": "Winstmarge",
+    "roi": "Return on Investment (ROI)",
+    "profit_per_euro": "Winst per €"
+  },
+
+  "stats": {
+    "cost_label": "Kosten Ingrediënten",
+    "profit_label": "Nettowinst",
+    "price_per_portion": "Prijs per Portie",
+    "margin_label": "Marge %",
+    "roi_label": "Winstgevendheid"
+  }
+}
