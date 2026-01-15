@@ -1536,6 +1536,12 @@
     // ====== Donaciones ======
     function openDonationModal() {
       document.getElementById('donation-modal').classList.add('active');
+      const installPrompt = document.getElementById('install-prompt');
+      if (deferredPrompt) {
+        installPrompt.style.display = 'block';
+      } else {
+        installPrompt.style.display = 'none';
+      }
     }
 
     function closeDonationModal() {
@@ -2814,11 +2820,20 @@
     let installPromptShown = false;
 
     window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('beforeinstallprompt event fired');
       e.preventDefault();
       deferredPrompt = e;
       if (!localStorage.getItem('pwa_dismissed')) {
         showInstallBanner();
       }
+    });
+
+    window.addEventListener('appinstalled', (e) => {
+      console.log('App installed');
+      showToast('App instalada correctamente');
+      dismissInstallBanner();
+      localStorage.setItem('pwa_dismissed', 'true');
+      deferredPrompt = null;
     });
 
     function showInstallBanner() {
@@ -2835,6 +2850,7 @@
     }
 
     function installApp() {
+      console.log('installApp called, deferredPrompt:', deferredPrompt);
       if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
@@ -2845,6 +2861,9 @@
           }
           deferredPrompt = null;
         });
+      } else {
+        console.log('deferredPrompt is null, cannot install');
+        showToast('La app no se puede instalar en este momento. Asegúrate de estar en un navegador compatible.');
       }
     }
 
