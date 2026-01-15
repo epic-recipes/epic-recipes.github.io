@@ -713,22 +713,22 @@
         <section class="panel">
           <h2>Creador de Recetas</h2>
           <div class="form-group">
-            <label>Nombre del Plato</label>
-            <input type="text" id="rec-name" placeholder="Pasta a la Carbonara">
+            <label data-i18n="recipe.recipe_name">Nombre del Plato</label>
+            <input type="text" id="rec-name" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
           </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
             <div class="form-group">
-              <label>Ingrediente</label>
+              <label data-i18n="recipe.ingredient">Ingrediente</label>
               <select id="rec-ing-select" onchange="updateUnitSelector()"></select>
             </div>
             <div class="form-group">
-              <label>Cantidad</label>
+              <label data-i18n="recipe.quantity">Cantidad</label>
               <input type="number" id="rec-qty" value="100" min="0.01" step="0.1">
             </div>
           </div>
           <div class="form-group">
-            <label>Unidad</label>
+            <label data-i18n="recipe.unit">Unidad</label>
             <select id="rec-unit-select"></select>
           </div>
 
@@ -835,15 +835,15 @@
         <div id="conversions-list" style="margin-bottom: 15px; max-height: 200px; overflow-y: auto;"></div>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px;">
           <div class="form-group" style="margin-bottom: 5px;">
-            <label style="font-size: 8px; margin-bottom: 3px;">De</label>
+            <label style="font-size: 8px; margin-bottom: 3px;" data-i18n="settings.from">De</label>
             <select id="conv-from" style="padding: 6px; font-size: 9px;"></select>
           </div>
           <div class="form-group" style="margin-bottom: 5px;">
-            <label style="font-size: 8px; margin-bottom: 3px;">A</label>
+            <label style="font-size: 8px; margin-bottom: 3px;" data-i18n="settings.to">A</label>
             <select id="conv-to" style="padding: 6px; font-size: 9px;"></select>
           </div>
           <div class="form-group" style="margin-bottom: 5px;">
-            <label style="font-size: 8px; margin-bottom: 3px;">Factor</label>
+            <label style="font-size: 8px; margin-bottom: 3px;" data-i18n="settings.factor">Factor</label>
             <input type="number" id="conv-factor" placeholder="1.0" step="0.01" style="padding: 6px; font-size: 9px;">
           </div>
         </div>
@@ -876,29 +876,29 @@
       <section class="panel">
         <h2 data-i18n="desktop.ingredients">Ingredientes</h2>
         <div class="form-group">
-          <label>Nombre del Ingrediente</label>
-          <input type="text" id="ing-name-desk" placeholder="Ej: Carne de Res, Ajo, Tomate">
+          <label data-i18n="ingredients.ingredient_name">Nombre del Ingrediente</label>
+          <input type="text" id="ing-name-desk" placeholder="Ej: Carne de Res, Ajo, Tomate" data-i18n="ingredients.ingredient_name_placeholder">
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
           <div class="form-group">
-            <label>Precio (€)</label>
+            <label data-i18n="ingredients.price">Precio (€)</label>
             <input type="number" id="ing-cost-desk" placeholder="0.00" step="0.01">
           </div>
           <div class="form-group">
-            <label>Unidad</label>
+            <label data-i18n="ingredients.unit">Unidad</label>
             <select id="ing-rarity-desk"></select>
           </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
           <div class="form-group">
-            <label>Tipo de Precio</label>
+            <label data-i18n="ingredients.price_type">Tipo de Precio</label>
             <select id="ing-price-type-desk" onchange="togglePackInput('ing-price-type-desk','ing-pack-size-desk')">
-              <option value="unit">Por unidad</option>
-              <option value="pack">Por pack</option>
+              <option value="unit" data-i18n="ingredients.per_unit">Por unidad</option>
+              <option value="pack" data-i18n="ingredients.per_pack">Por pack</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Tamaño del Pack (cantidad)</label>
+            <label data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
             <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="1" step="1">
           </div>
         </div>
@@ -908,7 +908,7 @@
         </div>
 
         <div class="divider"></div>
-        <label>Despensa</label>
+        <label data-i18n="ingredients.list_title">Despensa</label>
         <div class="list-container" id="ing-list-desk">
           <!-- Listado de ingredientes -->
         </div>
@@ -918,22 +918,22 @@
       <section class="panel">
         <h2>Creador de Recetas</h2>
         <div class="form-group">
-          <label>Nombre del Plato</label>
-          <input type="text" id="rec-name-desk" placeholder="Pasta a la Carbonara">
+          <label data-i18n="recipe.recipe_name">Nombre del Plato</label>
+          <input type="text" id="rec-name-desk" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
           <div class="form-group">
-            <label>Ingrediente</label>
+            <label data-i18n="recipe.ingredient">Ingrediente</label>
             <select id="rec-ing-select-desk" onchange="updateUnitSelectorDesk()"></select>
           </div>
           <div class="form-group">
-            <label>Cantidad</label>
+            <label data-i18n="recipe.quantity">Cantidad</label>
             <input type="number" id="rec-qty-desk" value="100" min="0.01" step="0.1">
           </div>
         </div>
         <div class="form-group">
-          <label>Unidad</label>
+          <label data-i18n="recipe.unit">Unidad</label>
           <select id="rec-unit-select-desk"></select>
         </div>
 
