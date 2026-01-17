@@ -1020,8 +1020,9 @@
       <div id="modal-recipe-details" class="recipe-details"></div>
       <div style="display: flex; gap: 10px; margin-top: 20px;">
         <button class="btn btn-secondary" style="flex: 1;" onclick="closeRecipeModal()">Cerrar</button>
-        <button class="btn btn-primary" style="flex: 1;" onclick="shareRecipe()">Compartir</button>
-        <button class="btn btn-info" style="flex: 1;" onclick="exportRecipeJSON()">Exportar JSON</button>
+        <button class="btn btn-primary" style="flex: 1;" onclick="editRecipe()">Editar</button>
+        <button class="btn btn-info" style="flex: 1;" onclick="shareRecipe()">Compartir</button>
+        <button class="btn btn-warning" style="flex: 1;" onclick="exportRecipeJSON()">Exportar JSON</button>
         <button class="btn btn-danger" style="flex: 1;" onclick="deleteFromModalRecipe()">Borrar</button>
       </div>
     </div>
@@ -1352,6 +1353,38 @@
           showToast(t('toasts.recipe_deleted', `Receta "${currentRecipeModal.name}" eliminada`));
         }
       });
+    }
+
+    function editRecipe() {
+      if (!currentRecipeModal) return;
+
+      // Cargar la receta en el formulario de creación
+      activeRecipe = {
+        items: [...currentRecipeModal.items],
+        editingId: currentRecipeModal.id
+      };
+
+      // Llenar los campos del formulario
+      document.getElementById('rec-name').value = currentRecipeModal.name;
+      document.getElementById('rec-price').value = currentRecipeModal.price;
+      document.getElementById('rec-portions').value = currentRecipeModal.portions || 1;
+      document.getElementById('rec-instructions').value = currentRecipeModal.instructions || '';
+
+      // Cambiar el botón de guardar a "Actualizar"
+      const saveBtn = document.querySelector('#tab-receta .btn-primary');
+      saveBtn.textContent = 'Actualizar Receta';
+      saveBtn.onclick = updateRecipe;
+
+      // Cambiar a la tab de crear receta
+      switchTab('tab-receta');
+
+      // Renderizar los ingredientes
+      renderActiveRecipe();
+
+      // Cerrar el modal
+      closeRecipeModal();
+
+      showToast(`Editando "${currentRecipeModal.name}"`);
     }
 
     function shareRecipe() {
@@ -1900,7 +1933,11 @@
         const unitPrice = getUnitCost(item);
         card.innerHTML = `
           <div class="card-info">
-            <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
+            <b>${item.name}</b>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+              <input type="number" value="${item.qty}" min="0.01" step="0.1" style="width: 80px; font-size: 10px; padding: 4px;" onchange="updateRecipeItemQty(${index}, this.value)">
+              <span>${getUnitLabel(item.rarity)}</span>
+            </div>
             <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipe(${index})">-</button>
@@ -1915,6 +1952,13 @@
 
     function removeFromRecipe(index) {
       activeRecipe.items.splice(index, 1);
+      renderActiveRecipe();
+    }
+
+    function updateRecipeItemQty(index, newQty) {
+      const qty = parseFloat(newQty);
+      if (isNaN(qty) || qty <= 0) return;
+      activeRecipe.items[index].qty = qty;
       renderActiveRecipe();
     }
 
@@ -1942,6 +1986,12 @@
       document.getElementById('rec-price').value = '';
       document.getElementById('rec-portions').value = '1';
       document.getElementById('rec-instructions').value = '';
+
+      // Resetear el botón a guardar
+      const saveBtn = document.querySelector('#tab-receta .btn-primary');
+      saveBtn.textContent = 'Guardar Receta';
+      saveBtn.onclick = saveRecipe;
+
       renderActiveRecipe();
     }
 
@@ -1969,6 +2019,36 @@
       renderBook();
       clearActiveRecipe();
       showToast(t('toasts.recipe_added', 'Receta guardada'));
+    }
+
+    function updateRecipe() {
+      const name = document.getElementById('rec-name').value.trim();
+      const price = parseFloat(document.getElementById('rec-price').value) || 0;
+      const portions = parseInt(document.getElementById('rec-portions').value) || 1;
+      const instructions = document.getElementById('rec-instructions').value.trim();
+
+      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+
+      const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
+
+      // Encontrar la receta existente y actualizarla
+      const index = recipeBook.findIndex(r => r.id === activeRecipe.editingId);
+      if (index !== -1) {
+        recipeBook[index] = {
+          ...recipeBook[index],
+          name,
+          items: [...activeRecipe.items],
+          price,
+          portions,
+          instructions,
+          cost
+        };
+      }
+
+      localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+      renderBook();
+      clearActiveRecipe();
+      showToast(t('toasts.recipe_updated', 'Receta actualizada'));
     }
 
     // ====== Manejo de Recetas - ESCRITORIO ======
@@ -2052,7 +2132,11 @@
         const unitPrice = getUnitCost(item);
         card.innerHTML = `
           <div class="card-info">
-            <b>${item.name} ${item.qty} ${getUnitLabel(item.rarity)}</b>
+            <b>${item.name}</b>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+              <input type="number" value="${item.qty}" min="0.01" step="0.1" style="width: 80px; font-size: 10px; padding: 4px;" onchange="updateRecipeItemQty(${index}, this.value)">
+              <span>${getUnitLabel(item.rarity)}</span>
+            </div>
             <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
           </div>
           <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipeDesk(${index})">-</button>
@@ -2091,6 +2175,12 @@
       document.getElementById('rec-price-desk').value = '';
       document.getElementById('rec-portions-desk').value = '1';
       document.getElementById('rec-instructions-desk').value = '';
+
+      // Resetear el botón a guardar
+      const saveBtn = document.querySelector('#desktop-view .btn-primary');
+      saveBtn.textContent = 'Guardar Receta';
+      saveBtn.onclick = saveRecipeDesk;
+
       renderActiveRecipe();
     }
 
