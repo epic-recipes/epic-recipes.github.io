@@ -101,7 +101,19 @@
     "data_title": "Datos",
     "export_all": "Exportar Todo (Recetas + Ingredientes)",
     "import_data": "Importar Datos",
-    "clear_all": "Limpiar Todo (⚠️)"
+    "clear_all": "Limpiar Todo (⚠️)",
+
+    "units": {
+      "kilogramo": "Kilogramo",
+      "gramo": "Gramo",
+      "litro": "Litro",
+      "mililitro": "Mililitro",
+      "unidad": "Unidad",
+      "cucharada": "Cucharada",
+      "cucharadita": "Cucharadita",
+      "taza": "Taza",
+      "pieza": "Pieza"
+    }
   },
 
   "donation": {

@@ -94,7 +94,19 @@
     "data_title": "Data",
     "export_all": "Export Ala (Resep + Ingridienti)",
     "import_data": "Import Data",
-    "clear_all": "Krasi Ala (⚠️)"
+    "clear_all": "Krasi Ala (⚠️)",
+
+    "units": {
+      "kilogramo": "Kilogram",
+      "gramo": "Gram",
+      "litro": "Liter",
+      "mililitro": "Milliliter",
+      "unidad": "Unit",
+      "cucharada": "Tablespoon",
+      "cucharadita": "Teaspoon",
+      "taza": "Cup",
+      "pieza": "Piece"
+    }
   },
 
   "donation": {
