@@ -70,14 +70,19 @@
 <body>
 
   <!-- PWA Install Banner + Language Selector -->
-  <div id="install-banner" class="hidden fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 to-yellow-500 p-3 shadow-lg text-gray-800 z-50">
-    <div class="max-w-full flex items-center justify-between gap-3 text-sm">
-      <div class="flex-1">
-        <div class="font-bold mb-1" data-i18n="donation.install_app">📱 Instalar como App</div>
-        <div class="text-xs opacity-90" data-i18n="donation.install_description">Acceso rápido sin necesidad de navegador</div>
+  <div id="install-banner" class="hidden fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
+    <div class="max-w-full mx-auto flex items-center justify-between gap-4 text-sm">
+      <div class="flex items-center gap-3 flex-1">
+        <div class="text-2xl flex-shrink-0">📱</div>
+        <div class="flex-1">
+          <div class="font-bold" data-i18n="donation.install_app">Instalar como App</div>
+          <div class="text-xs opacity-90" data-i18n="donation.install_description">Acceso rápido sin necesidad de navegador</div>
+        </div>
       </div>
-      <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs whitespace-nowrap" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-      <button class="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs" onclick="dismissInstallBanner()">✕</button>
+      <div class="flex gap-2 flex-shrink-0">
+        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium text-xs transition-colors" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+        <button class="bg-white hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-lg font-medium text-xs transition-colors" onclick="dismissInstallBanner()">✕</button>
+      </div>
     </div>
   </div>
 
@@ -2489,13 +2494,8 @@
     function showInstallBanner() {
       const banner = document.getElementById('install-banner');
       if (banner && !installPromptShown) {
-        banner.style.display = 'block';
+        banner.classList.remove('hidden');
         installPromptShown = true;
-        // Ajustar el padding del container para dejar espacio al banner
-        const container = document.querySelector('.container');
-        if (container) {
-          container.style.marginTop = '80px';
-        }
       }
     }
 
@@ -2520,11 +2520,7 @@
     function dismissInstallBanner() {
       const banner = document.getElementById('install-banner');
       if (banner) {
-        banner.style.display = 'none';
-      }
-      const container = document.querySelector('.container');
-      if (container) {
-        container.style.marginTop = '0';
+        banner.classList.add('hidden');
       }
       localStorage.setItem('pwa_dismissed', 'true');
     }
