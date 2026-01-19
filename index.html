@@ -52,10 +52,13 @@
     .modal-content {
       background: white;
       margin: 10% auto;
-      padding: 20px;
+      padding: 15px;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       border-radius: 8px;
+      font-size: 14px;
+      max-height: 80vh;
+      overflow-y: auto;
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -499,12 +502,12 @@
 
   <!-- MODAL de Donaciones -->
   <div id="donation-modal" class="modal donation-modal">
-    <div class="modal-content max-w-4xl w-full">
+    <div class="modal-content max-w-xl w-full">
       <div class="modal-header flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold text-gray-800" data-i18n="donation.title">Donaciones</h3>
         <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeDonationModal()">×</button>
       </div>
-      <div class="donation-body grid grid-cols-1 md:grid-cols-2 gap-6 max-h-96 overflow-y-auto">
+      <div class="donation-body grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
         <div class="space-y-4">
           <!-- Sección PWA Install -->
@@ -765,16 +768,24 @@
       let detailsHTML = `
         <div style="margin-bottom: 15px;">
           <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Ingredientes</h4>
-          ${recipe.items.map(i => `
-            <div class="detail-row">
-              <span class="detail-label">${i.name}</span>
-              <span class="detail-value">${i.qty} ${getUnitLabel(i.rarity)}</span>
-            </div>
-            <div class="detail-row">
-              <span class="detail-label">Costo: ${i.name}</span>
-              <span class="detail-value">${(getUnitCost(i) * i.qty).toFixed(2)}€</span>
-            </div>
-          `).join('')}
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            <thead>
+              <tr style="background-color: #f9f9f9;">
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Ingrediente</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Cantidad</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Costo</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${recipe.items.map(i => `
+                <tr>
+                  <td style="border: 1px solid #ddd; padding: 8px;">${i.name}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${i.qty} ${getUnitLabel(i.rarity)}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">${(getUnitCost(i) * i.qty).toFixed(2)}€</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
         </div>
         ${recipe.instructions ? `
         <div class="divider"></div>
@@ -786,33 +797,25 @@
         <div class="divider"></div>
         <div style="margin-bottom: 15px;">
           <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Análisis Financiero</h4>
-          <div class="detail-row">
-            <span class="detail-label">Costo Total</span>
-            <span class="detail-value" style="color: var(--danger)">${recipe.cost.toFixed(2)}€</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Precio Venta</span>
-            <span class="detail-value" style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Precio por Porción (${portions} porciones)</span>
-            <span class="detail-value">${pricePerPortion.toFixed(2)}€</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Ganancia Neta</span>
-            <span class="detail-value" style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Margen de Ganancia</span>
-            <span class="detail-value">${margin.toFixed(1)}%</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Rentabilidad (ROI)</span>
-            <span class="detail-value">${roi.toFixed(2)}x</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Ganancia por €</span>
-            <span class="detail-value">${(profit / recipe.price).toFixed(2)}€</span>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Costo Total:</strong> <span style="color: var(--danger)">${recipe.cost.toFixed(2)}€</span>
+            </div>
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Precio Venta:</strong> <span style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
+            </div>
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Precio por Porción:</strong> ${pricePerPortion.toFixed(2)}€ (${portions} porciones)
+            </div>
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Ganancia Neta:</strong> <span style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
+            </div>
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Margen de Ganancia:</strong> ${margin.toFixed(1)}%
+            </div>
+            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
+              <strong>Rentabilidad (ROI):</strong> ${roi.toFixed(2)}x
+            </div>
           </div>
         </div>
       `;
