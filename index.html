@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -54,11 +54,13 @@
       margin: 10% auto;
       padding: 15px;
       width: 90%;
-      max-width: 800px;
+      max-width: 900px;
       border-radius: 8px;
       font-size: 14px;
       max-height: 80vh;
-      overflow-y: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -80,17 +82,20 @@
   </div>
 
   <!-- Language Selector Bar -->
-  <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-2 rounded shadow z-40">
-    <select id="lang-select" class="bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded" onchange="changeLanguage(this.value)">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="nl">Nederlands</option>
-      <option value="srn">Sranantongo</option>
-    </select>
+  <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-3 rounded shadow z-40">
+    <div class="flex gap-2 items-center">
+      <select id="lang-select" class="flex-1 bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded" onchange="changeLanguage(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="nl">Nederlands</option>
+        <option value="srn">Sranantongo</option>
+      </select>
+      <button class="text-gray-500 hover:text-gray-700 text-lg font-bold cursor-pointer flex-shrink-0" onclick="closeLangBar()" title="Cerrar">×</button>
+    </div>
   </div>
 
   <div class="flex h-screen bg-yellow-50 overflow-x-hidden">
@@ -193,7 +198,8 @@
 
     <!-- TAB 2: CREAR RECETA -->
     <div id="tab-receta" class="tab-content">
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- COLUMNA IZQUIERDA: FORMULARIO -->
         <section class="bg-white rounded-lg shadow p-6">
           <h2 class="text-lg font-semibold text-gray-800 mb-4" data-i18n="recipe.title">Creador de Recetas</h2>
           <div class="space-y-4">
@@ -201,6 +207,7 @@
               <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.recipe_name">Nombre del Plato</label>
               <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" id="rec-name" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
             </div>
+            
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.ingredient">Ingrediente</label>
@@ -211,18 +218,17 @@
                 <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-qty" value="100" min="0.01" step="0.1">
               </div>
             </div>
+            
             <div>
               <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.unit">Unidad</label>
               <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" id="rec-unit-select"></select>
             </div>
+            
             <div class="flex gap-2">
-              <button class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded" onclick="addToRecipe()" data-i18n="recipe.add_button">Añadir</button>
-              <button class="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded" onclick="clearActiveRecipe()" data-i18n="recipe.clear_button">Limpiar</button>
+              <button class="flex-1 bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded" onclick="addToRecipe()" data-i18n="recipe.add_button">Añadir</button>
+              <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded" onclick="clearActiveRecipe()" data-i18n="recipe.clear_button">Limpiar</button>
             </div>
-            <div class="border-t pt-4">
-              <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="recipe.selected_ingredients">Ingredientes Seleccionados</label>
-              <div class="max-h-32 overflow-y-auto border rounded p-2" id="rec-items-list"></div>
-            </div>
+
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.price">Precio del Plato (€)</label>
@@ -233,33 +239,55 @@
                 <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-portions" placeholder="1" value="1" min="1" step="1" oninput="updateStats()">
               </div>
             </div>
+
             <div>
               <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.instructions">Método de Preparación</label>
-              <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="4"></textarea>
+              <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="3"></textarea>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div class="bg-gray-50 p-3 rounded">
-                <div class="text-xs text-gray-500" data-i18n="recipe.stats.cost">Costo Ingredientes</div>
-                <div class="text-lg font-semibold text-green-600" id="stat-cost">0.00€</div>
-              </div>
-              <div class="bg-gray-50 p-3 rounded">
-                <div class="text-xs text-gray-500" data-i18n="recipe.stats.profit">Beneficio Neto</div>
-                <div class="text-lg font-semibold text-green-600" id="stat-profit">0.00€</div>
-              </div>
-              <div class="bg-gray-50 p-3 rounded">
-                <div class="text-xs text-gray-500" data-i18n="recipe.stats.price_per_portion">Precio por Porción</div>
-                <div class="text-lg font-semibold text-green-600" id="stat-price-per-portion">0.00€</div>
-              </div>
-              <div class="bg-gray-50 p-3 rounded">
-                <div class="text-xs text-gray-500" data-i18n="recipe.stats.margin">Margen %</div>
-                <div class="text-lg font-semibold text-green-600" id="stat-margin">0%</div>
-              </div>
-              <div class="bg-gray-50 p-3 rounded">
-                <div class="text-xs text-gray-500" data-i18n="recipe.stats.roi">Rentabilidad</div>
-                <div class="text-lg font-semibold text-green-600" id="stat-roi">0.00x</div>
-              </div>
-            </div>
+
             <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold" onclick="saveRecipe()" data-i18n="recipe.save_button">Guardar Receta</button>
+          </div>
+        </section>
+
+        <!-- COLUMNA DERECHA: INGREDIENTES Y ESTADÍSTICAS -->
+        <section class="bg-white rounded-lg shadow p-6 space-y-4">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800 mb-2" data-i18n="recipe.selected_ingredients">Ingredientes Seleccionados</h3>
+            <div class="max-h-32 overflow-y-auto border rounded p-2 bg-gray-50 text-sm" id="rec-items-list">
+              <!-- Ingredientes seleccionados -->
+            </div>
+          </div>
+
+          <div class="border-t pt-3">
+            <h3 class="text-sm font-semibold text-gray-800 mb-2">Análisis Financiero</h3>
+            <div class="space-y-1">
+              <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-2 rounded border border-green-200">
+                <div class="text-xs text-gray-600" data-i18n="recipe.stats.cost">Costo Ingredientes</div>
+                <div class="text-lg font-bold text-green-700" id="stat-cost">0.00€</div>
+              </div>
+              <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-2 rounded border border-blue-200">
+                <div class="text-xs text-gray-600">Precio Venta</div>
+                <div class="text-lg font-bold text-blue-700" id="stat-price">0.00€</div>
+              </div>
+              <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-2 rounded border border-purple-200">
+                <div class="text-xs text-gray-600" data-i18n="recipe.stats.profit">Beneficio Neto</div>
+                <div class="text-lg font-bold text-purple-700" id="stat-profit">0.00€</div>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <div class="bg-yellow-50 p-2 rounded border border-yellow-200">
+                  <div class="text-xs text-gray-600" data-i18n="recipe.stats.price_per_portion">Precio/Porción</div>
+                  <div class="text-base font-bold text-yellow-700" id="stat-price-per-portion">0.00€</div>
+                </div>
+                <div class="bg-orange-50 p-2 rounded border border-orange-200">
+                  <div class="text-xs text-gray-600" data-i18n="recipe.stats.margin">Margen %</div>
+                  <div class="text-base font-bold text-orange-700" id="stat-margin">0%</div>
+                </div>
+              </div>
+              <div class="bg-red-50 p-2 rounded border border-red-200">
+                <div class="text-xs text-gray-600" data-i18n="recipe.stats.roi">Rentabilidad (ROI)</div>
+                <div class="text-base font-bold text-red-700" id="stat-roi">0.00x</div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -501,55 +529,76 @@
   </div>
 
   <!-- MODAL de Donaciones -->
-  <div id="donation-modal" class="modal donation-modal">
-    <div class="modal-content max-w-xl w-full">
-      <div class="modal-header flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-gray-800" data-i18n="donation.title">Donaciones</h3>
-        <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeDonationModal()">×</button>
+  <!-- Modal de Donaciones -->
+  <div id="donation-modal" class="modal">
+    <div class="modal-content max-w-6xl w-full flex flex-col">
+      <!-- Header Fijo -->
+      <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-200 flex-shrink-0">
+        <h2 class="text-2xl font-bold text-gray-800" data-i18n="donation.title">Donaciones</h2>
+        <button class="text-gray-400 hover:text-gray-600 text-2xl font-light transition-colors" onclick="closeDonationModal()">×</button>
       </div>
-      <div class="donation-body grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
-        <div class="space-y-4">
-          <!-- Sección PWA Install -->
-          <div id="install-prompt" class="hidden p-3 bg-gray-100 border-2 border-yellow-400 rounded">
-            <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.install_app">📱 Instalar App</div>
-            <div class="text-xs text-gray-700 mb-3 leading-relaxed" data-i18n="donation.install_description">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</div>
-            <div class="flex gap-2 flex-col">
-              <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-              <button class="w-full bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm" onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
+
+      <!-- Grid Principal - Scrolleable -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1 overflow-y-auto pr-2">
+        <!-- Columna Izquierda: Contenido -->
+        <div class="space-y-6">
+          <!-- Sección: Apoya el Proyecto -->
+          <div class="bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span class="text-2xl">💡</span>
+              <span data-i18n="donation.support_project">Apoya el Proyecto</span>
+            </h3>
+            <p class="text-sm text-gray-700 leading-relaxed" data-i18n="donation.support_description">Soy un desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos métodos P2P</p>
+          </div>
+
+          <!-- Sección: Instalar App -->
+          <div id="install-prompt" class="hidden bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              <span class="text-2xl">📱</span>
+              <span data-i18n="donation.install_app">Instalar como App</span>
+            </h3>
+            <p class="text-sm text-gray-700 mb-4 leading-relaxed" data-i18n="donation.install_description">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</p>
+            <div class="flex gap-3">
+              <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+              <button class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-4 py-2 rounded-lg transition-colors text-sm" onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
             </div>
           </div>
 
-          <!-- Sección Mensaje Motivacional -->
-          <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-            <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.support_project">Apoya el Proyecto</div>
-            <div class="text-xs text-gray-700 leading-relaxed" data-i18n="donation.support_description">Soy un desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos métodos P2P</div>
-          </div>
-
-          <!-- Sección Digicel -->
-          <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-            <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.digicel_label">Digicel</div>
-            <div class="text-sm text-yellow-600 font-bold mb-3 break-all">+5977479759</div>
-            <div class="flex gap-2 flex-wrap">
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-              <a class="flex-1 bg-green-400 hover:bg-green-500 text-white px-3 py-2 rounded text-sm text-center no-underline" href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup">Recargar</a>
+          <!-- Sección: Métodos de Pago -->
+          <div class="space-y-4">
+            <!-- Digicel -->
+            <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+              <h4 class="text-base font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                <span class="text-xl">📱</span>
+                <span data-i18n="donation.digicel_label">Digicel Mobile Money</span>
+              </h4>
+              <div class="bg-gray-50 border border-gray-200 rounded px-3 py-2 mb-4 font-mono text-sm text-gray-700 text-center">+5977479759</div>
+              <div class="flex gap-2">
+                <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium px-3 py-2 rounded-lg transition-colors text-sm" onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
+                <a class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium px-3 py-2 rounded-lg text-center no-underline transition-colors text-sm" href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup">Recargar</a>
+              </div>
             </div>
-          </div>
 
-          <!-- Sección Crypto -->
-          <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-            <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.crypto_label">USDC (Polygon)</div>
-            <div id="crypto-address" class="text-xs text-yellow-600 mb-3 break-all bg-white p-2 border rounded font-mono leading-relaxed">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
-            <div class="flex gap-2 flex-wrap">
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="copyToClipboard(document.getElementById('crypto-address').innerText)" data-i18n="donation.copy_button">Copiar</button>
-              <a class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm text-center no-underline" href="#" onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()" data-i18n="donation.view_on_explorer">Polygonscan</a>
+            <!-- Crypto -->
+            <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+              <h4 class="text-base font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                <span class="text-xl">₿</span>
+                <span data-i18n="donation.crypto_label">USDC (Polygon Network)</span>
+              </h4>
+              <div id="crypto-address" class="bg-gray-50 border border-gray-200 rounded px-3 py-2 mb-4 font-mono text-xs text-gray-700 text-center break-all leading-relaxed">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
+              <div class="flex gap-2">
+                <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-medium px-3 py-2 rounded-lg transition-colors text-sm" onclick="copyToClipboard(document.getElementById('crypto-address').innerText)" data-i18n="donation.copy_button">Copiar</button>
+                <a class="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-medium px-3 py-2 rounded-lg text-center no-underline transition-colors text-sm" href="#" onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()" data-i18n="donation.view_on_explorer">Ver</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: WIDGET -->
-        <div class="flex items-center justify-center bg-white border-2 border-gray-300 rounded p-3 overflow-hidden">
-          <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="100%" height="600" frameborder="0" class="border-none">No se puede cargar el widget</iframe>
+        <!-- Columna Derecha: Widget -->
+        <div class="flex items-center justify-center">
+          <div class="bg-white border border-gray-200 rounded-lg p-4 w-full h-full">
+            <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" width="100%" height="100%" frameborder="0" class="border-none rounded">No se puede cargar el widget</iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -565,6 +614,8 @@
       <div class="flex gap-3">
         <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded" onclick="closeConfirmModal(false)">Cancelar</button>
         <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded" onclick="closeConfirmModal(true)">Confirmar</button>
+      </div>
+        </div>
       </div>
     </div>
   </div>
@@ -621,11 +672,21 @@
       localStorage.setItem('appLanguage', lang);
       await loadI18nData();
       updateI18n();
+      closeLangBar();
     }
 
     function toggleLangBar() {
       const bar = document.getElementById('lang-bar');
-      if (bar) bar.style.display = bar.style.display === 'none' ? 'block' : 'none';
+      if (bar) {
+        bar.classList.toggle('hidden');
+      }
+    }
+
+    function closeLangBar() {
+      const bar = document.getElementById('lang-bar');
+      if (bar) {
+        bar.classList.add('hidden');
+      }
     }
 
     // ====== Lógica de Estado ======
@@ -902,9 +963,9 @@
       } else {
         // Fallback: copiar al portapapeles
         navigator.clipboard.writeText(shareText).then(() => {
-          showToast('Receta copiada al portapapeles');
+          showToast(t('toasts.recipe_copied', 'Receta copiada al portapapeles'));
         }).catch(() => {
-          showToast('Error al compartir');
+          showToast(t('toasts.share_error', 'Error al compartir'));
         });
       }
     }
@@ -928,7 +989,7 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('Receta exportada como JSON');
+      showToast(t('toasts.recipe_exported', 'Receta exportada como JSON'));
     }
 
     async function shareApp() {
@@ -950,7 +1011,7 @@
         try {
           await navigator.share(shareData);
           console.log('Contenido compartido exitosamente con imagen');
-          showToast('¡Compartido con imagen!');
+          showToast(t('toasts.shared_with_image', '¡Compartido con imagen!'));
         } catch (error) {
           console.error('Error al compartir con imagen:', error);
           // Si falla compartir con imagen, intentar sin imagen
@@ -963,7 +1024,7 @@
         shareWithoutImage(shareText);
       } else {
         console.log('Web Share API no disponible, usando fallback');
-        showToast('Web Share no disponible, copiando al portapapeles...');
+        showToast(t('toasts.web_share_unavailable', 'Web Share no disponible, copiando al portapapeles...'));
         fallbackCopyTextToClipboard(shareText);
       }
     }
@@ -975,7 +1036,7 @@
         url: window.location.href,
       }).then(() => {
         console.log('Contenido compartido exitosamente sin imagen');
-        showToast('¡Compartido exitosamente!');
+        showToast(t('toasts.shared', '¡Compartido exitosamente!'));
       }).catch((error) => {
         console.error('Error al compartir sin imagen:', error);
         if (error.name !== 'AbortError') {
@@ -1041,13 +1102,13 @@
       try {
         const successful = document.execCommand('copy');
         if (successful) {
-          showToast('Enlace copiado al portapapeles');
+          showToast(t('toasts.link_copied', 'Enlace copiado al portapapeles'));
         } else {
-          showToast('No se pudo copiar. Comparte manualmente: ' + text);
+          showToast(t('toasts.copy_failed', 'No se pudo copiar. Comparte manualmente: ') + text);
         }
       } catch (error) {
         console.error('Error en fallback copy:', error);
-        showToast('No se pudo copiar. Comparte manualmente: ' + text);
+        showToast(t('toasts.copy_failed', 'No se pudo copiar. Comparte manualmente: ') + text);
       }
 
       document.body.removeChild(textArea);
@@ -1058,9 +1119,9 @@
       document.getElementById('donation-modal').classList.add('active');
       const installPrompt = document.getElementById('install-prompt');
       if (deferredPrompt) {
-        installPrompt.style.display = 'block';
+        installPrompt.classList.remove('hidden');
       } else {
-        installPrompt.style.display = 'none';
+        installPrompt.classList.add('hidden');
       }
     }
 
@@ -1767,15 +1828,18 @@
 
     // ====== Exportar/Importar ======
     function exportRecipeBook() {
-      if (recipeBook.length === 0 && Object.keys(ingredients).length === 0) return showToast("No hay datos para exportar");
+      // Exportar TODA la configuración: recetas, ingredientes, unidades y equivalencias
+      if (recipeBook.length === 0 && Object.keys(ingredients).length === 0 && Object.keys(customUnits).length === 0 && Object.keys(customConversions).length === 0) {
+        return showToast(t('toasts.no_data_export', 'No hay datos para exportar'));
+      }
 
-      // Incluir recetas, ingredientes y unidades personalizadas
       const data = {
         recetas: recipeBook,
         ingredientes: ingredients,
         unidades: customUnits,
-        conversiones: customConversions,
-        exportDate: new Date().toISOString()
+        equivalencias: customConversions,
+        exportDate: new Date().toISOString(),
+        version: '1.0'
       };
 
       const jsonData = JSON.stringify(data, null, 2);
@@ -1783,23 +1847,25 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `recetas_${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `recetario-completo_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast(t('toasts.data_exported', 'Recetario, productos y configuración exportados'));
+      showToast(t('toasts.full_config_exported', 'Configuración completa exportada (recetas, ingredientes, unidades y equivalencias)'));
     }
 
     function exportUnitsAndConversions() {
+      // Exportar solo unidades y equivalencias
       if (Object.keys(customUnits).length === 0 && Object.keys(customConversions).length === 0) {
-        return showToast("No hay unidades o equivalencias personalizadas para exportar");
+        return showToast(t('toasts.no_data_export', 'No hay unidades o equivalencias personalizadas para exportar'));
       }
 
       const data = {
         unidades: customUnits,
-        conversiones: customConversions,
-        exportDate: new Date().toISOString()
+        equivalencias: customConversions,
+        exportDate: new Date().toISOString(),
+        version: '1.0'
       };
 
       const jsonData = JSON.stringify(data, null, 2);
@@ -1807,12 +1873,12 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `unidades_${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `unidades-equivalencias_${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('Unidades y equivalencias exportadas');
+      showToast(t('toasts.units_conversions_exported', 'Unidades y equivalencias exportadas'));
     }
 
     function importRecipeBook() {
@@ -1840,7 +1906,7 @@
           let importedRecipes = Array.isArray(imported) ? imported : (imported.recetas || []);
           let importedIngredients = imported.ingredientes || [];
           let importedUnits = imported.unidades || {};
-          let importedConversions = imported.conversiones || {};
+          let importedConversions = imported.conversiones || imported.equivalencias || {};
 
           if (!Array.isArray(importedRecipes)) return showToast("Formato JSON inválido");
 
@@ -2027,11 +2093,11 @@
                       customConversions[key] = importedConversions[key];
                     }
                   });
-                  showToast("Unidades y equivalencias unificadas");
+                  showToast(t('toasts.units_merged', 'Unidades y equivalencias unificadas'));
                 } else {
                   customUnits = importedUnits;
                   customConversions = importedConversions;
-                  showToast("Unidades y equivalencias reemplazadas");
+                  showToast(t('toasts.units_replaced', 'Unidades y equivalencias reemplazadas'));
                 }
                 localStorage.setItem('rpg_units', JSON.stringify(customUnits));
                 localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
@@ -2050,10 +2116,10 @@
                       customUnits[key] = importedUnits[key];
                     }
                   });
-                  showToast("Unidades unificadas");
+                  showToast(t('toasts.units_merged', 'Unidades unificadas'));
                 } else {
                   customUnits = importedUnits;
-                  showToast("Unidades reemplazadas");
+                  showToast(t('toasts.units_replaced', 'Unidades reemplazadas'));
                 }
                 localStorage.setItem('rpg_units', JSON.stringify(customUnits));
                 renderUnitsList();
@@ -2070,10 +2136,10 @@
                       customConversions[key] = importedConversions[key];
                     }
                   });
-                  showToast("Equivalencias unificadas");
+                  showToast(t('toasts.conversions_merged', 'Equivalencias unificadas'));
                 } else {
                   customConversions = importedConversions;
-                  showToast("Equivalencias reemplazadas");
+                  showToast(t('toasts.conversions_replaced', 'Equivalencias reemplazadas'));
                 }
                 localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
                 renderConversionsList();
@@ -2081,9 +2147,9 @@
             );
           }
 
-          showToast('Importación completada');
+          showToast(t('toasts.import_completed', 'Importación completada'));
         } catch (err) {
-          showToast("Error al leer el archivo JSON de unidades");
+          showToast(t('toasts.error', 'Error al leer el archivo JSON de unidades'));
         }
       };
       reader.readAsText(file);
@@ -2335,7 +2401,7 @@
           delete customConversions[reverseKey]; // Eliminar también la conversión inversa
           localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
           renderConversionsList();
-          showToast('Conversiones eliminadas');
+          showToast(t('toasts.conversions_deleted', 'Conversiones eliminadas'));
         }
       });
     }
@@ -2346,7 +2412,7 @@
           customConversions = {};
           localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
           renderConversionsList();
-          showToast('Conversiones restauradas');
+          showToast(t('toasts.conversions_restored', 'Conversiones restauradas'));
         }
       });
     }
@@ -2414,7 +2480,7 @@
 
     window.addEventListener('appinstalled', (e) => {
       console.log('App installed');
-      showToast('App instalada correctamente');
+      showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
       dismissInstallBanner();
       localStorage.setItem('pwa_dismissed', 'true');
       deferredPrompt = null;
@@ -2439,7 +2505,7 @@
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            showToast('App instalada correctamente');
+            showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
             dismissInstallBanner();
             localStorage.setItem('pwa_dismissed', 'true');
           }
@@ -2447,7 +2513,7 @@
         });
       } else {
         console.log('deferredPrompt is null, cannot install');
-        showToast('La app no se puede instalar en este momento. Asegúrate de estar en un navegador compatible.');
+        showToast(t('toasts.pwa_install_error', 'La app no se puede instalar en este momento. Asegúrate de estar en un navegador compatible.'));
       }
     }
 

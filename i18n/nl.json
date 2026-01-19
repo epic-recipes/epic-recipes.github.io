@@ -140,7 +140,26 @@
     "error": "Ongeldige selectie",
     "shared": "Succesvol gedeeld!",
     "copied": "Link gekopieerd naar klembord",
-    "copy_error": "Kon niet kopiëren. Deel handmatig: "
+    "copy_error": "Kon niet kopiëren. Deel handmatig: ",
+    "recipe_copied": "Recept gekopieerd naar klembord",
+    "share_error": "Fout bij delen",
+    "recipe_exported": "Recept geëxporteerd als JSON",
+    "shared_with_image": "Gedeeld met afbeelding!",
+    "web_share_unavailable": "Web Share niet beschikbaar, kopiëren naar klembord...",
+    "link_copied": "Link gekopieerd naar klembord",
+    "copy_failed": "Kon niet kopiëren. Deel handmatig: ",
+    "units_conversions_exported": "Eenheden en equivalenties geëxporteerd",
+    "import_completed": "Importeren voltooid",
+    "conversions_deleted": "Conversies verwijderd",
+    "conversions_restored": "Conversies hersteld",
+    "conversions_merged": "Equivalenties samengevoegd",
+    "conversions_replaced": "Equivalenties vervangen",
+    "units_merged": "Eenheden samengevoegd",
+    "units_replaced": "Eenheden vervangen",
+    "pwa_installed": "App succesvol geïnstalleerd",
+    "pwa_install_error": "De app kan op dit moment niet worden geïnstalleerd. Zorg ervoor dat je een compatibele browser gebruikt",
+    "full_config_exported": "Volledige configuratie geëxporteerd (recepten, ingrediënten, eenheden en equivalenties)",
+    "no_data_export": "Geen gegevens om te exporteren"
   },
 
   "confirm": {

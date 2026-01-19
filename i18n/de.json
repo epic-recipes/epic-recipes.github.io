@@ -140,7 +140,26 @@
     "error": "Ungültige Auswahl",
     "shared": "Erfolgreich geteilt!",
     "copied": "Link in Zwischenablage kopiert",
-    "copy_error": "Konnte nicht kopieren. Manuell teilen: "
+    "copy_error": "Konnte nicht kopieren. Manuell teilen: ",
+    "recipe_copied": "Rezept in Zwischenablage kopiert",
+    "share_error": "Fehler beim Teilen",
+    "recipe_exported": "Rezept als JSON exportiert",
+    "shared_with_image": "Mit Bild geteilt!",
+    "web_share_unavailable": "Web Share nicht verfügbar, in Zwischenablage kopieren...",
+    "link_copied": "Link in Zwischenablage kopiert",
+    "copy_failed": "Konnte nicht kopieren. Manuell teilen: ",
+    "units_conversions_exported": "Einheiten und Äquivalenzen exportiert",
+    "import_completed": "Import abgeschlossen",
+    "conversions_deleted": "Konvertierungen gelöscht",
+    "conversions_restored": "Konvertierungen wiederhergestellt",
+    "conversions_merged": "Äquivalenzen zusammengeführt",
+    "conversions_replaced": "Äquivalenzen ersetzt",
+    "units_merged": "Einheiten zusammengeführt",
+    "units_replaced": "Einheiten ersetzt",
+    "pwa_installed": "App erfolgreich installiert",
+    "pwa_install_error": "Die App kann derzeit nicht installiert werden. Stellen Sie sicher, dass Sie einen kompatiblen Browser verwenden",
+    "full_config_exported": "Vollständige Konfiguration exportiert (Rezepte, Zutaten, Einheiten und Äquivalenzen)",
+    "no_data_export": "Keine Daten zum Exportieren"
   },
 
   "confirm": {

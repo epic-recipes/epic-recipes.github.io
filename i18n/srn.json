@@ -138,7 +138,26 @@
     "error": "No bon piki",
     "shared": "Sari bun!",
     "copied": "Link kopi na clipboard",
-    "copy_error": "No kan kopi. Sari nanga anu: "
+    "copy_error": "No kan kopi. Sari nanga anu: ",
+    "recipe_copied": "Resipi kopi na clipboard",
+    "share_error": "Sari fara",
+    "recipe_exported": "Resipì export as JSON",
+    "shared_with_image": "Sari ku piki!",
+    "web_share_unavailable": "Web Sari no dape, kopi na clipboard...",
+    "link_copied": "Link kopi na clipboard",
+    "copy_failed": "No kan kopi. Sari nanga anu: ",
+    "units_conversions_exported": "Yunit nanga equivalent export",
+    "import_completed": "Import dun",
+    "conversions_deleted": "Konverzon trowe",
+    "conversions_restored": "Konverzon retun",
+    "conversions_merged": "Equivalent breni",
+    "conversions_replaced": "Equivalent chanj",
+    "units_merged": "Yunit breni",
+    "units_replaced": "Yunit chanj",
+    "pwa_installed": "App install bun",
+    "pwa_install_error": "App no kan install now. Cheki browser support",
+    "full_config_exported": "Furu konfig export (resipì, ingredient, yunit nanga equivalent)",
+    "no_data_export": "No data fu export"
   },
 
   "confirm": {
