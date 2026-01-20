@@ -70,7 +70,8 @@
 <body>
 
   <!-- PWA Install Banner + Language Selector -->
-  <div id="install-banner" class="hidden fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
+  <!-- Install banner -->
+  <div id="install-banner" style="display: none;" class="fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
     <div class="max-w-full mx-auto flex items-center justify-between gap-4 text-sm">
       <div class="flex items-center gap-3 flex-1">
         <div class="text-2xl flex-shrink-0">📱</div>
@@ -86,7 +87,8 @@
     </div>
   </div>
 
-  <!-- Language Selector Bar -->
+  <!-- Main container -->
+  <div class="container mx-auto px-2 py-4 max-w-6xl">
   <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-3 rounded shadow z-40">
     <div class="flex gap-2 items-center">
       <select id="lang-select" class="flex-1 bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded" onchange="changeLanguage(this.value)">
@@ -2447,15 +2449,35 @@
               recipeBook = [];
               customUnits = {};
               customConversions = {};
+              
+              // Limpiar todo localStorage
               localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
               localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
               localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+              
+              // Limpiar claves de PWA y otras configuraciones
+              localStorage.removeItem('pwa_dismissed');
+              localStorage.removeItem('install-banner-dismissed');
+              localStorage.removeItem('currentLanguage');
+              
+              // Limpiar todas las claves de localStorage (alternativa más completa)
+              console.log('[DATA] Limpiando localStorage completamente');
+              const keysToKeep = ['rpg_ing', 'rpg_book', 'rpg_units', 'rpg_conversions'];
+              for (let i = localStorage.length - 1; i >= 0; i--) {
+                const key = localStorage.key(i);
+                if (key && !keysToKeep.includes(key)) {
+                  localStorage.removeItem(key);
+                  console.log('[DATA] Eliminado:', key);
+                }
+              }
+              
               renderIngredients();
               renderBook();
               renderUnitsList();
               renderConversionsList();
               showToast(t('toasts.data_cleared', 'Todos los datos han sido eliminados'));
+              console.log('[DATA] ✓ Todos los datos limpiados');
             }
           });
         }
@@ -2474,17 +2496,69 @@
     let deferredPrompt = null;
     let installPromptShown = false;
 
+    console.log('[PWA] Script PWA cargado');
+    
+    // Función para debuggear - forzar mostrar banner
+    window.forceShowInstallBanner = function() {
+      console.log('[PWA] FORCE: Limpiando pwa_dismissed');
+      localStorage.removeItem('pwa_dismissed');
+      localStorage.removeItem('install-banner-dismissed');
+      console.log('[PWA] FORCE: Mostrando banner manualmente');
+      showInstallBanner();
+    };
+
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('beforeinstallprompt event fired');
+      console.log('[PWA] beforeinstallprompt event fired');
       e.preventDefault();
       deferredPrompt = e;
+      installPromptShown = false;
       if (!localStorage.getItem('pwa_dismissed')) {
+        console.log('[PWA] Mostrando banner - usuario nunca lo ha descartado');
         showInstallBanner();
+      } else {
+        console.log('[PWA] Banner descartado previamente');
       }
     });
 
+    // Mostrar banner para usuarios en iOS/Safari que no tienen beforeinstallprompt
+    window.addEventListener('load', () => {
+      console.log('[PWA] Evento load disparado');
+      console.log('[PWA] deferredPrompt:', deferredPrompt);
+      console.log('[PWA] pwa_dismissed en localStorage:', localStorage.getItem('pwa_dismissed'));
+      console.log('[PWA] installPromptShown:', installPromptShown);
+      
+      setTimeout(() => {
+        console.log('[PWA] Timeout de 2s alcanzado');
+        const isDismissed = localStorage.getItem('pwa_dismissed');
+        const hasDeferredPrompt = !!deferredPrompt;
+        
+        console.log('[PWA] Verificando condiciones:');
+        console.log('[PWA] - deferredPrompt existe:', hasDeferredPrompt);
+        console.log('[PWA] - pwa_dismissed:', isDismissed);
+        console.log('[PWA] - installPromptShown:', installPromptShown);
+        
+        if (!deferredPrompt && !isDismissed && !installPromptShown) {
+          // En dispositivos que no disparan beforeinstallprompt pero sí son PWA-capable
+          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+          const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+          
+          console.log('[PWA] Detectado:', { isIOS, isSafari, userAgent: navigator.userAgent });
+          
+          if (!isIOS || !isSafari) {
+            // Mostrar banner en navegadores que podrían instalar la app
+            console.log('[PWA] Mostrando banner PWA por timeout (no iOS/Safari)');
+            showInstallBanner();
+          } else {
+            console.log('[PWA] No mostrando banner - es iOS/Safari');
+          }
+        } else {
+          console.log('[PWA] Condiciones no cumplidas para mostrar banner por timeout');
+        }
+      }, 2000);
+    });
+
     window.addEventListener('appinstalled', (e) => {
-      console.log('App installed');
+      console.log('[PWA] App installed');
       showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
       dismissInstallBanner();
       localStorage.setItem('pwa_dismissed', 'true');
@@ -2492,37 +2566,52 @@
     });
 
     function showInstallBanner() {
+      console.log('[PWA] showInstallBanner() llamado');
       const banner = document.getElementById('install-banner');
-      if (banner && !installPromptShown) {
-        banner.classList.remove('hidden');
+      console.log('[PWA] Banner element encontrado:', !!banner);
+      if (banner) {
+        console.log('[PWA] Mostrando banner con style.display = block');
+        banner.style.display = 'block';
         installPromptShown = true;
+        console.log('[PWA] ✓ Install banner mostrado correctamente');
+      } else {
+        console.warn('[PWA] ✗ Install banner element no encontrado en el DOM');
       }
     }
 
     function installApp() {
-      console.log('installApp called, deferredPrompt:', deferredPrompt);
+      console.log('[PWA] installApp() llamado');
+      console.log('[PWA] deferredPrompt:', deferredPrompt);
       if (deferredPrompt) {
+        console.log('[PWA] Disparando prompt de instalación');
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
+          console.log('[PWA] User choice:', choiceResult.outcome);
           if (choiceResult.outcome === 'accepted') {
+            console.log('[PWA] ✓ Usuario aceptó instalar la app');
             showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
             dismissInstallBanner();
             localStorage.setItem('pwa_dismissed', 'true');
+          } else {
+            console.log('[PWA] Usuario rechazó instalar la app');
           }
           deferredPrompt = null;
         });
       } else {
-        console.log('deferredPrompt is null, cannot install');
+        console.log('[PWA] ✗ deferredPrompt es null, no se puede instalar');
         showToast(t('toasts.pwa_install_error', 'La app no se puede instalar en este momento. Asegúrate de estar en un navegador compatible.'));
       }
     }
 
     function dismissInstallBanner() {
+      console.log('[PWA] dismissInstallBanner() llamado');
       const banner = document.getElementById('install-banner');
       if (banner) {
-        banner.classList.add('hidden');
+        banner.style.display = 'none';
+        console.log('[PWA] ✓ Banner ocultado');
       }
       localStorage.setItem('pwa_dismissed', 'true');
+      console.log('[PWA] ✓ Banner marcado como descartado en localStorage');
     }
 
     // Init
