@@ -221,6 +221,8 @@
     "install_error": "Installazione annullata",
     "install_android": "Tocca il menu (⋮) e seleziona 'Installa app'",
     "install_chrome": "Fai clic sull'icona di download nella barra degli indirizzi o nel menu (⋮)",
-    "install_unsupported": "Il tuo browser non supporta l'installazione delle app. Prova Chrome, Edge o Safari su iOS."
+    "install_unsupported": "Il tuo browser non supporta l'installazione delle app. Prova Chrome, Edge o Safari su iOS.",
+    "uninstall_button": "Disinstalla App",
+    "uninstall_description": "Disinstalla l'applicazione dal tuo dispositivo"
   }
 }

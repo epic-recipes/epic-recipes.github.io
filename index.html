@@ -372,6 +372,7 @@
           <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded" onclick="exportRecipeBook()" data-i18n="settings.export_all">Exportar Todo (Recetas + Ingredientes)</button>
           <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded" onclick="importRecipeBook()" data-i18n="settings.import_data">Importar Datos</button>
           <button class="w-full bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded" onclick="resetAllData()" data-i18n="settings.clear_all">Limpiar Todo (⚠️)</button>
+          <button class="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded" onclick="uninstallApp()" data-i18n="pwa.uninstall_button">Desinstalar App</button>
         </div>
       </section>
     </div>
@@ -2625,6 +2626,32 @@
       isAppInstalled = false;
       showInstallBanner();
     };
+
+    // Función para desinstalar la app
+    function uninstallApp() {
+      const currentLang = localStorage.getItem('language') || 'es';
+      const confirmMsg = getTranslation('pwa.uninstall_description') || 'Desinstalar la aplicación de tu dispositivo';
+      
+      if (confirm(confirmMsg + '?\n\n⚠️ Esta acción no elimina los datos guardados.\n\n' + getTranslation('pwa.install_android', currentLang))) {
+        // Detectar plataforma y mostrar instrucciones
+        if (window.navigator.standalone === true) {
+          // iOS
+          alert('iPhone/iPad:\n\n1. Mantén presionada la aplicación en la pantalla de inicio\n2. Selecciona "Quitar app"\n3. Confirma "Quitar de pantalla de inicio"');
+        } else if (window.matchMedia('(display-mode: standalone)').matches) {
+          // Android
+          alert('Android:\n\n1. Ve a Configuración\n2. Selecciona "Aplicaciones"\n3. Busca "Recetario Épico"\n4. Toca "Desinstalar"');
+        } else if (window.matchMedia('(display-mode: window-controls-overlay)').matches) {
+          // Windows
+          alert('Windows:\n\n1. Haz clic derecho en la aplicación en el menú Inicio\n2. Selecciona "Desinstalar"\n3. Confirma la desinstalación');
+        }
+        
+        // Limpiar flag de instalación
+        localStorage.removeItem('isAppInstalled');
+        isAppInstalled = false;
+        showInstallBanner();
+        console.log('[PWA] App desinstalada (flag limpiado)');
+      }
+    }
     
     // Verificar si la app está instalada al inicio
     window.addEventListener('load', () => {

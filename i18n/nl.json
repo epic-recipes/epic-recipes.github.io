@@ -223,6 +223,8 @@
     "install_error": "Installatie geannuleerd",
     "install_android": "Tik op het menu (⋮) en selecteer 'App installeren'",
     "install_chrome": "Klik op het download-pictogram in de adresbalk of in het menu (⋮)",
-    "install_unsupported": "Uw browser ondersteunt het installeren van apps niet. Probeer Chrome, Edge of Safari op iOS."
+    "install_unsupported": "Uw browser ondersteunt het installeren van apps niet. Probeer Chrome, Edge of Safari op iOS.",
+    "uninstall_button": "App verwijderen",
+    "uninstall_description": "Verwijder de applicatie van uw apparaat"
   }
 }

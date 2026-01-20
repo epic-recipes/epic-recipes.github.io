@@ -215,12 +215,14 @@
 
   "pwa": {
     "install_app": "📱 Instala kom Aplikashon",
-    "install_description": "Aksesu rapidu sin necesidad di navigator",
+    "install_description": "Aksesu rápidu sin necesidad de navegador",
     "install_button": "Instala",
     "installed_success": "Aplikashon instala exitosamente",
-    "install_error": "Instalashon cancela",
-    "install_android": "Toka en menu (⋮) i selekta 'Instala aplikashon'",
-    "install_chrome": "Klika riba icon di download en address bar o en menu (⋮)",
-    "install_unsupported": "Navigator di bo no suporta instalashon di aplikashon. Prueba ku Chrome, Edge o Safari en iOS."
+    "install_error": "Instalashon cancelá",
+    "install_android": "Toka en menu (⋮) i seleká 'Instala aplikashon'",
+    "install_chrome": "Klika riba icon di download en address bar òf en menu (⋮)",
+    "install_unsupported": "Navigator di bo no suporta instalashon di aplikashon. Prueba ku Chrome, Edge òf Safari en iOS.",
+    "uninstall_button": "Disinstala Aplikashon",
+    "uninstall_description": "Disinstala e aplikashon from e device di bo"
   }
 }

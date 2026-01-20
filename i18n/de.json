@@ -223,6 +223,8 @@
     "install_error": "Installation abgebrochen",
     "install_android": "Tippen Sie auf das Menü (⋮) und wählen Sie 'App installieren'",
     "install_chrome": "Klicken Sie auf das Download-Symbol in der Adressleiste oder im Menü (⋮)",
-    "install_unsupported": "Ihr Browser unterstützt keine App-Installation. Versuchen Sie Chrome, Edge oder Safari auf iOS."
+    "install_unsupported": "Ihr Browser unterstützt keine App-Installation. Versuchen Sie Chrome, Edge oder Safari auf iOS.",
+    "uninstall_button": "App deinstallieren",
+    "uninstall_description": "Deinstallieren Sie die Anwendung von Ihrem Gerät"
   }
 }
