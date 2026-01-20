@@ -91,6 +91,7 @@
     "factor": "Factor",
     "add_conversion": "Add Conversion",
     "reset_conversions": "Reset",
+    "units_management": "Units Management",
     "export_units": "Export Units",
     "import_units": "Import Units",
     "data_title": "Data",
