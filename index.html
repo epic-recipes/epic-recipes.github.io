@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23e0c36c' width='192' height='192'/><path fill='%2312141d' d='M96 48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 80c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z'/><circle cx='96' cy='96' r='12' fill='%23e0c36c'/></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Recetario">
   <title>Recetario Épico — Daniel E. F. G.</title>
   <style>
     /* Custom styles for toast and modal */
@@ -2577,16 +2581,34 @@
       renderConversionsList();
       initSPA();
 
+      // Detectar si ya está instalada
+      isAppInstalled = checkIfAppIsInstalled();
+
       // Registrar Service Worker para PWA
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
           .then((registration) => {
-            console.log('[PWA] Service Worker registrado:', registration);
+            console.log('[PWA] ✓ Service Worker registrado:', registration);
           })
           .catch((error) => {
-            console.log('[PWA] Error al registrar Service Worker:', error);
+            console.error('[PWA] ✗ Error al registrar Service Worker:', error);
           });
+      } else {
+        console.warn('[PWA] ⚠️ Service Workers no soportados');
       }
+
+      // Debug PWA
+      console.log('\n========== PWA DEBUG ==========');
+      console.log('beforeinstallprompt soportado:', 'beforeinstallprompt' in window);
+      console.log('appinstalled soportado:', 'appinstalled' in window);
+      console.log('serviceWorker soportado:', 'serviceWorker' in navigator);
+      console.log('manifest vinculado:', !!document.querySelector('link[rel="manifest"]'));
+      console.log('display-mode:', window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser');
+      console.log('navigator.standalone:', window.navigator.standalone);
+      console.log('App instalada detectada:', isAppInstalled);
+      console.log('HTTP/HTTPS:', window.location.protocol);
+      console.log('Hostname:', window.location.hostname);
+      console.log('========== FIN DEBUG ==========\n');
       
       console.log('[PWA] Aplicación cargada');
     };

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Debug - Recetario Épico</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #1a1a1a;
+      color: #00ff00;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #ffff00;
+      border-bottom: 2px solid #00ff00;
+      padding-bottom: 10px;
+    }
+    .section {
+      margin: 20px 0;
+      padding: 15px;
+      background: #2a2a2a;
+      border-left: 3px solid #00ff00;
+    }
+    .status-ok {
+      color: #00ff00;
+      font-weight: bold;
+    }
+    .status-error {
+      color: #ff0000;
+      font-weight: bold;
+    }
+    .status-warning {
+      color: #ffff00;
+      font-weight: bold;
+    }
+    .check {
+      margin: 10px 0;
+      padding: 5px;
+    }
+    pre {
+      background: #1a1a1a;
+      padding: 10px;
+      overflow-x: auto;
+      border: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 PWA Debug - Recetario Épico</h1>
+    
+    <div class="section">
+      <h2>📋 Verificación de Capacidades</h2>
+      <div id="capabilities"></div>
+    </div>
+
+    <div class="section">
+      <h2>📍 Información del Navegador</h2>
+      <div id="browser-info"></div>
+    </div>
+
+    <div class="section">
+      <h2>🔗 Verificación de Recursos PWA</h2>
+      <div id="resources"></div>
+    </div>
+
+    <div class="section">
+      <h2>⚙️ Service Worker</h2>
+      <div id="service-worker"></div>
+    </div>
+
+    <div class="section">
+      <h2>📦 Manifest</h2>
+      <div id="manifest"></div>
+    </div>
+
+    <div class="section">
+      <h2>💾 localStorage</h2>
+      <div id="storage"></div>
+    </div>
+
+    <div class="section">
+      <h2>📝 Resumen</h2>
+      <div id="summary"></div>
+    </div>
+  </div>
+
+  <script>
+    const checks = {};
+
+    // Verificar capacidades
+    function checkCapabilities() {
+      const div = document.getElementById('capabilities');
+      const caps = {
+        'beforeinstallprompt': 'beforeinstallprompt' in window,
+        'appinstalled': 'appinstalled' in window,
+        'serviceWorker': 'serviceWorker' in navigator,
+        'Notifications API': 'Notification' in window,
+        'Web App Manifest': !!document.querySelector('link[rel="manifest"]'),
+        'displayMode': window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser',
+        'display-mode: window-controls-overlay': window.matchMedia('(display-mode: window-controls-overlay)').matches,
+        'navigator.standalone': window.navigator.standalone,
+      };
+
+      let html = '';
+      Object.entries(caps).forEach(([key, value]) => {
+        const status = value ? 'status-ok ✓' : 'status-error ✗';
+        html += `<div class="check"><span class="${status}">${key}:</span> ${value}</div>`;
+        checks[key] = value;
+      });
+      div.innerHTML = html;
+    }
+
+    // Información del navegador
+    function checkBrowser() {
+      const div = document.getElementById('browser-info');
+      const info = {
+        'User Agent': navigator.userAgent.substring(0, 80),
+        'Protocolo': window.location.protocol,
+        'Host': window.location.hostname,
+        'Puerto': window.location.port || 'default',
+        'HTTPS': window.location.protocol === 'https:' ? 'SÍ' : 'NO',
+        'Plataforma': navigator.platform,
+        'lenguaje': navigator.language,
+      };
+
+      let html = '';
+      Object.entries(info).forEach(([key, value]) => {
+        html += `<div class="check"><strong>${key}:</strong> ${value}</div>`;
+      });
+      div.innerHTML = html;
+    }
+
+    // Verificar recursos
+    function checkResources() {
+      const div = document.getElementById('resources');
+      let html = '';
+
+      // Verificar manifest
+      const manifestLink = document.querySelector('link[rel="manifest"]');
+      if (manifestLink) {
+        html += `<div class="check"><span class="status-ok">✓ Manifest vinculado:</span> ${manifestLink.href}</div>`;
+      } else {
+        html += `<div class="check"><span class="status-error">✗ Manifest NO vinculado</span></div>`;
+      }
+
+      // Intentar cargar el manifest
+      fetch('/manifest.json')
+        .then(r => r.json())
+        .then(manifest => {
+          html += `<div class="check"><span class="status-ok">✓ Manifest accesible:</span> Nombre: "${manifest.name}", Iconos: ${manifest.icons.length}</div>`;
+          document.getElementById('resources').innerHTML = html;
+        })
+        .catch(e => {
+          html += `<div class="check"><span class="status-error">✗ Manifest NO accesible:</span> ${e.message}</div>`;
+          document.getElementById('resources').innerHTML = html;
+        });
+
+      document.getElementById('resources').innerHTML = html + '<p>Cargando...</p>';
+    }
+
+    // Service Worker
+    function checkServiceWorker() {
+      const div = document.getElementById('service-worker');
+      let html = '';
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations()
+          .then(registrations => {
+            if (registrations.length > 0) {
+              html += `<div class="check"><span class="status-ok">✓ Service Workers registrados:</span> ${registrations.length}</div>`;
+              registrations.forEach((reg, i) => {
+                html += `<div class="check">  ${i + 1}. Scope: ${reg.scope}</div>`;
+                html += `<div class="check">     Estado: ${reg.active ? 'ACTIVO' : 'PENDIENTE'}</div>`;
+              });
+            } else {
+              html += `<div class="check"><span class="status-warning">⚠️ Sin Service Workers registrados</span></div>`;
+              html += `<div class="check">Intenta recargar la página o hacer click en el botón de instalar</div>`;
+            }
+            div.innerHTML = html;
+          })
+          .catch(e => {
+            html += `<div class="check"><span class="status-error">✗ Error al verificar:</span> ${e.message}</div>`;
+            div.innerHTML = html;
+          });
+      } else {
+        html += `<div class="check"><span class="status-error">✗ Service Workers no soportados</span></div>`;
+        div.innerHTML = html;
+      }
+
+      div.innerHTML = html || '<p>Verificando...</p>';
+    }
+
+    // Manifest
+    function checkManifest() {
+      const div = document.getElementById('manifest');
+      fetch('/manifest.json')
+        .then(r => r.json())
+        .then(manifest => {
+          let html = '<pre>' + JSON.stringify(manifest, null, 2) + '</pre>';
+          div.innerHTML = html;
+        })
+        .catch(e => {
+          div.innerHTML = `<div class="check"><span class="status-error">✗ Error al cargar:</span> ${e.message}</div>`;
+        });
+    }
+
+    // localStorage
+    function checkStorage() {
+      const div = document.getElementById('storage');
+      const keys = ['isAppInstalled', 'language', 'recipes', 'ingredients', 'units'];
+      let html = '';
+
+      keys.forEach(key => {
+        const value = localStorage.getItem(key);
+        if (value) {
+          const display = value.length > 100 ? value.substring(0, 100) + '...' : value;
+          html += `<div class="check"><strong>${key}:</strong> ${display}</div>`;
+        }
+      });
+
+      if (!html) {
+        html = '<div class="check"><span class="status-warning">⚠️ localStorage vacío o sin datos PWA</span></div>';
+      }
+
+      div.innerHTML = html;
+    }
+
+    // Resumen
+    function generateSummary() {
+      const div = document.getElementById('summary');
+      let status = 'ESTADO DESCONOCIDO';
+      let color = 'status-warning';
+
+      const isHttps = window.location.protocol === 'https:';
+      const hasManifest = !!document.querySelector('link[rel="manifest"]');
+      const hasServiceWorker = 'serviceWorker' in navigator;
+      const hasBeforeInstallPrompt = 'beforeinstallprompt' in window;
+
+      if (isHttps && hasManifest && hasServiceWorker && hasBeforeInstallPrompt) {
+        status = '✓ PWA CORRECTAMENTE CONFIGURADA';
+        color = 'status-ok';
+      } else if (isHttps && hasManifest && hasServiceWorker) {
+        status = '⚠️ PWA PARCIALMENTE CONFIGURADA (falta beforeinstallprompt)';
+        color = 'status-warning';
+      } else if (!isHttps) {
+        status = '✗ NO FUNCIONA: Requiere HTTPS o localhost';
+        color = 'status-error';
+      } else if (!hasManifest) {
+        status = '✗ Falta: manifest.json vinculado';
+        color = 'status-error';
+      } else if (!hasServiceWorker) {
+        status = '✗ No soportado: Service Workers';
+        color = 'status-error';
+      }
+
+      const html = `
+        <div class="check"><span class="${color}">${status}</span></div>
+        <div class="check">
+          <h3>Checklist:</h3>
+          <div class="check">✓ HTTPS/localhost: ${isHttps ? 'SÍ' : 'NO'}</div>
+          <div class="check">✓ manifest.json: ${hasManifest ? 'SÍ' : 'NO'}</div>
+          <div class="check">✓ Service Worker: ${hasServiceWorker ? 'SÍ' : 'NO'}</div>
+          <div class="check">✓ beforeinstallprompt: ${hasBeforeInstallPrompt ? 'SÍ' : 'NO (se activará cuando sea instalable)'}</div>
+        </div>
+        <div class="check">
+          <h3>Próximos pasos:</h3>
+          <div class="check">1. Recarga la página (Ctrl+R)</div>
+          <div class="check">2. Abre DevTools (F12) > Console para ver logs PWA</div>
+          <div class="check">3. Busca el botón "Instalar" en la barra de direcciones</div>
+          <div class="check">4. Si el botón no aparece, verifica los errores en Console</div>
+        </div>
+      `;
+
+      div.innerHTML = html;
+    }
+
+    // Ejecutar todas las verificaciones
+    window.addEventListener('load', () => {
+      checkCapabilities();
+      checkBrowser();
+      checkResources();
+      checkServiceWorker();
+      checkManifest();
+      checkStorage();
+      generateSummary();
+    });
+  </script>
+</body>
+</html>
