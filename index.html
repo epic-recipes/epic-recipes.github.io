@@ -2493,12 +2493,13 @@
     // ====== PWA Install Prompt ======
     let deferredPrompt = null;
     let isHttps = window.location.protocol === 'https:';
-    let isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    let isProduction = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
 
     console.log('[PWA] ========== INICIALIZANDO PWA ==========');
     console.log('[PWA] HTTPS:', isHttps);
-    console.log('[PWA] Localhost:', isLocalhost);
+    console.log('[PWA] Producción:', isProduction);
     console.log('[PWA] Protocolo:', window.location.protocol);
+    console.log('[PWA] Host:', window.location.hostname);
 
     // Capturar el evento beforeinstallprompt (solo en HTTPS)
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -2557,8 +2558,10 @@
           if (choiceResult.outcome === 'accepted') {
             console.log('[PWA] ✓ Usuario aceptó instalar');
             showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
+            dismissInstallBanner();
           } else {
             console.log('[PWA] Usuario rechazó');
+            showToast(t('toasts.pwa_install_error', 'Instalación cancelada'));
           }
           deferredPrompt = null;
         }).catch((err) => {
@@ -2571,17 +2574,15 @@
         const isEdge = /Edg/.test(navigator.userAgent);
         const isAndroid = /Android/.test(navigator.userAgent);
         
-        let instructions = 'Para instalar la app:\n\n';
-        
+        let msg = '';
         if (isAndroid) {
-          instructions += '1. Abre el menú (⋮)\n2. Selecciona "Instalar app"';
+          msg = '📱 Toca el menú (⋮) y selecciona "Instalar app"';
         } else if (isChrome || isEdge) {
-          instructions += '1. Haz clic en el ícono de instalación en la barra de direcciones\n2. O usa el menú (⋮) → "Instalar app"';
+          msg = '📥 Haz clic en el ícono de descarga en la barra de direcciones o en el menú (⋮)';
         } else {
-          instructions += 'Tu navegador puede no soportar la instalación como app.\nIntenta con Chrome, Edge o navegador en Android.';
+          msg = '💻 Tu navegador no soporta instalación de apps. Intenta con Chrome, Edge o Safari en iOS.';
         }
-        
-        showToast(instructions);
+        showToast(msg);
       }
     }
 
@@ -2591,6 +2592,17 @@
       localStorage.removeItem('install_banner_dismissed');
       showInstallBanner();
     };
+    
+    // En producción, mostrar banner automáticamente si no se descartó
+    if (isProduction && isHttps) {
+      setTimeout(() => {
+        console.log('[PWA] Verificando si mostrar banner automático en producción');
+        if (!localStorage.getItem('install_banner_dismissed')) {
+          console.log('[PWA] Mostrando banner automático en producción');
+          showInstallBanner();
+        }
+      }, 3000);
+    }
 
     // Init
     window.onload = async () => {
