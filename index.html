@@ -70,23 +70,6 @@
 <body>
 
   <!-- PWA Install Banner + Language Selector -->
-  <!-- Install banner -->
-  <div id="install-banner" style="display: none;" class="fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
-    <div class="max-w-full mx-auto flex items-center justify-between gap-4 text-sm">
-      <div class="flex items-center gap-3 flex-1">
-        <div class="text-2xl flex-shrink-0">📱</div>
-        <div class="flex-1">
-          <div class="font-bold" data-i18n="pwa.install_app">📱 Instalar como App</div>
-          <div class="text-xs opacity-90" data-i18n="pwa.install_description">Acceso rápido sin necesidad de navegador</div>
-        </div>
-      </div>
-      <div class="flex gap-2 flex-shrink-0">
-        <button id="install-button" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium text-xs transition-colors" onclick="handleInstallClick()" data-i18n="pwa.install_button">Instalar</button>
-        <button class="bg-white hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-lg font-medium text-xs transition-colors" onclick="dismissInstallBanner()">✕</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Language Selector Bar -->
   <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-3 rounded shadow z-40">
     <div class="flex gap-2 items-center">
@@ -2492,13 +2475,9 @@
 
     // ====== PWA Install Prompt ======
     let deferredPrompt = null;
-    let isHttps = window.location.protocol === 'https:';
-    let isProduction = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
     let isAppInstalled = false;
 
     console.log('[PWA] ========== INICIALIZANDO PWA ==========');
-    console.log('[PWA] HTTPS:', isHttps);
-    console.log('[PWA] Producción:', isProduction);
     console.log('[PWA] Protocolo:', window.location.protocol);
     console.log('[PWA] Host:', window.location.hostname);
 
@@ -2528,111 +2507,45 @@
 
     // Capturar el evento beforeinstallprompt
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('[PWA] beforeinstallprompt disparado');
+      console.log('[PWA] beforeinstallprompt disparado - botón nativo visible en navegador');
       e.preventDefault();
       deferredPrompt = e;
-      
-      // Solo mostrar banner si la app NO está instalada
-      if (!localStorage.getItem('install_banner_dismissed') && !isAppInstalled) {
-        console.log('[PWA] Mostrando banner desde beforeinstallprompt');
-        showInstallBanner();
-      }
     });
 
     // Cuando la app se instala correctamente
     window.addEventListener('appinstalled', (e) => {
       console.log('[PWA] ✓ App instalada correctamente');
       isAppInstalled = true;
-      dismissInstallBanner();
-      localStorage.setItem('install_banner_dismissed', 'true');
+      localStorage.setItem('isAppInstalled', 'true');
       deferredPrompt = null;
     });
 
-    // Mostrar banner de instalación
-    function showInstallBanner() {
-      console.log('[PWA] showInstallBanner() ejecutada');
-      const banner = document.getElementById('install-banner');
-      if (banner) {
-        banner.style.display = 'block';
-        console.log('[PWA] ✓ Banner mostrado');
-        updateI18n();
-      } else {
-        console.error('[PWA] ERROR: install-banner no encontrado');
-      }
-    }
 
-    // Ocultar banner de instalación
-    function dismissInstallBanner() {
-      console.log('[PWA] dismissInstallBanner() ejecutada');
-      const banner = document.getElementById('install-banner');
-      if (banner) {
-        banner.style.display = 'none';
-        localStorage.setItem('install_banner_dismissed', 'true');
-        console.log('[PWA] ✓ Banner ocultado');
-      }
-    }
-
-    // Manejar clic en botón instalar
+    // Manejar clic en botón instalar (si es necesario)
     function handleInstallClick() {
       console.log('[PWA] handleInstallClick() ejecutada');
-      console.log('[PWA] deferredPrompt disponible:', !!deferredPrompt);
-      
       if (deferredPrompt) {
         console.log('[PWA] Disparando prompt de instalación');
         deferredPrompt.prompt();
-        
         deferredPrompt.userChoice.then((choiceResult) => {
           console.log('[PWA] userChoice:', choiceResult.outcome);
           if (choiceResult.outcome === 'accepted') {
             console.log('[PWA] ✓ Usuario aceptó instalar');
-            showToast(t('pwa.installed_success', 'App instalada correctamente'));
-            dismissInstallBanner();
-            localStorage.setItem('install_banner_dismissed', 'true');
-            isAppInstalled = true;
-          } else {
-            console.log('[PWA] Usuario rechazó instalar');
-            showToast(t('pwa.install_error', 'Instalación cancelada'));
           }
           deferredPrompt = null;
         }).catch((err) => {
           console.error('[PWA] Error en userChoice:', err);
         });
-      } else {
-        // Mostrar instrucciones basadas en el navegador
-        console.log('[PWA] No hay deferredPrompt, mostrando instrucciones');
-        const isChrome = /Chrome|Chromium|CriOS/.test(navigator.userAgent);
-        const isEdge = /Edg/.test(navigator.userAgent);
-        const isAndroid = /Android/.test(navigator.userAgent);
-        
-        let message = '';
-        
-        if (isAndroid) {
-          message = t('pwa.install_android', '📱 Toca el menú (⋮) y selecciona "Instalar app"');
-        } else if (isChrome || isEdge) {
-          message = t('pwa.install_chrome', '📥 Haz clic en el ícono de descarga en la barra de direcciones o en el menú (⋮)');
-        } else {
-          message = t('pwa.install_unsupported', '💻 Tu navegador no soporta instalación de apps. Intenta con Chrome, Edge o Safari en iOS.');
-        }
-        
-        showToast(message);
-        dismissInstallBanner();
       }
     }
 
-    // Función para testing
-    window.forceShowInstallBanner = function() {
-      console.log('[PWA] FORCE: Mostrando banner');
-      localStorage.removeItem('install_banner_dismissed');
-      isAppInstalled = false;
-      showInstallBanner();
-    };
+
 
     // Función para desinstalar la app
     function uninstallApp() {
-      const currentLang = localStorage.getItem('language') || 'es';
-      const confirmMsg = getTranslation('pwa.uninstall_description') || 'Desinstalar la aplicación de tu dispositivo';
+      const confirmMsg = 'Desinstalar la aplicación de tu dispositivo';
       
-      if (confirm(confirmMsg + '?\n\n⚠️ Esta acción no elimina los datos guardados.\n\n' + getTranslation('pwa.install_android', currentLang))) {
+      if (confirm(confirmMsg + '?\n\n⚠️ Esta acción no elimina los datos guardados.')) {
         // Detectar plataforma y mostrar instrucciones
         if (window.navigator.standalone === true) {
           // iOS
@@ -2648,32 +2561,9 @@
         // Limpiar flag de instalación
         localStorage.removeItem('isAppInstalled');
         isAppInstalled = false;
-        showInstallBanner();
         console.log('[PWA] App desinstalada (flag limpiado)');
       }
     }
-    
-    // Verificar si la app está instalada al inicio
-    window.addEventListener('load', () => {
-      console.log('[PWA] Verificando estado de instalación en load event');
-      isAppInstalled = checkIfAppIsInstalled();
-      
-      // En producción, mostrar banner automáticamente si:
-      // 1. Estamos en HTTPS
-      // 2. No fue descartado
-      // 3. La app NO está instalada
-      if (isProduction && isHttps && !isAppInstalled) {
-        setTimeout(() => {
-          console.log('[PWA] Verificando si mostrar banner automático en producción');
-          if (!localStorage.getItem('install_banner_dismissed') && !isAppInstalled) {
-            console.log('[PWA] Mostrando banner automático en producción');
-            showInstallBanner();
-          }
-        }, 3000);
-      } else if (isAppInstalled) {
-        console.log('[PWA] App ya instalada, no mostrando banner');
-      }
-    });
 
     // Init
     window.onload = async () => {
@@ -2686,15 +2576,6 @@
       renderUnitsList();
       renderConversionsList();
       initSPA();
-
-      // Test automático del banner PWA
-      console.log('[PWA] ========== TEST AUTOMÁTICO DE BANNER ==========');
-      console.log('[PWA] 1. Elemento install-banner existe:', !!document.getElementById('install-banner'));
-      console.log('[PWA] 2. localStorage install_banner_dismissed:', localStorage.getItem('install_banner_dismissed'));
-      console.log('[PWA] 3. beforeinstallprompt evento soportado:', 'beforeinstallprompt' in window);
-      console.log('[PWA] 4. Navegador:', navigator.userAgent);
-      console.log('[PWA] 5. Protocolo:', window.location.protocol);
-      console.log('[PWA] ========== FIN TEST AUTOMÁTICO ==========');
 
       // Registrar Service Worker para PWA
       if ('serviceWorker' in navigator) {
