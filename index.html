@@ -2509,6 +2509,8 @@
       if (!localStorage.getItem('install_banner_dismissed')) {
         console.log('[PWA] Mostrando banner desde beforeinstallprompt');
         showInstallBanner();
+      } else {
+        console.log('[PWA] Banner descartado previamente');
       }
     });
 
