@@ -70,7 +70,8 @@
 <body>
 
   <!-- PWA Install Banner + Language Selector -->
-  <div id="install-banner" class="hidden fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
+  <!-- Install banner -->
+  <div id="install-banner" style="display: none;" class="fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 via-yellow-450 to-amber-400 p-4 shadow-xl text-gray-800 z-50">
     <div class="max-w-full mx-auto flex items-center justify-between gap-4 text-sm">
       <div class="flex items-center gap-3 flex-1">
         <div class="text-2xl flex-shrink-0">📱</div>
@@ -86,7 +87,8 @@
     </div>
   </div>
 
-  <!-- Language Selector Bar -->
+  <!-- Main container -->
+  <div class="container mx-auto px-2 py-4 max-w-6xl">
   <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-3 rounded shadow z-40">
     <div class="flex gap-2 items-center">
       <select id="lang-select" class="flex-1 bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded" onchange="changeLanguage(this.value)">
@@ -2447,15 +2449,33 @@
               recipeBook = [];
               customUnits = {};
               customConversions = {};
+              
+              // Limpiar datos de recetas en localStorage
               localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
               localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
               localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+              
+              // Limpiar todas las otras claves de localStorage
+              localStorage.removeItem('install_banner_dismissed');
+              localStorage.removeItem('currentLanguage');
+              
+              // Limpiar cualquier otra clave que no sea de recetas
+              const keysToKeep = ['rpg_ing', 'rpg_book', 'rpg_units', 'rpg_conversions'];
+              for (let i = localStorage.length - 1; i >= 0; i--) {
+                const key = localStorage.key(i);
+                if (key && !keysToKeep.includes(key)) {
+                  console.log('[DATA] Eliminando:', key);
+                  localStorage.removeItem(key);
+                }
+              }
+              
               renderIngredients();
               renderBook();
               renderUnitsList();
               renderConversionsList();
               showToast(t('toasts.data_cleared', 'Todos los datos han sido eliminados'));
+              console.log('[DATA] ✓ Todos los datos limpiados');
             }
           });
         }
@@ -2472,58 +2492,103 @@
 
     // ====== PWA Install Prompt ======
     let deferredPrompt = null;
-    let installPromptShown = false;
+    let isHttps = window.location.protocol === 'https:';
+    let isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
+    console.log('[PWA] ========== INICIALIZANDO PWA ==========');
+    console.log('[PWA] HTTPS:', isHttps);
+    console.log('[PWA] Localhost:', isLocalhost);
+    console.log('[PWA] Protocolo:', window.location.protocol);
+
+    // Capturar el evento beforeinstallprompt (solo en HTTPS)
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('beforeinstallprompt event fired');
+      console.log('[PWA] beforeinstallprompt disparado');
       e.preventDefault();
       deferredPrompt = e;
-      if (!localStorage.getItem('pwa_dismissed')) {
+      
+      if (!localStorage.getItem('install_banner_dismissed')) {
+        console.log('[PWA] Mostrando banner desde beforeinstallprompt');
         showInstallBanner();
       }
     });
 
+    // Cuando la app se instala correctamente
     window.addEventListener('appinstalled', (e) => {
-      console.log('App installed');
-      showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
+      console.log('[PWA] App instalada correctamente');
       dismissInstallBanner();
-      localStorage.setItem('pwa_dismissed', 'true');
+      localStorage.setItem('install_banner_dismissed', 'true');
       deferredPrompt = null;
     });
 
+    // Mostrar banner de instalación
     function showInstallBanner() {
-      const banner = document.getElementById('install-banner');
-      if (banner && !installPromptShown) {
-        banner.classList.remove('hidden');
-        installPromptShown = true;
-      }
-    }
-
-    function installApp() {
-      console.log('installApp called, deferredPrompt:', deferredPrompt);
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
-            dismissInstallBanner();
-            localStorage.setItem('pwa_dismissed', 'true');
-          }
-          deferredPrompt = null;
-        });
-      } else {
-        console.log('deferredPrompt is null, cannot install');
-        showToast(t('toasts.pwa_install_error', 'La app no se puede instalar en este momento. Asegúrate de estar en un navegador compatible.'));
-      }
-    }
-
-    function dismissInstallBanner() {
+      console.log('[PWA] showInstallBanner() ejecutada');
       const banner = document.getElementById('install-banner');
       if (banner) {
-        banner.classList.add('hidden');
+        banner.style.display = 'block';
+        console.log('[PWA] ✓ Banner mostrado');
+      } else {
+        console.error('[PWA] ERROR: install-banner no encontrado');
       }
-      localStorage.setItem('pwa_dismissed', 'true');
     }
+
+    // Ocultar banner de instalación
+    function dismissInstallBanner() {
+      console.log('[PWA] dismissInstallBanner() ejecutada');
+      const banner = document.getElementById('install-banner');
+      if (banner) {
+        banner.style.display = 'none';
+        localStorage.setItem('install_banner_dismissed', 'true');
+        console.log('[PWA] ✓ Banner ocultado');
+      }
+    }
+
+    // Instalar app
+    function installApp() {
+      console.log('[PWA] installApp() ejecutada');
+      
+      if (deferredPrompt) {
+        console.log('[PWA] Usando beforeinstallprompt');
+        deferredPrompt.prompt();
+        
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('[PWA] ✓ Usuario aceptó instalar');
+            showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
+          } else {
+            console.log('[PWA] Usuario rechazó');
+          }
+          deferredPrompt = null;
+        }).catch((err) => {
+          console.error('[PWA] Error:', err);
+        });
+      } else {
+        // Mostrar instrucciones manuales si no hay deferredPrompt
+        console.log('[PWA] No hay deferredPrompt, mostrando instrucciones manuales');
+        const isChrome = /Chrome|Chromium|CriOS/.test(navigator.userAgent);
+        const isEdge = /Edg/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        let instructions = 'Para instalar la app:\n\n';
+        
+        if (isAndroid) {
+          instructions += '1. Abre el menú (⋮)\n2. Selecciona "Instalar app"';
+        } else if (isChrome || isEdge) {
+          instructions += '1. Haz clic en el ícono de instalación en la barra de direcciones\n2. O usa el menú (⋮) → "Instalar app"';
+        } else {
+          instructions += 'Tu navegador puede no soportar la instalación como app.\nIntenta con Chrome, Edge o navegador en Android.';
+        }
+        
+        showToast(instructions);
+      }
+    }
+
+    // Función para testing
+    window.forceShowInstallBanner = function() {
+      console.log('[PWA] FORCE: Mostrando banner');
+      localStorage.removeItem('install_banner_dismissed');
+      showInstallBanner();
+    };
 
     // Init
     window.onload = async () => {
@@ -2537,16 +2602,27 @@
       renderConversionsList();
       initSPA();
 
+      // Test automático del banner PWA
+      console.log('[PWA] ========== TEST AUTOMÁTICO DE BANNER ==========');
+      console.log('[PWA] 1. Elemento install-banner existe:', !!document.getElementById('install-banner'));
+      console.log('[PWA] 2. localStorage install_banner_dismissed:', localStorage.getItem('install_banner_dismissed'));
+      console.log('[PWA] 3. beforeinstallprompt evento soportado:', 'beforeinstallprompt' in window);
+      console.log('[PWA] 4. Navegador:', navigator.userAgent);
+      console.log('[PWA] 5. Protocolo:', window.location.protocol);
+      console.log('[PWA] ========== FIN TEST AUTOMÁTICO ==========');
+
       // Registrar Service Worker para PWA
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
           .then((registration) => {
-            console.log('Service Worker registrado:', registration);
+            console.log('[PWA] Service Worker registrado:', registration);
           })
           .catch((error) => {
-            console.log('Error al registrar Service Worker:', error);
+            console.log('[PWA] Error al registrar Service Worker:', error);
           });
       }
+      
+      console.log('[PWA] Aplicación cargada');
     };
   </script>
 <div style="position: absolute; z-index: 99999">
