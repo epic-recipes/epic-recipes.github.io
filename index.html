@@ -76,12 +76,12 @@
       <div class="flex items-center gap-3 flex-1">
         <div class="text-2xl flex-shrink-0">📱</div>
         <div class="flex-1">
-          <div class="font-bold" data-i18n="donation.install_app">Instalar como App</div>
-          <div class="text-xs opacity-90" data-i18n="donation.install_description">Acceso rápido sin necesidad de navegador</div>
+          <div class="font-bold" data-i18n="pwa.install_app">📱 Instalar como App</div>
+          <div class="text-xs opacity-90" data-i18n="pwa.install_description">Acceso rápido sin necesidad de navegador</div>
         </div>
       </div>
       <div class="flex gap-2 flex-shrink-0">
-        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium text-xs transition-colors" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+        <button id="install-button" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium text-xs transition-colors" onclick="handleInstallClick()" data-i18n="pwa.install_button">Instalar</button>
         <button class="bg-white hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-lg font-medium text-xs transition-colors" onclick="dismissInstallBanner()">✕</button>
       </div>
     </div>
@@ -2501,7 +2501,7 @@
     console.log('[PWA] Protocolo:', window.location.protocol);
     console.log('[PWA] Host:', window.location.hostname);
 
-    // Capturar el evento beforeinstallprompt (solo en HTTPS)
+    // Capturar el evento beforeinstallprompt
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log('[PWA] beforeinstallprompt disparado');
       e.preventDefault();
@@ -2530,6 +2530,7 @@
       if (banner) {
         banner.style.display = 'block';
         console.log('[PWA] ✓ Banner mostrado');
+        updateI18n(); // Asegurar que se traduce
       } else {
         console.error('[PWA] ERROR: install-banner no encontrado');
       }
@@ -2546,43 +2547,49 @@
       }
     }
 
-    // Instalar app
-    function installApp() {
-      console.log('[PWA] installApp() ejecutada');
+    // Manejar clic en botón instalar
+    function handleInstallClick() {
+      console.log('[PWA] handleInstallClick() ejecutada');
+      console.log('[PWA] deferredPrompt disponible:', !!deferredPrompt);
       
       if (deferredPrompt) {
-        console.log('[PWA] Usando beforeinstallprompt');
+        console.log('[PWA] Disparando prompt de instalación');
         deferredPrompt.prompt();
         
         deferredPrompt.userChoice.then((choiceResult) => {
+          console.log('[PWA] userChoice:', choiceResult.outcome);
           if (choiceResult.outcome === 'accepted') {
             console.log('[PWA] ✓ Usuario aceptó instalar');
-            showToast(t('toasts.pwa_installed', 'App instalada correctamente'));
+            showToast(t('pwa.installed_success', 'App instalada correctamente'));
             dismissInstallBanner();
+            localStorage.setItem('install_banner_dismissed', 'true');
           } else {
-            console.log('[PWA] Usuario rechazó');
-            showToast(t('toasts.pwa_install_error', 'Instalación cancelada'));
+            console.log('[PWA] Usuario rechazó instalar');
+            showToast(t('pwa.install_error', 'Instalación cancelada'));
           }
           deferredPrompt = null;
         }).catch((err) => {
-          console.error('[PWA] Error:', err);
+          console.error('[PWA] Error en userChoice:', err);
         });
       } else {
-        // Mostrar instrucciones manuales si no hay deferredPrompt
-        console.log('[PWA] No hay deferredPrompt, mostrando instrucciones manuales');
+        // Mostrar instrucciones basadas en el navegador
+        console.log('[PWA] No hay deferredPrompt, mostrando instrucciones');
         const isChrome = /Chrome|Chromium|CriOS/.test(navigator.userAgent);
         const isEdge = /Edg/.test(navigator.userAgent);
         const isAndroid = /Android/.test(navigator.userAgent);
         
-        let msg = '';
+        let message = '';
+        
         if (isAndroid) {
-          msg = '📱 Toca el menú (⋮) y selecciona "Instalar app"';
+          message = t('pwa.install_android', '📱 Toca el menú (⋮) y selecciona "Instalar app"');
         } else if (isChrome || isEdge) {
-          msg = '📥 Haz clic en el ícono de descarga en la barra de direcciones o en el menú (⋮)';
+          message = t('pwa.install_chrome', '📥 Haz clic en el ícono de descarga en la barra de direcciones o en el menú (⋮)');
         } else {
-          msg = '💻 Tu navegador no soporta instalación de apps. Intenta con Chrome, Edge o Safari en iOS.';
+          message = t('pwa.install_unsupported', '💻 Tu navegador no soporta instalación de apps. Intenta con Chrome, Edge o Safari en iOS.');
         }
-        showToast(msg);
+        
+        showToast(message);
+        dismissInstallBanner();
       }
     }
 

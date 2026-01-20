@@ -213,5 +213,16 @@
     "price_per_portion": "Prix par Portion",
     "margin_label": "Marge %",
     "roi_label": "Rentabilité"
+  },
+
+  "pwa": {
+    "install_app": "📱 Installer comme Application",
+    "install_description": "Accès rapide sans navigateur",
+    "install_button": "Installer",
+    "installed_success": "Application installée avec succès",
+    "install_error": "Installation annulée",
+    "install_android": "Appuyez sur le menu (⋮) et sélectionnez 'Installer l'application'",
+    "install_chrome": "Cliquez sur l'icône de téléchargement dans la barre d'adresse ou dans le menu (⋮)",
+    "install_unsupported": "Votre navigateur ne supporte pas l'installation d'applications. Essayez Chrome, Edge ou Safari sur iOS."
   }
 }

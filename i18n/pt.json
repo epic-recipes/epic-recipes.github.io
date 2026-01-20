@@ -210,6 +210,17 @@
     "profit_label": "Lucro Líquido",
     "price_per_portion": "Preço por Porção",
     "margin_label": "Margem %",
-    "roi_label": "Lucratividade"
+    "roi_label": "Rentabilidade"
+  },
+
+  "pwa": {
+    "install_app": "📱 Instalar como Aplicativo",
+    "install_description": "Acesso rápido sem precisar de navegador",
+    "install_button": "Instalar",
+    "installed_success": "Aplicativo instalado com sucesso",
+    "install_error": "Instalação cancelada",
+    "install_android": "Toque no menu (⋮) e selecione 'Instalar aplicativo'",
+    "install_chrome": "Clique no ícone de download na barra de endereços ou no menu (⋮)",
+    "install_unsupported": "Seu navegador não suporta instalação de aplicativos. Tente Chrome, Edge ou Safari no iOS."
   }
 }

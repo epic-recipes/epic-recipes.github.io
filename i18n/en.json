@@ -213,5 +213,16 @@
     "price_per_portion": "Price per Portion",
     "margin_label": "Margin %",
     "roi_label": "Profitability"
+  },
+
+  "pwa": {
+    "install_app": "📱 Install as App",
+    "install_description": "Quick access without needing a browser",
+    "install_button": "Install",
+    "installed_success": "App installed successfully",
+    "install_error": "Installation cancelled",
+    "install_android": "Tap the menu (⋮) and select 'Install app'",
+    "install_chrome": "Click the download icon in the address bar or in the menu (⋮)",
+    "install_unsupported": "Your browser does not support app installation. Try Chrome, Edge or Safari on iOS."
   }
 }

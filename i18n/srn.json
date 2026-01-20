@@ -211,5 +211,16 @@
     "price_per_portion": "Pris per Porti",
     "margin_label": "Margin %",
     "roi_label": "Profit"
+  },
+
+  "pwa": {
+    "install_app": "📱 Instala kom Aplikashon",
+    "install_description": "Aksesu rapidu sin necesidad di navigator",
+    "install_button": "Instala",
+    "installed_success": "Aplikashon instala exitosamente",
+    "install_error": "Instalashon cancela",
+    "install_android": "Toka en menu (⋮) i selekta 'Instala aplikashon'",
+    "install_chrome": "Klika riba icon di download en address bar o en menu (⋮)",
+    "install_unsupported": "Navigator di bo no suporta instalashon di aplikashon. Prueba ku Chrome, Edge o Safari en iOS."
   }
 }
