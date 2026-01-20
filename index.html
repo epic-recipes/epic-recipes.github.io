@@ -87,8 +87,7 @@
     </div>
   </div>
 
-  <!-- Main container -->
-  <div class="container mx-auto px-2 py-4 max-w-6xl">
+  <!-- Language Selector Bar -->
   <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-3 rounded shadow z-40">
     <div class="flex gap-2 items-center">
       <select id="lang-select" class="flex-1 bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded" onchange="changeLanguage(this.value)">
@@ -2494,6 +2493,7 @@
     let deferredPrompt = null;
     let isHttps = window.location.protocol === 'https:';
     let isProduction = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
+    let isAppInstalled = false;
 
     console.log('[PWA] ========== INICIALIZANDO PWA ==========');
     console.log('[PWA] HTTPS:', isHttps);
@@ -2501,23 +2501,47 @@
     console.log('[PWA] Protocolo:', window.location.protocol);
     console.log('[PWA] Host:', window.location.hostname);
 
+    // Detectar si la app está instalada
+    function checkIfAppIsInstalled() {
+      // Método 1: Verificar window.navigator.standalone (iOS)
+      if (window.navigator.standalone === true) {
+        console.log('[PWA] ✓ App instalada detectada (iOS)');
+        return true;
+      }
+
+      // Método 2: Verificar si se está ejecutando en modo PWA (Android)
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('[PWA] ✓ App instalada detectada (Android)');
+        return true;
+      }
+
+      // Método 3: Verificar si se está ejecutando en modo PWA (Windows)
+      if (window.matchMedia('(display-mode: window-controls-overlay)').matches) {
+        console.log('[PWA] ✓ App instalada detectada (Windows)');
+        return true;
+      }
+
+      console.log('[PWA] ✗ App no instalada');
+      return false;
+    }
+
     // Capturar el evento beforeinstallprompt
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log('[PWA] beforeinstallprompt disparado');
       e.preventDefault();
       deferredPrompt = e;
       
-      if (!localStorage.getItem('install_banner_dismissed')) {
+      // Solo mostrar banner si la app NO está instalada
+      if (!localStorage.getItem('install_banner_dismissed') && !isAppInstalled) {
         console.log('[PWA] Mostrando banner desde beforeinstallprompt');
         showInstallBanner();
-      } else {
-        console.log('[PWA] Banner descartado previamente');
       }
     });
 
     // Cuando la app se instala correctamente
     window.addEventListener('appinstalled', (e) => {
-      console.log('[PWA] App instalada correctamente');
+      console.log('[PWA] ✓ App instalada correctamente');
+      isAppInstalled = true;
       dismissInstallBanner();
       localStorage.setItem('install_banner_dismissed', 'true');
       deferredPrompt = null;
@@ -2530,7 +2554,7 @@
       if (banner) {
         banner.style.display = 'block';
         console.log('[PWA] ✓ Banner mostrado');
-        updateI18n(); // Asegurar que se traduce
+        updateI18n();
       } else {
         console.error('[PWA] ERROR: install-banner no encontrado');
       }
@@ -2563,6 +2587,7 @@
             showToast(t('pwa.installed_success', 'App instalada correctamente'));
             dismissInstallBanner();
             localStorage.setItem('install_banner_dismissed', 'true');
+            isAppInstalled = true;
           } else {
             console.log('[PWA] Usuario rechazó instalar');
             showToast(t('pwa.install_error', 'Instalación cancelada'));
@@ -2597,19 +2622,31 @@
     window.forceShowInstallBanner = function() {
       console.log('[PWA] FORCE: Mostrando banner');
       localStorage.removeItem('install_banner_dismissed');
+      isAppInstalled = false;
       showInstallBanner();
     };
     
-    // En producción, mostrar banner automáticamente si no se descartó
-    if (isProduction && isHttps) {
-      setTimeout(() => {
-        console.log('[PWA] Verificando si mostrar banner automático en producción');
-        if (!localStorage.getItem('install_banner_dismissed')) {
-          console.log('[PWA] Mostrando banner automático en producción');
-          showInstallBanner();
-        }
-      }, 3000);
-    }
+    // Verificar si la app está instalada al inicio
+    window.addEventListener('load', () => {
+      console.log('[PWA] Verificando estado de instalación en load event');
+      isAppInstalled = checkIfAppIsInstalled();
+      
+      // En producción, mostrar banner automáticamente si:
+      // 1. Estamos en HTTPS
+      // 2. No fue descartado
+      // 3. La app NO está instalada
+      if (isProduction && isHttps && !isAppInstalled) {
+        setTimeout(() => {
+          console.log('[PWA] Verificando si mostrar banner automático en producción');
+          if (!localStorage.getItem('install_banner_dismissed') && !isAppInstalled) {
+            console.log('[PWA] Mostrando banner automático en producción');
+            showInstallBanner();
+          }
+        }, 3000);
+      } else if (isAppInstalled) {
+        console.log('[PWA] App ya instalada, no mostrando banner');
+      }
+    });
 
     // Init
     window.onload = async () => {
