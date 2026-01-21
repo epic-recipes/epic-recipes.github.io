@@ -86,6 +86,15 @@
         <option value="pt">Português</option>
         <option value="nl">Nederlands</option>
         <option value="srn">Sranantongo</option>
+        <option value="ru">Русский</option>
+        <option value="zh">中文</option>
+        <option value="ar">العربية</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="tr">Türkçe</option>
+        <option value="pl">Polski</option>
+        <option value="th">ไทย</option>
+        <option value="vi">Tiếng Việt</option>
       </select>
       <button class="text-gray-500 hover:text-gray-700 text-lg font-bold cursor-pointer flex-shrink-0" onclick="closeLangBar()" title="Cerrar">×</button>
     </div>
@@ -169,7 +178,7 @@
                 <div class="grid grid-cols-2 gap-4">
                   <div>
                     <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.price">Precio (€)</label>
-                    <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="ing-cost" placeholder="0.00" step="0.01">
+                    <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="ing-cost" placeholder="0.00" step="0.01" data-i18n="ingredients.price_placeholder">
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.unit">Unidad</label>
@@ -186,7 +195,7 @@
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
-                    <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
+                    <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1" data-i18n="ingredients.pack_size_placeholder">
                   </div>
                 </div>
                 <div class="flex gap-2">
@@ -240,17 +249,17 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.price">Precio del Plato (€)</label>
-                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-price" placeholder="0.00" step="0.01" oninput="updateStats()">
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-price" placeholder="0.00" step="0.01" oninput="updateStats()" data-i18n="recipe.price_placeholder">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.portions">Porciones</label>
-                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-portions" placeholder="1" value="1" min="1" step="1" oninput="updateStats()">
+                <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="rec-portions" placeholder="1" value="1" min="1" step="1" oninput="updateStats()" data-i18n="recipe.portions_placeholder">
               </div>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.instructions">Método de Preparación</label>
-              <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="3"></textarea>
+              <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400" id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="3" data-i18n="recipe.instructions_placeholder"></textarea>
             </div>
 
             <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold" onclick="saveRecipe()" data-i18n="recipe.save_button">Guardar Receta</button>
@@ -309,8 +318,8 @@
           <!-- Recetas guardadas -->
         </div>
         <div class="flex gap-2 mt-4">
-          <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="exportRecipeBook()">Exportar JSON</button>
-          <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm" onclick="importRecipeBook()">Importar JSON</button>
+          <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="exportRecipeBook()" data-i18n="book.export">Exportar JSON</button>
+          <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm" onclick="importRecipeBook()" data-i18n="book.import">Importar JSON</button>
         </div>
         <input type="file" id="file-input" class="hidden" accept=".json" onchange="handleFileImport()">
         <input type="file" id="recipe-file-input" class="hidden" accept=".json" onchange="handleRecipeImport()">
@@ -330,11 +339,11 @@
             <div class="space-y-3">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.unit_name">Nombre de Unidad</label>
-                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" id="unit-key" placeholder="kilogramo">
+                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" id="unit-key" placeholder="kilogramo" data-i18n="settings.unit_name_placeholder">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.symbol">Símbolo</label>
-                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" id="unit-value" placeholder="kg">
+                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="text" id="unit-value" placeholder="kg" data-i18n="settings.unit_symbol_placeholder">
               </div>
               <div class="flex gap-2">
                 <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm" onclick="addCustomUnit()" data-i18n="settings.add_unit">Agregar</button>
@@ -358,7 +367,7 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.factor">Factor</label>
-                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="conv-factor" placeholder="1.0" step="0.01">
+                <input class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400" type="number" id="conv-factor" placeholder="1.0" step="0.01" data-i18n="settings.conversion_factor_placeholder">
               </div>
             </div>
             <div class="flex gap-2">
@@ -386,7 +395,6 @@
               <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm font-medium" onclick="exportRecipeBook()" data-i18n="settings.export_all">Exportar Todo (Recetas + Ingredientes)</button>
               <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm font-medium" onclick="importRecipeBook()" data-i18n="settings.import_data">Importar Datos</button>
               <button class="w-full bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded text-sm font-medium" onclick="resetAllData()" data-i18n="settings.clear_all">Limpiar Todo (⚠️)</button>
-              <button class="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-sm font-medium" onclick="uninstallApp()" data-i18n="pwa.uninstall_button">Desinstalar App</button>
             </div>
           </section>
         </div>
@@ -405,7 +413,7 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
           <div class="form-group">
             <label data-i18n="ingredients.price">Precio (€)</label>
-            <input type="number" id="ing-cost-desk" placeholder="0.00" step="0.01">
+            <input type="number" id="ing-cost-desk" placeholder="0.00" step="0.01" data-i18n="ingredients.price_placeholder">
           </div>
           <div class="form-group">
             <label data-i18n="ingredients.unit">Unidad</label>
@@ -422,7 +430,7 @@
           </div>
           <div class="form-group">
             <label data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
-            <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="1" step="1">
+            <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="1" step="1" data-i18n="ingredients.pack_size_placeholder">
           </div>
         </div>
         <div class="btn-grid">
@@ -471,17 +479,17 @@
 
         <div class="form-group" style="margin-top:15px">
           <label data-i18n="recipe.price">Precio del Plato (€)</label>
-          <input type="number" id="rec-price-desk" placeholder="0.00" step="0.01" oninput="updateStatsDesk()">
+          <input type="number" id="rec-price-desk" placeholder="0.00" step="0.01" oninput="updateStatsDesk()" data-i18n="recipe.price_placeholder">
         </div>
 
         <div class="form-group">
           <label data-i18n="recipe.portions">Porciones</label>
-          <input type="number" id="rec-portions-desk" placeholder="1" value="1" min="1" step="1" oninput="updateStatsDesk()">
+          <input type="number" id="rec-portions-desk" placeholder="1" value="1" min="1" step="1" oninput="updateStatsDesk()" data-i18n="recipe.portions_placeholder">
         </div>
 
         <div class="form-group">
           <label data-i18n="recipe.instructions">Método de Preparación</label>
-          <textarea id="rec-instructions-desk" placeholder="Describe los pasos para preparar la receta..." rows="4"></textarea>
+          <textarea id="rec-instructions-desk" placeholder="Describe los pasos para preparar la receta..." rows="4" data-i18n="recipe.instructions_placeholder"></textarea>
         </div>
 
         <div class="stats-box">
@@ -518,11 +526,11 @@
       <h2 data-i18n="desktop.my_recipes">Mis Recetas
         <div style="display:flex; gap:5px; justify-self:end">
           <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
-            onclick="exportRecipeBook()">Exportar JSON</button>
+            onclick="exportRecipeBook()" data-i18n="desktop.export_recipe_book">Exportar JSON</button>
           <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
-            onclick="importRecipeBook()">Importar JSON</button>
+            onclick="importRecipeBook()" data-i18n="desktop.import_recipe_book">Importar JSON</button>
           <button class="btn btn-info" style="padding:5px 10px; font-size:9px"
-            onclick="importSingleRecipe()">Importar Receta</button>
+            onclick="importSingleRecipe()" data-i18n="desktop.import_single_recipe">Importar Receta</button>
         </div>
       </h2>
       <div id="recipe-book-desk" class="list-container"
@@ -542,11 +550,11 @@
       </div>
       <div id="modal-recipe-details" class="recipe-details mb-4"></div>
       <div class="flex gap-2">
-        <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded" onclick="closeRecipeModal()">Cerrar</button>
-        <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded" onclick="editRecipe()">Editar</button>
-        <button class="flex-1 bg-blue-400 hover:bg-blue-500 text-white px-3 py-2 rounded" onclick="shareRecipe()">Compartir</button>
-        <button class="flex-1 bg-purple-400 hover:bg-purple-500 text-white px-3 py-2 rounded" onclick="exportRecipeJSON()">Exportar JSON</button>
-        <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded" onclick="deleteFromModalRecipe()">Borrar</button>
+        <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded" onclick="closeRecipeModal()" data-i18n="desktop.close">Cerrar</button>
+        <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded" onclick="editRecipe()" data-i18n="desktop.edit">Editar</button>
+        <button class="flex-1 bg-blue-400 hover:bg-blue-500 text-white px-3 py-2 rounded" onclick="shareRecipe()" data-i18n="desktop.share">Compartir</button>
+        <button class="flex-1 bg-purple-400 hover:bg-purple-500 text-white px-3 py-2 rounded" onclick="exportRecipeJSON()" data-i18n="desktop.export">Exportar JSON</button>
+        <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded" onclick="deleteFromModalRecipe()" data-i18n="desktop.delete">Borrar</button>
       </div>
     </div>
   </div>
@@ -942,7 +950,7 @@
       // Cerrar el modal
       closeRecipeModal();
 
-      showToast(`Editando "${currentRecipeModal.name}"`);
+      showToast(t('messages.editing_recipe', `Editando "${currentRecipeModal.name}"`));
     }
 
     function shareRecipe() {
@@ -1245,7 +1253,7 @@
           ingredients = ingredients.filter(i => i.id !== id);
           saveState();
           renderIngredients();
-          showToast(`${ing.name} eliminado de la despensa`);
+          showToast(`${ing.name} ${t('messages.ingredient_deleted')}`);
         }
       });
     }
@@ -1297,7 +1305,7 @@
         const addBtn = document.querySelector('#tab-ingredientes .btn-primary');
         addBtn.textContent = 'Añadir';
         addBtn.onclick = addIngredient;
-        showToast(`${name} actualizado`);
+        showToast(`${name} ${t('messages.ingredient_updated')}`);
       }
     }
 
@@ -1357,7 +1365,7 @@
       renderIngredients();
       document.getElementById('ing-name-desk').value = '';
       document.getElementById('ing-cost-desk').value = '';
-      showToast(`${name} añadido a la despensa`);
+      showToast(`${name} ${t('messages.ingredient_added')}`);
     }
 
     function renderIngredientsDesk() {
@@ -1400,7 +1408,7 @@
           ingredients = ingredients.filter(i => i.id !== id);
           saveState();
           renderIngredients();
-          showToast(`${ing.name} eliminado de la despensa`);
+          showToast(`${ing.name} ${t('messages.ingredient_deleted')}`);
         }
       });
     }
@@ -1441,7 +1449,7 @@
         const addBtn = document.querySelector('#tab-ingredientes-desk .btn-primary');
         addBtn.textContent = 'Añadir';
         addBtn.onclick = addIngredientDesk;
-        showToast(`${name} actualizado`);
+        showToast(`${name} ${t('messages.ingredient_updated')}`);
       }
     }
 
@@ -1512,7 +1520,7 @@
         convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
         if (convertedQty === qty) {
           // No se pudo convertir, usar original
-          showToast(`No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`);
+          showToast(t('messages.no_conversion', `No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`));
         }
       }
 
@@ -1526,7 +1534,7 @@
 
       renderActiveRecipe();
       updateStats();
-      showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} en la mesa`);
+      showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} ${t('messages.recipe_available')}`);
     }
 
     function renderActiveRecipe() {
@@ -1607,7 +1615,7 @@
       const portions = parseInt(document.getElementById('rec-portions').value) || 1;
       const instructions = document.getElementById('rec-instructions').value.trim();
 
-      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+      if (!name || activeRecipe.items.length === 0) return showToast(t('messages.write_name_add_ingredients'));
 
       const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
@@ -1633,7 +1641,7 @@
       const portions = parseInt(document.getElementById('rec-portions').value) || 1;
       const instructions = document.getElementById('rec-instructions').value.trim();
 
-      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+      if (!name || activeRecipe.items.length === 0) return showToast(t('messages.write_name_add_ingredients'));
 
       const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
@@ -1711,7 +1719,7 @@
         convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
         if (convertedQty === qty) {
           // No se pudo convertir, usar original
-          showToast(`No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`);
+          showToast(t('messages.no_conversion', `No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`));
         }
       }
 
@@ -1725,7 +1733,7 @@
 
       renderActiveRecipe();
       updateStats();
-      showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} en la mesa`);
+      showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} ${t('messages.recipe_available')}`);
     }
 
     function renderActiveRecipeDesk() {
@@ -1796,7 +1804,7 @@
       const portions = parseInt(document.getElementById('rec-portions-desk').value) || 1;
       const instructions = document.getElementById('rec-instructions-desk').value.trim();
 
-      if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
+      if (!name || activeRecipe.items.length === 0) return showToast(t('messages.write_name_add_ingredients'));
 
       const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
@@ -1876,7 +1884,7 @@
           recipeBook = recipeBook.filter(r => r.id !== id);
           localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
           renderBook();
-          showToast(`Receta "${rec.name}" eliminada`);
+          showToast(`Receta "${rec.name}" ${t('messages.recipe_deleted')}`);
         }
       });
     }
@@ -1963,7 +1971,7 @@
           let importedUnits = imported.unidades || {};
           let importedConversions = imported.conversiones || imported.equivalencias || {};
 
-          if (!Array.isArray(importedRecipes)) return showToast("Formato JSON inválido");
+          if (!Array.isArray(importedRecipes)) return showToast(t('messages.invalid_json'));
 
           // Importar ingredientes
           if (importedIngredients.length > 0) {
@@ -1979,10 +1987,10 @@
                       existingNames.add(newIng.name.toLowerCase());
                     }
                   });
-                  showToast(`${importedIngredients.length} ingrediente(s) importado(s)`);
+                  showToast(`${importedIngredients.length} ${t('messages.ingredients_imported')}`);
                 } else {
                   ingredients = importedIngredients;
-                  showToast("Ingredientes reemplazados");
+                  showToast(t('messages.ingredients_replaced'));
                 }
                 saveState();
                 renderIngredients();
@@ -1998,10 +2006,10 @@
                 if (mergeUnitsChoice) {
                   // Unificar unidades
                   customUnits = Object.assign({}, customUnits, importedUnits);
-                  showToast("Unidades unificadas");
+                  showToast(t('messages.units_merged'));
                 } else {
                   customUnits = importedUnits;
-                  showToast("Unidades reemplazadas");
+                  showToast(t('messages.units_replaced'));
                 }
                 localStorage.setItem('rpg_units', JSON.stringify(customUnits));
                 renderUnitsList();
@@ -2018,10 +2026,10 @@
                 if (mergeConvs) {
                   // Unificar conversiones
                   customConversions = Object.assign({}, customConversions, importedConversions);
-                  showToast("Conversiones unificadas");
+                  showToast(t('messages.conversions_merged'));
                 } else {
                   customConversions = importedConversions;
-                  showToast("Conversiones reemplazadas");
+                  showToast(t('messages.conversions_replaced'));
                 }
                 localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
                 renderConversionsList();
@@ -2044,7 +2052,7 @@
                       mergedNames.add(newRec.name.toLowerCase());
                     }
                   });
-                  showToast("Recetas unificadas (duplicados eliminados)");
+                  showToast(t('messages.recipes_merged'));
                 }
                 localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
                 renderBook();
@@ -2059,9 +2067,9 @@
           configLoaded = true;
           localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
           renderBook();
-          showToast(`${importedRecipes.length} receta(s) importada(s)`);
+          showToast(`${importedRecipes.length} ${t('messages.recipes_imported')}`);
         } catch (err) {
-          showToast("Error al leer el archivo JSON");
+          showToast(t('messages.error_reading_file'));
         }
       };
       reader.readAsText(file);
@@ -2082,7 +2090,7 @@
           const imported = JSON.parse(e.target.result);
           const importedRecipe = imported.receta;
 
-          if (!importedRecipe || !importedRecipe.name) return showToast("Formato JSON de receta inválido");
+          if (!importedRecipe || !importedRecipe.name) return showToast(t('messages.invalid_recipe_json'));
 
           // Verificar si ya existe
           const existing = recipeBook.find(r => r.name.toLowerCase() === importedRecipe.name.toLowerCase());
@@ -2093,17 +2101,17 @@
                 recipeBook[index] = importedRecipe;
                 localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
                 renderBook();
-                showToast(`Receta "${importedRecipe.name}" reemplazada`);
+                showToast(`Receta "${importedRecipe.name}" ${t('messages.recipe_replaced')}`);
               }
             });
           } else {
             recipeBook.unshift(importedRecipe);
             localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
             renderBook();
-            showToast(`Receta "${importedRecipe.name}" importada`);
+            showToast(`Receta "${importedRecipe.name}" ${t('messages.recipe_imported')}`);
           }
         } catch (err) {
-          showToast("Error al leer el archivo JSON de receta");
+          showToast(t('messages.error_reading_file'));
         }
       };
       reader.readAsText(file);
@@ -2122,7 +2130,7 @@
 
           // Verificar formato
           if (!imported.unidades && !imported.conversiones) {
-            return showToast("El archivo no contiene unidades o equivalencias válidas");
+            return showToast(t('messages.invalid_units_json'));
           }
 
           let importedUnits = imported.unidades || {};
@@ -2270,7 +2278,7 @@
           localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
         }
         renderIngredients();
-        showToast("Ingredientes de demo cargados");
+        showToast(t('messages.demo_loaded'));
       }
     }
 
@@ -2282,7 +2290,7 @@
             localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
           }
           renderIngredients();
-          showToast("Despensa vaciada");
+          showToast(t('messages.pantry_cleared'));
         }
       });
     }
@@ -2351,7 +2359,7 @@
       const key = document.getElementById('unit-key').value.trim();
       const value = document.getElementById('unit-value').value.trim();
 
-      if (!key || !value) return showToast("Completa todos los campos");
+      if (!key || !value) return showToast(t('messages.complete_all_fields'));
 
       customUnits[key] = value;
       localStorage.setItem('rpg_units', JSON.stringify(customUnits));
@@ -2433,7 +2441,7 @@
       const to = document.getElementById('conv-to').value;
       const factor = parseFloat(document.getElementById('conv-factor').value);
 
-      if (!from || !to || isNaN(factor) || factor <= 0) return showToast("Completa todos los campos correctamente");
+      if (!from || !to || isNaN(factor) || factor <= 0) return showToast(t('messages.complete_all_fields_correct'));
 
       const key = `${from}-${to}`;
       const reverseKey = `${to}-${from}`;
@@ -2444,7 +2452,7 @@
       localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
       renderConversionsList();
       document.getElementById('conv-factor').value = '';
-      showToast(`Conversiones ${from} ↔ ${to} agregadas`);
+      showToast(t('messages.conversion_added', `Conversiones ${from} ↔ ${to} agregadas`));
     }
 
     function deleteConversion(key) {
