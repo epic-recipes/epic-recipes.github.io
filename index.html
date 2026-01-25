@@ -419,13 +419,14 @@
                 <!-- Resumen de Receta (Solo lectura) -->
                 <div class="bg-gray-50 p-6 rounded-[1.5rem] flex justify-between items-center border border-gray-100">
                   <div>
-                    <h3 class="text-2xl font-black text-gray-900" id="display-rec-name">Nueva Receta</h3>
+                    <h3 class="text-2xl font-black text-gray-900" id="display-rec-name" data-i18n="common.new_recipe">
+                      Nueva Receta</h3>
                     <div class="flex items-center gap-3 text-sm text-gray-500 mt-2">
                       <span class="bg-white px-2 py-1 rounded-lg border border-gray-100"><span
-                          id="display-rec-portions">1</span> porciones</span>
+                          id="display-rec-portions">1</span> <span data-i18n="book.portions">porciones</span></span>
                       <span class="bg-sage-50 text-primary font-bold px-2 py-1 rounded-lg border border-sage-100"
                         style="color: var(--primary); background-color: #f0f4f2;"><span
-                          id="display-rec-price">0.00€</span> venta</span>
+                          id="display-rec-price">0.00€</span> <span data-i18n="modal.sale_price">venta</span></span>
                     </div>
                   </div>
                   <button
@@ -512,7 +513,8 @@
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-xs font-black text-primary uppercase tracking-widest" style="color: var(--primary)"
                 data-i18n="settings.units_title">Unidades de Medida</h3>
-              <button class="text-primary font-bold text-xs flex items-center gap-1 hover:underline"
+              <button
+                class="bg-primary/10 text-primary hover:bg-primary/20 font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5"
                 style="color: var(--primary)" onclick="openUnitModal()" data-i18n="settings.add_unit">
                 <i class="fas fa-plus-circle"></i> Agregar Unidad
               </button>
@@ -524,7 +526,8 @@
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-xs font-black text-primary uppercase tracking-widest" style="color: var(--primary)"
                   data-i18n="settings.conversions_title">Equivalencias</h3>
-                <button class="text-primary font-bold text-xs flex items-center gap-1 hover:underline"
+                <button
+                  class="bg-primary/10 text-primary hover:bg-primary/20 font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5"
                   style="color: var(--primary)" onclick="openConversionModal()" data-i18n="settings.add_conversion">
                   <i class="fas fa-plus-circle"></i> Agregar Conversión
                 </button>
@@ -1061,7 +1064,7 @@
               <button class="flex-1 btn btn-secondary py-3.5" onclick="closeRecipeDetailsModal()"
                 data-i18n="common.cancel">Cerrar</button>
               <button class="flex-1 btn btn-primary py-3.5" onclick="saveRecipeDetails()"
-                data-i18n="common.confirm_changes">Confirmar</button>
+                data-i18n="common.confirm_changes">Confirmar Cambios</button>
             </div>
           </div>
         </div>
@@ -1446,7 +1449,7 @@
         }
 
         async function shareApp() {
-          const shareText = `🍽️ Descubre Recetario Épico: Gestor de recetas con análisis de costos y rentabilidad. ¡Prueba esta app increíble para chefs y amantes de la cocina!\n\n${window.location.href}`;
+          const shareText = `${t('share.app_share_text')}\n\n${window.location.href}`;
 
           // Crear una imagen simple para compartir
           const imageBlob = await createShareImage();
@@ -2910,17 +2913,32 @@
           const units = getCustomUnits();
 
           Object.entries(units).forEach(([key, value]) => {
+            const isCustom = !!customUnits[key];
             const div = document.createElement('div');
-            div.className = 'bg-gray-50 border border-gray-300 p-2 mb-2 flex justify-between items-center text-sm';
+            div.className = `group flex items-center justify-between p-3 rounded-xl border transition-all ${isCustom ? 'bg-white border-gray-100 hover:border-primary/20 shadow-sm' : 'bg-gray-50/50 border-gray-100 opacity-80'}`;
+
             div.innerHTML = `
-          <div>
-            <span class="text-yellow-600 font-bold">${getUnitName(key)}</span>
-            <span class="text-gray-500 ml-2">= ${value}</span>
-          </div>
-          ${customUnits[key] ? `<button class="bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-xs">X</button>` : '<span class="text-gray-500 text-xs">Por defecto</span>'}
-        `;
-            if (customUnits[key]) {
-              div.querySelector('button').onclick = () => deleteCustomUnit(key);
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <i class="fas fa-balance-scale text-[10px]"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] font-black text-gray-800 leading-tight">${getUnitName(key).toUpperCase()}</div>
+                  <div class="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">= ${value}</div>
+                </div>
+              </div>
+              <div class="flex items-center">
+                ${isCustom
+                ? `<button class="w-7 h-7 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all delete-unit-btn">
+                       <i class="fas fa-times text-[10px]"></i>
+                     </button>`
+                : `<span class="bg-gray-100 text-gray-400 px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest">${t('common.default')}</span>`
+              }
+              </div>
+            `;
+
+            if (isCustom) {
+              div.querySelector('.delete-unit-btn').onclick = () => deleteCustomUnit(key);
             }
             list.appendChild(div);
           });
@@ -2985,35 +3003,53 @@
           const units = getCustomUnits();
           const unitKeys = Object.keys(units);
 
-          // Poblar selects
+          // Populate selects
           const fromSelect = document.getElementById('conv-from');
           const toSelect = document.getElementById('conv-to');
-          fromSelect.innerHTML = '';
-          toSelect.innerHTML = '';
-          unitKeys.forEach(key => {
-            const opt1 = document.createElement('option');
-            opt1.value = key;
-            opt1.textContent = units[key];
-            fromSelect.appendChild(opt1);
-            const opt2 = document.createElement('option');
-            opt2.value = key;
-            opt2.textContent = units[key];
-            toSelect.appendChild(opt2);
-          });
+          if (fromSelect && toSelect) {
+            fromSelect.innerHTML = '';
+            toSelect.innerHTML = '';
+            unitKeys.forEach(key => {
+              const opt1 = document.createElement('option');
+              opt1.value = key;
+              opt1.textContent = getUnitName(key);
+              fromSelect.appendChild(opt1);
+              const opt2 = document.createElement('option');
+              opt2.value = key;
+              opt2.textContent = getUnitName(key);
+              toSelect.appendChild(opt2);
+            });
+          }
 
+          if (!list) return;
           list.innerHTML = '';
+          
           Object.keys(customConversions).forEach(key => {
             const [from, to] = key.split('-');
             const factor = customConversions[key];
             const div = document.createElement('div');
-            div.className = 'bg-gray-50 border border-gray-300 p-2 mb-2 flex justify-between items-center text-sm';
+            div.className = 'group flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white hover:border-primary/20 shadow-sm transition-all';
+            
             div.innerHTML = `
-          <span class="text-yellow-600 font-bold">${units[from] || from}</span>
-          <span class="text-gray-700">→</span>
-          <span class="text-yellow-600 font-bold">${units[to] || to}</span>
-          <span class="text-gray-500 ml-2">x${factor}</span>
-          <button class="bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded text-xs" onclick="deleteConversion('${key}')">X</button>
-        `;
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                  <i class="fas fa-random text-[10px]"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5 leading-tight">
+                    <span class="text-[10px] font-black text-gray-800">${getUnitName(from).toUpperCase()}</span>
+                    <i class="fas fa-long-arrow-alt-right text-[8px] text-gray-300"></i>
+                    <span class="text-[10px] font-black text-gray-800">${getUnitName(to).toUpperCase()}</span>
+                  </div>
+                  <div class="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">FACTOR: ${factor}</div>
+                </div>
+              </div>
+              <button class="w-7 h-7 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all delete-conv-btn">
+                <i class="fas fa-trash text-[10px]"></i>
+              </button>
+            `;
+            
+            div.querySelector('.delete-conv-btn').onclick = () => deleteConversion(from, to);
             list.appendChild(div);
           });
         }

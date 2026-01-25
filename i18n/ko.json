@@ -277,11 +277,13 @@
     "add": "추가",
     "new_recipe": "New Recipe",
     "save": "레시피 저장",
-    "update": "업데이트"
+    "update": "업데이트",
+    "default": "Default"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
     "promo_phrase": "Efficiency and Elegance for every Chef.",
-    "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS"
+    "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
+    "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
   }
 }

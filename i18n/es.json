@@ -228,7 +228,8 @@
     "update": "Actualizar",
     "confirm_changes": "Confirmar Cambios",
     "edit_details": "Editar Detalles",
-    "new_recipe": "Nueva Receta"
+    "new_recipe": "Nueva Receta",
+    "default": "Por defecto"
   },
   "stats": {
     "cost_label": "Costo Ingredientes",
@@ -282,6 +283,7 @@
   "share": {
     "app_branding": "RECETARIO ÉPICO · EPIC RECIPES",
     "promo_phrase": "Eficiencia y Elegancia para cada Chef.",
-    "footer_branding": "DISEÑADO PARA PROFESIONALES DE LA GASTRONOMÍA"
+    "footer_branding": "DISEÑADO PARA PROFESIONALES DE LA GASTRONOMÍA",
+    "app_share_text": "🍽️ Descubre Recetario Épico: Gestor de recetas con análisis de costos y rentabilidad. ¡La herramienta definitiva para chefs!"
   }
 }
