@@ -1,14 +1,12 @@
 {
   "app_name": "Epic Recipe Book",
   "app_description": "Recipe manager with cost and profitability analysis",
-
   "nav": {
     "ingredients": "Ingredients",
     "create_recipe": "Create Recipe",
     "my_recipes": "My Recipes",
     "settings": "Settings"
   },
-
   "ingredients": {
     "title": "Ingredients",
     "ingredient_name": "Ingredient Name",
@@ -30,7 +28,6 @@
     "edit_button": "Edit",
     "update_button": "Update"
   },
-
   "recipe": {
     "title": "Recipe Creator",
     "recipe_name": "Dish Name",
@@ -42,6 +39,7 @@
     "unit": "Unit",
     "select_unit": "-- Select unit --",
     "add_button": "Add",
+    "add_ingredient_button": "Add Ingredient",
     "clear_button": "Clear",
     "price": "Dish Price (€)",
     "portions": "Portions",
@@ -56,7 +54,6 @@
       "roi": "Profitability"
     }
   },
-
   "book": {
     "title": "My Recipes",
     "export_json": "Export JSON",
@@ -77,7 +74,6 @@
     "profit_per_euro": "Profit per €",
     "portions": "portions"
   },
-
   "settings": {
     "title": "Settings",
     "units_title": "Units of Measure",
@@ -97,7 +93,6 @@
     "export_all": "Export All (Recipes + Ingredients)",
     "import_data": "Import Data",
     "clear_all": "Clear All (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -110,7 +105,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Donations",
     "install_app": "📱 Install as App",
@@ -125,7 +119,6 @@
     "copy_button": "Copy",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingredient added to pantry",
     "ingredient_updated": "Ingredient updated",
@@ -142,7 +135,6 @@
     "copied": "Link copied to clipboard",
     "copy_error": "Could not copy. Share manually: "
   },
-
   "confirm": {
     "delete_ingredient": "Remove \"{name}\" from pantry?",
     "clear_ingredients": "Are you sure you want to clear the pantry? This action cannot be undone.",
@@ -157,7 +149,6 @@
     "delete_unit": "Delete custom unit \"{name}\"?",
     "delete_conversion": "Delete conversion \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Ingredients",
     "recipe_creator": "Recipe Creator",
@@ -170,7 +161,6 @@
     "import_json": "Import JSON",
     "import_recipe": "Import Recipe"
   },
-
   "modal": {
     "recipe_name": "Recipe Name",
     "close": "Close",
@@ -185,9 +175,23 @@
     "net_profit": "Net Profit",
     "profit_margin": "Profit Margin",
     "roi": "Return on Investment (ROI)",
-    "profit_per_euro": "Profit per €"
+    "profit_per_euro": "Profit per €",
+    "add_ingredient_title": "Add Ingredient",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_conversion_title": "Add Conversion"
   },
-
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "add": "Add",
+    "update": "Update",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "new_recipe": "New Recipe"
+  },
   "stats": {
     "cost_label": "Ingredients Cost",
     "profit_label": "Net Profit",

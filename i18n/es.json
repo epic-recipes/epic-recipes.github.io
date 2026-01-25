@@ -1,14 +1,12 @@
 {
   "app_name": "Recetario Épico",
   "app_description": "Gestor de recetas con análisis de costos y rentabilidad",
-
   "nav": {
     "ingredients": "Ingredientes",
     "create_recipe": "Crear Receta",
     "my_recipes": "Mis Recetas",
     "settings": "Configuración"
   },
-
   "ingredients": {
     "title": "Ingredientes",
     "ingredient_name": "Nombre del Ingrediente",
@@ -32,7 +30,6 @@
     "edit_button": "Editar",
     "update_button": "Actualizar"
   },
-
   "recipe": {
     "title": "Creador de Recetas",
     "recipe_name": "Nombre del Plato",
@@ -45,6 +42,7 @@
     "unit": "Unidad",
     "select_unit": "-- Seleccionar unidad --",
     "add_button": "Añadir",
+    "add_ingredient_button": "Añadir Ingrediente",
     "clear_button": "Limpiar",
     "price": "Precio del Plato (€)",
     "price_placeholder": "0.00",
@@ -61,7 +59,6 @@
       "roi": "Rentabilidad"
     }
   },
-
   "book": {
     "title": "Mis Recetas",
     "export_json": "Exportar JSON",
@@ -82,7 +79,6 @@
     "profit_per_euro": "Ganancia por €",
     "portions": "porciones"
   },
-
   "settings": {
     "title": "Configuración",
     "units_title": "Unidades de Medida",
@@ -102,7 +98,6 @@
     "export_all": "Exportar Todo (Recetas + Ingredientes)",
     "import_data": "Importar Datos",
     "clear_all": "Limpiar Todo (⚠️)",
-
     "units": {
       "kilogramo": "Kilogramo",
       "gramo": "Gramo",
@@ -115,7 +110,6 @@
       "pieza": "Pieza"
     }
   },
-
   "donation": {
     "title": "Donaciones",
     "install_app": "📱 Instalar como App",
@@ -130,7 +124,6 @@
     "copy_button": "Copiar",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingrediente añadido a la despensa",
     "ingredient_updated": "Ingrediente actualizado",
@@ -147,7 +140,6 @@
     "copied": "Enlace copiado al portapapeles",
     "copy_error": "No se pudo copiar. Comparte manualmente: "
   },
-
   "confirm": {
     "delete_ingredient": "¿Eliminar \"{name}\" de la despensa?",
     "clear_ingredients": "¿Seguro que quieres vaciar la despensa? Esta acción no se puede deshacer.",
@@ -162,7 +154,6 @@
     "delete_unit": "¿Eliminar la unidad personalizada \"{name}\"?",
     "delete_conversion": "¿Eliminar la conversión \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Ingredientes",
     "recipe_creator": "Creador de Recetas",
@@ -175,7 +166,6 @@
     "import_json": "Importar JSON",
     "import_recipe": "Importar Receta"
   },
-
   "modal": {
     "recipe_name": "Nombre de la Receta",
     "close": "Cerrar",
@@ -190,9 +180,23 @@
     "net_profit": "Ganancia Neta",
     "profit_margin": "Margen de Ganancia",
     "roi": "Rentabilidad (ROI)",
-    "profit_per_euro": "Ganancia por €"
+    "profit_per_euro": "Ganancia por €",
+    "add_ingredient_title": "Añadir Ingrediente",
+    "edit_ingredient_title": "Editar Ingrediente",
+    "add_recipe_item_title": "Añadir Ingrediente a Receta",
+    "recipe_details_title": "Detalles de la Receta",
+    "add_unit_title": "Añadir Unidad",
+    "add_conversion_title": "Añadir Conversión"
   },
-
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "add": "Añadir",
+    "update": "Actualizar",
+    "confirm_changes": "Confirmar Cambios",
+    "edit_details": "Editar Detalles",
+    "new_recipe": "Nueva Receta"
+  },
   "stats": {
     "cost_label": "Costo Ingredientes",
     "profit_label": "Beneficio Neto",
