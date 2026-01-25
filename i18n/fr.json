@@ -1,14 +1,12 @@
 {
   "app_name": "Livre de Recettes Épique",
   "app_description": "Gestionnaire de recettes avec analyse des coûts et de la rentabilité",
-
   "nav": {
     "ingredients": "Ingrédients",
     "create_recipe": "Créer une Recette",
     "my_recipes": "Mes Recettes",
     "settings": "Paramètres"
   },
-
   "ingredients": {
     "title": "Ingrédients",
     "ingredient_name": "Nom de l'Ingrédient",
@@ -28,9 +26,10 @@
     "price_per_unit": "Prix/Unité",
     "delete_button": "Supprimer",
     "edit_button": "Éditer",
-    "update_button": "Mettre à jour"
+    "update_button": "Mettre à jour",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
-
   "recipe": {
     "title": "Créateur de Recette",
     "recipe_name": "Nom du Plat",
@@ -54,9 +53,12 @@
       "price_per_portion": "Prix par Portion",
       "margin": "Marge %",
       "roi": "Rentabilité"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "add_ingredient_button": "Add Ingredient",
+    "portions_placeholder": "1"
   },
-
   "book": {
     "title": "Mes Recettes",
     "export_json": "Exporter JSON",
@@ -78,7 +80,6 @@
     "profit_per_euro": "Bénéfice par €",
     "portions": "portions"
   },
-
   "settings": {
     "title": "Paramètres",
     "units_title": "Unités de Mesure",
@@ -102,7 +103,6 @@
     "export_all": "Exporter Tout (Recettes + Ingrédients)",
     "import_data": "Importer les Données",
     "clear_all": "Effacer Tout (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -115,7 +115,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Dons",
     "install_app": "📱 Installer comme Application",
@@ -130,7 +129,6 @@
     "copy_button": "Copier",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingrédient ajouté au garde-manger",
     "ingredient_updated": "Ingrédient mis à jour",
@@ -164,9 +162,9 @@
     "pwa_installed": "Application installée avec succès",
     "pwa_install_error": "L'application ne peut pas être installée pour le moment. Assurez-vous d'utiliser un navigateur compatible",
     "full_config_exported": "Configuration complète exportée (recettes, ingrédients, unités et équivalences)",
-    "no_data_export": "Aucune donnée à exporter"
+    "no_data_export": "Aucune donnée à exporter",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Modification de \"{name}\"",
     "ingredient_added": "Ajouté au tableau",
@@ -197,7 +195,6 @@
     "missing_ingredient_data": "Données d'ingrédient manquantes",
     "recipe_available": "sur le tableau"
   },
-
   "confirm": {
     "delete_ingredient": "Retirer \"{name}\" du garde-manger ?",
     "clear_ingredients": "Êtes-vous sûr de vouloir vider le garde-manger ? Cette action ne peut pas être annulée.",
@@ -212,7 +209,6 @@
     "delete_unit": "Supprimer l'unité personnalisée \"{name}\" ?",
     "delete_conversion": "Supprimer la conversion \"{key}\" ?"
   },
-
   "desktop": {
     "ingredients": "Ingrédients",
     "recipe_creator": "Créateur de Recettes",
@@ -233,7 +229,6 @@
     "export": "Exporter JSON",
     "delete": "Supprimer"
   },
-
   "modal": {
     "recipe_name": "Nom de la Recette",
     "close": "Fermer",
@@ -248,9 +243,14 @@
     "net_profit": "Bénéfice Net",
     "profit_margin": "Marge Bénéficiaire",
     "roi": "Retour sur Investissement (ROI)",
-    "profit_per_euro": "Bénéfice par €"
+    "profit_per_euro": "Bénéfice par €",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_unit_title": "Add Unit",
+    "recipe_details_title": "Recipe Details",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion",
+    "edit_ingredient_title": "Edit Ingredient"
   },
-
   "stats": {
     "cost_label": "Coût des Ingrédients",
     "profit_label": "Bénéfice Net",
@@ -258,7 +258,6 @@
     "margin_label": "Marge %",
     "roi_label": "Rentabilité"
   },
-
   "pwa": {
     "install_app": "📱 Installer comme Application",
     "install_description": "Accès rapide sans navigateur",
@@ -270,5 +269,14 @@
     "install_unsupported": "Votre navigateur ne supporte pas l'installation d'applications. Essayez Chrome, Edge ou Safari sur iOS.",
     "uninstall_button": "Désinstaller l'Application",
     "uninstall_description": "Désinstaller l'application de votre appareil"
+  },
+  "common": {
+    "cancel": "Plus tard",
+    "add": "Ajouter",
+    "update": "Mettre à jour",
+    "new_recipe": "New Recipe",
+    "confirm_changes": "Confirm Changes",
+    "save": "Sauvegarder la Recette",
+    "edit_details": "Edit Details"
   }
 }

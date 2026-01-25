@@ -1,14 +1,12 @@
 {
   "app_name": "Epicka Książka Przepisów",
   "app_description": "Menedżer przepisów z analizą kosztów i rentowności",
-
   "nav": {
     "ingredients": "Składniki",
     "create_recipe": "Utwórz przepis",
     "my_recipes": "Moje przepisy",
     "settings": "Ustawienia"
   },
-
   "ingredients": {
     "title": "Składniki",
     "ingredient_name": "Nazwa składnika",
@@ -32,7 +30,6 @@
     "edit_button": "Edytuj",
     "update_button": "Aktualizuj"
   },
-
   "recipe": {
     "title": "Kreator przepisów",
     "recipe_name": "Nazwa dania",
@@ -59,9 +56,9 @@
       "price_per_portion": "Cena za porcję",
       "margin": "Marża %",
       "roi": "Rentowność"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "Moje przepisy",
     "export_json": "Eksportuj JSON",
@@ -83,7 +80,6 @@
     "profit_per_euro": "Zysk na €",
     "portions": "porcje"
   },
-
   "settings": {
     "title": "Ustawienia",
     "units_title": "Jednostki miary",
@@ -107,7 +103,6 @@
     "export_all": "Eksportuj wszystko (Przepisy + Składniki)",
     "import_data": "Importuj dane",
     "clear_all": "Wyczyść wszystko (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -120,7 +115,6 @@
       "pieza": "Kawałek"
     }
   },
-
   "donation": {
     "title": "Darowizny",
     "install_app": "📱 Zainstaluj jako aplikację",
@@ -135,7 +129,6 @@
     "copy_button": "Kopiuj",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Składnik dodany do spiżarni",
     "ingredient_updated": "Składnik zaktualizowany",
@@ -169,40 +162,39 @@
     "pwa_installed": "Aplikacja pomyślnie zainstalowana",
     "pwa_install_error": "Nie można zainstalować aplikacji w tym momencie. Upewnij się, że używasz kompatybilnej przeglądarki",
     "full_config_exported": "Pełna konfiguracja wyeksportowana (przepisy, składniki, jednostki i konwersje)",
-    "no_data_export": "Brak danych do eksportu"
+    "no_data_export": "Brak danych do eksportu",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Edycja \\\"{name}\\\"",
     "ingredient_added": "Dodano do tabeli",
-    "ingredient_deleted": "Usuni\u0119to z spiżarni",
+    "ingredient_deleted": "Usunięto z spiżarni",
     "ingredient_updated": "Zaktualizowano",
-    "no_conversion": "Brak konwersji z {from} na {to}, u\u017cyto jednostki oryginalnej",
-    "recipe_deleted": "Usuni\u0119to",
+    "no_conversion": "Brak konwersji z {from} na {to}, użyto jednostki oryginalnej",
+    "recipe_deleted": "Usunięto",
     "recipe_imported": "Przepis zaimportowany",
     "recipe_replaced": "Zamieniono",
     "recipes_imported": "przepis (-y) zaimportowany (-e)",
-    "ingredients_imported": "sk\u0142adnik (-i) zaimportowany (-e)",
-    "ingredients_replaced": "Sk\u0142adniki zamieniono",
+    "ingredients_imported": "składnik (-i) zaimportowany (-e)",
+    "ingredients_replaced": "Składniki zamieniono",
     "units_merged": "Jednostki scalone",
     "units_replaced": "Jednostki zamieniono",
     "conversions_merged": "Konwersje scalone",
     "conversions_replaced": "Konwersje zamieniono",
-    "recipes_merged": "Przepisy scalone (duplikaty usuni\u0119te)",
-    "demo_loaded": "Za\u0142adowano demo sk\u0142adniki",
+    "recipes_merged": "Przepisy scalone (duplikaty usunięte)",
+    "demo_loaded": "Załadowano demo składniki",
     "pantry_cleared": "Spiżarnia wyczyszczona",
-    "conversion_added": "Dodano konwersje {from} \u2194 {to}",
-    "invalid_json": "Nieprawid\u0142owy format JSON",
-    "invalid_recipe_json": "Nieprawid\u0142owy format JSON przepisu",
-    "invalid_units_json": "Plik nie zawiera wa\u017cnych jednostek lub ekwiwalent\u00f3w",
-    "error_reading_file": "B\u0142\u0105d odczytu pliku JSON",
-    "complete_all_fields": "Wype\u0142nij wszystkie pola",
-    "complete_all_fields_correct": "Wype\u0142nij wszystkie pola poprawnie",
-    "write_name_add_ingredients": "Wpisz nazw\u0119 i dodaj sk\u0142adniki",
+    "conversion_added": "Dodano konwersje {from} ↔ {to}",
+    "invalid_json": "Nieprawidłowy format JSON",
+    "invalid_recipe_json": "Nieprawidłowy format JSON przepisu",
+    "invalid_units_json": "Plik nie zawiera ważnych jednostek lub ekwiwalentów",
+    "error_reading_file": "Błąd odczytu pliku JSON",
+    "complete_all_fields": "Wypełnij wszystkie pola",
+    "complete_all_fields_correct": "Wypełnij wszystkie pola poprawnie",
+    "write_name_add_ingredients": "Wpisz nazwę i dodaj składniki",
     "missing_ingredient_data": "Brakujące dane składnika",
     "recipe_available": "na stole"
   },
-
   "confirm": {
     "delete_ingredient": "Usunąć \"{name}\" ze spiżarni?",
     "clear_ingredients": "Na pewno chcesz wyczyścić spiżarnię? Tej czynności nie można cofnąć.",
@@ -217,7 +209,6 @@
     "delete_unit": "Usunąć niestandardową jednostkę \"{name}\"?",
     "delete_conversion": "Usunąć konwersję \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Składniki",
     "recipe_creator": "Kreator przepisów",
@@ -238,7 +229,6 @@
     "export": "Eksportuj JSON",
     "delete": "Usuń"
   },
-
   "modal": {
     "recipe_name": "Nazwa przepisu",
     "close": "Zamknij",
@@ -253,9 +243,14 @@
     "net_profit": "Zysk netto",
     "profit_margin": "Marża zysku",
     "roi": "Zwrot z inwestycji (ROI)",
-    "profit_per_euro": "Zysk na €"
+    "profit_per_euro": "Zysk na €",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "Koszt składników",
     "profit_label": "Zysk netto",
@@ -263,7 +258,6 @@
     "margin_label": "Marża %",
     "roi_label": "Rentowność"
   },
-
   "pwa": {
     "install_app": "📱 Zainstaluj jako aplikację",
     "install_description": "Szybki dostęp bez przeglądarki",
@@ -275,5 +269,14 @@
     "install_unsupported": "Twoja przeglądarka nie obsługuje instalacji aplikacji. Spróbuj Chrome'a, Edge'a lub Safari'ego na iOS.",
     "uninstall_button": "Odinstaluj aplikację",
     "uninstall_description": "Odinstaluj aplikację z urządzenia"
+  },
+  "common": {
+    "cancel": "Później",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "Dodaj",
+    "new_recipe": "New Recipe",
+    "save": "Zapisz przepis",
+    "update": "Aktualizuj"
   }
 }

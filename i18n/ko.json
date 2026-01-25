@@ -1,14 +1,12 @@
-﻿{
+{
   "app_name": "에픽 레시피북",
   "app_description": "비용 및 수익성 분석이 포함된 레시피 관리자",
-
   "nav": {
     "ingredients": "재료",
     "create_recipe": "레시피 만들기",
     "my_recipes": "내 레시피",
     "settings": "설정"
   },
-
   "ingredients": {
     "title": "재료",
     "ingredient_name": "재료 이름",
@@ -32,7 +30,6 @@
     "edit_button": "편집",
     "update_button": "업데이트"
   },
-
   "recipe": {
     "title": "레시피 작성자",
     "recipe_name": "요리 이름",
@@ -59,9 +56,9 @@
       "price_per_portion": "1인분 가격",
       "margin": "마진 %",
       "roi": "수익성"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "내 레시피",
     "export_json": "JSON 내보내기",
@@ -83,7 +80,6 @@
     "profit_per_euro": "€당 이익",
     "portions": "인분"
   },
-
   "settings": {
     "title": "설정",
     "units_title": "측정 단위",
@@ -107,7 +103,6 @@
     "export_all": "모두 내보내기 (레시피 + 재료)",
     "import_data": "데이터 가져오기",
     "clear_all": "모두 지우기 (⚠️)",
-
     "units": {
       "kilogramo": "킬로그램",
       "gramo": "그램",
@@ -120,7 +115,6 @@
       "pieza": "조각"
     }
   },
-
   "donation": {
     "title": "기부",
     "install_app": "📱 앱으로 설치",
@@ -135,7 +129,6 @@
     "copy_button": "복사",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "재료가 식료품 저장실에 추가되었습니다",
     "ingredient_updated": "재료가 업데이트되었습니다",
@@ -169,40 +162,39 @@
     "pwa_installed": "앱이 성공적으로 설치되었습니다",
     "pwa_install_error": "지금은 앱을 설치할 수 없습니다. 호환 가능한 브라우저를 사용하고 있는지 확인하세요",
     "full_config_exported": "완전한 설정이 내보내졌습니다 (레시피, 재료, 단위 및 환산)",
-    "no_data_export": "내보낼 데이터가 없습니다"
+    "no_data_export": "내보낼 데이터가 없습니다",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
-    "editing_recipe": "\\\"{name}\\\" \uc218\uc815 \uc911",
-    "ingredient_added": "\ud14c\uc774\ube14\uc5d0 \ucd94\uac00\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "ingredient_deleted": "\uc2dd\ub960\uc5d0\uc11c \uc81c\uac70\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "ingredient_updated": "\uc5c5\ub370\uc774\ud2b8\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "no_conversion": "{from}\uc5d0\uc11c {to}(\ub85c) \ubcf4\ub0c8 \ubcc0\ud658\uc774 \uc5c6\uc2b5\ub2c8\ub2e4. \uc6d0\ub798 \ub2e8\uc704\ub97c \uc0ac\uc6a9\ud588\uc2b5\ub2c8\ub2e4",
-    "recipe_deleted": "\uc81c\uac70\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "recipe_imported": "\ub808\uc2dc\ud53c\ub97c \uac00\uc838\uc654\uc2b5\ub2c8\ub2e4",
-    "recipe_replaced": "\uad50\uccb4\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "recipes_imported": "\ub808\uc2dc\ud53c(\ub97c)\ub97c \uac00\uc838\uc654\uc2b5\ub2c8\ub2e4",
-    "ingredients_imported": "\uc7ac\ub8cc(\ub97c)\ub97c \uac00\uc838\uc654\uc2b5\ub2c8\ub2e4",
-    "ingredients_replaced": "\uc7ac\ub8cc\ub97c \uad50\uccb4\ud588\uc2b5\ub2c8\ub2e4",
-    "units_merged": "\ub2e8\uc704\ub97c \ubcd1\ud569\ud588\uc2b5\ub2c8\ub2e4",
-    "units_replaced": "\ub2e8\uc704\ub97c \uad50\uccb4\ud588\uc2b5\ub2c8\ub2e4",
-    "conversions_merged": "\ubcc0\ud658\uc744 \ubcd1\ud569\ud588\uc2b5\ub2c8\ub2e4",
-    "conversions_replaced": "\ubcc0\ud658\uc744 \uad50\uccb4\ud588\uc2b5\ub2c8\ub2e4",
-    "recipes_merged": "\ub808\uc2dc\ud53c\ub97c \ubcd1\ud569\ud588\uc2b5\ub2c8\ub2e4 (\uc911\ubcf5\uc81c\uac70)",
-    "demo_loaded": "\ub370\ubaa8 \uc7ac\ub8cc\uac00 \ub85c\ub4dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "pantry_cleared": "\uc2dd\ub960\uc744 \ube44\uc6e0\uc2b5\ub2c8\ub2e4",
-    "conversion_added": "{from} \u2194 {to} \ubcc0\ud658\uc774 \ucd94\uac00\ub418\uc5c8\uc2b5\ub2c8\ub2e4",
-    "invalid_json": "\uc720\ud6a8\ud558\uc9c0 \uc54a\uc740 JSON \ud615\uc2dd",
-    "invalid_recipe_json": "\uc720\ud6a8\ud558\uc9c0 \uc54a\uc740 \ub808\uc2dc\ud53c JSON \ud615\uc2dd",
-    "invalid_units_json": "\ud30c\uc77c\uc5d0 \uc801\uc5d0 \ub2e8\uc704 \ub610\ub294 \ub3d9\ub4f1\uc740 \uc5c6\uc2b5\ub2c8\ub2e4",
-    "error_reading_file": "JSON \ud30c\uc77c \uc77d\uae30 \uc624\ub958",
-    "complete_all_fields": "\ubaa8\ub4e0 \ud544\ub4dc\ub97c \uc791\uc131\ud558\uc138\uc694",
-    "complete_all_fields_correct": "\ubaa8\ub4e0 \ud544\ub4dc\ub97c \uc62c\ubc14\ub978\uac8c \uc791\uc131\ud558\uc138\uc694",
-    "write_name_add_ingredients": "\uc774\ub984\uc744 \uc4f0\uace0 \uc7ac\ub8cc\ub97c \ucd94\uac00\ud558\uc138\uc694",
-    "missing_ingredient_data": "\uc7ac\ub8cc \ub370\uc774\ud130 \ub20c\ub77c",
-    "recipe_available": "\ud14c\uc774\ube14\uc5d0"
+    "editing_recipe": "\\\"{name}\\\" 수정 중",
+    "ingredient_added": "테이블에 추가되었습니다",
+    "ingredient_deleted": "식률에서 제거되었습니다",
+    "ingredient_updated": "업데이트되었습니다",
+    "no_conversion": "{from}에서 {to}(로) 보냈 변환이 없습니다. 원래 단위를 사용했습니다",
+    "recipe_deleted": "제거되었습니다",
+    "recipe_imported": "레시피를 가져왔습니다",
+    "recipe_replaced": "교체되었습니다",
+    "recipes_imported": "레시피(를)를 가져왔습니다",
+    "ingredients_imported": "재료(를)를 가져왔습니다",
+    "ingredients_replaced": "재료를 교체했습니다",
+    "units_merged": "단위를 병합했습니다",
+    "units_replaced": "단위를 교체했습니다",
+    "conversions_merged": "변환을 병합했습니다",
+    "conversions_replaced": "변환을 교체했습니다",
+    "recipes_merged": "레시피를 병합했습니다 (중복제거)",
+    "demo_loaded": "데모 재료가 로드되었습니다",
+    "pantry_cleared": "식률을 비웠습니다",
+    "conversion_added": "{from} ↔ {to} 변환이 추가되었습니다",
+    "invalid_json": "유효하지 않은 JSON 형식",
+    "invalid_recipe_json": "유효하지 않은 레시피 JSON 형식",
+    "invalid_units_json": "파일에 적에 단위 또는 동등은 없습니다",
+    "error_reading_file": "JSON 파일 읽기 오류",
+    "complete_all_fields": "모든 필드를 작성하세요",
+    "complete_all_fields_correct": "모든 필드를 올바른게 작성하세요",
+    "write_name_add_ingredients": "이름을 쓰고 재료를 추가하세요",
+    "missing_ingredient_data": "재료 데이터 눌라",
+    "recipe_available": "테이블에"
   },
-
   "confirm": {
     "delete_ingredient": "식료품 저장실에서 \"{name}\"을(를) 삭제하시겠습니까?",
     "clear_ingredients": "식료품 저장실을 비우시겠습니까? 이 작업은 실행 취소할 수 없습니다.",
@@ -217,7 +209,6 @@
     "delete_unit": "사용자 정의 단위 \"{name}\"을(를) 삭제하시겠습니까?",
     "delete_conversion": "환산 \"{key}\"을(를) 삭제하시겠습니까?"
   },
-
   "desktop": {
     "ingredients": "재료",
     "recipe_creator": "레시피 작성자",
@@ -238,7 +229,6 @@
     "export": "JSON 내보내기",
     "delete": "삭제"
   },
-
   "modal": {
     "recipe_name": "레시피 이름",
     "close": "닫기",
@@ -253,9 +243,14 @@
     "net_profit": "순이익",
     "profit_margin": "이익 마진",
     "roi": "투자수익률 (ROI)",
-    "profit_per_euro": "€당 이익"
+    "profit_per_euro": "€당 이익",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "재료 비용",
     "profit_label": "순이익",
@@ -263,7 +258,6 @@
     "margin_label": "마진 %",
     "roi_label": "수익성"
   },
-
   "pwa": {
     "install_app": "📱 앱으로 설치",
     "install_description": "브라우저 없이 빠른 액세스",
@@ -275,7 +269,14 @@
     "install_unsupported": "브라우저가 앱 설치를 지원하지 않습니다. Chrome, Edge 또는 iOS의 Safari를 시도해보세요.",
     "uninstall_button": "앱 제거",
     "uninstall_description": "기기에서 앱 제거"
+  },
+  "common": {
+    "cancel": "나중에",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "추가",
+    "new_recipe": "New Recipe",
+    "save": "레시피 저장",
+    "update": "업데이트"
   }
 }
-
-

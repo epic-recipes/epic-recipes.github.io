@@ -1,14 +1,12 @@
-﻿{
+{
   "app_name": "Sách Công Thức Kỳ Tích",
   "app_description": "Trình quản lý công thức với phân tích chi phí và lợi nhuận",
-
   "nav": {
     "ingredients": "Nguyên liệu",
     "create_recipe": "Tạo công thức",
     "my_recipes": "Công thức của tôi",
     "settings": "Cài đặt"
   },
-
   "ingredients": {
     "title": "Nguyên liệu",
     "ingredient_name": "Tên nguyên liệu",
@@ -32,7 +30,6 @@
     "edit_button": "Chỉnh sửa",
     "update_button": "Cập nhật"
   },
-
   "recipe": {
     "title": "Trình tạo công thức",
     "recipe_name": "Tên món ăn",
@@ -59,9 +56,9 @@
       "price_per_portion": "Giá mỗi phần",
       "margin": "Biên lợi nhuận %",
       "roi": "Tính lợi nhuận"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "Công thức của tôi",
     "export_json": "Xuất JSON",
@@ -83,7 +80,6 @@
     "profit_per_euro": "Lợi nhuận mỗi €",
     "portions": "phần"
   },
-
   "settings": {
     "title": "Cài đặt",
     "units_title": "Đơn vị đo lường",
@@ -107,7 +103,6 @@
     "export_all": "Xuất tất cả (Công thức + Nguyên liệu)",
     "import_data": "Nhập dữ liệu",
     "clear_all": "Xóa tất cả (⚠️)",
-
     "units": {
       "kilogramo": "Kilôgam",
       "gramo": "Gam",
@@ -120,7 +115,6 @@
       "pieza": "Miếng"
     }
   },
-
   "donation": {
     "title": "Quyên góp",
     "install_app": "📱 Cài đặt ứng dụng",
@@ -135,7 +129,6 @@
     "copy_button": "Sao chép",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Thêm nguyên liệu vào tủ lạnh",
     "ingredient_updated": "Cập nhật nguyên liệu",
@@ -169,40 +162,39 @@
     "pwa_installed": "Cài đặt ứng dụng thành công",
     "pwa_install_error": "Không thể cài đặt ứng dụng lúc này. Hãy chắc chắn bạn đang sử dụng trình duyệt tương thích",
     "full_config_exported": "Xuất cấu hình đầy đủ (công thức, nguyên liệu, đơn vị và chuyển đổi)",
-    "no_data_export": "Không có dữ liệu để xuất"
+    "no_data_export": "Không có dữ liệu để xuất",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
-    "editing_recipe": "\u0110ang ch\u1ec9nh s\u1eeda \\\"{name}\\\"",
-    "ingredient_added": "Th\u00eam v\u00e0o b\u00e0n",
-    "ingredient_deleted": "xo\u00e1 kh\u00f4i t\u1ee7 qu\u00e2n",
-    "ingredient_updated": "\u0111\u00e3 c\u1eadp nh\u1eadt",
-    "no_conversion": "Kh\u00f4ng c\u00f3 c\u00e1ch chuy\u1ec3n \u0111\u1ed5i t\u1eeb {from} sang {to}, s\u1eed d\u1ee5ng \u0111\u01a1n v\u1ecb g\u1ed1c",
-    "recipe_deleted": "xo\u00e1 \u0111i",
-    "recipe_imported": "\u0110\u00e3 nh\u1eadp c\u00f4ng th\u1ee9c",
-    "recipe_replaced": "thay th\u1ebf",
-    "recipes_imported": "c\u00f4ng th\u1ee9c \u0111\u00e3 nh\u1eadp",
-    "ingredients_imported": "\u0111\u00e3 nh\u1eadp th\u00e0nh ph\u1ec1",
-    "ingredients_replaced": "Th\u00e0nh ph\u1ec1 \u0111\u00e3 thay th\u1ebf",
-    "units_merged": "\u0110\u01a1n v\u1ecb \u0111\u1ea3o h\u1ae3ng",
-    "units_replaced": "\u0110\u01a1n v\u1ecb \u0111\u00e3 thay th\u1ebf",
-    "conversions_merged": "Chuy\u1ec3n \u0111\u1ed5i \u0111\u1ea3o h\u1ae3ng",
-    "conversions_replaced": "Chuy\u1ec3n \u0111\u1ed5i \u0111\u00e3 thay th\u1ebf",
-    "recipes_merged": "C\u00f4ng th\u1ee9c \u0111\u1ea3o h\u1ae3ng (\u0111\u00e3 xo\u00e1 tr\u00f9ng l\u1eb7p)",
-    "demo_loaded": "\u0110\u00e3 t\u1ea3i th\u00e0nh ph\u1ec1 minh h\u1ecda",
-    "pantry_cleared": "T\u1ee7 qu\u00e2n \u0111\u00e3 x\u00f3a s\u1ea1ch",
-    "conversion_added": "\u0110\u00e3 th\u00eam chuy\u1ec3n \u0111\u1ed5i {from} \u2194 {to}",
-    "invalid_json": "\u0110\u1ecbnh d\u1ea1ng JSON kh\u00f4ng h\u1ee3p l\u1ec7",
-    "invalid_recipe_json": "\u0110\u1ecbnh d\u1ea1ng JSON c\u00f4ng th\u1ee9c kh\u00f4ng h\u1ee3p l\u1ec7",
-    "invalid_units_json": "T\u1eadp tin kh\u00f4ng ch\u1ee9a c\u00e1c \u0111\u01a1n v\u1ecb ho\u1eb7c t\u01b0\u01a1ng \u0111\u01b0\u01a1ng h\u1ee3p l\u1ec7",
-    "error_reading_file": "L\u1ed7i khi \u0111\u1ecdc t\u1eadp tin JSON",
-    "complete_all_fields": "Ho\u00e0n th\u00e0nh t\u1ea5t c\u1ea3 c\u00e1c tr\u01b0\u1eddng",
-    "complete_all_fields_correct": "Ho\u00e0n th\u00e0nh t\u1ea5t c\u1ea3 c\u00e1c tr\u01b0\u1eddng m\u1ed9t c\u00e1ch ch\u00ednh x\u00e1c",
-    "write_name_add_ingredients": "Vi\u1ebft t\u00ean v\u00e0 th\u00eam th\u00e0nh ph\u1ec1",
-    "missing_ingredient_data": "D\u1eef li\u1ec7u th\u00e0nh ph\u1ec1 b\u1ecb thi\u1ebfu",
-    "recipe_available": "tr\u00ean b\u00e0n"
+    "editing_recipe": "Đang chỉnh sửa \\\"{name}\\\"",
+    "ingredient_added": "Thêm vào bàn",
+    "ingredient_deleted": "xoá khôi tủ quân",
+    "ingredient_updated": "đã cập nhật",
+    "no_conversion": "Không có cách chuyển đổi từ {from} sang {to}, sử dụng đơn vị gốc",
+    "recipe_deleted": "xoá đi",
+    "recipe_imported": "Đã nhập công thức",
+    "recipe_replaced": "thay thế",
+    "recipes_imported": "công thức đã nhập",
+    "ingredients_imported": "đã nhập thành phề",
+    "ingredients_replaced": "Thành phề đã thay thế",
+    "units_merged": "Đơn vị đảo h᫣ng",
+    "units_replaced": "Đơn vị đã thay thế",
+    "conversions_merged": "Chuyển đổi đảo h᫣ng",
+    "conversions_replaced": "Chuyển đổi đã thay thế",
+    "recipes_merged": "Công thức đảo h᫣ng (đã xoá trùng lặp)",
+    "demo_loaded": "Đã tải thành phề minh họa",
+    "pantry_cleared": "Tủ quân đã xóa sạch",
+    "conversion_added": "Đã thêm chuyển đổi {from} ↔ {to}",
+    "invalid_json": "Định dạng JSON không hợp lệ",
+    "invalid_recipe_json": "Định dạng JSON công thức không hợp lệ",
+    "invalid_units_json": "Tập tin không chứa các đơn vị hoặc tương đương hợp lệ",
+    "error_reading_file": "Lỗi khi đọc tập tin JSON",
+    "complete_all_fields": "Hoàn thành tất cả các trường",
+    "complete_all_fields_correct": "Hoàn thành tất cả các trường một cách chính xác",
+    "write_name_add_ingredients": "Viết tên và thêm thành phề",
+    "missing_ingredient_data": "Dữ liệu thành phề bị thiếu",
+    "recipe_available": "trên bàn"
   },
-
   "confirm": {
     "delete_ingredient": "Xóa \"{name}\" khỏi tủ lạnh?",
     "clear_ingredients": "Bạn chắc chắn muốn xóa tủ lạnh? Hành động này không thể hoàn tác.",
@@ -217,7 +209,6 @@
     "delete_unit": "Xóa đơn vị tùy chỉnh \"{name}\"?",
     "delete_conversion": "Xóa chuyển đổi \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Nguyên liệu",
     "recipe_creator": "Trình tạo công thức",
@@ -238,7 +229,6 @@
     "export": "Xuất JSON",
     "delete": "Xóa"
   },
-
   "modal": {
     "recipe_name": "Tên công thức",
     "close": "Đóng",
@@ -253,9 +243,14 @@
     "net_profit": "Lợi nhuận ròng",
     "profit_margin": "Biên lợi nhuận",
     "roi": "Tính lợi nhuận (ROI)",
-    "profit_per_euro": "Lợi nhuận mỗi €"
+    "profit_per_euro": "Lợi nhuận mỗi €",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "Chi phí nguyên liệu",
     "profit_label": "Lợi nhuận ròng",
@@ -263,7 +258,6 @@
     "margin_label": "Biên lợi nhuận %",
     "roi_label": "Tính lợi nhuận"
   },
-
   "pwa": {
     "install_app": "📱 Cài đặt ứng dụng",
     "install_description": "Truy cập nhanh không cần trình duyệt",
@@ -275,7 +269,14 @@
     "install_unsupported": "Trình duyệt của bạn không hỗ trợ cài đặt ứng dụng. Hãy thử Chrome, Edge hoặc Safari trên iOS.",
     "uninstall_button": "Gỡ cài đặt ứng dụng",
     "uninstall_description": "Gỡ cài đặt ứng dụng khỏi thiết bị của bạn"
+  },
+  "common": {
+    "cancel": "Để sau",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "Thêm",
+    "new_recipe": "New Recipe",
+    "save": "Lưu công thức",
+    "update": "Cập nhật"
   }
 }
-
-

@@ -1,14 +1,12 @@
 {
   "app_name": "Episches Rezeptbuch",
   "app_description": "Rezeptverwaltung mit Kosten- und Rentabilitätsanalyse",
-
   "nav": {
     "ingredients": "Zutaten",
     "create_recipe": "Rezept Erstellen",
     "my_recipes": "Meine Rezepte",
     "settings": "Einstellungen"
   },
-
   "ingredients": {
     "title": "Zutaten",
     "ingredient_name": "Zutatname",
@@ -28,9 +26,10 @@
     "price_per_unit": "Preis/Einheit",
     "delete_button": "Löschen",
     "edit_button": "Bearbeiten",
-    "update_button": "Aktualisieren"
+    "update_button": "Aktualisieren",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
-
   "recipe": {
     "title": "Rezept-Ersteller",
     "recipe_name": "Gerichtsname",
@@ -54,9 +53,12 @@
       "price_per_portion": "Preis pro Portion",
       "margin": "Marge %",
       "roi": "Rentabilität"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "add_ingredient_button": "Add Ingredient",
+    "portions_placeholder": "1"
   },
-
   "book": {
     "title": "Meine Rezepte",
     "export_json": "JSON Exportieren",
@@ -78,7 +80,6 @@
     "profit_per_euro": "Gewinn pro €",
     "portions": "Portionen"
   },
-
   "settings": {
     "title": "Einstellungen",
     "units_title": "Maßeinheiten",
@@ -102,7 +103,6 @@
     "export_all": "Alles Exportieren (Rezepte + Zutaten)",
     "import_data": "Daten Importieren",
     "clear_all": "Alles Löschen (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -115,7 +115,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Spenden",
     "install_app": "📱 Als App Installieren",
@@ -130,7 +129,6 @@
     "copy_button": "Kopieren",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Zutat zur Vorratskammer hinzugefügt",
     "ingredient_updated": "Zutat aktualisiert",
@@ -164,9 +162,9 @@
     "pwa_installed": "App erfolgreich installiert",
     "pwa_install_error": "Die App kann derzeit nicht installiert werden. Stellen Sie sicher, dass Sie einen kompatiblen Browser verwenden",
     "full_config_exported": "Vollständige Konfiguration exportiert (Rezepte, Zutaten, Einheiten und Äquivalenzen)",
-    "no_data_export": "Keine Daten zum Exportieren"
+    "no_data_export": "Keine Daten zum Exportieren",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Bearbeitung von \"{name}\"",
     "ingredient_added": "Zur Tabelle hinzugefügt",
@@ -197,7 +195,6 @@
     "missing_ingredient_data": "Zutaten-Daten fehlen",
     "recipe_available": "auf dem Tisch"
   },
-
   "confirm": {
     "delete_ingredient": "\"{name}\" aus Vorratskammer entfernen?",
     "clear_ingredients": "Sind Sie sicher, dass Sie die Vorratskammer leeren möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -212,7 +209,6 @@
     "delete_unit": "Benutzerdefinierte Einheit \"{name}\" löschen?",
     "delete_conversion": "Umrechnung \"{key}\" löschen?"
   },
-
   "desktop": {
     "ingredients": "Zutaten",
     "recipe_creator": "Rezept-Ersteller",
@@ -233,7 +229,6 @@
     "export": "JSON Exportieren",
     "delete": "Löschen"
   },
-
   "modal": {
     "recipe_name": "Rezeptname",
     "close": "Schließen",
@@ -248,9 +243,14 @@
     "net_profit": "Nettogewinn",
     "profit_margin": "Gewinnmarge",
     "roi": "Kapitalrendite (ROI)",
-    "profit_per_euro": "Gewinn pro €"
+    "profit_per_euro": "Gewinn pro €",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_unit_title": "Add Unit",
+    "recipe_details_title": "Recipe Details",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion",
+    "edit_ingredient_title": "Edit Ingredient"
   },
-
   "stats": {
     "cost_label": "Zutatenkosten",
     "profit_label": "Nettogewinn",
@@ -258,7 +258,6 @@
     "margin_label": "Marge %",
     "roi_label": "Rentabilität"
   },
-
   "pwa": {
     "install_app": "📱 Als App installieren",
     "install_description": "Schneller Zugriff ohne Browser",
@@ -270,5 +269,14 @@
     "install_unsupported": "Ihr Browser unterstützt keine App-Installation. Versuchen Sie Chrome, Edge oder Safari auf iOS.",
     "uninstall_button": "App deinstallieren",
     "uninstall_description": "Deinstallieren Sie die Anwendung von Ihrem Gerät"
+  },
+  "common": {
+    "cancel": "Später",
+    "add": "Hinzufügen",
+    "update": "Aktualisieren",
+    "new_recipe": "New Recipe",
+    "confirm_changes": "Confirm Changes",
+    "save": "Rezept Speichern",
+    "edit_details": "Edit Details"
   }
 }

@@ -1,14 +1,12 @@
-﻿{
+{
   "app_name": "エピックレシピブック",
   "app_description": "コストと収益性の分析を備えたレシピマネージャー",
-
   "nav": {
     "ingredients": "材料",
     "create_recipe": "レシピを作成",
     "my_recipes": "マイレシピ",
     "settings": "設定"
   },
-
   "ingredients": {
     "title": "材料",
     "ingredient_name": "材料名",
@@ -32,7 +30,6 @@
     "edit_button": "編集",
     "update_button": "更新"
   },
-
   "recipe": {
     "title": "レシピクリエイター",
     "recipe_name": "料理名",
@@ -59,9 +56,9 @@
       "price_per_portion": "1ポーションあたりの価格",
       "margin": "マージン %",
       "roi": "収益性"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "マイレシピ",
     "export_json": "JSON をエクスポート",
@@ -83,7 +80,6 @@
     "profit_per_euro": "€ あたりの利益",
     "portions": "ポーション"
   },
-
   "settings": {
     "title": "設定",
     "units_title": "測定単位",
@@ -107,7 +103,6 @@
     "export_all": "すべてをエクスポート（レシピ+材料）",
     "import_data": "データをインポート",
     "clear_all": "すべてクリア (⚠️)",
-
     "units": {
       "kilogramo": "キログラム",
       "gramo": "グラム",
@@ -120,7 +115,6 @@
       "pieza": "ピース"
     }
   },
-
   "donation": {
     "title": "寄付",
     "install_app": "📱 アプリとしてインストール",
@@ -135,7 +129,6 @@
     "copy_button": "コピー",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "材料がパントリーに追加されました",
     "ingredient_updated": "材料が更新されました",
@@ -169,40 +162,39 @@
     "pwa_installed": "アプリが正常にインストールされました",
     "pwa_install_error": "現在アプリをインストールできません。互換性のあるブラウザを使用していることを確認してください",
     "full_config_exported": "完全な構成がエクスポートされました（レシピ、材料、単位、換算）",
-    "no_data_export": "エクスポートするデータがありません"
+    "no_data_export": "エクスポートするデータがありません",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
-    "editing_recipe": "\\\"{name}\\\"\u3092\u7de8\u96c6",
-    "ingredient_added": "\u8868\u306b\u8ffd\u52a0\u3057\u307e\u3057\u305f",
-    "ingredient_deleted": "\u7f46\u63b6\u3088\u308a\u524a\u9664\u3055\u308c\u307e\u3057\u305f",
-    "ingredient_updated": "\u66f4\u65b0\u3055\u308c\u307e\u3057\u305f",
-    "no_conversion": "{from}\u304b\u3089{to}\u3078\u306e\u5909\u63db\u306f\u5229\u7528\u4e0d\u53ef\u3001\u5143\u306e\u5358\u4f4d\u3092\u4f7f\u7528\u3057\u307e\u3057\u305f",
-    "recipe_deleted": "\u524a\u9664\u3055\u308c\u307e\u3057\u305f",
-    "recipe_imported": "\u30ec\u30b7\u30d4\u3092\u30a4\u30f3\u30dd\u30fc\u30c8\u3057\u307e\u3057\u305f",
-    "recipe_replaced": "\u306a\u304c\u304b\u308f\u308a\u307e\u3057\u305f",
-    "recipes_imported": "\u30ec\u30b7\u30d4\u3092\u30a4\u30f3\u30dd\u30fc\u30c8\u3057\u307e\u3057\u305f",
-    "ingredients_imported": "\u6750\u6599\u3092\u30a4\u30f3\u30dd\u30fc\u30c8\u3057\u307e\u3057\u305f",
-    "ingredients_replaced": "\u6750\u6599\u3092\u4e26\u304b\u3048\u307e\u3057\u305f",
-    "units_merged": "\u5358\u4f4d\u304c\u7d71\u5408\u3055\u308c\u307e\u3057\u305f",
-    "units_replaced": "\u5358\u4f4d\u304c\u7f6e\u304d\u63db\u308f\u308a\u307e\u3057\u305f",
-    "conversions_merged": "\u5909\u63db\u304c\u7d71\u5408\u3055\u308c\u307e\u3057\u305f",
-    "conversions_replaced": "\u5909\u63db\u304c\u7f6e\u304d\u63db\u308f\u308a\u307e\u3057\u305f",
-    "recipes_merged": "\u30ec\u30b7\u30d4\u304c\u7d71\u5408\u3055\u308c\u307e\u3057\u305f\uff08\u91cd\u8907\u3092\u524a\u9664\uff09",
-    "demo_loaded": "\u30c7\u30e2\u6750\u6599\u3092\u8aad\u307f\u8fbc\u307f\u307e\u3057\u305f",
-    "pantry_cleared": "\u4e0a\u8db3\u304c\u6e05\u7a7a\u5316\u3055\u308c\u307e\u3057\u305f",
-    "conversion_added": "{from}\u2194{to}\u3092\u9069\u7528\u3057\u307e\u3057\u305f",
-    "invalid_json": "\u7121\u52b9\u306eJSON\u5f62\u5f0f",
-    "invalid_recipe_json": "\u7121\u52b9\u306eJSON\u5f62\u5f0f",
-    "invalid_units_json": "\u30d5\u30a1\u30a4\u30eb\u304b\u3089\u6709\u52b9\u306a\u5358\u4f4d\u307e\u305f\u306f\u6574\u7b49\u3092\u4f7f\u7528\u3067\u304d\u307e\u305b\u3093",
-    "error_reading_file": "JSON\u30d5\u30a1\u30a4\u30eb\u3092\u8aad\u3046\u5931\u6557",
-    "complete_all_fields": "\u3059\u3079\u3066\u306e\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u586b\u3081\u3066\u304f\u3060\u3055\u3044",
-    "complete_all_fields_correct": "\u3059\u3079\u3066\u306e\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u6b63\u3057\u304f\u586b\u3081\u3066\u304f\u3060\u3055\u3044",
-    "write_name_add_ingredients": "\u540d\u524d\u3092\u5165\u529b\u3057\u3001\u6750\u6599\u3092\u8ffd\u52a0\u3057\u3066\u304f\u3060\u3055\u3044",
-    "missing_ingredient_data": "\u6750\u6599\u60c5\u5831\u304c\u4e0d\u8db3\u3057\u3066\u3044\u308b",
-    "recipe_available": "\u30c6\u30fc\u30d6\u30eb\u306b\u3042\u308a\u307e\u3059"
+    "editing_recipe": "\\\"{name}\\\"を編集",
+    "ingredient_added": "表に追加しました",
+    "ingredient_deleted": "罆掶より削除されました",
+    "ingredient_updated": "更新されました",
+    "no_conversion": "{from}から{to}への変換は利用不可、元の単位を使用しました",
+    "recipe_deleted": "削除されました",
+    "recipe_imported": "レシピをインポートしました",
+    "recipe_replaced": "ながかわりました",
+    "recipes_imported": "レシピをインポートしました",
+    "ingredients_imported": "材料をインポートしました",
+    "ingredients_replaced": "材料を並かえました",
+    "units_merged": "単位が統合されました",
+    "units_replaced": "単位が置き換わりました",
+    "conversions_merged": "変換が統合されました",
+    "conversions_replaced": "変換が置き換わりました",
+    "recipes_merged": "レシピが統合されました（重複を削除）",
+    "demo_loaded": "デモ材料を読み込みました",
+    "pantry_cleared": "上足が清空化されました",
+    "conversion_added": "{from}↔{to}を適用しました",
+    "invalid_json": "無効のJSON形式",
+    "invalid_recipe_json": "無効のJSON形式",
+    "invalid_units_json": "ファイルから有効な単位または整等を使用できません",
+    "error_reading_file": "JSONファイルを読う失敗",
+    "complete_all_fields": "すべてのフィールドを填めてください",
+    "complete_all_fields_correct": "すべてのフィールドを正しく填めてください",
+    "write_name_add_ingredients": "名前を入力し、材料を追加してください",
+    "missing_ingredient_data": "材料情報が不足している",
+    "recipe_available": "テーブルにあります"
   },
-
   "confirm": {
     "delete_ingredient": "パントリーから\"{name}\"を削除しますか？",
     "clear_ingredients": "本当にパントリーをクリアしたいのですか？ このアクションは元に戻せません。",
@@ -217,7 +209,6 @@
     "delete_unit": "カスタム単位\"{name}\"を削除しますか？",
     "delete_conversion": "換算\"{key}\"を削除しますか？"
   },
-
   "desktop": {
     "ingredients": "材料",
     "recipe_creator": "レシピクリエイター",
@@ -238,7 +229,6 @@
     "export": "JSON をエクスポート",
     "delete": "削除"
   },
-
   "modal": {
     "recipe_name": "レシピの名前",
     "close": "閉じる",
@@ -253,9 +243,14 @@
     "net_profit": "純利益",
     "profit_margin": "利益率",
     "roi": "投資利益率 (ROI)",
-    "profit_per_euro": "€ あたりの利益"
+    "profit_per_euro": "€ あたりの利益",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "材料コスト",
     "profit_label": "純利益",
@@ -263,7 +258,6 @@
     "margin_label": "マージン %",
     "roi_label": "収益性"
   },
-
   "pwa": {
     "install_app": "📱 アプリとしてインストール",
     "install_description": "ブラウザなしで高速アクセス",
@@ -275,7 +269,14 @@
     "install_unsupported": "ブラウザがアプリのインストールをサポートしていません。 Chrome、Edge、または iOS の Safari をお試しください。",
     "uninstall_button": "アプリをアンインストール",
     "uninstall_description": "デバイスからアプリをアンインストール"
+  },
+  "common": {
+    "cancel": "後で",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "追加",
+    "new_recipe": "New Recipe",
+    "save": "レシピを保存",
+    "update": "更新"
   }
 }
-
-

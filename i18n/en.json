@@ -26,7 +26,9 @@
     "price_per_unit": "Price/Unit",
     "delete_button": "Delete",
     "edit_button": "Edit",
-    "update_button": "Update"
+    "update_button": "Update",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
   "recipe": {
     "title": "Recipe Creator",
@@ -52,7 +54,10 @@
       "price_per_portion": "Price per Portion",
       "margin": "Margin %",
       "roi": "Profitability"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "portions_placeholder": "1"
   },
   "book": {
     "title": "My Recipes",
@@ -157,9 +162,9 @@
     "pwa_installed": "App installed successfully",
     "pwa_install_error": "The app cannot be installed at this time. Make sure you are on a compatible browser",
     "full_config_exported": "Complete configuration exported (recipes, ingredients, units and equivalences)",
-    "no_data_export": "No data to export"
+    "no_data_export": "No data to export",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Editing \"{name}\"",
     "ingredient_added": "Added to the table",
@@ -262,7 +267,6 @@
     "margin_label": "Margin %",
     "roi_label": "Profitability"
   },
-
   "pwa": {
     "install_app": "📱 Install as App",
     "install_description": "Quick access without needing a browser",

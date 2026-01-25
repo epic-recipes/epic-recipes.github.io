@@ -1,14 +1,12 @@
-﻿{
+{
   "app_name": "Epik Tarif Kitabı",
   "app_description": "Maliyet ve karlılık analizi ile tarif yöneticisi",
-
   "nav": {
     "ingredients": "Malzemeler",
     "create_recipe": "Tarif Oluştur",
     "my_recipes": "Tariflerim",
     "settings": "Ayarlar"
   },
-
   "ingredients": {
     "title": "Malzemeler",
     "ingredient_name": "Malzeme Adı",
@@ -32,7 +30,6 @@
     "edit_button": "Düzenle",
     "update_button": "Güncelle"
   },
-
   "recipe": {
     "title": "Tarif Oluşturucu",
     "recipe_name": "Yemek Adı",
@@ -59,9 +56,9 @@
       "price_per_portion": "Porsiyon Başına Fiyat",
       "margin": "Marj %",
       "roi": "Karlılık"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "Tariflerim",
     "export_json": "JSON'u Dışa Aktar",
@@ -83,7 +80,6 @@
     "profit_per_euro": "€ Başına Kar",
     "portions": "porsiyon"
   },
-
   "settings": {
     "title": "Ayarlar",
     "units_title": "Ölçü Birimleri",
@@ -107,7 +103,6 @@
     "export_all": "Tümünü Dışa Aktar (Tarifler + Malzemeler)",
     "import_data": "Verileri İçe Aktar",
     "clear_all": "Tümünü Temizle (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -120,7 +115,6 @@
       "pieza": "Parça"
     }
   },
-
   "donation": {
     "title": "Bağışlar",
     "install_app": "📱 Uygulama Olarak Yükle",
@@ -135,7 +129,6 @@
     "copy_button": "Kopyala",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Malzeme buzdolabına eklendi",
     "ingredient_updated": "Malzeme güncellendi",
@@ -169,40 +162,39 @@
     "pwa_installed": "Uygulama başarıyla yüklendi",
     "pwa_install_error": "Şu anda uygulama yüklenemez. Uyumlu bir tarayıcı kullandığınızdan emin olun",
     "full_config_exported": "Tam yapılandırma dışa aktarıldı (tarifler, malzemeler, birimler ve dönüşümler)",
-    "no_data_export": "Dışa aktarılacak veri yok"
+    "no_data_export": "Dışa aktarılacak veri yok",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
-    "editing_recipe": "\\\"{name}\\\" d\u00fczenleniyor",
+    "editing_recipe": "\\\"{name}\\\" düzenleniyor",
     "ingredient_added": "Tabloya eklendi",
     "ingredient_deleted": "Panténden kaldırıldı",
-    "ingredient_updated": "G\u00fcncellendi",
-    "no_conversion": "{from}\u2019den {to}\u2019ya d\u00f6n\u00fc\u015füm yok, orijinal birim kullanılıyor",
+    "ingredient_updated": "Güncellendi",
+    "no_conversion": "{from}’den {to}’ya dönüşüm yok, orijinal birim kullanılıyor",
     "recipe_deleted": "Silindi",
-    "recipe_imported": "Tarif i\u00e7e aktarıldı",
-    "recipe_replaced": "De\u011fi\u015ftirildi",
-    "recipes_imported": "Tarif(ler) i\u00e7e aktarıldı",
-    "ingredients_imported": "Malzeme(ler) i\u00e7e aktarıldı",
-    "ingredients_replaced": "Malzeme de\u011fi\u015ftirildi",
-    "units_merged": "Birimler birle\u015ftirildi",
-    "units_replaced": "Birimler de\u011fi\u015ftirildi",
-    "conversions_merged": "D\u00f6n\u00fc\u015f\u00fcmler birle\u015ftirildi",
-    "conversions_replaced": "D\u00f6n\u00fc\u015f\u00fcmler de\u011fi\u015ftirildi",
-    "recipes_merged": "Tarifler birle\u015ftirildi (tekrarlar kaldırıldı)",
-    "demo_loaded": "Demo malzemeleri y\u00fcklendi",
+    "recipe_imported": "Tarif içe aktarıldı",
+    "recipe_replaced": "Değiştirildi",
+    "recipes_imported": "Tarif(ler) içe aktarıldı",
+    "ingredients_imported": "Malzeme(ler) içe aktarıldı",
+    "ingredients_replaced": "Malzeme değiştirildi",
+    "units_merged": "Birimler birleştirildi",
+    "units_replaced": "Birimler değiştirildi",
+    "conversions_merged": "Dönüşümler birleştirildi",
+    "conversions_replaced": "Dönüşümler değiştirildi",
+    "recipes_merged": "Tarifler birleştirildi (tekrarlar kaldırıldı)",
+    "demo_loaded": "Demo malzemeleri yüklendi",
     "pantry_cleared": "Panté temizlendi",
-    "conversion_added": "{from} \u2194 {to} d\u00f6n\u00fc\u015f\u00fcm eklendi",
-    "invalid_json": "Ge\u00e7ersiz JSON bi\u00e7imi",
-    "invalid_recipe_json": "Ge\u00e7ersiz tarif JSON bi\u00e7imi",
-    "invalid_units_json": "Dosya ge\u00e7erli birim veya e\u015fde\u011ferler i\u00e7ermiyor",
+    "conversion_added": "{from} ↔ {to} dönüşüm eklendi",
+    "invalid_json": "Geçersiz JSON biçimi",
+    "invalid_recipe_json": "Geçersiz tarif JSON biçimi",
+    "invalid_units_json": "Dosya geçerli birim veya eşdeğerler içermiyor",
     "error_reading_file": "JSON dosyası okunurken hata",
-    "complete_all_fields": "T\u00fcm alanları doldurun",
-    "complete_all_fields_correct": "T\u00fcm alanları do\u011fru \u015fekilde doldurun",
+    "complete_all_fields": "Tüm alanları doldurun",
+    "complete_all_fields_correct": "Tüm alanları doğru şekilde doldurun",
     "write_name_add_ingredients": "Adınızı yazın ve malzeme ekleyin",
     "missing_ingredient_data": "Malzeme verileri eksik",
     "recipe_available": "masada"
   },
-
   "confirm": {
     "delete_ingredient": "Buzdolabından \"{name}\" silinsin mi?",
     "clear_ingredients": "Buzdolabını temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
@@ -217,7 +209,6 @@
     "delete_unit": "Özel birim \"{name}\" silinsin mi?",
     "delete_conversion": "Dönüşüm \"{key}\" silinsin mi?"
   },
-
   "desktop": {
     "ingredients": "Malzemeler",
     "recipe_creator": "Tarif Oluşturucu",
@@ -238,7 +229,6 @@
     "export": "JSON'u Dışa Aktar",
     "delete": "Sil"
   },
-
   "modal": {
     "recipe_name": "Tarif Adı",
     "close": "Kapat",
@@ -253,9 +243,14 @@
     "net_profit": "Net Kar",
     "profit_margin": "Kar Marjı",
     "roi": "Yatırım Getirisi (ROI)",
-    "profit_per_euro": "€ Başına Kar"
+    "profit_per_euro": "€ Başına Kar",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "Malzeme Maliyeti",
     "profit_label": "Net Kar",
@@ -263,7 +258,6 @@
     "margin_label": "Marj %",
     "roi_label": "Karlılık"
   },
-
   "pwa": {
     "install_app": "📱 Uygulama Olarak Yükle",
     "install_description": "Tarayıcı olmadan hızlı erişim",
@@ -275,7 +269,14 @@
     "install_unsupported": "Tarayıcınız uygulama yüklemeyi desteklemiyor. Chrome, Edge veya iOS üzerinde Safari'yi deneyin.",
     "uninstall_button": "Uygulamayı Kaldır",
     "uninstall_description": "Uygulamayı cihazınızdan kaldırın"
+  },
+  "common": {
+    "cancel": "Sonra",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "Ekle",
+    "new_recipe": "New Recipe",
+    "save": "Tarifu Kaydet",
+    "update": "Güncelle"
   }
 }
-
-

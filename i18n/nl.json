@@ -1,14 +1,12 @@
 {
   "app_name": "Episch Receptenboek",
   "app_description": "Receptenbeheerder met kosten- en winstgevendheidsanalyse",
-
   "nav": {
     "ingredients": "Ingrediënten",
     "create_recipe": "Recept Maken",
     "my_recipes": "Mijn Recepten",
     "settings": "Instellingen"
   },
-
   "ingredients": {
     "title": "Ingrediënten",
     "ingredient_name": "Naam Ingrediënt",
@@ -28,9 +26,10 @@
     "price_per_unit": "Prijs/Eenheid",
     "delete_button": "Verwijderen",
     "edit_button": "Bewerken",
-    "update_button": "Bijwerken"
+    "update_button": "Bijwerken",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
-
   "recipe": {
     "title": "Receptenmaker",
     "recipe_name": "Naam van het Gerecht",
@@ -54,9 +53,12 @@
       "price_per_portion": "Prijs per Portie",
       "margin": "Marge %",
       "roi": "Winstgevendheid"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "add_ingredient_button": "Add Ingredient",
+    "portions_placeholder": "1"
   },
-
   "book": {
     "title": "Mijn Recepten",
     "export_json": "JSON Exporteren",
@@ -78,7 +80,6 @@
     "profit_per_euro": "Winst per €",
     "portions": "porties"
   },
-
   "settings": {
     "title": "Instellingen",
     "units_title": "Maateenheden",
@@ -102,7 +103,6 @@
     "export_all": "Alles Exporteren (Recepten + Ingrediënten)",
     "import_data": "Gegevens Importeren",
     "clear_all": "Alles Wissen (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -115,7 +115,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Donaties",
     "install_app": "📱 Als App Installeren",
@@ -130,7 +129,6 @@
     "copy_button": "Kopiëren",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingrediënt toegevoegd aan voorraadkast",
     "ingredient_updated": "Ingrediënt bijgewerkt",
@@ -164,9 +162,9 @@
     "pwa_installed": "App succesvol geïnstalleerd",
     "pwa_install_error": "De app kan op dit moment niet worden geïnstalleerd. Zorg ervoor dat je een compatibele browser gebruikt",
     "full_config_exported": "Volledige configuratie geëxporteerd (recepten, ingrediënten, eenheden en equivalenties)",
-    "no_data_export": "Geen gegevens om te exporteren"
+    "no_data_export": "Geen gegevens om te exporteren",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Bewerken van \"{name}\"",
     "ingredient_added": "Toegevoegd aan de tafel",
@@ -197,7 +195,6 @@
     "missing_ingredient_data": "Ingrediëntengegevens ontbreken",
     "recipe_available": "aan de tafel"
   },
-
   "confirm": {
     "delete_ingredient": "\"{name}\" uit voorraadkast verwijderen?",
     "clear_ingredients": "Weet je zeker dat je de voorraadkast wilt legen? Deze actie kan niet ongedaan worden gemaakt.",
@@ -212,7 +209,6 @@
     "delete_unit": "Aangepaste eenheid \"{name}\" verwijderen?",
     "delete_conversion": "Conversie \"{key}\" verwijderen?"
   },
-
   "desktop": {
     "ingredients": "Ingrediënten",
     "recipe_creator": "Receptenmaker",
@@ -233,7 +229,6 @@
     "export": "JSON Exporteren",
     "delete": "Verwijderen"
   },
-
   "modal": {
     "recipe_name": "Receptnaam",
     "close": "Sluiten",
@@ -248,9 +243,14 @@
     "net_profit": "Nettowinst",
     "profit_margin": "Winstmarge",
     "roi": "Return on Investment (ROI)",
-    "profit_per_euro": "Winst per €"
+    "profit_per_euro": "Winst per €",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_unit_title": "Add Unit",
+    "recipe_details_title": "Recipe Details",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion",
+    "edit_ingredient_title": "Edit Ingredient"
   },
-
   "stats": {
     "cost_label": "Ingrediëntenkosten",
     "profit_label": "Nettowinst",
@@ -258,7 +258,6 @@
     "margin_label": "Marge %",
     "roi_label": "Winstgevendheid"
   },
-
   "pwa": {
     "install_app": "📱 Installeer als App",
     "install_description": "Snelle toegang zonder browser nodig",
@@ -270,5 +269,14 @@
     "install_unsupported": "Uw browser ondersteunt het installeren van apps niet. Probeer Chrome, Edge of Safari op iOS.",
     "uninstall_button": "App verwijderen",
     "uninstall_description": "Verwijder de applicatie van uw apparaat"
+  },
+  "common": {
+    "cancel": "Niet nu",
+    "add": "Toevoegen",
+    "update": "Bijwerken",
+    "new_recipe": "New Recipe",
+    "confirm_changes": "Confirm Changes",
+    "save": "Recept Opslaan",
+    "edit_details": "Edit Details"
   }
 }

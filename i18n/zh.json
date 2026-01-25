@@ -1,14 +1,12 @@
-﻿{
+{
   "app_name": "史诗食谱",
   "app_description": "带有成本和盈利能力分析的食谱管理器",
-
   "nav": {
     "ingredients": "食材",
     "create_recipe": "创建食谱",
     "my_recipes": "我的食谱",
     "settings": "设置"
   },
-
   "ingredients": {
     "title": "食材",
     "ingredient_name": "食材名称",
@@ -32,7 +30,6 @@
     "edit_button": "编辑",
     "update_button": "更新"
   },
-
   "recipe": {
     "title": "食谱创建器",
     "recipe_name": "菜名",
@@ -59,9 +56,9 @@
       "price_per_portion": "每份价格",
       "margin": "利润率 %",
       "roi": "投资回报率"
-    }
+    },
+    "add_ingredient_button": "Add Ingredient"
   },
-
   "book": {
     "title": "我的食谱",
     "export_json": "导出 JSON",
@@ -83,7 +80,6 @@
     "profit_per_euro": "每€利润",
     "portions": "份数"
   },
-
   "settings": {
     "title": "设置",
     "units_title": "度量单位",
@@ -107,7 +103,6 @@
     "export_all": "导出全部（食谱+食材）",
     "import_data": "导入数据",
     "clear_all": "清除全部 (⚠️)",
-
     "units": {
       "kilogramo": "公斤",
       "gramo": "克",
@@ -120,7 +115,6 @@
       "pieza": "块"
     }
   },
-
   "donation": {
     "title": "捐赠",
     "install_app": "📱 安装为应用",
@@ -135,7 +129,6 @@
     "copy_button": "复制",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "食材已添加到食品室",
     "ingredient_updated": "食材已更新",
@@ -169,40 +162,39 @@
     "pwa_installed": "应用安装成功",
     "pwa_install_error": "此时无法安装应用。请确保您正在使用兼容的浏览器",
     "full_config_exported": "完整配置已导出（食谱、食材、单位和转换）",
-    "no_data_export": "没有数据可导出"
+    "no_data_export": "没有数据可导出",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
-    "editing_recipe": "\u7f16\u8f91 \\\"{name}\\\"",
-    "ingredient_added": "\u6dfb\u52a0\u5230\u8868\u683c",
-    "ingredient_deleted": "\u4ece\u98df\u7587\u4e2d\u5220\u9664",
-    "ingredient_updated": "\u5df2\u66f4\u65b0",
-    "no_conversion": "\u6ca1\u6709\u53ef\u7528\u7684\u4ecb\u75b2\u4e2d\u6587{from}\u53f8{to}\uff0c\u4f7f\u7528\u539f\u59cb\u5355\u4f4d",
-    "recipe_deleted": "\u5df2\u5220\u9664",
-    "recipe_imported": "\u6210\u529f\u5bfc\u5165\u914d\u65b9",
-    "recipe_replaced": "\u5df2\u66ff\u6362",
-    "recipes_imported": "\u914d\u65b9\u5b50\u5bfc\u5165",
-    "ingredients_imported": "\u914d\u6599\u5bfc\u5165",
-    "ingredients_replaced": "\u914d\u6599\u5df2\u66ff\u6362",
-    "units_merged": "\u5355\u4f4d\u5df2\u5408\u5e76",
-    "units_replaced": "\u5355\u4f4d\u5df2\u66ff\u6362",
-    "conversions_merged": "\u8f6c\u6362\u5df2\u5408\u5e76",
-    "conversions_replaced": "\u8f6c\u6362\u5df2\u66ff\u6362",
-    "recipes_merged": "\u914d\u65b9\u3001\u91cd\u590d\u4ee5\u79fb\u9664",
-    "demo_loaded": "\u49a1\u6a08\u914d\u6599\u5df2\u52a0\u8f09",
-    "pantry_cleared": "\u98df\u7587\u5df2\u6e05\u7a7a",
-    "conversion_added": "\u8f6c\u6362{from}\u2194{to}\u5df2\u6dfb\u52a0",
-    "invalid_json": "\u65e0\u6548\u7684JSON\u5f62\u5f0f",
-    "invalid_recipe_json": "\u65e0\u6548\u7684\u914d\u65b9JSON\u5f62\u5f0f",
-    "invalid_units_json": "\u6587\u4ef6\u4e0d\u542b\u6709\u6548\u7684\u5355\u4f4d\u6216\u4e24\u4e22",
-    "error_reading_file": "\u8bfb\u53d6JSON\u6587\u4ef6\u51fa\u9519",
-    "complete_all_fields": "\u8bf7\u586b\u5199\u4e0d\u5b50\u5168\u90e8\u533a\u57df",
-    "complete_all_fields_correct": "\u8bf7\u786e\u4fdd\u586b\u8bbf\u4e0d\u5b50\u5168\u90e8\u533a\u57df\u65b9\u6cd5",
-    "write_name_add_ingredients": "\u586b\u5199\u540d\u79f0\u4e0d\u4e0a\u914d\u6599",
-    "missing_ingredient_data": "\u7f3a\u5c11\u914d\u6599\u6570\u636e",
-    "recipe_available": "\u4e0a\u4e86\u8868"
+    "editing_recipe": "编辑 \\\"{name}\\\"",
+    "ingredient_added": "添加到表格",
+    "ingredient_deleted": "从食疇中删除",
+    "ingredient_updated": "已更新",
+    "no_conversion": "没有可用的介疲中文{from}司{to}，使用原始单位",
+    "recipe_deleted": "已删除",
+    "recipe_imported": "成功导入配方",
+    "recipe_replaced": "已替换",
+    "recipes_imported": "配方子导入",
+    "ingredients_imported": "配料导入",
+    "ingredients_replaced": "配料已替换",
+    "units_merged": "单位已合并",
+    "units_replaced": "单位已替换",
+    "conversions_merged": "转换已合并",
+    "conversions_replaced": "转换已替换",
+    "recipes_merged": "配方、重复以移除",
+    "demo_loaded": "䦡樈配料已加載",
+    "pantry_cleared": "食疇已清空",
+    "conversion_added": "转换{from}↔{to}已添加",
+    "invalid_json": "无效的JSON形式",
+    "invalid_recipe_json": "无效的配方JSON形式",
+    "invalid_units_json": "文件不含有效的单位或两丢",
+    "error_reading_file": "读取JSON文件出错",
+    "complete_all_fields": "请填写不子全部区域",
+    "complete_all_fields_correct": "请确保填访不子全部区域方法",
+    "write_name_add_ingredients": "填写名称不上配料",
+    "missing_ingredient_data": "缺少配料数据",
+    "recipe_available": "上了表"
   },
-
   "confirm": {
     "delete_ingredient": "从食品室删除\"{name}\"？",
     "clear_ingredients": "您确定要清空食品室吗？此操作无法撤销。",
@@ -217,7 +209,6 @@
     "delete_unit": "删除自定义单位\"{name}\"？",
     "delete_conversion": "删除转换\"{key}\"？"
   },
-
   "desktop": {
     "ingredients": "食材",
     "recipe_creator": "食谱创建器",
@@ -238,7 +229,6 @@
     "export": "导出 JSON",
     "delete": "删除"
   },
-
   "modal": {
     "recipe_name": "食谱名称",
     "close": "关闭",
@@ -253,9 +243,14 @@
     "net_profit": "净利润",
     "profit_margin": "利润率",
     "roi": "投资回报率 (ROI)",
-    "profit_per_euro": "每€利润"
+    "profit_per_euro": "每€利润",
+    "edit_ingredient_title": "Edit Ingredient",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "recipe_details_title": "Recipe Details",
+    "add_unit_title": "Add Unit",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion"
   },
-
   "stats": {
     "cost_label": "食材成本",
     "profit_label": "净利润",
@@ -263,7 +258,6 @@
     "margin_label": "利润率 %",
     "roi_label": "投资回报率"
   },
-
   "pwa": {
     "install_app": "📱 安装为应用",
     "install_description": "快速访问，无需浏览器",
@@ -275,7 +269,14 @@
     "install_unsupported": "您的浏览器不支持应用安装。请尝试 Chrome、Edge 或 iOS 上的 Safari。",
     "uninstall_button": "卸载应用",
     "uninstall_description": "从您的设备卸载应用"
+  },
+  "common": {
+    "cancel": "稍后",
+    "confirm_changes": "Confirm Changes",
+    "edit_details": "Edit Details",
+    "add": "添加",
+    "new_recipe": "New Recipe",
+    "save": "保存食谱",
+    "update": "更新"
   }
 }
-
-

@@ -1,14 +1,12 @@
 {
   "app_name": "Epiki Koki Buku",
   "app_description": "Koki manejer nanga kosto nanga profit analisis",
-
   "nav": {
     "ingredients": "Ingridienti",
     "create_recipe": "Meki Resep",
     "my_recipes": "Mi Resep",
     "settings": "Seting"
   },
-
   "ingredients": {
     "title": "Ingridienti",
     "ingredient_name": "Ingridienti Nen",
@@ -28,9 +26,10 @@
     "price_per_unit": "Pris/Yunit",
     "delete_button": "Trowe",
     "edit_button": "Kenki",
-    "update_button": "Update"
+    "update_button": "Update",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
-
   "recipe": {
     "title": "Resep Meker",
     "recipe_name": "Njan Nen",
@@ -39,7 +38,9 @@
     "ingredient": "Ingridienti",
     "select_ingredient": "-- Piki --",
     "quantity": "Owantu",
-    "unit": "Yunit",    "select_unit": "-- Piki yunit --",    "add_button": "Adi",
+    "unit": "Yunit",
+    "select_unit": "-- Piki yunit --",
+    "add_button": "Adi",
     "clear_button": "Krasi",
     "price": "Njan Pris (€)",
     "portions": "Porti",
@@ -52,9 +53,12 @@
       "price_per_portion": "Pris per Porti",
       "margin": "Margin %",
       "roi": "Profit"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "add_ingredient_button": "Add Ingredient",
+    "portions_placeholder": "1"
   },
-
   "book": {
     "title": "Mi Resep",
     "export_json": "Export JSON",
@@ -76,7 +80,6 @@
     "profit_per_euro": "Profit per €",
     "portions": "porti"
   },
-
   "settings": {
     "title": "Seting",
     "units_title": "Miti Yunit",
@@ -100,7 +103,6 @@
     "export_all": "Export Ala (Resep + Ingridienti)",
     "import_data": "Import Data",
     "clear_all": "Krasi Ala (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -113,7 +115,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Donasi",
     "install_app": "📱 Install leki App",
@@ -128,7 +129,6 @@
     "copy_button": "Kopi",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingridienti adi na koki skapu",
     "ingredient_updated": "Ingridienti update",
@@ -162,9 +162,9 @@
     "pwa_installed": "App install bun",
     "pwa_install_error": "App no kan install now. Cheki browser support",
     "full_config_exported": "Furu konfig export (resipì, ingredient, yunit nanga equivalent)",
-    "no_data_export": "No data fu export"
+    "no_data_export": "No data fu export",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Mi o fesibE di \"{name}\"",
     "ingredient_added": "Putu pina monton",
@@ -195,7 +195,6 @@
     "missing_ingredient_data": "Ingredienti datu fal",
     "recipe_available": "pina monton"
   },
-
   "confirm": {
     "delete_ingredient": "Trowe \"{name}\" fu koki skapu?",
     "clear_ingredients": "Yu siki fu krasi a koki skapu? A wroko disi no kan undo.",
@@ -210,7 +209,6 @@
     "delete_unit": "Trowe custom yunit \"{name}\"?",
     "delete_conversion": "Trowe konversi \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Ingridienti",
     "recipe_creator": "Resep Meker",
@@ -231,7 +229,6 @@
     "export": "Export JSON",
     "delete": "Trowe"
   },
-
   "modal": {
     "recipe_name": "Resep Nen",
     "close": "Kibri",
@@ -246,9 +243,14 @@
     "net_profit": "Neti Profit",
     "profit_margin": "Profit Margin",
     "roi": "Return on Investment (ROI)",
-    "profit_per_euro": "Profit per €"
+    "profit_per_euro": "Profit per €",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_unit_title": "Add Unit",
+    "recipe_details_title": "Recipe Details",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion",
+    "edit_ingredient_title": "Edit Ingredient"
   },
-
   "stats": {
     "cost_label": "Ingridienti Kosto",
     "profit_label": "Neti Profit",
@@ -256,7 +258,6 @@
     "margin_label": "Margin %",
     "roi_label": "Profit"
   },
-
   "pwa": {
     "install_app": "📱 Instala kom Aplikashon",
     "install_description": "Aksesu rápidu sin necesidad de navegador",
@@ -268,5 +269,14 @@
     "install_unsupported": "Navigator di bo no suporta instalashon di aplikashon. Prueba ku Chrome, Edge òf Safari en iOS.",
     "uninstall_button": "Disinstala Aplikashon",
     "uninstall_description": "Disinstala e aplikashon from e device di bo"
+  },
+  "common": {
+    "cancel": "No now",
+    "add": "Adi",
+    "update": "Update",
+    "new_recipe": "New Recipe",
+    "confirm_changes": "Confirm Changes",
+    "save": "Seif Resep",
+    "edit_details": "Edit Details"
   }
 }

@@ -1,14 +1,12 @@
 {
   "app_name": "Livro de Receitas Épico",
   "app_description": "Gerenciador de receitas com análise de custos e lucratividade",
-
   "nav": {
     "ingredients": "Ingredientes",
     "create_recipe": "Criar Receita",
     "my_recipes": "Minhas Receitas",
     "settings": "Configurações"
   },
-
   "ingredients": {
     "title": "Ingredientes",
     "ingredient_name": "Nome do Ingrediente",
@@ -28,9 +26,10 @@
     "price_per_unit": "Preço/Unidade",
     "delete_button": "Deletar",
     "edit_button": "Editar",
-    "update_button": "Atualizar"
+    "update_button": "Atualizar",
+    "pack_size_placeholder": "1",
+    "price_placeholder": "0.00"
   },
-
   "recipe": {
     "title": "Criador de Receitas",
     "recipe_name": "Nome do Prato",
@@ -39,7 +38,9 @@
     "ingredient": "Ingrediente",
     "select_ingredient": "-- Escolher --",
     "quantity": "Quantidade",
-    "unit": "Unidade",    "select_unit": "-- Selecionar unidade --",    "add_button": "Adicionar",
+    "unit": "Unidade",
+    "select_unit": "-- Selecionar unidade --",
+    "add_button": "Adicionar",
     "clear_button": "Limpar",
     "price": "Preço do Prato (€)",
     "portions": "Porções",
@@ -52,9 +53,12 @@
       "price_per_portion": "Preço por Porção",
       "margin": "Margem %",
       "roi": "Lucratividade"
-    }
+    },
+    "price_placeholder": "0.00",
+    "quantity_placeholder": "100",
+    "add_ingredient_button": "Add Ingredient",
+    "portions_placeholder": "1"
   },
-
   "book": {
     "title": "Minhas Receitas",
     "export_json": "Exportar JSON",
@@ -76,7 +80,6 @@
     "profit_per_euro": "Lucro por €",
     "portions": "porções"
   },
-
   "settings": {
     "title": "Configurações",
     "units_title": "Unidades de Medida",
@@ -100,7 +103,6 @@
     "export_all": "Exportar Tudo (Receitas + Ingredientes)",
     "import_data": "Importar Dados",
     "clear_all": "Limpar Tudo (⚠️)",
-
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",
@@ -113,7 +115,6 @@
       "pieza": "Piece"
     }
   },
-
   "donation": {
     "title": "Doações",
     "install_app": "📱 Instalar como App",
@@ -128,7 +129,6 @@
     "copy_button": "Copiar",
     "view_on_explorer": "Polygonscan"
   },
-
   "toasts": {
     "ingredient_added": "Ingrediente adicionado à despensa",
     "ingredient_updated": "Ingrediente atualizado",
@@ -162,9 +162,9 @@
     "pwa_installed": "App instalado com sucesso",
     "pwa_install_error": "O app não pode ser instalado no momento. Certifique-se de estar usando um navegador compatível",
     "full_config_exported": "Configuração completa exportada (receitas, ingredientes, unidades e equivalências)",
-    "no_data_export": "Nenhum dado para exportar"
+    "no_data_export": "Nenhum dado para exportar",
+    "recipe_updated": "Recipe updated"
   },
-
   "messages": {
     "editing_recipe": "Editando \"{name}\"",
     "ingredient_added": "Adicionado à mesa",
@@ -195,7 +195,6 @@
     "missing_ingredient_data": "Dados do ingrediente ausentes",
     "recipe_available": "na mesa"
   },
-
   "confirm": {
     "delete_ingredient": "Deseja remover \"{name}\" da despensa?",
     "clear_ingredients": "Tem certeza de que deseja limpar a despensa? Esta ação não pode ser desfeita.",
@@ -210,7 +209,6 @@
     "delete_unit": "Deletar unidade personalizada \"{name}\"?",
     "delete_conversion": "Deletar conversão \"{key}\"?"
   },
-
   "desktop": {
     "ingredients": "Ingredientes",
     "recipe_creator": "Criador de Receitas",
@@ -231,7 +229,6 @@
     "export": "Exportar JSON",
     "delete": "Deletar"
   },
-
   "modal": {
     "recipe_name": "Nome da Receita",
     "close": "Fechar",
@@ -246,9 +243,14 @@
     "net_profit": "Lucro Líquido",
     "profit_margin": "Margem de Lucro",
     "roi": "Retorno sobre Investimento (ROI)",
-    "profit_per_euro": "Lucro por €"
+    "profit_per_euro": "Lucro por €",
+    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_unit_title": "Add Unit",
+    "recipe_details_title": "Recipe Details",
+    "add_ingredient_title": "Add Ingredient",
+    "add_conversion_title": "Add Conversion",
+    "edit_ingredient_title": "Edit Ingredient"
   },
-
   "stats": {
     "cost_label": "Custo dos Ingredientes",
     "profit_label": "Lucro Líquido",
@@ -256,7 +258,6 @@
     "margin_label": "Margem %",
     "roi_label": "Rentabilidade"
   },
-
   "pwa": {
     "install_app": "📱 Instalar como Aplicativo",
     "install_description": "Acesso rápido sem precisar de navegador",
@@ -268,5 +269,14 @@
     "install_unsupported": "Seu navegador não suporta instalação de aplicativos. Tente Chrome, Edge ou Safari no iOS.",
     "uninstall_button": "Desinstalar Aplicativo",
     "uninstall_description": "Desinstale o aplicativo do seu dispositivo"
+  },
+  "common": {
+    "cancel": "Depois",
+    "add": "Adicionar",
+    "update": "Atualizar",
+    "new_recipe": "New Recipe",
+    "confirm_changes": "Confirm Changes",
+    "save": "Salvar Receita",
+    "edit_details": "Edit Details"
   }
 }

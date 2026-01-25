@@ -12,34 +12,79 @@
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23e0c36c' width='192' height='192'/><path fill='%2312141d' d='M96 48c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 80c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z'/><circle cx='96' cy='96' r='12' fill='%23e0c36c'/></svg>">
   <title>Recetario Épico</title>
   <style>
-    /* Custom styles for toast and modal */
+    :root {
+      --primary: #7C9D8E;
+      --primary-light: #A1C1B1;
+      --primary-dark: #5F7A6E;
+      --bg: #F8F9F5;
+      --bg-card: #FFFFFF;
+      --accent: #D9AD98;
+      --text: #2C3E50;
+      --text-muted: #7F8C8D;
+      --danger: #E74C3C;
+      --success: #27AE60;
+      --warning: #F39C12;
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --radius: 1rem;
+    }
+
     * {
       box-sizing: border-box;
+      transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
     }
 
     #toast-container {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 200;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .toast {
-      background: #333;
-      color: white;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 4px;
-      animation: slideIn 0.3s ease-out;
+      background: var(--bg-card);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-hover);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      border-left: 4px solid var(--primary);
+      animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast-success {
+      border-left-color: var(--success);
+    }
+
+    .toast-error {
+      border-left-color: var(--danger);
+    }
+
+    .toast-warning {
+      border-left-color: var(--warning);
     }
 
     @keyframes slideIn {
       from {
-        transform: translateX(100%);
+        transform: translateX(120%);
+        opacity: 0;
       }
 
       to {
         transform: translateX(0);
+        opacity: 1;
       }
     }
 
@@ -51,7 +96,8 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(44, 62, 80, 0.4);
+      backdrop-filter: blur(4px);
     }
 
     .modal.active {
@@ -61,17 +107,14 @@
     }
 
     .modal-content {
-      background: white;
-      margin: 10% auto;
-      padding: 15px;
+      background: var(--bg-card);
+      padding: 2rem;
       width: 90%;
-      max-width: 900px;
-      border-radius: 8px;
-      font-size: 14px;
-      max-height: 80vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      max-width: 600px;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .tab-content {
@@ -80,6 +123,77 @@
 
     .tab-content.active {
       display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(124, 157, 142, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+      background: #f0f0f0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
@@ -88,111 +202,188 @@
 
   <!-- PWA Install Banner + Language Selector -->
   <div id="install-banner"
-    class="hidden fixed top-0 left-0 right-0 bg-gradient-to-r from-yellow-400 to-yellow-500 p-3 shadow-lg text-gray-800 z-50">
-    <div class="max-w-full flex items-center justify-between gap-3 text-sm">
-      <div class="flex-1">
-        <div class="font-bold mb-1" data-i18n="donation.install_app">📱 Instalar como App</div>
-        <div class="text-xs opacity-90" data-i18n="donation.install_description">Acceso rápido sin necesidad de
-          navegador</div>
+    class="hidden fixed top-4 left-4 right-4 bg-primary text-white p-4 shadow-2xl rounded-2xl z-50 animate-bounce"
+    style="background-color: var(--primary)">
+    <div class="flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div>
+          <div class="font-bold text-sm" data-i18n="donation.install_app">📱 Instalar como App</div>
+          <div class="text-[10px] opacity-80" data-i18n="donation.install_description">Acceso rápido sin conexión</div>
+        </div>
       </div>
-      <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs whitespace-nowrap"
-        onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-      <button class="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs"
-        onclick="dismissInstallBanner()">✕</button>
+      <div class="flex gap-2">
+        <button class="bg-white text-primary px-4 py-1.5 rounded-lg text-xs font-bold shadow-sm"
+          style="color: var(--primary)" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+        <button class="bg-primary-dark text-white px-2 py-1.5 rounded-lg text-xs"
+          onclick="dismissInstallBanner()">✕</button>
+      </div>
     </div>
   </div>
 
-  <!-- Language Selector Bar -->
-  <div id="lang-bar" class="hidden fixed top-20 right-4 bg-white border-2 border-yellow-400 p-2 rounded shadow z-40">
-    <select id="lang-select"
-      class="bg-white text-yellow-600 border border-yellow-400 px-2 py-1 text-xs cursor-pointer rounded"
-      onchange="changeLanguage(this.value)">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="nl">Nederlands</option>
-      <option value="srn">Sranantongo</option>
-    </select>
+  <!-- MODAL de Idioma (Rediseñado) -->
+  <div id="language-modal" class="modal">
+    <div class="modal-content max-w-lg">
+      <div class="modal-header flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800" data-i18n="settings.title">Idioma</h3>
+        <button
+          class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+          onclick="toggleLangBar()">×</button>
+      </div>
+      <div class="grid grid-cols-2 gap-2 max-h-[60vh] overflow-y-auto no-scrollbar" id="lang-options">
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('es')">🇪🇸 Español</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('en')">🇺🇸 English</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('fr')">🇫🇷 Français</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('de')">🇩🇪 Deutsch</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('it')">🇮🇹 Italiano</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('pt')">🇵🇹 Português</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('nl')">🇳🇱 Nederlands</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('ar')">🇸🇦 العربية</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('ja')">🇯🇵 日本語</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('ko')">🇰🇷 한국어</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('zh')">🇨🇳 中文</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('ru')">🇷🇺 Русский</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('tr')">🇹🇷 Türkçe</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('vi')">🇻🇳 Tiếng Việt</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('th')">🇹🇭 ไทย</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('pl')">🇵🇱 Polski</button>
+        <button
+          class="btn btn-secondary justify-start font-medium py-3 px-4 rounded-xl hover:border-primary/50 transition-all text-xs"
+          onclick="changeLanguage('srn')">🇸🇷 Sranan</button>
+      </div>
+    </div>
   </div>
 
-  <div class="flex h-screen bg-yellow-50 overflow-x-hidden">
-    <aside class="hidden md:flex flex-col items-center py-4 w-20 bg-gray-100">
+  <div class="flex h-screen bg-gray-50 overflow-x-hidden">
+    <aside class="hidden md:flex flex-col items-center py-6 w-24 bg-white border-r border-gray-100">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-10 shadow-sm"
+        style="background-color: var(--primary-light)">
+        <i class="fas fa-utensils text-white text-xl"></i>
+      </div>
       <button id="sidebar-ingredientes"
-        class="w-16 h-16 flex items-center justify-center rounded hover:bg-gray-200 text-gray-600 mb-2"
-        onclick="switchTab('tab-ingredientes')" title="Ingredientes">
-        <i class="fas fa-list"></i>
+        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 mb-4 hover:text-primary transition-all"
+        onclick="switchTab('tab-ingredientes')" title="Ingredientes" data-i18n-title="nav.ingredients">
+        <i class="fas fa-carrot text-xl"></i>
       </button>
       <button id="sidebar-receta"
-        class="w-16 h-16 flex items-center justify-center rounded hover:bg-gray-200 text-gray-600 mb-2"
-        onclick="switchTab('tab-receta')" title="Crear Receta">
-        <i class="fas fa-plus"></i>
+        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 mb-4 hover:text-primary transition-all"
+        onclick="switchTab('tab-receta')" title="Crear Receta" data-i18n-title="nav.create_recipe">
+        <i class="fas fa-mortar-pestle text-xl"></i>
       </button>
       <button id="sidebar-libro"
-        class="w-16 h-16 flex items-center justify-center rounded bg-yellow-300 text-gray-800 mb-2"
-        onclick="switchTab('tab-libro')" title="Mis Recetas">
-        <i class="fas fa-book"></i>
+        class="w-16 h-16 flex items-center justify-center rounded-2xl bg-primary text-white mb-4 shadow-lg shadow-primary/20"
+        style="background-color: var(--primary)" onclick="switchTab('tab-libro')" title="Mis Recetas"
+        data-i18n-title="nav.my_recipes">
+        <i class="fas fa-book-open text-xl"></i>
       </button>
       <button id="sidebar-config"
-        class="w-16 h-16 flex items-center justify-center rounded hover:bg-gray-200 text-gray-600"
-        onclick="switchTab('tab-config')" title="Configuración">
-        <i class="fas fa-cog"></i>
+        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 hover:text-primary transition-all mt-auto"
+        onclick="switchTab('tab-config')" title="Configuración" data-i18n-title="nav.settings">
+        <i class="fas fa-sliders-h text-xl"></i>
       </button>
     </aside>
     <main class="flex-1 md:ml-0 flex flex-col">
-      <header class="bg-white shadow p-4 flex justify-between items-center">
+      <header
+        class="bg-white/80 backdrop-blur-md sticky top-0 z-30 p-4 px-6 flex justify-between items-center border-b border-gray-100">
         <div class="flex items-center">
-          <div class="w-6 h-6 bg-yellow-400 rounded-full mr-2"></div>
-          <h1 class="text-xl font-bold text-gray-800" data-i18n="app_name">RECETARIO ÉPICO</h1>
+          <div class="w-2 h-8 rounded-full mr-3" style="background-color: var(--primary)"></div>
+          <h1 class="text-xl font-extrabold tracking-tight text-gray-800" data-i18n="app_name">RECETARIO ÉPICO</h1>
         </div>
-        <div class="flex gap-2">
-          <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded text-sm"
-            onclick="toggleLangBar()" title="Cambiar idioma">
-            <i class="fas fa-globe"></i>
+        <div class="flex gap-3">
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors"
+            onclick="toggleLangBar()" title="Cambiar idioma" data-i18n-title="settings.title">
+            <i class="fas fa-language text-lg"></i>
           </button>
-          <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-1 rounded text-sm" onclick="shareApp()"
-            title="Compartir App">
-            <i class="fas fa-share"></i>
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors"
+            onclick="shareApp()" title="Compartir App" data-i18n-title="book.share">
+            <i class="fas fa-share-alt text-lg"></i>
           </button>
-          <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded text-sm donate-btn"
-            onclick="openDonationModal()" data-i18n="donation.title">Donar</button>
+          <button
+            class="text-white px-5 py-2 rounded-xl font-semibold shadow-md hover:opacity-90 transition-all text-sm donate-btn"
+            style="background-color: var(--primary)" onclick="openDonationModal()"
+            data-i18n="donation.title">Donar</button>
         </div>
       </header>
 
       <!-- Install App Banner -->
-      <div id="install-banner" class="hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 flex items-center justify-between gap-4 shadow-lg">
+      <div id="install-banner"
+        class="hidden bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 flex items-center justify-between gap-4 shadow-lg">
         <div class="flex items-center gap-3 flex-1">
           <span class="text-2xl">📱</span>
           <div class="flex-1">
             <p class="font-semibold text-sm" data-i18n="donation.install_app">Instalar como App</p>
-            <p class="text-xs opacity-90" data-i18n="donation.install_description">Guarda Recetario en tu dispositivo para acceso rápido sin conexión</p>
+            <p class="text-xs opacity-90" data-i18n="donation.install_description">Guarda Recetario en tu dispositivo
+              para acceso rápido sin conexión</p>
           </div>
         </div>
         <div class="flex gap-2 flex-shrink-0">
-          <button class="bg-white hover:bg-gray-100 text-blue-600 font-medium px-4 py-2 rounded-lg transition-colors text-sm whitespace-nowrap" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-          <button class="bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm whitespace-nowrap" onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
+          <button
+            class="bg-white hover:bg-gray-100 text-blue-600 font-medium px-4 py-2 rounded-lg transition-colors text-sm whitespace-nowrap"
+            onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
+          <button
+            class="bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm whitespace-nowrap"
+            onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
         </div>
       </div>
 
       <!-- Bottom Nav for Mobile -->
-      <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-2">
-        <button id="bottom-ingredientes" class="flex flex-col items-center text-gray-600 py-3 px-4"
+      <div
+        class="md:hidden fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-lg border border-gray-100 flex justify-around py-3 z-40 rounded-3xl shadow-2xl">
+        <button id="bottom-ingredientes" class="flex flex-col items-center text-gray-400 transition-colors"
           onclick="switchTab('tab-ingredientes')">
-          <i class="fas fa-list"></i>
+          <i class="fas fa-carrot text-xl"></i>
+          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.ingredients">Ingredientes</span>
         </button>
-        <button id="bottom-receta" class="flex flex-col items-center text-gray-600 py-3 px-4"
+        <button id="bottom-receta" class="flex flex-col items-center text-gray-400 transition-colors"
           onclick="switchTab('tab-receta')">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-mortar-pestle text-xl"></i>
+          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.create_recipe">Crear</span>
         </button>
-        <button id="bottom-libro" class="flex flex-col items-center text-yellow-600 py-3 px-4"
-          onclick="switchTab('tab-libro')">
-          <i class="fas fa-book"></i>
+        <button id="bottom-libro" class="flex flex-col items-center text-primary transition-colors"
+          style="color: var(--primary)" onclick="switchTab('tab-libro')">
+          <i class="fas fa-book-open text-xl"></i>
+          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.my_recipes">Mis Recetas</span>
         </button>
-        <button id="bottom-config" class="flex flex-col items-center text-gray-600 py-3 px-4"
+        <button id="bottom-config" class="flex flex-col items-center text-gray-400 transition-colors"
           onclick="switchTab('tab-config')">
-          <i class="fas fa-cog"></i>
+          <i class="fas fa-sliders-h text-xl"></i>
+          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.settings">Ajustes</span>
         </button>
       </div>
 
@@ -200,15 +391,20 @@
 
         <!-- TAB 1: INGREDIENTES -->
         <div id="tab-ingredientes" class="tab-content">
-          <section class="bg-white rounded-lg shadow p-6 mb-20">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-md font-semibold text-gray-800" data-i18n="ingredients.list_title">Despensa</h3>
-              <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-1 rounded text-sm shadow"
-                onclick="openIngredientModal()" data-i18n="ingredients.add_button">
-                <i class="fas fa-plus mr-1"></i> Añadir
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 mb-20 border border-gray-50">
+            <div class="flex justify-between items-center mb-8">
+              <div>
+                <h3 class="text-xl font-bold text-gray-800" data-i18n="ingredients.list_title">Despensa</h3>
+                <p class="text-sm text-gray-500" data-i18n="app_description">Gestor de ingredientes</p>
+              </div>
+              <button
+                class="bg-primary text-white px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/20 flex items-center gap-2 hover:scale-105 transition-all"
+                style="background-color: var(--primary)" onclick="openIngredientModal()"
+                data-i18n="ingredients.add_button">
+                <i class="fas fa-plus text-xs"></i> Añadir
               </button>
             </div>
-            <div class="space-y-2" id="ing-list">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ing-list">
               <!-- Listado de ingredientes -->
             </div>
           </section>
@@ -217,36 +413,45 @@
         <!-- TAB 2: CREAR RECETA -->
         <div id="tab-receta" class="tab-content">
           <div class="grid grid-cols-1 gap-4">
-            <section class="bg-white rounded-lg shadow p-6">
-              <h2 class="text-lg font-semibold text-gray-800 mb-4" data-i18n="recipe.title">Creador de Recetas</h2>
-              <div class="space-y-4">
+            <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50">
+              <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="recipe.title">Creador de Recetas</h2>
+              <div class="space-y-6">
                 <!-- Resumen de Receta (Solo lectura) -->
-                <div class="bg-yellow-50 p-4 rounded-lg flex justify-between items-center mb-2">
+                <div class="bg-gray-50 p-6 rounded-[1.5rem] flex justify-between items-center border border-gray-100">
                   <div>
-                    <h3 class="text-xl font-bold text-gray-800" id="display-rec-name">Nueva Receta</h3>
-                    <div class="text-sm text-gray-600 mt-1">
-                      <span id="display-rec-portions">1</span> porciones •
-                      <span id="display-rec-price" class="font-semibold text-green-600">0.00€</span> venta
+                    <h3 class="text-2xl font-black text-gray-900" id="display-rec-name">Nueva Receta</h3>
+                    <div class="flex items-center gap-3 text-sm text-gray-500 mt-2">
+                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100"><span
+                          id="display-rec-portions">1</span> porciones</span>
+                      <span class="bg-sage-50 text-primary font-bold px-2 py-1 rounded-lg border border-sage-100"
+                        style="color: var(--primary); background-color: #f0f4f2;"><span
+                          id="display-rec-price">0.00€</span> venta</span>
                     </div>
                   </div>
-                  <button class="bg-blue-100 hover:bg-blue-200 text-blue-800 p-2 rounded-full"
-                    onclick="openRecipeDetailsModal()" title="Editar Detalles">
+                  <button
+                    class="w-12 h-12 bg-white text-primary border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all flex items-center justify-center"
+                    style="color: var(--primary)" onclick="openRecipeDetailsModal()" title="Editar Detalles"
+                    data-i18n-title="common.edit_details">
                     <i class="fas fa-pen"></i>
                   </button>
                 </div>
 
-                <div class="flex gap-2">
-                  <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold"
-                    onclick="openRecipeItemModal()" data-i18n="recipe.add_ingredient_button">
-                    <i class="fas fa-plus mr-1"></i> Añadir Ingrediente
+                <div class="flex gap-3">
+                  <button
+                    class="flex-1 bg-primary text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                    style="background-color: var(--primary)" onclick="openRecipeItemModal()"
+                    data-i18n="recipe.add_ingredient_button">
+                    <i class="fas fa-plus-circle"></i> Añadir Ingrediente
                   </button>
-                  <button class="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded" onclick="clearActiveRecipe()"
-                    data-i18n="recipe.clear_button">Limpiar</button>
+                  <button
+                    class="bg-gray-100 text-gray-500 px-6 py-3 rounded-2xl font-bold hover:bg-gray-200 transition-all"
+                    onclick="clearActiveRecipe()" data-i18n="recipe.clear_button">Limpiar</button>
                 </div>
-                <div class="border-t pt-4">
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                <div>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1"
                     data-i18n="recipe.selected_ingredients">Ingredientes Seleccionados</label>
-                  <div class="max-h-32 overflow-y-auto border rounded p-2" id="rec-items-list"></div>
+                  <div class="grid grid-cols-1 gap-3 max-h-64 overflow-y-auto pr-2 no-scrollbar" id="rec-items-list">
+                  </div>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -281,16 +486,17 @@
 
         <!-- TAB 3: LIBRO DE RECETAS -->
         <div id="tab-libro" class="tab-content active">
-          <section class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4" data-i18n="book.title">Mis Recetas</h2>
-            <div id="recipe-book" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-96 overflow-y-auto">
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50">
+            <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="book.title">Mis Recetas</h2>
+            <div id="recipe-book"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[60vh] overflow-y-auto pr-2 no-scrollbar">
               <!-- Recetas guardadas -->
             </div>
-            <div class="flex gap-2 mt-4">
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                onclick="exportRecipeBook()">Exportar JSON</button>
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm"
-                onclick="importRecipeBook()">Importar JSON</button>
+            <div class="flex gap-4 mt-8">
+              <button class="flex-1 btn btn-secondary text-sm py-3" onclick="exportRecipeBook()"
+                data-i18n="book.export">Exportar JSON</button>
+              <button class="flex-1 btn btn-secondary text-sm py-3" onclick="importRecipeBook()"
+                data-i18n="book.import">Importar JSON</button>
             </div>
             <input type="file" id="file-input" class="hidden" accept=".json" onchange="handleFileImport()">
             <input type="file" id="recipe-file-input" class="hidden" accept=".json" onchange="handleRecipeImport()">
@@ -300,54 +506,57 @@
 
         <!-- TAB 4: CONFIGURACIÓN -->
         <div id="tab-config" class="tab-content">
-          <section class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4" data-i18n="settings.title">Configuración</h2>
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50">
+            <h2 class="text-xl font-bold text-gray-800 mb-8" data-i18n="settings.title">Configuración</h2>
 
-            <h3 class="text-yellow-600 text-sm font-semibold uppercase mb-3" data-i18n="settings.units_title">Unidades
-              de Medida</h3>
-            <div id="units-list" class="mb-4 max-h-48 overflow-y-auto"></div>
-
-            <div class="flex gap-2 mb-6">
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                onclick="openUnitModal()" data-i18n="settings.add_unit">
-                <i class="fas fa-plus mr-1"></i> Agregar Unidad
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xs font-black text-primary uppercase tracking-widest" style="color: var(--primary)"
+                data-i18n="settings.units_title">Unidades de Medida</h3>
+              <button class="text-primary font-bold text-xs flex items-center gap-1 hover:underline"
+                style="color: var(--primary)" onclick="openUnitModal()" data-i18n="settings.add_unit">
+                <i class="fas fa-plus-circle"></i> Agregar Unidad
               </button>
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm"
-                onclick="resetUnits()" data-i18n="settings.reset_units">Restaurar</button>
+            </div>
+            <div id="units-list"
+              class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 max-h-48 overflow-y-auto pr-2 no-scrollbar"></div>
+
+            <div class="border-t border-gray-100 pt-8 mb-8">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xs font-black text-primary uppercase tracking-widest" style="color: var(--primary)"
+                  data-i18n="settings.conversions_title">Equivalencias</h3>
+                <button class="text-primary font-bold text-xs flex items-center gap-1 hover:underline"
+                  style="color: var(--primary)" onclick="openConversionModal()" data-i18n="settings.add_conversion">
+                  <i class="fas fa-plus-circle"></i> Agregar Conversión
+                </button>
+              </div>
+              <div id="conversions-list" class="grid grid-cols-1 gap-2 mb-8 max-h-48 overflow-y-auto pr-2 no-scrollbar">
+              </div>
             </div>
 
-            <div class="border-t pt-6 mb-6"></div>
-
-            <h3 class="text-yellow-600 text-sm font-semibold uppercase mb-3" data-i18n="settings.conversions_title">
-              Equivalencias de Unidades</h3>
-            <div id="conversions-list" class="mb-4 max-h-48 overflow-y-auto"></div>
-
-            <div class="flex gap-2 mb-4">
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                onclick="openConversionModal()" data-i18n="settings.add_conversion">
-                <i class="fas fa-exchange-alt mr-1"></i> Agregar Conversión
-              </button>
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm"
-                onclick="resetConversions()" data-i18n="settings.reset_conversions">Restaurar</button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-              <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                onclick="exportUnitsAndConversions()" data-i18n="settings.export_units">Exportar Unidades</button>
-              <button class="bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm"
-                onclick="importUnitsAndConversions()" data-i18n="settings.import_units">Importar Unidades</button>
+            <div class="grid grid-cols-2 gap-4 mb-10">
+              <button class="btn btn-secondary text-sm" onclick="exportUnitsAndConversions()"
+                data-i18n="settings.export_units">Exportar Unidades</button>
+              <button class="btn btn-secondary text-sm" onclick="importUnitsAndConversions()"
+                data-i18n="settings.import_units">Importar Unidades</button>
             </div>
 
-            <div class="border-t pt-6"></div>
-
-            <h3 class="text-yellow-600 text-sm font-semibold uppercase mb-3" data-i18n="settings.data_title">Datos</h3>
-            <div class="space-y-2">
-              <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded"
-                onclick="exportRecipeBook()" data-i18n="settings.export_all">Exportar Todo (Recetas +
-                Ingredientes)</button>
-              <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded"
-                onclick="importRecipeBook()" data-i18n="settings.import_data">Importar Datos</button>
-              <button class="w-full bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded" onclick="resetAllData()"
-                data-i18n="settings.clear_all">Limpiar Todo (⚠️)</button>
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4"
+                data-i18n="settings.data_title">Gestión de Datos</h3>
+              <div class="space-y-3">
+                <button class="w-full btn btn-secondary justify-start text-sm" onclick="exportRecipeBook()"
+                  data-i18n="settings.export_all">
+                  <i class="fas fa-download mr-2 opacity-50"></i> Exportar Todo
+                </button>
+                <button class="w-full btn btn-secondary justify-start text-sm" onclick="importRecipeBook()"
+                  data-i18n="settings.import_data">
+                  <i class="fas fa-upload mr-2 opacity-50"></i> Importar Datos
+                </button>
+                <button class="w-full btn justify-start text-sm text-red-500 hover:bg-red-50" onclick="resetAllData()"
+                  data-i18n="settings.clear_all">
+                  <i class="fas fa-trash-alt mr-2 opacity-50"></i> Limpiar Todo (⚠️)
+                </button>
+              </div>
             </div>
           </section>
         </div>
@@ -502,97 +711,121 @@
 
       <!-- MODAL para ver detalles de receta -->
       <div id="recipe-modal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 id="modal-recipe-name" class="text-lg font-semibold text-gray-800">Nombre de la Receta</h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeRecipeModal()">×</button>
+        <div class="modal-content max-w-3xl">
+          <div class="modal-header flex justify-between items-center mb-6">
+            <h3 id="modal-recipe-name" class="text-2xl font-black text-gray-800 tracking-tight">Nombre de la Receta</h3>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+              onclick="closeRecipeModal()">×</button>
           </div>
-          <div id="modal-recipe-details" class="recipe-details mb-4"></div>
-          <div class="flex gap-2">
-            <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded"
-              onclick="closeRecipeModal()">Cerrar</button>
-            <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded"
-              onclick="editRecipe()">Editar</button>
-            <button class="flex-1 bg-blue-400 hover:bg-blue-500 text-white px-3 py-2 rounded"
-              onclick="shareRecipe()">Compartir</button>
-            <button class="flex-1 bg-purple-400 hover:bg-purple-500 text-white px-3 py-2 rounded"
-              onclick="exportRecipeJSON()">Exportar JSON</button>
-            <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-3 py-2 rounded"
-              onclick="deleteFromModalRecipe()">Borrar</button>
+          <div id="modal-recipe-details" class="recipe-details mb-8 no-scrollbar overflow-y-auto"></div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <button class="btn btn-secondary text-xs p-2.5" onclick="closeRecipeModal()"
+              data-i18n="book.close">Cerrar</button>
+            <button class="btn btn-secondary text-primary text-xs p-2.5" style="color: var(--primary)"
+              onclick="editRecipe()" data-i18n="desktop.edit">Editar</button>
+            <button class="btn btn-secondary text-blue-500 text-xs p-2.5" onclick="shareRecipe()"
+              data-i18n="book.share">Compartir</button>
+            <button class="btn btn-secondary text-purple-500 text-xs p-2.5" onclick="exportRecipeJSON()"
+              data-i18n="book.export">Exportar</button>
+            <button class="btn bg-red-50 text-red-500 text-xs p-2.5" onclick="deleteFromModalRecipe()"
+              data-i18n="book.delete">Borrar</button>
           </div>
         </div>
       </div>
 
       <!-- MODAL de Donaciones -->
       <div id="donation-modal" class="modal donation-modal">
-        <div class="modal-content max-w-xl w-full">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" data-i18n="donation.title">Donaciones</h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeDonationModal()">×</button>
-          </div>
-          <div class="donation-body grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="modal-content max-w-4xl p-0 overflow-hidden border-0">
+          <div class="grid grid-cols-1 md:grid-cols-2">
             <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
-            <div class="space-y-4">
-              <!-- Sección PWA Install -->
-              <div id="install-prompt" class="hidden p-3 bg-gray-100 border-2 border-yellow-400 rounded">
-                <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.install_app">📱
-                  Instalar App</div>
-                <div class="text-xs text-gray-700 mb-3 leading-relaxed" data-i18n="donation.install_description">Guarda
-                  Recetario en tu dispositivo para acceso rápido sin conexión</div>
-                <div class="flex gap-2 flex-col">
-                  <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                    onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-                  <button class="w-full bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm"
-                    onclick="dismissInstallBanner()" data-i18n="donation.later">Ahora no</button>
+            <div class="p-10 bg-gray-50">
+              <div class="flex justify-between items-center mb-10">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-14 h-14 bg-primary/10 text-primary rounded-[1.25rem] flex items-center justify-center text-2xl shadow-inner">
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-black text-gray-800 tracking-tight leading-none mb-1"
+                      data-i18n="donation.title">Donaciones</h3>
+                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
+                  </div>
                 </div>
+                <button
+                  class="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-gray-400 shadow-sm border border-gray-100"
+                  onclick="closeDonationModal()">×</button>
               </div>
 
-              <!-- Sección Mensaje Motivacional -->
-              <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-                <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.support_project">Apoya
-                  el Proyecto</div>
-                <div class="text-xs text-gray-700 leading-relaxed" data-i18n="donation.support_description">Soy un
-                  desarrollador independiente y necesito tu ayuda. Puedes donar mediante el widget o usando estos
-                  métodos P2P</div>
-              </div>
-
-              <!-- Sección Digicel -->
-              <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-                <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.digicel_label">Digicel
+              <div class="space-y-6">
+                <div
+                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
+                  <div
+                    class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-125 transition-transform">
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-widest mb-4"
+                    style="color: var(--primary)">
+                    <i class="fas fa-magic"></i>
+                    <span data-i18n="donation.support_project">Apoya el Proyecto</span>
+                  </div>
+                  <p class="text-sm text-gray-500 leading-relaxed relative z-10 font-medium"
+                    data-i18n="donation.support_description">Independiente y artesanal. Tu ayuda mantiene este proyecto
+                    vivo.</p>
                 </div>
-                <div class="text-sm text-yellow-600 font-bold mb-3 break-all">+5977479759</div>
-                <div class="flex gap-2 flex-wrap">
-                  <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                    onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-                  <a class="flex-1 bg-green-400 hover:bg-green-500 text-white px-3 py-2 rounded text-sm text-center no-underline"
-                    href="https://topup.digicelgroup.com/" target="_blank"
-                    data-i18n="donation.digicel_topup">Recargar</a>
-                </div>
-              </div>
 
-              <!-- Sección Crypto -->
-              <div class="p-3 bg-gray-100 border-2 border-gray-300 rounded">
-                <div class="text-sm text-yellow-600 font-bold uppercase mb-2" data-i18n="donation.crypto_label">USDC
-                  (Polygon)</div>
-                <div id="crypto-address"
-                  class="text-xs text-yellow-600 mb-3 break-all bg-white p-2 border rounded font-mono leading-relaxed">
-                  0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</div>
-                <div class="flex gap-2 flex-wrap">
-                  <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded text-sm"
-                    onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
-                    data-i18n="donation.copy_button">Copiar</button>
-                  <a class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-3 py-2 rounded text-sm text-center no-underline"
-                    href="#"
-                    onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
-                    data-i18n="donation.view_on_explorer">Polygonscan</a>
+                <div
+                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 group hover:shadow-md transition-all">
+                  <div class="flex justify-between items-center mb-6">
+                    <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                      <i class="fas fa-mobile-alt text-primary/40"></i>
+                      <span data-i18n="donation.digicel_label">Digicel</span>
+                    </div>
+                    <span class="text-xs font-black text-primary/60 font-mono tracking-tighter"
+                      style="color: var(--primary)">+5977479759</span>
+                  </div>
+                  <div class="flex gap-4">
+                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                      onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
+                    <a class="flex-1 btn btn-primary text-[10px] h-12 rounded-2xl shadow-sm no-underline"
+                      href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup"
+                      style="background-color: var(--primary)">Recargar</a>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 group hover:shadow-md transition-all">
+                  <div
+                    class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <i class="fab fa-ethereum text-primary/40"></i>
+                    <span data-i18n="donation.crypto_label">USDC (Polygon)</span>
+                  </div>
+                  <div class="bg-gray-50 p-5 rounded-2xl mb-6 border border-gray-100">
+                    <code id="crypto-address"
+                      class="text-[9px] text-gray-400 break-all font-mono leading-relaxed block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
+                  </div>
+                  <div class="flex gap-4">
+                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                      onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
+                      data-i18n="donation.copy_button">Copiar</button>
+                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                      onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
+                      data-i18n="donation.view_on_explorer">Explorer</button>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- COLUMNA DERECHA: WIDGET -->
-            <div class="flex items-center justify-center bg-white border-2 border-gray-300 rounded p-3 overflow-hidden">
-              <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
-                width="100%" height="600" frameborder="0" class="border-none">No se puede cargar el widget</iframe>
+            <div class="relative bg-white flex flex-col">
+              <button
+                class="hidden md:flex absolute top-6 right-6 w-10 h-10 items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 transition-all z-10"
+                onclick="closeDonationModal()">×</button>
+              <div class="flex-1 min-h-[500px]">
+                <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
+                  width="100%" height="100%" frameborder="0" class="w-full h-full border-none">No se puede cargar el
+                  widget</iframe>
+              </div>
             </div>
           </div>
         </div>
@@ -600,16 +833,19 @@
 
       <!-- MODAL de Confirmación -->
       <div id="confirm-modal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="text-lg font-semibold text-gray-800">Confirmar Acción</h3>
+        <div class="modal-content overflow-visible">
+          <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-exclamation-triangle text-2xl"></i>
           </div>
-          <div id="confirm-message" class="mb-4 text-sm leading-relaxed"></div>
-          <div class="flex gap-3">
-            <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-              onclick="closeConfirmModal(false)">Cancelar</button>
-            <button class="flex-1 bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded"
-              onclick="closeConfirmModal(true)">Confirmar</button>
+          <div class="text-center mb-8">
+            <h3 class="text-xl font-black text-gray-900 mb-2">Confirmar Acción</h3>
+            <p id="confirm-message" class="text-gray-500 text-sm leading-relaxed"></p>
+          </div>
+          <div class="flex gap-4">
+            <button class="flex-1 btn btn-secondary" onclick="closeConfirmModal(false)"
+              data-i18n="common.cancel">Cancelar</button>
+            <button class="flex-1 btn bg-red-500 text-white hover:bg-red-600" onclick="closeConfirmModal(true)"
+              data-i18n="common.save">Confirmar</button>
           </div>
         </div>
       </div>
@@ -618,59 +854,62 @@
       <!-- MODAL para Añadir/Editar Ingrediente -->
       <div id="ingredient-modal-form" class="modal">
         <div class="modal-content">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" id="ing-modal-title" data-i18n="modal.add_ingredient_title">
+          <div class="modal-header flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-800" id="ing-modal-title" data-i18n="modal.add_ingredient_title">
               Añadir Ingrediente</h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeIngredientModal()">×</button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+              onclick="closeIngredientModal()">×</button>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.ingredient_name">Nombre
-                del Ingrediente</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="ingredients.ingredient_name">Nombre del Ingrediente</label>
               <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate"
                 data-i18n="ingredients.ingredient_name_placeholder">
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.price">Precio
-                  (€)</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="ingredients.price">Precio (€)</label>
                 <input
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   type="number" id="ing-cost" placeholder="0.00" step="0.01">
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.unit">Unidad</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="ingredients.unit">Unidad</label>
                 <select
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
                   id="ing-rarity"></select>
               </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.price_type">Tipo de
-                  Precio</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="ingredients.price_type">Tipo de Precio</label>
                 <select
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
                   id="ing-price-type" onchange="togglePackInput('ing-price-type','ing-pack-size')">
                   <option value="unit" data-i18n="ingredients.per_unit">Por unidad</option>
                   <option value="pack" data-i18n="ingredients.per_pack">Por pack</option>
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="ingredients.pack_size">Tamaño del
-                  Pack (cantidad)</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="ingredients.pack_size">Pack Size</label>
                 <input
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
               </div>
             </div>
-            <div class="flex gap-2 pt-2">
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                onclick="closeIngredientModal()" data-i18n="common.cancel">Cancelar</button>
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold"
-                id="ing-modal-action-btn" onclick="addIngredient()" data-i18n="common.save">Guardar</button>
+            <div class="flex gap-4 pt-6">
+              <button class="flex-1 btn btn-secondary py-3.5" onclick="closeIngredientModal()"
+                data-i18n="common.cancel">Cancelar</button>
+              <button class="flex-1 btn btn-primary py-3.5" id="ing-modal-action-btn" onclick="addIngredient()"
+                data-i18n="common.save">Guardar</button>
             </div>
           </div>
         </div>
@@ -703,11 +942,11 @@
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 id="rec-unit-select"></select>
             </div>
-            <div class="flex gap-2 pt-2">
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                onclick="closeRecipeItemModal()" data-i18n="common.cancel">Cancelar</button>
-              <button class="flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-semibold"
-                onclick="addToRecipe()" data-i18n="common.add">Añadir</button>
+            <div class="flex gap-4 pt-6">
+              <button class="flex-1 btn btn-secondary py-3.5" onclick="closeRecipeItemModal()"
+                data-i18n="common.cancel">Cancelar</button>
+              <button class="flex-1 btn btn-primary py-3.5" onclick="addToRecipe()"
+                data-i18n="common.add">Añadir</button>
             </div>
           </div>
         </div>
@@ -716,29 +955,32 @@
       <!-- MODAL para Añadir Unidad -->
       <div id="unit-modal" class="modal">
         <div class="modal-content">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" data-i18n="modal.add_unit_title">Añadir Unidad</h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeUnitModal()">×</button>
+          <div class="modal-header flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-800" data-i18n="modal.add_unit_title">Añadir Unidad</h3>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+              onclick="closeUnitModal()">×</button>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.unit_name">Nombre de
-                Unidad</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="settings.unit_name">Nombre de Unidad</label>
               <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="text" id="unit-key" placeholder="kilogramo">
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.symbol">Símbolo</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="settings.symbol">Símbolo</label>
               <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="text" id="unit-value" placeholder="kg">
             </div>
-            <div class="flex gap-2 pt-2">
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                onclick="closeUnitModal()" data-i18n="common.cancel">Cancelar</button>
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold"
-                onclick="addCustomUnit()" data-i18n="common.add">Agregar</button>
+            <div class="flex gap-4 pt-6">
+              <button class="flex-1 btn btn-secondary py-3.5" onclick="closeUnitModal()"
+                data-i18n="common.cancel">Cancelar</button>
+              <button class="flex-1 btn btn-primary py-3.5" onclick="addCustomUnit()"
+                data-i18n="common.add">Agregar</button>
             </div>
           </div>
         </div>
@@ -747,38 +989,42 @@
       <!-- MODAL para Añadir Conversión -->
       <div id="conversion-modal" class="modal">
         <div class="modal-content">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" data-i18n="modal.add_conversion_title">Añadir Conversión
-            </h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeConversionModal()">×</button>
+          <div class="modal-header flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-800" data-i18n="modal.add_conversion_title">Añadir Conversión</h3>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+              onclick="closeConversionModal()">×</button>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-6">
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.from">De</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="settings.from">De</label>
                 <select
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
                   id="conv-from"></select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.to">A</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="settings.to">A</label>
                 <select
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
                   id="conv-to"></select>
               </div>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="settings.factor">Factor</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="settings.factor">Factor</label>
               <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="number" id="conv-factor" placeholder="1.0" step="0.01">
-              <div class="text-xs text-gray-500 mt-1">1 [De] = Factor * [A]</div>
+              <div class="text-[10px] text-gray-400 mt-2 ml-1">1 [De] = Factor * [A]</div>
             </div>
-            <div class="flex gap-2 pt-2">
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                onclick="closeConversionModal()" data-i18n="common.cancel">Cancelar</button>
-              <button class="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold"
-                onclick="addConversion()" data-i18n="common.add">Agregar</button>
+            <div class="flex gap-4 pt-6">
+              <button class="flex-1 btn btn-secondary py-3.5" onclick="closeConversionModal()"
+                data-i18n="common.cancel">Cancelar</button>
+              <button class="flex-1 btn btn-primary py-3.5" onclick="addConversion()"
+                data-i18n="common.add">Agregar</button>
             </div>
           </div>
         </div>
@@ -787,46 +1033,50 @@
       <!-- MODAL Para Detalles de la Receta (Nombre, Precio, Instrucciones) -->
       <div id="recipe-details-modal" class="modal">
         <div class="modal-content">
-          <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" data-i18n="modal.recipe_details_title">Detalles de la Receta
+          <div class="modal-header flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-800" data-i18n="modal.recipe_details_title">Detalles de la Receta
             </h3>
-            <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeRecipeDetailsModal()">×</button>
+            <button
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
+              onclick="closeRecipeDetailsModal()">×</button>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.recipe_name">Nombre del
-                Plato</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="recipe.recipe_name">Nombre del Plato</label>
               <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="text" id="rec-name" placeholder="Pasta a la Carbonara" data-i18n="recipe.recipe_name_placeholder">
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.price">Precio del Plato
-                  (€)</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="recipe.price">Precio (€)</label>
                 <input
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   type="number" id="rec-price" placeholder="0.00" step="0.01" oninput="updateStats()">
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.portions">Porciones</label>
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                  data-i18n="recipe.portions">Porciones</label>
                 <input
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                   type="number" id="rec-portions" placeholder="1" value="1" min="1" step="1" oninput="updateStats()">
               </div>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.instructions">Método de
-                Preparación</label>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="recipe.instructions">Método</label>
               <textarea
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                id="rec-instructions" placeholder="Describe los pasos para preparar la receta..." rows="4"></textarea>
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all no-scrollbar"
+                id="rec-instructions" placeholder="Pasos..." rows="4"
+                data-i18n="recipe.instructions_placeholder"></textarea>
             </div>
-            <div class="flex gap-2 pt-2">
-              <button class="flex-1 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
-                onclick="closeRecipeDetailsModal()" data-i18n="common.cancel">Cerrar</button>
-              <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold"
-                onclick="saveRecipeDetails()" data-i18n="common.confirm_changes">Confirmar Cambios</button>
+            <div class="flex gap-4 pt-6">
+              <button class="flex-1 btn btn-secondary py-3.5" onclick="closeRecipeDetailsModal()"
+                data-i18n="common.cancel">Cerrar</button>
+              <button class="flex-1 btn btn-primary py-3.5" onclick="saveRecipeDetails()"
+                data-i18n="common.confirm_changes">Confirmar</button>
             </div>
           </div>
         </div>
@@ -873,9 +1123,6 @@
               el.textContent = text;
             }
           });
-          // Preseleccionar el idioma actual en el selector
-          const langSelect = document.getElementById('lang-select');
-          if (langSelect) langSelect.value = currentLanguage;
           document.documentElement.lang = currentLanguage;
         }
 
@@ -884,11 +1131,15 @@
           localStorage.setItem('appLanguage', lang);
           await loadI18nData();
           updateI18n();
+          toggleLangBar(); // Close modal after selection
+          showToast(t('messages.units_replaced', 'Idioma actualizado'), 'success');
         }
 
         function toggleLangBar() {
-          const bar = document.getElementById('lang-bar');
-          if (bar) bar.style.display = bar.style.display === 'none' ? 'block' : 'none';
+          const modal = document.getElementById('language-modal');
+          if (modal) {
+            modal.classList.toggle('active');
+          }
         }
 
         // ====== Lógica de Estado ======
@@ -898,12 +1149,12 @@
         let configLoaded = false;
         let currentRecipeModal = null;
 
-        // Constantes de color
+        // Constantes de color (Soft Palette)
         const RARITY_COLORS = {
-          common: '#a9b0c2',
-          rare: '#4fa3ff',
-          epic: '#a335ee',
-          legendary: '#ff8000'
+          common: '#E2E8F0',
+          rare: '#BFDBFE',
+          epic: '#E9D5FF',
+          legendary: '#FED7AA'
         };
 
         // ====== Funciones de Tabs (SPA - Single Page Application) ======
@@ -999,13 +1250,25 @@
         }
 
         // ====== Funciones de UI ======
-        function showToast(msg) {
+        function showToast(msg, type = 'info') {
           const container = document.getElementById('toast-container');
           const t = document.createElement('div');
-          t.className = 'toast';
-          t.innerText = `> ${msg}`;
+          t.className = `toast toast-${type}`;
+
+          let icon = 'info-circle';
+          if (type === 'success') icon = 'check-circle';
+          if (type === 'error') icon = 'exclamation-circle';
+          if (type === 'warning') icon = 'exclamation-triangle';
+
+          t.innerHTML = `<i class="fas fa-${icon}"></i> <span>${msg}</span>`;
           container.appendChild(t);
-          setTimeout(() => t.remove(), 3000);
+
+          // Animation out
+          setTimeout(() => {
+            t.style.transform = 'translateX(120%)';
+            t.style.opacity = '0';
+            setTimeout(() => t.remove(), 400);
+          }, 3000);
         }
 
         // reloj eliminado - no se usa en header
@@ -1137,7 +1400,7 @@
           showToast(`Editando "${currentRecipeModal.name}"`);
         }
 
-        function shareRecipe() {
+        async function shareRecipe() {
           if (!currentRecipeModal) return;
 
           const recipe = currentRecipeModal;
@@ -1146,29 +1409,24 @@
           const profit = recipe.price - recipe.cost;
           const margin = recipe.price > 0 ? (profit / recipe.price) * 100 : 0;
 
-          let shareText = `🍽️ Receta: ${recipe.name}\n\n`;
-          shareText += `Ingredientes:\n`;
-          recipe.items.forEach(item => {
-            shareText += `- ${item.name}: ${item.qty} ${getUnitLabel(item.rarity)}\n`;
-          });
-          shareText += `\n💰 Costo Total: ${recipe.cost.toFixed(2)}€\n`;
-          shareText += `💰 Precio Venta: ${recipe.price.toFixed(2)}€\n`;
-          shareText += `💰 Precio por Porción (${portions}): ${pricePerPortion.toFixed(2)}€\n`;
-          shareText += `💰 Ganancia: ${profit.toFixed(2)}€ (${margin.toFixed(1)}% margen)\n\n`;
-          shareText += `Compartido desde Recetario Épico`;
+          const shareText = `🍳 ${recipe.name}\n💰 ${t('book.sale_price')}: ${recipe.price.toFixed(2)}€\n📉 ${t('book.total_cost')}: ${recipe.cost.toFixed(2)}€\n\n${t('modal.ingredients')}:\n${recipe.items.map(i => `- ${i.name}: ${i.qty} ${getUnitLabel(i.rarity)}`).join('\n')}\n\n${window.location.href}`;
 
-          if (navigator.share) {
-            navigator.share({
-              title: `Receta: ${recipe.name}`,
-              text: shareText,
-            }).catch(console.error);
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([], 'test.png')] })) {
+            try {
+              const imageFile = await createShareImage(recipe);
+              await navigator.share({
+                title: recipe.name,
+                text: shareText,
+                files: [imageFile],
+              });
+              showToast(t('toasts.shared', '¡Compartido con imagen!'), 'success');
+            } catch (error) {
+              if (error.name !== 'AbortError') shareWithoutImage(shareText);
+            }
+          } else if (navigator.share) {
+            shareWithoutImage(shareText);
           } else {
-            // Fallback: copiar al portapapeles
-            navigator.clipboard.writeText(shareText).then(() => {
-              showToast('Receta copiada al portapapeles');
-            }).catch(() => {
-              showToast('Error al compartir');
-            });
+            fallbackCopyTextToClipboard(shareText);
           }
         }
 
@@ -1247,43 +1505,93 @@
           });
         }
 
-        async function createShareImage() {
+        async function createShareImage(recipe) {
           return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
-            canvas.width = 400;
-            canvas.height = 200;
+            canvas.width = 800; // Better resolution
+            canvas.height = 400;
             const ctx = canvas.getContext('2d');
 
-            // Fondo con gradiente
-            const gradient = ctx.createLinearGradient(0, 0, 400, 200);
-            gradient.addColorStop(0, '#e0c36c');
-            gradient.addColorStop(1, '#6cd0e0');
+            // 1. Background (Sage & Cream Gradient)
+            const gradient = ctx.createLinearGradient(0, 0, 800, 400);
+            gradient.addColorStop(0, '#7C9D8E'); // Primary Sage
+            gradient.addColorStop(1, '#8FB5A3');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 400, 200);
+            ctx.fillRect(0, 0, 800, 400);
 
-            // Texto del título
-            ctx.fillStyle = '#12141d';
-            ctx.font = 'bold 24px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('RECETARIO ÉPICO', 200, 80);
+            // 2. Decorative Elements (White Circles)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.beginPath(); ctx.arc(750, 50, 150, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(50, 350, 100, 0, Math.PI * 2); ctx.fill();
 
-            // Texto descriptivo
-            ctx.font = '16px Arial';
-            ctx.fillText('Gestor de Recetas', 200, 110);
-            ctx.fillText('con Análisis de Costos', 200, 130);
+            // 3. Card Container (White)
+            ctx.fillStyle = '#FFFFFF';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+            ctx.shadowBlur = 40;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 20;
 
-            // Icono simple (gema)
-            ctx.fillStyle = '#e0c36c';
-            ctx.beginPath();
-            ctx.moveTo(200, 150);
-            ctx.lineTo(180, 170);
-            ctx.lineTo(180, 190);
-            ctx.lineTo(220, 190);
-            ctx.lineTo(220, 170);
-            ctx.closePath();
+            const margin = 50;
+            const radius = 40;
+            ctx.roundRect(margin, margin, 800 - margin * 2, 400 - margin * 2, radius);
             ctx.fill();
 
-            // Convertir a blob
+            // 4. Header Text
+            ctx.shadowBlur = 0; // Reset shadow for text
+            ctx.shadowOffsetY = 0;
+
+            ctx.fillStyle = '#7C9D8E'; // Primary Sage
+            ctx.font = 'bold 12px Montserrat, Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('RECETARIO ÉPICO · EPIC RECIPES', margin + 30, margin + 40);
+
+            // 5. Recipe Name or App Name
+            const mainTitle = recipe ? recipe.name.toUpperCase() : t('app_name').toUpperCase();
+            ctx.fillStyle = '#12141D';
+            ctx.font = 'black 36px Montserrat, Arial';
+            ctx.fillText(mainTitle, margin + 30, margin + 90);
+
+            // 6. Ingredients Count or Description
+            const subTitle = recipe ? `${recipe.items.length} ${t('modal.ingredients').toUpperCase()}` : t('app_description').toUpperCase();
+            ctx.fillStyle = '#A9B0C2';
+            ctx.font = '600 14px Montserrat, Arial';
+            ctx.fillText(subTitle, margin + 30, margin + 115);
+
+            // 7. Stats Grid (Only if recipe exists)
+            if (recipe) {
+              const statY = margin + 180;
+              const drawStat = (label, value, x, color) => {
+                ctx.fillStyle = '#A9B0C2';
+                ctx.font = 'bold 10px Montserrat, Arial';
+                ctx.fillText(label.toUpperCase(), x, statY);
+
+                ctx.fillStyle = color;
+                ctx.font = 'black 28px Montserrat, Arial';
+                ctx.fillText(value, x, statY + 35);
+              };
+
+              drawStat(t('book.total_cost'), `${recipe.cost.toFixed(2)}€`, margin + 30, '#EE6262');
+              drawStat(t('book.sale_price'), `${recipe.price.toFixed(2)}€`, margin + 230, '#7C9D8E');
+
+              const profit = recipe.price - recipe.cost;
+              drawStat(t('book.net_profit'), `${profit.toFixed(2)}€`, margin + 430, profit >= 0 ? '#7C9D8E' : '#EE6262');
+            } else {
+              // App Promo Logic
+              ctx.fillStyle = '#7C9D8E';
+              ctx.font = 'italic 18px Montserrat, Arial';
+              ctx.fillText('Efficiency and Elegance for every Chef.', margin + 30, margin + 180);
+            }
+
+            // 8. Footer Branding
+            ctx.fillStyle = '#F8F9F5';
+            ctx.fillRect(margin, 400 - margin - 60, 800 - margin * 2, 60);
+
+            ctx.fillStyle = '#7C9D8E';
+            ctx.font = 'bold 10px Montserrat, Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText('DESIGNED FOR GASTRONOMY PROFESSIONALS', 800 - margin - 30, 400 - margin - 25);
+
+            // Convert to blob
             canvas.toBlob((blob) => {
               const file = new File([blob], 'recetario-epico.png', { type: 'image/png' });
               resolve(file);
@@ -1409,7 +1717,7 @@
           saveState();
           renderIngredients();
           closeIngredientModal();
-          showToast(t('toasts.ingredient_added', `${name} añadido a la despensa`));
+          showToast(t('toasts.ingredient_added', `${name} añadido a la despensa`), 'success');
         }
 
         function deleteIngredient(id) {
@@ -1463,7 +1771,7 @@
             saveState();
             renderIngredients();
             closeIngredientModal();
-            showToast(`${name} actualizado`);
+            showToast(`${name} ${t('messages.ingredient_updated', 'actualizado')}`, 'success');
           }
         }
 
@@ -1477,20 +1785,27 @@
           ingredients.forEach(ing => {
             // Listado lateral móvil
             const card = document.createElement('div');
-            card.className = 'bg-white border border-gray-300 rounded p-3 mb-2 flex justify-between items-center';
+            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all';
             const unitPrice = getUnitCost(ing);
-            const priceExtra = ing.priceType === 'pack' ? ` — Pack: ${ing.cost.toFixed(2)}€ / ${ing.packSize}` : '';
+            const priceExtra = ing.priceType === 'pack' ? ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€</span>` : '';
             card.innerHTML = `
           <div class="flex-1">
             <div class="flex items-center mb-1">
-              <span class="inline-block w-3 h-3 rounded-full mr-2" style="background-color:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>
-              <b class="text-sm text-gray-800">${ing.name}</b>
+              <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>
+              <b class="text-sm text-gray-800 font-bold">${ing.name}</b>
             </div>
-            <span class="text-xs text-gray-600">Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
+            <div class="flex items-center flex-wrap gap-1">
+              <span class="text-xs text-gray-400 font-medium">${unitPrice.toFixed(2)}€ / ${getUnitLabel(ing.rarity)}</span>
+              ${priceExtra}
+            </div>
           </div>
           <div class="flex gap-2 ml-2">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-xs" onclick="editIngredient(${ing.id})">Editar</button>
-            <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs" onclick="deleteIngredient(${ing.id})">X</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-primary-light hover:text-white transition-all" onclick="editIngredient(${ing.id})" title="${t('ingredients.edit_button')}" data-i18n-title="ingredients.edit_button">
+              <i class="fas fa-edit text-xs"></i>
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all" onclick="deleteIngredient(${ing.id})" title="${t('ingredients.delete_button')}" data-i18n-title="ingredients.delete_button">
+              <i class="fas fa-trash text-xs"></i>
+            </button>
           </div>
         `;
             list.appendChild(card);
@@ -1717,18 +2032,25 @@
 
           activeRecipe.items.forEach((item, index) => {
             const card = document.createElement('div');
-            card.className = 'card';
+            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:bg-gray-50 transition-all';
             const unitPrice = getUnitCost(item);
             card.innerHTML = `
-          <div class="card-info">
-            <b>${item.name}</b>
-            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
-              <input type="number" value="${item.qty}" min="0.01" step="0.1" style="width: 80px; font-size: 10px; padding: 4px;" onchange="updateRecipeItemQty(${index}, this.value)">
-              <span>${getUnitLabel(item.rarity)}</span>
+          <div class="flex-1">
+            <div class="font-bold text-gray-800 mb-2">${item.name}</div>
+            <div class="flex items-center gap-2">
+              <input type="number" value="${item.qty}" min="0.01" step="0.1" 
+                class="w-20 px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-bold focus:ring-2 focus:ring-primary/20 outline-none" 
+                onchange="updateRecipeItemQty(${index}, this.value)">
+              <span class="text-xs text-gray-400 font-medium">${getUnitLabel(item.rarity)}</span>
             </div>
-            <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
           </div>
-          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipe(${index})">-</button>
+          <div class="text-right mr-4">
+            <div class="text-xs text-gray-300 font-medium">Costo</div>
+            <div class="text-sm font-black text-gray-700">${(unitPrice * item.qty).toFixed(2)}€</div>
+          </div>
+          <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all" onclick="removeFromRecipe(${index})">
+            <i class="fas fa-minus text-xs"></i>
+          </button>
         `;
             list.appendChild(card);
           });
@@ -2071,19 +2393,40 @@
 
           recipeBook.forEach(rec => {
             const div = document.createElement('div');
-            div.className = 'bg-white border border-gray-300 rounded p-4 cursor-pointer hover:shadow-md transition-shadow';
-            div.innerHTML = `
-          <div class="text-yellow-600 font-semibold mb-2 text-sm">${rec.name}</div>
-          <div class="text-gray-500 text-xs leading-relaxed mb-2">
-            ${rec.items.map(i => `${i.name} ${i.qty} ${getUnitLabel(i.rarity)}`).join('<br>')}
-          </div>
-          <div class="border-t pt-2 mb-2"></div>
-          <div class="flex justify-between text-xs">
-            <span class="text-green-600">Venta: ${rec.price.toFixed(2)}€</span>
-            <span class="text-red-600">Costo: ${rec.cost.toFixed(2)}€</span>
-          </div>
-          <div class="text-xs text-gray-400 mt-1">Pulsa para ver detalles</div>
-        `;
+            div.className = 'bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50 hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer group relative overflow-hidden';
+
+            // Background decoration
+            const decor = document.createElement('div');
+            decor.className = 'absolute -right-4 -top-4 w-24 h-24 bg-sage-50 rounded-full opacity-50 group-hover:scale-110 transition-transform';
+            decor.style.backgroundColor = '#f0f4f2';
+            div.appendChild(decor);
+
+            const content = document.createElement('div');
+            content.className = 'relative z-10';
+            content.innerHTML = `
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-2 h-2 rounded-full bg-primary" style="background-color: var(--primary)"></div>
+                <h3 class="text-lg font-black text-gray-800 truncate">${rec.name}</h3>
+              </div>
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex -space-x-2">
+                  ${rec.items.slice(0, 3).map(() => `<div class="w-7 h-7 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] text-gray-400"><i class="fas fa-leaf"></i></div>`).join('')}
+                  ${rec.items.length > 3 ? `<div class="w-7 h-7 rounded-full bg-primary-light border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">+${rec.items.length - 3}</div>` : ''}
+                </div>
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">${rec.items.length} ${t('modal.ingredients')}</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3 pt-4 border-t border-gray-50">
+                <div>
+                  <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1" data-i18n="book.total_cost">${t('book.total_cost', 'Costo')}</div>
+                  <div class="text-sm font-black text-red-400">${rec.cost.toFixed(2)}€</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1" data-i18n="book.sale_price">${t('book.sale_price', 'Venta')}</div>
+                  <div class="text-sm font-black text-primary" style="color: var(--primary)">${rec.price.toFixed(2)}€</div>
+                </div>
+              </div>
+            `;
+            div.appendChild(content);
             div.onclick = () => openRecipeModal(rec.id);
             container.appendChild(div);
           });
