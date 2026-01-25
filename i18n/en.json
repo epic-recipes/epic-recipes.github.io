@@ -10,7 +10,7 @@
   "ingredients": {
     "title": "Ingredients",
     "ingredient_name": "Ingredient Name",
-    "ingredient_name_placeholder": "E.g: Beef, Garlic, Tomato, floor",
+    "ingredient_name_placeholder": "E.g: Beef, Garlic, Tomato",
     "price": "Price (€)",
     "unit": "Unit",
     "select_unit": "-- Select unit --",
