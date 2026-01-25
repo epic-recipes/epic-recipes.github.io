@@ -318,7 +318,7 @@
     </aside>
     <main class="flex-1 md:ml-0 flex flex-col">
       <header
-        class="bg-white/80 backdrop-blur-md sticky top-0 z-30 p-4 px-6 flex justify-between items-center border-b border-gray-100">
+        class="bg-white sticky top-0 z-30 p-4 px-6 flex justify-between items-center border-b border-gray-100 shadow-sm">
         <div class="flex items-center">
           <div class="w-2 h-8 rounded-full mr-3" style="background-color: var(--primary)"></div>
           <h1 class="text-xl font-extrabold tracking-tight text-gray-800" data-i18n="app_name">RECETARIO ÉPICO</h1>
@@ -364,26 +364,26 @@
 
       <!-- Bottom Nav for Mobile -->
       <div
-        class="md:hidden fixed bottom-6 left-4 right-4 bg-white/90 backdrop-blur-lg border border-gray-100 flex justify-around py-3 z-40 rounded-3xl shadow-2xl">
-        <button id="bottom-ingredientes" class="flex flex-col items-center text-gray-400 transition-colors"
-          onclick="switchTab('tab-ingredientes')">
-          <i class="fas fa-carrot text-xl"></i>
-          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.ingredients">Ingredientes</span>
+        class="md:hidden fixed bottom-6 left-6 right-6 bg-white border border-gray-100 flex justify-around py-4 z-40 rounded-[2rem] shadow-2xl shadow-primary/10">
+        <button id="bottom-ingredientes"
+          class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
+          onclick="switchTab('tab-ingredientes')" title="Ingredientes">
+          <i class="fas fa-carrot text-2xl"></i>
         </button>
-        <button id="bottom-receta" class="flex flex-col items-center text-gray-400 transition-colors"
-          onclick="switchTab('tab-receta')">
-          <i class="fas fa-mortar-pestle text-xl"></i>
-          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.create_recipe">Crear</span>
+        <button id="bottom-receta"
+          class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
+          onclick="switchTab('tab-receta')" title="Crear Receta">
+          <i class="fas fa-mortar-pestle text-2xl"></i>
         </button>
-        <button id="bottom-libro" class="flex flex-col items-center text-primary transition-colors"
-          style="color: var(--primary)" onclick="switchTab('tab-libro')">
-          <i class="fas fa-book-open text-xl"></i>
-          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.my_recipes">Mis Recetas</span>
+        <button id="bottom-libro"
+          class="flex items-center justify-center text-primary transition-all hover:scale-110 active:scale-95"
+          style="color: var(--primary)" onclick="switchTab('tab-libro')" title="Mis Recetas">
+          <i class="fas fa-book-open text-2xl"></i>
         </button>
-        <button id="bottom-config" class="flex flex-col items-center text-gray-400 transition-colors"
-          onclick="switchTab('tab-config')">
-          <i class="fas fa-sliders-h text-xl"></i>
-          <span class="text-[10px] mt-1 font-medium" data-i18n="nav.settings">Ajustes</span>
+        <button id="bottom-config"
+          class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
+          onclick="switchTab('tab-config')" title="Configuración">
+          <i class="fas fa-sliders-h text-2xl"></i>
         </button>
       </div>
 
@@ -1159,35 +1159,43 @@
 
         // ====== Funciones de Tabs (SPA - Single Page Application) ======
         function switchTab(tabId) {
-          // Esconder todos los tabs
+          // Hide all tabs
           document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-          // Remover clase active de botones
-          document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-          // Remover clases activas de sidebar
+
+          // Reset Sidebar Buttons
           document.querySelectorAll('[id^="sidebar-"]').forEach(btn => {
-            btn.classList.remove('bg-yellow-300', 'text-gray-800');
-            btn.classList.add('hover:bg-gray-200', 'text-gray-600');
+            btn.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
+            btn.classList.add('text-gray-400');
+            btn.style.backgroundColor = '';
           });
-          // Remover clases activas de bottom nav
+
+          // Reset Bottom Nav Buttons
           document.querySelectorAll('[id^="bottom-"]').forEach(btn => {
-            btn.classList.remove('text-yellow-600');
-            btn.classList.add('text-gray-600');
+            btn.classList.remove('text-primary');
+            btn.classList.add('text-gray-400');
+            btn.style.color = '';
           });
-          // Mostrar tab seleccionado
-          document.getElementById(tabId).classList.add('active');
-          // Activar botón correspondiente en sidebar
+
+          // Show selected tab
+          const targetTab = document.getElementById(tabId);
+          if (targetTab) targetTab.classList.add('active');
+
+          // Activate sidebar item
           const sidebarId = 'sidebar-' + tabId.replace('tab-', '');
           const sidebarBtn = document.getElementById(sidebarId);
           if (sidebarBtn) {
-            sidebarBtn.classList.remove('hover:bg-gray-200', 'text-gray-600');
-            sidebarBtn.classList.add('bg-yellow-300', 'text-gray-800');
+            sidebarBtn.classList.remove('text-gray-400');
+            sidebarBtn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
+            sidebarBtn.style.backgroundColor = 'var(--primary)';
           }
-          // Activar botón correspondiente en bottom nav
+
+          // Activate bottom nav item
           const bottomId = 'bottom-' + tabId.replace('tab-', '');
           const bottomBtn = document.getElementById(bottomId);
           if (bottomBtn) {
-            bottomBtn.classList.remove('text-gray-600');
-            bottomBtn.classList.add('text-yellow-600');
+            bottomBtn.classList.remove('text-gray-400');
+            bottomBtn.classList.add('text-primary');
+            bottomBtn.style.color = 'var(--primary)';
           }
           // Activar botón en bottom nav si existe
           if (event && event.target) event.target.classList.add('active');
