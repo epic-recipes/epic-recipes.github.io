@@ -28,7 +28,10 @@
     "price_per_unit": "単価",
     "delete_button": "削除",
     "edit_button": "編集",
-    "update_button": "更新"
+    "update_button": "更新",
+    "category_label": "カテゴリ",
+    "type_food": "材料",
+    "type_supply": "供給 / 包装"
   },
   "recipe": {
     "title": "レシピクリエイター",
@@ -57,7 +60,9 @@
       "margin": "マージン %",
       "roi": "収益性"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "材料",
+    "supplies_section": "供給と包装"
   },
   "book": {
     "title": "マイレシピ",
@@ -278,7 +283,9 @@
     "new_recipe": "新しいレシピ",
     "save": "レシピを保存",
     "update": "更新",
-    "default": "デフォルト"
+    "default": "デフォルト",
+    "recipe_prefix": "[レシピ]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

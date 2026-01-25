@@ -28,7 +28,10 @@
     "edit_button": "Éditer",
     "update_button": "Mettre à jour",
     "pack_size_placeholder": "1",
-    "price_placeholder": "0.00"
+    "price_placeholder": "0.00",
+    "category_label": "Catégorie",
+    "type_food": "Ingrédient",
+    "type_supply": "Fourniture / Emballage"
   },
   "recipe": {
     "title": "Créateur de Recette",
@@ -57,7 +60,9 @@
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
     "add_ingredient_button": "Add Ingredient",
-    "portions_placeholder": "1"
+    "portions_placeholder": "1",
+    "ingredients_section": "Ingrédients",
+    "supplies_section": "Fournitures et emballage"
   },
   "book": {
     "title": "Mes Recettes",
@@ -278,7 +283,9 @@
     "confirm_changes": "Confirmer les changements",
     "save": "Sauvegarder la Recette",
     "edit_details": "Modifier les détails",
-    "default": "Par défaut"
+    "default": "Par défaut",
+    "recipe_prefix": "[RECETTE]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

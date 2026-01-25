@@ -28,7 +28,10 @@
     "edit_button": "Modifica",
     "update_button": "Aggiorna",
     "pack_size_placeholder": "1",
-    "price_placeholder": "0.00"
+    "price_placeholder": "0.00",
+    "category_label": "Categoria",
+    "type_food": "Ingrediente",
+    "type_supply": "Fornitura / Imballaggio"
   },
   "recipe": {
     "title": "Creatore di Ricette",
@@ -57,7 +60,9 @@
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
     "add_ingredient_button": "Add Ingredient",
-    "portions_placeholder": "1"
+    "portions_placeholder": "1",
+    "ingredients_section": "Ingredienti",
+    "supplies_section": "Provviste e imballaggio"
   },
   "book": {
     "title": "Le Mie Ricette",
@@ -278,7 +283,9 @@
     "confirm_changes": "Conferma Modifiche",
     "save": "Salva Ricetta",
     "edit_details": "Modifica Dettagli",
-    "default": "Predefinito"
+    "default": "Predefinito",
+    "recipe_prefix": "[RICETTA]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

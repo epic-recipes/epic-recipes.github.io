@@ -28,7 +28,10 @@
     "price_per_unit": "Birim Fiyatı",
     "delete_button": "Sil",
     "edit_button": "Düzenle",
-    "update_button": "Güncelle"
+    "update_button": "Güncelle",
+    "category_label": "Kategori",
+    "type_food": "Malzeme",
+    "type_supply": "Malzeme / Ambalaj"
   },
   "recipe": {
     "title": "Tarif Oluşturucu",
@@ -57,7 +60,9 @@
       "margin": "Marj %",
       "roi": "Karlılık"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "Malzemeler",
+    "supplies_section": "Malzemeler ve ambalaj"
   },
   "book": {
     "title": "Tariflerim",
@@ -278,7 +283,9 @@
     "new_recipe": "Yeni Tarif",
     "save": "Tarifu Kaydet",
     "update": "Güncelle",
-    "default": "Varsayılan"
+    "default": "Varsayılan",
+    "recipe_prefix": "[TARİF]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

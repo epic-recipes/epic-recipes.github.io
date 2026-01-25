@@ -28,7 +28,10 @@
     "price_per_unit": "السعر/الوحدة",
     "delete_button": "حذف",
     "edit_button": "تحرير",
-    "update_button": "تحديث"
+    "update_button": "تحديث",
+    "category_label": "فئة",
+    "type_food": "مكون",
+    "type_supply": "لوازم / تغليف"
   },
   "recipe": {
     "title": "منشئ الوصفات",
@@ -57,7 +60,9 @@
       "margin": "الهامش %",
       "roi": "العائد على الاستثمار"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "مكونات",
+    "supplies_section": "لوازم وتغليف"
   },
   "book": {
     "title": "وصفاتي",
@@ -278,7 +283,9 @@
     "new_recipe": "وصفة جديدة",
     "save": "حفظ الوصفة",
     "update": "تحديث",
-    "default": "افتراضي"
+    "default": "افتراضي",
+    "recipe_prefix": "[وصفة]",
+    "subrecipe_prefix": "[ر]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

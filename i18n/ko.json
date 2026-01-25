@@ -28,7 +28,10 @@
     "price_per_unit": "개당 가격",
     "delete_button": "삭제",
     "edit_button": "편집",
-    "update_button": "업데이트"
+    "update_button": "업데이트",
+    "category_label": "카테고리",
+    "type_food": "재료",
+    "type_supply": "공급 / 포장"
   },
   "recipe": {
     "title": "레시피 작성자",
@@ -57,7 +60,9 @@
       "margin": "마진 %",
       "roi": "수익성"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "재료",
+    "supplies_section": "공급 및 포장"
   },
   "book": {
     "title": "내 레시피",
@@ -278,7 +283,9 @@
     "new_recipe": "새 레시피",
     "save": "레시피 저장",
     "update": "업데이트",
-    "default": "기본값"
+    "default": "기본값",
+    "recipe_prefix": "[레시피]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

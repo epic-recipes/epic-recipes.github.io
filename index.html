@@ -584,6 +584,13 @@
                 <select id="ing-rarity-desk"></select>
               </div>
             </div>
+            <div class="form-group" style="margin-top:8px">
+              <label data-i18n="ingredients.category_label">Categoría</label>
+              <select id="ing-category-desk">
+                <option value="food" data-i18n="ingredients.type_food">Ingrediente</option>
+                <option value="supply" data-i18n="ingredients.type_supply">Insumo / Empaque</option>
+              </select>
+            </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px">
               <div class="form-group">
                 <label data-i18n="ingredients.price_type">Tipo de Precio</label>
@@ -857,6 +864,16 @@
                 class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 type="text" id="ing-name" placeholder="Ej: Carne de Res, Ajo, Tomate"
                 data-i18n="ingredients.ingredient_name_placeholder">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                data-i18n="ingredients.category_label">Categoría</label>
+              <select
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none"
+                id="ing-category">
+                <option value="food" data-i18n="ingredients.type_food">Ingrediente</option>
+                <option value="supply" data-i18n="ingredients.type_supply">Insumo / Empaque</option>
+              </select>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -1706,13 +1723,14 @@
           const name = document.getElementById('ing-name').value.trim();
           const cost = parseFloat(document.getElementById('ing-cost').value);
           const rarity = document.getElementById('ing-rarity').value;
+          const category = document.getElementById('ing-category').value || 'food';
 
           const priceType = document.getElementById('ing-price-type') ? document.getElementById('ing-price-type').value : 'unit';
           const packSize = document.getElementById('ing-pack-size') ? parseInt(document.getElementById('ing-pack-size').value) || 1 : 1;
 
           if (!name || isNaN(cost)) return showToast(t('toasts.error', 'Faltan datos del ingrediente'));
 
-          ingredients.push({ id: Date.now(), name, cost, rarity, priceType, packSize });
+          ingredients.push({ id: Date.now(), name, cost, rarity, priceType, packSize, category });
           saveState();
           renderIngredients();
           closeIngredientModal();
@@ -1742,6 +1760,9 @@
           document.getElementById('ing-name').value = ing.name;
           document.getElementById('ing-cost').value = ing.cost;
           document.getElementById('ing-rarity').value = ing.rarity;
+          if (document.getElementById('ing-category')) {
+            document.getElementById('ing-category').value = ing.category || 'food';
+          }
           if (document.getElementById('ing-price-type')) {
             document.getElementById('ing-price-type').value = ing.priceType || 'unit';
             togglePackInput('ing-price-type', 'ing-pack-size');
@@ -1759,6 +1780,7 @@
           const name = document.getElementById('ing-name').value.trim();
           const cost = parseFloat(document.getElementById('ing-cost').value);
           const rarity = document.getElementById('ing-rarity').value;
+          const category = document.getElementById('ing-category').value || 'food';
           const priceType = document.getElementById('ing-price-type') ? document.getElementById('ing-price-type').value : 'unit';
           const packSize = document.getElementById('ing-pack-size') ? parseInt(document.getElementById('ing-pack-size').value) || 1 : 1;
 
@@ -1766,7 +1788,7 @@
 
           const index = ingredients.findIndex(i => i.id === id);
           if (index !== -1) {
-            ingredients[index] = { ...ingredients[index], name, cost, rarity, priceType, packSize };
+            ingredients[index] = { ...ingredients[index], name, cost, rarity, priceType, packSize, category };
             saveState();
             renderIngredients();
             closeIngredientModal();
@@ -1781,16 +1803,36 @@
           list.innerHTML = '';
           select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
 
+          const foodItems = ingredients.filter(i => (i.category || 'food') === 'food');
+          const supplyItems = ingredients.filter(i => i.category === 'supply');
+
+          const appendGroup = (items, labelKey, container) => {
+            if (items.length === 0) return;
+            const group = document.createElement('optgroup');
+            group.label = t(labelKey);
+            items.forEach(ing => {
+              const opt = document.createElement('option');
+              opt.value = ing.id;
+              opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
+              group.appendChild(opt);
+            });
+            container.appendChild(group);
+          };
+
           ingredients.forEach(ing => {
             // Listado lateral móvil
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all';
             const unitPrice = getUnitCost(ing);
             const priceExtra = ing.priceType === 'pack' ? ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€</span>` : '';
+            const isSupply = ing.category === 'supply';
+            const categoryIcon = isSupply ? 'fas fa-box' : 'fas fa-leaf';
+            
             card.innerHTML = `
           <div class="flex-1">
             <div class="flex items-center mb-1">
               <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>
+              <i class="${categoryIcon} text-[10px] mr-1.5 opacity-40"></i>
               <b class="text-sm text-gray-800 font-bold">${ing.name}</b>
             </div>
             <div class="flex items-center flex-wrap gap-1">
@@ -1808,13 +1850,24 @@
           </div>
         `;
             list.appendChild(card);
-
-            // Selector en receta - Mostrar UNIDAD DE MEDIDA
-            const opt = document.createElement('option');
-            opt.value = ing.id;
-            opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
-            select.appendChild(opt);
           });
+
+          // Llenar selectores con grupos
+          appendGroup(foodItems, 'recipe.ingredients_section', select);
+          appendGroup(supplyItems, 'recipe.supplies_section', select);
+
+          // AÑADIR RECETAS COMO SUB-RECETAS
+          if (recipeBook.length > 0) {
+            const recipeGroup = document.createElement('optgroup');
+            recipeGroup.label = "── " + t('nav.my_recipes').toUpperCase() + " ──";
+            recipeBook.forEach(rec => {
+              const opt = document.createElement('option');
+              opt.value = `R-${rec.id}`;
+              opt.innerText = `${t('common.subrecipe_prefix', '[R]')} ${rec.name} (${rec.portions} ${t('book.portions')})`;
+              recipeGroup.appendChild(opt);
+            });
+            select.appendChild(recipeGroup);
+          }
 
           // Actualizar selectores de unidades
           renderUnitsSelector('ing-rarity');
@@ -1829,10 +1882,11 @@
           const name = document.getElementById('ing-name-desk').value.trim();
           const cost = parseFloat(document.getElementById('ing-cost-desk').value);
           const rarity = document.getElementById('ing-rarity-desk').value;
+          const category = document.getElementById('ing-category-desk').value || 'food';
 
           if (!name || isNaN(cost)) return showToast(t('toasts.error', 'Faltan datos del ingrediente'));
 
-          ingredients.push({ id: Date.now(), name, cost, rarity });
+          ingredients.push({ id: Date.now(), name, cost, rarity, category });
           saveState();
           renderIngredients();
           document.getElementById('ing-name-desk').value = '';
@@ -1847,15 +1901,34 @@
           list.innerHTML = '';
           select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
 
+          const foodItems = ingredients.filter(i => (i.category || 'food') === 'food');
+          const supplyItems = ingredients.filter(i => i.category === 'supply');
+
+          const appendGroup = (items, labelKey, container) => {
+            if (items.length === 0) return;
+            const group = document.createElement('optgroup');
+            group.label = t(labelKey);
+            items.forEach(ing => {
+              const opt = document.createElement('option');
+              opt.value = ing.id;
+              opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
+              group.appendChild(opt);
+            });
+            container.appendChild(group);
+          };
+
           ingredients.forEach(ing => {
             // Listado lateral escritorio
             const card = document.createElement('div');
             card.className = 'card';
             const unitPrice = getUnitCost(ing);
             const priceExtra = ing.priceType === 'pack' ? ` — Pack: ${ing.cost.toFixed(2)}€ / ${ing.packSize}` : '';
+            const isSupply = ing.category === 'supply';
+            const categoryIcon = isSupply ? 'box' : 'leaf';
+
             card.innerHTML = `
           <div class="card-info">
-            <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span>${ing.name}</b>
+            <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span><i class="fas fa-${categoryIcon}" style="font-size: 8px; opacity: 0.5; margin-right: 4px;"></i>${ing.name}</b>
             <span>Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
           </div>
           <div style="display: flex; gap: 4px;">
@@ -1864,13 +1937,24 @@
           </div>
         `;
             list.appendChild(card);
-
-            // Selector en receta - Mostrar UNIDAD DE MEDIDA
-            const opt = document.createElement('option');
-            opt.value = ing.id;
-            opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
-            select.appendChild(opt);
           });
+
+          // Llenar selectores escritorio
+          appendGroup(foodItems, 'recipe.ingredients_section', select);
+          appendGroup(supplyItems, 'recipe.supplies_section', select);
+
+          // AÑADIR RECETAS COMO SUB-RECETAS EN ESCRITORIO
+          if (recipeBook.length > 0) {
+            const recGroup = document.createElement('optgroup');
+            recGroup.label = "── " + t('nav.my_recipes').toUpperCase() + " ──";
+            recipeBook.forEach(rec => {
+              const opt = document.createElement('option');
+              opt.value = `R-${rec.id}`;
+              opt.innerText = `${t('common.subrecipe_prefix', '[R]')} ${rec.name}`;
+              recGroup.appendChild(opt);
+            });
+            select.appendChild(recGroup);
+          }
         }
 
         function deleteIngredientDesk(id) {
@@ -1893,6 +1977,9 @@
           document.getElementById('ing-name-desk').value = ing.name;
           document.getElementById('ing-cost-desk').value = ing.cost;
           document.getElementById('ing-rarity-desk').value = ing.rarity;
+          if (document.getElementById('ing-category-desk')) {
+            document.getElementById('ing-category-desk').value = ing.category || 'food';
+          }
 
           // Cambiar el botón Añadir a Actualizar
           const addBtn = document.querySelector('#tab-ingredientes-desk .btn-primary');
@@ -1907,12 +1994,13 @@
           const name = document.getElementById('ing-name-desk').value.trim();
           const cost = parseFloat(document.getElementById('ing-cost-desk').value);
           const rarity = document.getElementById('ing-rarity-desk').value;
+          const category = document.getElementById('ing-category-desk').value || 'food';
 
           if (!name || isNaN(cost)) return showToast(t('toasts.error', 'Faltan datos del ingrediente'));
 
           const index = ingredients.findIndex(i => i.id === id);
           if (index !== -1) {
-            ingredients[index] = { ...ingredients[index], name, cost, rarity };
+            ingredients[index] = { ...ingredients[index], name, cost, rarity, category };
             saveState();
             renderIngredients();
             // Resetear formulario
@@ -1955,12 +2043,23 @@
         }
 
         function updateUnitSelector() {
-          const ingId = parseInt(document.getElementById('rec-ing-select').value);
+          const selectValue = document.getElementById('rec-ing-select').value;
           const unitSelect = document.getElementById('rec-unit-select');
           unitSelect.innerHTML = '';
 
-          if (!ingId) return;
+          if (!selectValue) return;
 
+          if (selectValue.startsWith('R-')) {
+            // Es una receta, solo permitir porciones
+            const opt = document.createElement('option');
+            opt.value = 'porcion';
+            opt.textContent = t('book.portions', 'porciones');
+            unitSelect.appendChild(opt);
+            unitSelect.value = 'porcion';
+            return;
+          }
+
+          const ingId = parseInt(selectValue);
           const ing = ingredients.find(i => i.id === ingId);
           if (!ing) return;
 
@@ -1993,83 +2092,120 @@
         }
 
         function addToRecipe() {
-          const ingId = parseInt(document.getElementById('rec-ing-select').value);
+          const selectValue = document.getElementById('rec-ing-select').value;
           const qty = parseFloat(document.getElementById('rec-qty').value);
           const selectedUnit = document.getElementById('rec-unit-select').value;
 
-          if (!ingId || isNaN(qty) || qty < 1) return showToast(t('toasts.error', 'Selección inválida'));
+          if (!selectValue || isNaN(qty) || qty < 0.01) return showToast(t('toasts.error', 'Selección inválida'));
 
-          const ing = ingredients.find(i => i.id === ingId);
-          let convertedQty = qty;
+          let itemToAdd;
 
-          if (selectedUnit !== ing.rarity) {
-            // Convertir la cantidad a la unidad del ingrediente
-            convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
-            if (convertedQty === qty) {
-              // No se pudo convertir, usar original
-              showToast(`No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`);
-            }
-          }
-
-          const existing = activeRecipe.items.find(i => i.id === ingId);
-
-          if (existing) {
-            existing.qty += convertedQty;
-            if (existing.displayUnit === selectedUnit) {
-              existing.displayQty += qty;
-            } else {
-              // Si cambia de unidad, resetear a base para evitar líos
-              delete existing.displayUnit;
-              delete existing.displayQty;
-            }
+          if (selectValue.startsWith('R-')) {
+            // Es una receta
+            const realId = parseInt(selectValue.replace('R-', ''));
+            const subRec = recipeBook.find(r => r.id === realId);
+            itemToAdd = {
+              id: selectValue,
+              name: `${t('common.recipe_prefix', '[RECETA]')} ${subRec.name}`,
+              rarity: 'porcion', // Unidad virtual
+              cost: 0, // El costo se calcula dinámicamente con getUnitCost
+              qty: qty
+            };
           } else {
-            activeRecipe.items.push({
+            // Es un ingrediente
+            const ingId = parseInt(selectValue);
+            const ing = ingredients.find(i => i.id === ingId);
+            let convertedQty = qty;
+
+            if (selectedUnit !== ing.rarity) {
+              convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
+              if (convertedQty === qty && selectedUnit !== ing.rarity) {
+                showToast(`No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`);
+              }
+            }
+
+            itemToAdd = {
               ...ing,
               qty: convertedQty,
               displayUnit: selectedUnit !== ing.rarity ? selectedUnit : undefined,
               displayQty: selectedUnit !== ing.rarity ? qty : undefined
-            });
+            };
+          }
+
+          const existing = activeRecipe.items.find(i => i.id === itemToAdd.id);
+
+          if (existing) {
+            existing.qty += itemToAdd.qty;
+            if (itemToAdd.displayUnit && existing.displayUnit === itemToAdd.displayUnit) {
+              existing.displayQty += itemToAdd.displayQty;
+            } else {
+              delete existing.displayUnit;
+              delete existing.displayQty;
+            }
+          } else {
+            activeRecipe.items.push(itemToAdd);
           }
 
           renderActiveRecipe();
           updateStats();
-          closeRecipeItemModal(); // Close modal
-          showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} en la mesa`);
+          closeRecipeItemModal();
+          showToast(`${itemToAdd.name} en la mesa`);
         }
 
         function renderActiveRecipe() {
           const list = document.getElementById('rec-items-list');
           list.innerHTML = '';
 
-          activeRecipe.items.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:bg-gray-50 transition-all';
-            const displayQty = item.displayUnit ? item.displayQty : item.qty;
-            const displayUnit = item.displayUnit || item.rarity;
+          const foodItems = activeRecipe.items.filter(i => (typeof i.id === 'string' && i.id.startsWith('R-')) || (i.category || 'food') === 'food');
+          const supplyItems = activeRecipe.items.filter(i => i.category === 'supply');
 
-            card.innerHTML = `
-  <div class="flex-1">
-    <div class="font-bold text-gray-800 mb-2">${item.name}</div>
-    <div class="flex items-center gap-2">
-      <input type="number" value="${displayQty}" min="0.01" step="0.1" 
-        class="w-20 px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-bold focus:ring-2 focus:ring-primary/20 outline-none" 
-        onchange="updateRecipeItemQty(${index}, this.value)">
-      <span class="text-xs text-gray-400 font-medium">${getUnitLabel(displayUnit)}</span>
-    </div>
-  </div>
-          <div class="text-right mr-4">
-            <div class="text-xs text-gray-300 font-medium">Costo</div>
-            <div class="text-sm font-black text-gray-700">${(getUnitCost(item) * item.qty).toFixed(2)}€</div>
-          </div>
-          <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all" onclick="removeFromRecipe(${index})">
-            <i class="fas fa-minus text-xs"></i>
-          </button>
-        `;
-            list.appendChild(card);
-          });
+          const renderSection = (items, titleKey) => {
+            if (items.length === 0) return;
+            
+            const h = document.createElement('div');
+            h.className = "text-[10px] font-black text-primary/40 uppercase tracking-widest mb-3 mt-6 first:mt-0 px-2";
+            h.textContent = t(titleKey);
+            list.appendChild(h);
+
+            items.forEach((item) => {
+              const index = activeRecipe.items.indexOf(item);
+              const card = document.createElement('div');
+              card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:bg-gray-50 transition-all mb-2';
+              
+              const displayQty = item.displayUnit ? item.displayQty : item.qty;
+              const displayUnit = item.displayUnit || item.rarity;
+              const isRec = typeof item.id === 'string' && item.id.startsWith('R-');
+              const iconClass = isRec ? 'fas fa-utensils' : (item.category === 'supply' ? 'fas fa-box' : 'fas fa-leaf');
+
+              card.innerHTML = `
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <i class="${iconClass} text-[10px] opacity-30"></i>
+                <div class="font-bold text-gray-800 text-sm">${item.name}</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="number" value="${displayQty.toFixed(2)}" min="0.01" step="0.1" 
+                  class="w-20 px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-bold focus:ring-2 focus:ring-primary/20 outline-none" 
+                  onchange="updateRecipeItemQty(${index}, this.value)">
+                <span class="text-xs text-gray-400 font-medium">${getUnitLabel(displayUnit)}</span>
+              </div>
+            </div>
+            <div class="text-right mr-4">
+              <div class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">Costo</div>
+              <div class="text-sm font-black text-gray-700">${(getUnitCost(item) * item.qty).toFixed(2)}€</div>
+            </div>
+            <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all outline-none" onclick="removeFromRecipe(${index})">
+              <i class="fas fa-minus text-xs"></i>
+            </button>
+          `;
+              list.appendChild(card);
+            });
+          };
+
+          renderSection(foodItems, 'recipe.ingredients_section');
+          renderSection(supplyItems, 'recipe.supplies_section');
+
           updateStats();
-
-          // Sincronizar con escritorio
           renderActiveRecipeDesk();
         }
 
@@ -2200,6 +2336,7 @@
 
           if (!name || activeRecipe.items.length === 0) return showToast("Escribe un nombre y añade ingredientes");
 
+          // USAR RECURSIÓN PARA EL COSTO TOTAL
           const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
           recipeBook.unshift({
@@ -2250,12 +2387,22 @@
 
         // ====== Manejo de Recetas - ESCRITORIO ======
         function updateUnitSelectorDesk() {
-          const ingId = parseInt(document.getElementById('rec-ing-select-desk').value);
+          const selectValue = document.getElementById('rec-ing-select-desk').value;
           const unitSelect = document.getElementById('rec-unit-select-desk');
           unitSelect.innerHTML = '';
 
-          if (!ingId) return;
+          if (!selectValue) return;
 
+          if (selectValue.startsWith('R-')) {
+            const opt = document.createElement('option');
+            opt.value = 'porcion';
+            opt.textContent = t('book.portions', 'porciones');
+            unitSelect.appendChild(opt);
+            unitSelect.value = 'porcion';
+            return;
+          }
+
+          const ingId = parseInt(selectValue);
           const ing = ingredients.find(i => i.id === ingId);
           if (!ing) return;
 
@@ -2288,69 +2435,104 @@
         }
 
         function addToRecipeDesk() {
-          const ingId = parseInt(document.getElementById('rec-ing-select-desk').value);
+          const selectValue = document.getElementById('rec-ing-select-desk').value;
           const qty = parseFloat(document.getElementById('rec-qty-desk').value);
           const selectedUnit = document.getElementById('rec-unit-select-desk').value;
 
-          if (!ingId || isNaN(qty) || qty < 1) return showToast(t('toasts.error', 'Selección inválida'));
+          if (!selectValue || isNaN(qty) || qty < 0.01) return showToast(t('toasts.error', 'Selección inválida'));
 
-          const ing = ingredients.find(i => i.id === ingId);
-          let convertedQty = qty;
+          let itemToAdd;
 
-          if (selectedUnit !== ing.rarity) {
-            // Convertir la cantidad a la unidad del ingrediente
-            convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
-            if (convertedQty === qty) {
-              // No se pudo convertir, usar original
-              showToast(`No hay equivalencia para convertir ${selectedUnit} a ${ing.rarity}, usando unidad original`);
+          if (selectValue.startsWith('R-')) {
+            const realId = parseInt(selectValue.replace('R-', ''));
+            const subRec = recipeBook.find(r => r.id === realId);
+            itemToAdd = {
+              id: selectValue,
+              name: `${t('common.recipe_prefix', '[RECETA]')} ${subRec.name}`,
+              rarity: 'porcion',
+              cost: 0,
+              qty: qty
+            };
+          } else {
+            const ingId = parseInt(selectValue);
+            const ing = ingredients.find(i => i.id === ingId);
+            let convertedQty = qty;
+
+            if (selectedUnit !== ing.rarity) {
+              convertedQty = convertUnit(qty, selectedUnit, ing.rarity);
             }
+
+            itemToAdd = {
+              ...ing,
+              qty: convertedQty,
+              displayUnit: selectedUnit !== ing.rarity ? selectedUnit : undefined,
+              displayQty: selectedUnit !== ing.rarity ? qty : undefined
+            };
           }
 
-          const existing = activeRecipe.items.find(i => i.id === ingId);
+          const existing = activeRecipe.items.find(i => i.id === itemToAdd.id);
 
           if (existing) {
-            existing.qty += convertedQty;
-            if (existing.displayUnit === selectedUnit) {
-              existing.displayQty += qty;
+            existing.qty += itemToAdd.qty;
+            if (itemToAdd.displayUnit && existing.displayUnit === itemToAdd.displayUnit) {
+              existing.displayQty += itemToAdd.displayQty;
             } else {
               delete existing.displayUnit;
               delete existing.displayQty;
             }
           } else {
-            activeRecipe.items.push({
-              ...ing,
-              qty: convertedQty,
-              displayUnit: selectedUnit !== ing.rarity ? selectedUnit : undefined,
-              displayQty: selectedUnit !== ing.rarity ? qty : undefined
-            });
+            activeRecipe.items.push(itemToAdd);
           }
 
           renderActiveRecipe();
           updateStats();
-          showToast(`${ing.name} x${convertedQty.toFixed(2)} ${getUnitLabel(ing.rarity)} en la mesa`);
+          showToast(`${itemToAdd.name} en la mesa`);
         }
 
         function renderActiveRecipeDesk() {
           const list = document.getElementById('rec-items-list-desk');
           list.innerHTML = '';
 
-          activeRecipe.items.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            const unitPrice = getUnitCost(item);
-            card.innerHTML = `
-          <div class="card-info">
-            <b>${item.name}</b>
-            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
-              <input type="number" value="${item.qty}" min="0.01" step="0.1" style="width: 80px; font-size: 10px; padding: 4px;" onchange="updateRecipeItemQty(${index}, this.value)">
-              <span>${getUnitLabel(item.rarity)}</span>
+          const foodItems = activeRecipe.items.filter(i => (typeof i.id === 'string' && i.id.startsWith('R-')) || (i.category || 'food') === 'food');
+          const supplyItems = activeRecipe.items.filter(i => i.category === 'supply');
+
+          const renderSection = (items, titleKey) => {
+            if (items.length === 0) return;
+            
+            const h = document.createElement('div');
+            h.style = "font-size: 9px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin: 15px 0 8px 0; border-bottom: 1px solid #eee; padding-bottom: 4px;";
+            h.textContent = t(titleKey);
+            list.appendChild(h);
+
+            items.forEach((item) => {
+              const index = activeRecipe.items.indexOf(item);
+              const card = document.createElement('div');
+              card.className = 'card';
+              const unitPrice = getUnitCost(item);
+              const isRec = typeof item.id === 'string' && item.id.startsWith('R-');
+              const icon = isRec ? 'utensils' : (item.category === 'supply' ? 'box' : 'leaf');
+
+              card.innerHTML = `
+            <div class="card-info">
+              <div style="display:flex; align-items:center; gap:5px">
+                <i class="fas fa-${icon}" style="font-size:8px; opacity:0.4"></i>
+                <b>${item.name}</b>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                <input type="number" value="${item.qty}" min="0.01" step="0.1" style="width: 80px; font-size: 10px; padding: 4px;" onchange="updateRecipeItemQty(${index}, this.value)">
+                <span style="font-size:10px; color:#999">${getUnitLabel(item.rarity)}</span>
+              </div>
+              <span style="font-size:10px">Costo: ${(unitPrice * item.qty).toFixed(2)}€</span>
             </div>
-            <span>Costo: ${(unitPrice * item.qty).toFixed(2)}€ (${unitPrice.toFixed(2)}€/u)</span>
-          </div>
-          <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipeDesk(${index})">-</button>
-        `;
-            list.appendChild(card);
-          });
+            <button class="btn btn-danger" style="padding:4px 8px; font-size:8px" onclick="removeFromRecipeDesk(${index})">-</button>
+          `;
+              list.appendChild(card);
+            });
+          }
+
+          renderSection(foodItems, 'recipe.ingredients_section');
+          renderSection(supplyItems, 'recipe.supplies_section');
+
           updateStatsDesk();
         }
 
@@ -2835,13 +3017,28 @@
 
         // ====== Utilidades ======
         function getUnitLabel(rarity) {
+          if (rarity === 'porcion') return t('book.portions', 'porciones');
           const units = getCustomUnits();
-          return units[rarity] || 'kg';
+          return units[rarity] || rarity;
         }
 
-        // Devuelve el coste por 1 unidad del ingrediente (tiene en cuenta packs)
+        // Devuelve el coste por 1 unidad física o por porción de receta
         function getUnitCost(item) {
           if (!item) return 0;
+
+          // Si es una sub-receta (detectado por ID string con R-)
+          if (typeof item.id === 'string' && item.id.startsWith('R-')) {
+            const realId = parseInt(item.id.replace('R-', ''));
+            const subRecipe = recipeBook.find(r => r.id === realId);
+            if (!subRecipe) return 0;
+
+            // Recalcular costo de la sub-receta recursivamente
+            const totalSubCost = subRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
+            const portions = subRecipe.portions || 1;
+            return totalSubCost / portions; // Precio por porción
+          }
+
+          // Si es un ingrediente normal
           const priceType = item.priceType || 'unit';
           const packSize = parseFloat(item.packSize) || 1;
           const cost = parseFloat(item.cost) || 0;

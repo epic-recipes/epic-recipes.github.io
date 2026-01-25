@@ -28,7 +28,10 @@
     "price_per_unit": "ราคา/หน่วย",
     "delete_button": "ลบ",
     "edit_button": "แก้ไข",
-    "update_button": "อัปเดต"
+    "update_button": "อัปเดต",
+    "category_label": "หมวดหมู่",
+    "type_food": "ส่วนผสม",
+    "type_supply": "อุปทาน / บรรจุภัณฑ์"
   },
   "recipe": {
     "title": "ตัวสร้างสูตร",
@@ -57,7 +60,9 @@
       "margin": "มาร์จิน %",
       "roi": "ผลตอบแทน"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "ส่วนผสม",
+    "supplies_section": "อุปทานและบรรจุภัณฑ์"
   },
   "book": {
     "title": "สูตรของฉัน",
@@ -278,7 +283,9 @@
     "new_recipe": "สูตรอาหารใหม่",
     "save": "บันทึกสูตร",
     "update": "อัปเดต",
-    "default": "ค่าเริ่มต้น"
+    "default": "ค่าเริ่มต้น",
+    "recipe_prefix": "[สูตร]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

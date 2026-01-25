@@ -28,7 +28,10 @@
     "price_per_unit": "Precio/Unidad",
     "delete_button": "Eliminar",
     "edit_button": "Editar",
-    "update_button": "Actualizar"
+    "update_button": "Actualizar",
+    "category_label": "Categoría",
+    "type_food": "Ingrediente",
+    "type_supply": "Insumo / Empaque"
   },
   "recipe": {
     "title": "Creador de Recetas",
@@ -42,6 +45,8 @@
     "unit": "Unidad",
     "select_unit": "-- Seleccionar unidad --",
     "add_button": "Añadir",
+    "ingredients_section": "Ingredientes",
+    "supplies_section": "Insumos y Empaque",
     "add_ingredient_button": "Añadir Ingrediente",
     "clear_button": "Limpiar",
     "price": "Precio del Plato (€)",
@@ -229,7 +234,9 @@
     "confirm_changes": "Confirmar Cambios",
     "edit_details": "Editar Detalles",
     "new_recipe": "Nueva Receta",
-    "default": "Por defecto"
+    "default": "Por defecto",
+    "recipe_prefix": "[RECETA]",
+    "subrecipe_prefix": "[R]"
   },
   "stats": {
     "cost_label": "Costo Ingredientes",

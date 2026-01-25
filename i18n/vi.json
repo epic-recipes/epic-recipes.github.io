@@ -28,7 +28,10 @@
     "price_per_unit": "Giá/Đơn vị",
     "delete_button": "Xóa",
     "edit_button": "Chỉnh sửa",
-    "update_button": "Cập nhật"
+    "update_button": "Cập nhật",
+    "category_label": "Thể loại",
+    "type_food": "Thành phần",
+    "type_supply": "Cung cấp / Bao bì"
   },
   "recipe": {
     "title": "Trình tạo công thức",
@@ -57,7 +60,9 @@
       "margin": "Biên lợi nhuận %",
       "roi": "Tính lợi nhuận"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "Thành phần",
+    "supplies_section": "Cung cấp & Bao bì"
   },
   "book": {
     "title": "Công thức của tôi",
@@ -278,7 +283,9 @@
     "new_recipe": "Công thức mới",
     "save": "Lưu công thức",
     "update": "Cập nhật",
-    "default": "Mặc định"
+    "default": "Mặc định",
+    "recipe_prefix": "[CÔNG THỨC]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

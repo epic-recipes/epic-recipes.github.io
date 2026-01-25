@@ -28,7 +28,10 @@
     "price_per_unit": "Cena/jednostka",
     "delete_button": "Usuń",
     "edit_button": "Edytuj",
-    "update_button": "Aktualizuj"
+    "update_button": "Aktualizuj",
+    "category_label": "Kategoria",
+    "type_food": "Składnik",
+    "type_supply": "Zapasy / Opakowanie"
   },
   "recipe": {
     "title": "Kreator przepisów",
@@ -57,7 +60,9 @@
       "margin": "Marża %",
       "roi": "Rentowność"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "Składniki",
+    "supplies_section": "Zapasy i opakowanie"
   },
   "book": {
     "title": "Moje przepisy",
@@ -278,7 +283,9 @@
     "new_recipe": "Nowy Przepis",
     "save": "Zapisz przepis",
     "update": "Aktualizuj",
-    "default": "Domyślny"
+    "default": "Domyślny",
+    "recipe_prefix": "[PRZEPIS]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

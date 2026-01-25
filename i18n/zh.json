@@ -28,7 +28,10 @@
     "price_per_unit": "单价",
     "delete_button": "删除",
     "edit_button": "编辑",
-    "update_button": "更新"
+    "update_button": "更新",
+    "category_label": "类别",
+    "type_food": "配料",
+    "type_supply": "供应 / 包装"
   },
   "recipe": {
     "title": "食谱创建器",
@@ -57,7 +60,9 @@
       "margin": "利润率 %",
       "roi": "投资回报率"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "配料",
+    "supplies_section": "供应与包装"
   },
   "book": {
     "title": "我的食谱",
@@ -278,7 +283,9 @@
     "new_recipe": "新食谱",
     "save": "保存食谱",
     "update": "更新",
-    "default": "默认"
+    "default": "默认",
+    "recipe_prefix": "[食谱]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

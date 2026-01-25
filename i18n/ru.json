@@ -28,7 +28,10 @@
     "price_per_unit": "Цена/Единица",
     "delete_button": "Удалить",
     "edit_button": "Редактировать",
-    "update_button": "Обновить"
+    "update_button": "Обновить",
+    "category_label": "Категория",
+    "type_food": "ингредиент",
+    "type_supply": "Снабжение / упаковка"
   },
   "recipe": {
     "title": "Создатель рецептов",
@@ -57,7 +60,9 @@
       "margin": "Маржа %",
       "roi": "Рентабельность"
     },
-    "add_ingredient_button": "Add Ingredient"
+    "add_ingredient_button": "Add Ingredient",
+    "ingredients_section": "Ингредиенты",
+    "supplies_section": "Снабжение и упаковка"
   },
   "book": {
     "title": "Мои рецепты",
@@ -278,7 +283,9 @@
     "new_recipe": "Новый рецепт",
     "save": "Сохранить рецепт",
     "update": "Обновить",
-    "default": "По умолчанию"
+    "default": "По умолчанию",
+    "recipe_prefix": "[РЕЦЕПТ]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

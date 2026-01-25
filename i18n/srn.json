@@ -28,7 +28,10 @@
     "edit_button": "Kenki",
     "update_button": "Update",
     "pack_size_placeholder": "1",
-    "price_placeholder": "0.00"
+    "price_placeholder": "0.00",
+    "category_label": "Category",
+    "type_food": "Ingredient",
+    "type_supply": "Supply / Packaging"
   },
   "recipe": {
     "title": "Resep Meker",
@@ -57,7 +60,9 @@
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
     "add_ingredient_button": "Add Ingredient",
-    "portions_placeholder": "1"
+    "portions_placeholder": "1",
+    "ingredients_section": "Ingredients",
+    "supplies_section": "Supplies & Packaging"
   },
   "book": {
     "title": "Mi Resep",
@@ -278,7 +283,9 @@
     "confirm_changes": "Bevestigi kenki",
     "save": "Seif Resep",
     "edit_details": "Seti fini fini",
-    "default": "Standard"
+    "default": "Standard",
+    "recipe_prefix": "[RECIPE]",
+    "subrecipe_prefix": "[R]"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
