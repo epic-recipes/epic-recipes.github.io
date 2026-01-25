@@ -278,5 +278,10 @@
     "new_recipe": "New Recipe",
     "save": "حفظ الوصفة",
     "update": "تحديث"
+  },
+  "share": {
+    "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
+    "promo_phrase": "Efficiency and Elegance for every Chef.",
+    "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS"
   }
 }

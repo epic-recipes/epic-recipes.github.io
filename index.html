@@ -736,79 +736,77 @@
 
       <!-- MODAL de Donaciones -->
       <div id="donation-modal" class="modal donation-modal">
-        <div class="modal-content max-w-4xl p-0 overflow-hidden border-0">
+        <div class="modal-content max-w-3xl p-0 overflow-hidden border-0">
           <div class="grid grid-cols-1 md:grid-cols-2">
             <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
-            <div class="p-10 bg-gray-50">
-              <div class="flex justify-between items-center mb-10">
-                <div class="flex items-center gap-4">
+            <div class="p-6 md:p-8 bg-gray-50 flex flex-col">
+              <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-3">
                   <div
-                    class="w-14 h-14 bg-primary/10 text-primary rounded-[1.25rem] flex items-center justify-center text-2xl shadow-inner">
+                    class="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl shadow-inner">
                     <i class="fas fa-heart"></i>
                   </div>
                   <div>
-                    <h3 class="text-2xl font-black text-gray-800 tracking-tight leading-none mb-1"
+                    <h3 class="text-xl font-black text-gray-800 tracking-tight leading-none mb-1"
                       data-i18n="donation.title">Donaciones</h3>
-                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
+                    <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
                   </div>
                 </div>
                 <button
-                  class="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-gray-400 shadow-sm border border-gray-100"
+                  class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white text-gray-400 shadow-sm border border-gray-100"
                   onclick="closeDonationModal()">×</button>
               </div>
 
-              <div class="space-y-6">
+              <div class="space-y-4 flex-1">
                 <div
-                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
+                  class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100 relative overflow-hidden group">
                   <div
-                    class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-125 transition-transform">
+                    class="absolute -right-6 -bottom-6 w-20 h-20 bg-primary/5 rounded-full group-hover:scale-125 transition-transform">
                   </div>
                   <div
-                    class="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-widest mb-4"
+                    class="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-widest mb-3"
                     style="color: var(--primary)">
                     <i class="fas fa-magic"></i>
                     <span data-i18n="donation.support_project">Apoya el Proyecto</span>
                   </div>
-                  <p class="text-sm text-gray-500 leading-relaxed relative z-10 font-medium"
+                  <p class="text-xs text-gray-500 leading-relaxed relative z-10 font-medium"
                     data-i18n="donation.support_description">Independiente y artesanal. Tu ayuda mantiene este proyecto
                     vivo.</p>
                 </div>
 
-                <div
-                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 group hover:shadow-md transition-all">
-                  <div class="flex justify-between items-center mb-6">
-                    <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                <div class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="text-[9px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                       <i class="fas fa-mobile-alt text-primary/40"></i>
                       <span data-i18n="donation.digicel_label">Digicel</span>
                     </div>
                     <span class="text-xs font-black text-primary/60 font-mono tracking-tighter"
                       style="color: var(--primary)">+5977479759</span>
                   </div>
-                  <div class="flex gap-4">
-                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                  <div class="flex gap-3">
+                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
                       onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-                    <a class="flex-1 btn btn-primary text-[10px] h-12 rounded-2xl shadow-sm no-underline"
+                    <a class="flex-1 btn btn-primary text-[9px] h-10 rounded-xl no-underline"
                       href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup"
                       style="background-color: var(--primary)">Recargar</a>
                   </div>
                 </div>
 
-                <div
-                  class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 group hover:shadow-md transition-all">
+                <div class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100">
                   <div
-                    class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                     <i class="fab fa-ethereum text-primary/40"></i>
                     <span data-i18n="donation.crypto_label">USDC (Polygon)</span>
                   </div>
-                  <div class="bg-gray-50 p-5 rounded-2xl mb-6 border border-gray-100">
+                  <div class="bg-gray-50 p-4 rounded-xl mb-4 border border-gray-100">
                     <code id="crypto-address"
-                      class="text-[9px] text-gray-400 break-all font-mono leading-relaxed block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
+                      class="text-[8px] text-gray-400 break-all font-mono leading-relaxed block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
                   </div>
-                  <div class="flex gap-4">
-                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                  <div class="flex gap-3">
+                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
                       onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
                       data-i18n="donation.copy_button">Copiar</button>
-                    <button class="flex-1 btn btn-secondary text-[10px] h-12 rounded-2xl border-gray-100"
+                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
                       onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
                       data-i18n="donation.view_on_explorer">Explorer</button>
                   </div>
@@ -817,14 +815,13 @@
             </div>
 
             <!-- COLUMNA DERECHA: WIDGET -->
-            <div class="relative bg-white flex flex-col">
+            <div class="relative bg-white flex flex-col border-t md:border-t-0 md:border-l border-gray-100">
               <button
                 class="hidden md:flex absolute top-6 right-6 w-10 h-10 items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 transition-all z-10"
                 onclick="closeDonationModal()">×</button>
-              <div class="flex-1 min-h-[500px]">
+              <div class="flex-1 min-h-[450px]">
                 <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
-                  width="100%" height="100%" frameborder="0" class="w-full h-full border-none">No se puede cargar el
-                  widget</iframe>
+                  width="100%" height="100%" frameborder="0" class="w-full h-full border-none"></iframe>
               </div>
             </div>
           </div>
@@ -1544,60 +1541,60 @@
             ctx.roundRect(margin, margin, 800 - margin * 2, 400 - margin * 2, radius);
             ctx.fill();
 
-            // 4. Header Text
-            ctx.shadowBlur = 0; // Reset shadow for text
+            // 4. Header Text (Localized)
+            ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
 
-            ctx.fillStyle = '#7C9D8E'; // Primary Sage
-            ctx.font = 'bold 12px Montserrat, Arial';
+            ctx.fillStyle = '#7C9D8E';
+            ctx.font = 'bold 16px Montserrat, Arial';
             ctx.textAlign = 'left';
-            ctx.fillText('RECETARIO ÉPICO · EPIC RECIPES', margin + 30, margin + 40);
+            ctx.fillText(t('share.app_branding').toUpperCase(), margin + 30, margin + 45);
 
-            // 5. Recipe Name or App Name
+            // 5. Recipe Name or App Name (Increased Size)
             const mainTitle = recipe ? recipe.name.toUpperCase() : t('app_name').toUpperCase();
             ctx.fillStyle = '#12141D';
-            ctx.font = 'black 36px Montserrat, Arial';
-            ctx.fillText(mainTitle, margin + 30, margin + 90);
+            ctx.font = 'black 48px Montserrat, Arial';
+            ctx.fillText(mainTitle, margin + 30, margin + 110);
 
-            // 6. Ingredients Count or Description
+            // 6. Ingredients Count or Description (Increased Size)
             const subTitle = recipe ? `${recipe.items.length} ${t('modal.ingredients').toUpperCase()}` : t('app_description').toUpperCase();
             ctx.fillStyle = '#A9B0C2';
-            ctx.font = '600 14px Montserrat, Arial';
-            ctx.fillText(subTitle, margin + 30, margin + 115);
+            ctx.font = '600 20px Montserrat, Arial';
+            ctx.fillText(subTitle, margin + 30, margin + 145);
 
             // 7. Stats Grid (Only if recipe exists)
             if (recipe) {
-              const statY = margin + 180;
+              const statY = margin + 210;
               const drawStat = (label, value, x, color) => {
                 ctx.fillStyle = '#A9B0C2';
-                ctx.font = 'bold 10px Montserrat, Arial';
+                ctx.font = 'bold 14px Montserrat, Arial';
                 ctx.fillText(label.toUpperCase(), x, statY);
 
                 ctx.fillStyle = color;
-                ctx.font = 'black 28px Montserrat, Arial';
-                ctx.fillText(value, x, statY + 35);
+                ctx.font = 'black 36px Montserrat, Arial';
+                ctx.fillText(value, x, statY + 45);
               };
 
               drawStat(t('book.total_cost'), `${recipe.cost.toFixed(2)}€`, margin + 30, '#EE6262');
-              drawStat(t('book.sale_price'), `${recipe.price.toFixed(2)}€`, margin + 230, '#7C9D8E');
+              drawStat(t('book.sale_price'), `${recipe.price.toFixed(2)}€`, margin + 250, '#7C9D8E');
 
               const profit = recipe.price - recipe.cost;
-              drawStat(t('book.net_profit'), `${profit.toFixed(2)}€`, margin + 430, profit >= 0 ? '#7C9D8E' : '#EE6262');
+              drawStat(t('book.net_profit'), `${profit.toFixed(2)}€`, margin + 480, profit >= 0 ? '#7C9D8E' : '#EE6262');
             } else {
-              // App Promo Logic
+              // App Promo Logic (localized and larger)
               ctx.fillStyle = '#7C9D8E';
-              ctx.font = 'italic 18px Montserrat, Arial';
-              ctx.fillText('Efficiency and Elegance for every Chef.', margin + 30, margin + 180);
+              ctx.font = 'italic 24px Montserrat, Arial';
+              ctx.fillText(t('share.promo_phrase'), margin + 30, margin + 210);
             }
 
-            // 8. Footer Branding
+            // 8. Footer Branding (Localized and larger)
             ctx.fillStyle = '#F8F9F5';
             ctx.fillRect(margin, 400 - margin - 60, 800 - margin * 2, 60);
 
             ctx.fillStyle = '#7C9D8E';
-            ctx.font = 'bold 10px Montserrat, Arial';
+            ctx.font = 'bold 14px Montserrat, Arial';
             ctx.textAlign = 'right';
-            ctx.fillText('DESIGNED FOR GASTRONOMY PROFESSIONALS', 800 - margin - 30, 400 - margin - 25);
+            ctx.fillText(t('share.footer_branding').toUpperCase(), 800 - margin - 30, 400 - margin - 25);
 
             // Convert to blob
             canvas.toBlob((blob) => {

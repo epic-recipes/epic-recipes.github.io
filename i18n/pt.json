@@ -278,5 +278,10 @@
     "confirm_changes": "Confirm Changes",
     "save": "Salvar Receita",
     "edit_details": "Edit Details"
+  },
+  "share": {
+    "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
+    "promo_phrase": "Efficiency and Elegance for every Chef.",
+    "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS"
   }
 }

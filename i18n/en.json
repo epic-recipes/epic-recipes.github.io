@@ -278,5 +278,10 @@
     "install_unsupported": "Your browser does not support app installation. Try Chrome, Edge or Safari on iOS.",
     "uninstall_button": "Uninstall App",
     "uninstall_description": "Uninstall the application from your device"
+  },
+  "share": {
+    "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
+    "promo_phrase": "Efficiency and Elegance for every Chef.",
+    "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS"
   }
 }
