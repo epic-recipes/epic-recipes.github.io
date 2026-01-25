@@ -274,11 +274,11 @@
     "cancel": "Plus tard",
     "add": "Ajouter",
     "update": "Mettre à jour",
-    "new_recipe": "New Recipe",
-    "confirm_changes": "Confirm Changes",
+    "new_recipe": "Nouvelle Recette",
+    "confirm_changes": "Confirmer les changements",
     "save": "Sauvegarder la Recette",
-    "edit_details": "Edit Details",
-    "default": "Default"
+    "edit_details": "Modifier les détails",
+    "default": "Par défaut"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

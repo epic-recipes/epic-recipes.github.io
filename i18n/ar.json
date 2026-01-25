@@ -272,13 +272,13 @@
   },
   "common": {
     "cancel": "لاحقًا",
-    "confirm_changes": "Confirm Changes",
-    "edit_details": "Edit Details",
+    "confirm_changes": "تأكيد التغييرات",
+    "edit_details": "تعديل التفاصيل",
     "add": "إضافة",
-    "new_recipe": "New Recipe",
+    "new_recipe": "وصفة جديدة",
     "save": "حفظ الوصفة",
     "update": "تحديث",
-    "default": "Default"
+    "default": "افتراضي"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

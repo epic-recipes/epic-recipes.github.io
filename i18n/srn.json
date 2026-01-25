@@ -274,11 +274,11 @@
     "cancel": "No now",
     "add": "Adi",
     "update": "Update",
-    "new_recipe": "New Recipe",
-    "confirm_changes": "Confirm Changes",
+    "new_recipe": "Nyun Resepti",
+    "confirm_changes": "Bevestigi kenki",
     "save": "Seif Resep",
-    "edit_details": "Edit Details",
-    "default": "Default"
+    "edit_details": "Seti fini fini",
+    "default": "Standard"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

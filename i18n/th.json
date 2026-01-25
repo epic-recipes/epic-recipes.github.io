@@ -272,13 +272,13 @@
   },
   "common": {
     "cancel": "ทีหลัง",
-    "confirm_changes": "Confirm Changes",
-    "edit_details": "Edit Details",
+    "confirm_changes": "ยืนยันการเปลี่ยนแปลง",
+    "edit_details": "แก้ไขรายละเอียด",
     "add": "เพิ่ม",
-    "new_recipe": "New Recipe",
+    "new_recipe": "สูตรอาหารใหม่",
     "save": "บันทึกสูตร",
     "update": "อัปเดต",
-    "default": "Default"
+    "default": "ค่าเริ่มต้น"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

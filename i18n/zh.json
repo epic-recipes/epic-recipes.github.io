@@ -272,13 +272,13 @@
   },
   "common": {
     "cancel": "稍后",
-    "confirm_changes": "Confirm Changes",
-    "edit_details": "Edit Details",
+    "confirm_changes": "确认更改",
+    "edit_details": "编辑细节",
     "add": "添加",
-    "new_recipe": "New Recipe",
+    "new_recipe": "新食谱",
     "save": "保存食谱",
     "update": "更新",
-    "default": "Default"
+    "default": "默认"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

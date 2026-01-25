@@ -272,13 +272,13 @@
   },
   "common": {
     "cancel": "Sonra",
-    "confirm_changes": "Confirm Changes",
-    "edit_details": "Edit Details",
+    "confirm_changes": "Değişiklikleri onayla",
+    "edit_details": "Detayları düzenle",
     "add": "Ekle",
-    "new_recipe": "New Recipe",
+    "new_recipe": "Yeni Tarif",
     "save": "Tarifu Kaydet",
     "update": "Güncelle",
-    "default": "Default"
+    "default": "Varsayılan"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

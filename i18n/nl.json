@@ -274,11 +274,11 @@
     "cancel": "Niet nu",
     "add": "Toevoegen",
     "update": "Bijwerken",
-    "new_recipe": "New Recipe",
-    "confirm_changes": "Confirm Changes",
+    "new_recipe": "Nieuw Recept",
+    "confirm_changes": "Wijzigingen bevestigen",
     "save": "Recept Opslaan",
-    "edit_details": "Edit Details",
-    "default": "Default"
+    "edit_details": "Details bewerken",
+    "default": "Standaard"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

@@ -272,13 +272,13 @@
   },
   "common": {
     "cancel": "Để sau",
-    "confirm_changes": "Confirm Changes",
-    "edit_details": "Edit Details",
+    "confirm_changes": "Xác nhận thay đổi",
+    "edit_details": "Chỉnh sửa chi tiết",
     "add": "Thêm",
-    "new_recipe": "New Recipe",
+    "new_recipe": "Công thức mới",
     "save": "Lưu công thức",
     "update": "Cập nhật",
-    "default": "Default"
+    "default": "Mặc định"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

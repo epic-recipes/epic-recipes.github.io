@@ -1321,16 +1321,16 @@
           <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Análisis Financiero</h4>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
             <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Costo Total:</strong> <span style="color: var(--danger)">${recipe.cost.toFixed(2)}€</span>
+              <strong>${t('book.total_cost')}:</strong> <span style="color: var(--danger)">${recipe.cost.toFixed(2)}€</span>
             </div>
             <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Precio Venta:</strong> <span style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
+              <strong>${t('book.sale_price')}:</strong> <span style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
             </div>
             <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Precio por Porción:</strong> ${pricePerPortion.toFixed(2)}€ (${portions} porciones)
+              <strong>${t('stats.price_per_portion')}:</strong> ${pricePerPortion.toFixed(2)}€ (${portions} ${t('book.portions')})
             </div>
             <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Ganancia Neta:</strong> <span style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
+              <strong>${t('book.net_profit')}:</strong> <span style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
             </div>
             <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
               <strong>Margen de Ganancia:</strong> ${margin.toFixed(1)}%
@@ -3023,13 +3023,13 @@
 
           if (!list) return;
           list.innerHTML = '';
-          
+
           Object.keys(customConversions).forEach(key => {
             const [from, to] = key.split('-');
             const factor = customConversions[key];
             const div = document.createElement('div');
             div.className = 'group flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white hover:border-primary/20 shadow-sm transition-all';
-            
+
             div.innerHTML = `
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
@@ -3048,7 +3048,7 @@
                 <i class="fas fa-trash text-[10px]"></i>
               </button>
             `;
-            
+
             div.querySelector('.delete-conv-btn').onclick = () => deleteConversion(from, to);
             list.appendChild(div);
           });
