@@ -738,78 +738,66 @@
       <div id="donation-modal" class="modal donation-modal">
         <div class="modal-content max-w-3xl p-0 overflow-hidden border-0">
           <div class="grid grid-cols-1 md:grid-cols-2">
-            <!-- COLUMNA IZQUIERDA: TEXTOS DE AYUDA -->
-            <div class="p-6 md:p-8 bg-gray-50 flex flex-col">
-              <div class="flex justify-between items-center mb-6">
+            <!-- COLUMNA IZQUIERDA: INFO -->
+            <div class="p-5 md:p-7 bg-gray-50 flex flex-col gap-4">
+              <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <div
-                    class="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-xl shadow-inner">
+                    class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-lg shadow-inner">
                     <i class="fas fa-heart"></i>
                   </div>
                   <div>
-                    <h3 class="text-xl font-black text-gray-800 tracking-tight leading-none mb-1"
+                    <h3 class="text-lg font-black text-gray-800 tracking-tight leading-none mb-1"
                       data-i18n="donation.title">Donaciones</h3>
-                    <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
+                    <div class="text-[8px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
                   </div>
                 </div>
                 <button
-                  class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white text-gray-400 shadow-sm border border-gray-100"
+                  class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg bg-white text-gray-400 border border-gray-100 shadow-sm"
                   onclick="closeDonationModal()">×</button>
               </div>
 
-              <div class="space-y-4 flex-1">
-                <div
-                  class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100 relative overflow-hidden group">
-                  <div
-                    class="absolute -right-6 -bottom-6 w-20 h-20 bg-primary/5 rounded-full group-hover:scale-125 transition-transform">
-                  </div>
-                  <div
-                    class="flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-widest mb-3"
-                    style="color: var(--primary)">
-                    <i class="fas fa-magic"></i>
-                    <span data-i18n="donation.support_project">Apoya el Proyecto</span>
-                  </div>
-                  <p class="text-xs text-gray-500 leading-relaxed relative z-10 font-medium"
-                    data-i18n="donation.support_description">Independiente y artesanal. Tu ayuda mantiene este proyecto
-                    vivo.</p>
-                </div>
+              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
+                <i class="fas fa-magic text-primary/40 text-xs"></i>
+                <p class="text-[11px] text-gray-500 leading-tight font-medium" data-i18n="donation.support_description">
+                  Tu ayuda mantiene este proyecto independiente y vivo.</p>
+              </div>
 
-                <div class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100">
-                  <div class="flex justify-between items-center mb-4">
-                    <div class="text-[9px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                      <i class="fas fa-mobile-alt text-primary/40"></i>
-                      <span data-i18n="donation.digicel_label">Digicel</span>
-                    </div>
-                    <span class="text-xs font-black text-primary/60 font-mono tracking-tighter"
-                      style="color: var(--primary)">+5977479759</span>
+              <!-- DIGICEL -->
+              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                    <i class="fas fa-mobile-alt text-primary/30"></i>
+                    <span data-i18n="donation.digicel_label">Digicel</span>
                   </div>
-                  <div class="flex gap-3">
-                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
-                      onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-                    <a class="flex-1 btn btn-primary text-[9px] h-10 rounded-xl no-underline"
-                      href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup"
-                      style="background-color: var(--primary)">Recargar</a>
-                  </div>
+                  <span class="text-xs font-black text-primary/60 font-mono">+5977479759</span>
                 </div>
+                <div class="flex gap-2">
+                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
+                    onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
+                  <a class="flex-1 btn btn-primary text-[9px] py-2 rounded-xl shadow-sm no-underline text-center"
+                    href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup"
+                    style="background-color: var(--primary)">Recargar</a>
+                </div>
+              </div>
 
-                <div class="bg-white p-6 rounded-[1.5rem] shadow-sm border border-gray-100">
-                  <div
-                    class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                    <i class="fab fa-ethereum text-primary/40"></i>
-                    <span data-i18n="donation.crypto_label">USDC (Polygon)</span>
-                  </div>
-                  <div class="bg-gray-50 p-4 rounded-xl mb-4 border border-gray-100">
-                    <code id="crypto-address"
-                      class="text-[8px] text-gray-400 break-all font-mono leading-relaxed block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
-                  </div>
-                  <div class="flex gap-3">
-                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
-                      onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
-                      data-i18n="donation.copy_button">Copiar</button>
-                    <button class="flex-1 btn btn-secondary text-[9px] h-10 rounded-xl"
-                      onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
-                      data-i18n="donation.view_on_explorer">Explorer</button>
-                  </div>
+              <!-- CRYPTO -->
+              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3">
+                  <i class="fab fa-ethereum text-primary/30"></i>
+                  <span data-i18n="donation.crypto_label">USDC (Polygon)</span>
+                </div>
+                <div class="bg-gray-50 p-3 rounded-xl mb-3 border border-gray-100">
+                  <code id="crypto-address"
+                    class="text-[8px] text-gray-400 break-all font-mono leading-tight block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
+                </div>
+                <div class="flex gap-2">
+                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
+                    onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
+                    data-i18n="donation.copy_button">Copiar</button>
+                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
+                    onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
+                    data-i18n="donation.view_on_explorer">Explorer</button>
                 </div>
               </div>
             </div>
@@ -817,9 +805,9 @@
             <!-- COLUMNA DERECHA: WIDGET -->
             <div class="relative bg-white flex flex-col border-t md:border-t-0 md:border-l border-gray-100">
               <button
-                class="hidden md:flex absolute top-6 right-6 w-10 h-10 items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 transition-all z-10"
+                class="hidden md:flex absolute top-4 right-4 w-9 h-9 items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 transition-all z-10"
                 onclick="closeDonationModal()">×</button>
-              <div class="flex-1 min-h-[450px]">
+              <div class="flex-1 min-h-[420px]">
                 <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
                   width="100%" height="100%" frameborder="0" class="w-full h-full border-none"></iframe>
               </div>
