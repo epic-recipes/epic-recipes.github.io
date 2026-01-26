@@ -154,6 +154,52 @@
       transform: scale(0.95);
     }
 
+    .btn-icon:hover {
+      background-color: #fca5a5;
+      color: white;
+    }
+
+    /* FAB - Floating Action Button */
+    .fab {
+      position: fixed;
+      bottom: 100px;
+      /* Above bottom nav */
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(124, 157, 142, 0.4);
+      z-index: 1001;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .fab:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 15px 30px rgba(124, 157, 142, 0.6);
+      background-color: var(--primary-dark);
+    }
+
+    .fab:active {
+      transform: scale(0.95);
+    }
+
+    @media (min-width: 768px) {
+      .fab {
+        position: sticky;
+        bottom: 24px;
+        right: 0;
+        margin-left: auto;
+        margin-top: 20px;
+      }
+    }
+
     .btn-primary {
       background: var(--primary);
       color: white;
@@ -397,16 +443,15 @@
                 <h3 class="text-xl font-bold text-gray-800" data-i18n="ingredients.list_title">Despensa</h3>
                 <p class="text-sm text-gray-500" data-i18n="app_description">Gestor de ingredientes</p>
               </div>
-              <button
-                class="bg-primary text-white px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/20 flex items-center gap-2 hover:scale-105 transition-all"
-                style="background-color: var(--primary)" onclick="openIngredientModal()"
-                data-i18n="ingredients.add_button">
-                <i class="fas fa-plus text-xs"></i> Añadir
-              </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ing-list">
               <!-- Listado de ingredientes -->
             </div>
+            
+            <!-- Botón Flotante -->
+            <button class="fab" onclick="openIngredientModal()" title="Añadir Ingrediente" data-i18n-title="modal.add_ingredient_title">
+              <i class="fas fa-plus text-xl"></i>
+            </button>
           </section>
         </div>
 
@@ -1827,7 +1872,7 @@
             const priceExtra = ing.priceType === 'pack' ? ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€</span>` : '';
             const isSupply = ing.category === 'supply';
             const categoryIcon = isSupply ? 'fas fa-box' : 'fas fa-leaf';
-            
+
             card.innerHTML = `
           <div class="flex-1">
             <div class="flex items-center mb-1">
@@ -2161,7 +2206,7 @@
 
           const renderSection = (items, titleKey) => {
             if (items.length === 0) return;
-            
+
             const h = document.createElement('div');
             h.className = "text-[10px] font-black text-primary/40 uppercase tracking-widest mb-3 mt-6 first:mt-0 px-2";
             h.textContent = t(titleKey);
@@ -2171,7 +2216,7 @@
               const index = activeRecipe.items.indexOf(item);
               const card = document.createElement('div');
               card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:bg-gray-50 transition-all mb-2';
-              
+
               const displayQty = item.displayUnit ? item.displayQty : item.qty;
               const displayUnit = item.displayUnit || item.rarity;
               const isRec = typeof item.id === 'string' && item.id.startsWith('R-');
@@ -2498,7 +2543,7 @@
 
           const renderSection = (items, titleKey) => {
             if (items.length === 0) return;
-            
+
             const h = document.createElement('div');
             h.style = "font-size: 9px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin: 15px 0 8px 0; border-bottom: 1px solid #eee; padding-bottom: 4px;";
             h.textContent = t(titleKey);
@@ -3132,6 +3177,7 @@
           if (!select) return;
 
           const units = getCustomUnits();
+          const currentVal = select.value;
           select.innerHTML = '<option value="">' + t('ingredients.select_unit') + '</option>';
 
           Object.entries(units).forEach(([key, value]) => {
@@ -3140,6 +3186,22 @@
             opt.innerText = `${getUnitName(key)} (${value})`;
             select.appendChild(opt);
           });
+
+          if (currentVal) select.value = currentVal;
+        }
+
+        // Nueva función centralizada para refrescar TODO lo que use unidades
+        function refreshAllUnitSelectors() {
+          // 1. Selectores de "rareza" (unidad base) en los modales de ingrediente
+          renderUnitsSelector('ing-rarity');
+          renderUnitsSelector('ing-rarity-desk');
+
+          // 2. Selectores de conversión en el modal de añadir ingrediente a receta
+          updateUnitSelector();
+          updateUnitSelectorDesk();
+
+          // 3. Selectores de "De" y "A" en el modal de añadir equivalencia
+          renderConversionsList();
         }
 
         function renderUnitsList() {
@@ -3200,7 +3262,8 @@
           customUnits[key] = value;
           localStorage.setItem('rpg_units', JSON.stringify(customUnits));
           renderUnitsList();
-          renderConversionsList(); // Actualizar dropdowns de equivalencias
+          // REFRESCAR TODO
+          refreshAllUnitSelectors();
           document.getElementById('unit-key').value = '';
           document.getElementById('unit-value').value = '';
           closeUnitModal();
@@ -3217,6 +3280,7 @@
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
               renderUnitsList();
               renderIngredients();
+              refreshAllUnitSelectors();
               showToast(t('toasts.ingredient_deleted', `Unidad "${key}" eliminada`));
             }
           });
@@ -3229,6 +3293,7 @@
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
               renderUnitsList();
               renderIngredients();
+              refreshAllUnitSelectors();
               showToast(t('toasts.ingredient_updated', 'Unidades restauradas a valores por defecto'));
             }
           });
@@ -3314,7 +3379,10 @@
           customConversions[key] = factor;
           customConversions[reverseKey] = reverseFactor; // Agregar conversión inversa
           localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
-          renderConversionsList();
+
+          // REFRESCAR SELECTORES
+          refreshAllUnitSelectors();
+
           document.getElementById('conv-factor').value = '';
           closeConversionModal();
           showToast(t('toasts.conversions_replaced', `Conversiones ${from} ↔ ${to} agregadas`));
@@ -3348,6 +3416,7 @@
               renderConversionsList();
               renderActiveRecipe();
               renderBook();
+              refreshAllUnitSelectors();
               showToast(t('toasts.conversions_deleted', 'Conversiones eliminadas y unidades actualizadas'));
             }
           });
@@ -3358,8 +3427,23 @@
             if (confirmed) {
               customConversions = {};
               localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+
+              const clearDisplay = (items) => {
+                items.forEach(item => {
+                  delete item.displayUnit;
+                  delete item.displayQty;
+                });
+              };
+
+              clearDisplay(activeRecipe.items);
+              recipeBook.forEach(rec => clearDisplay(rec.items));
+              localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+
               renderConversionsList();
-              showToast('Conversiones restauradas');
+              renderActiveRecipe();
+              renderBook();
+              refreshAllUnitSelectors();
+              showToast(t('toasts.conversions_replaced', 'Conversiones restauradas'));
             }
           });
         }
