@@ -60,7 +60,7 @@
       "margin": "マージン %",
       "roi": "収益性"
     },
-    "add_ingredient_button": "Add Ingredient",
+    "add_ingredient_button": "Add Components",
     "ingredients_section": "材料",
     "supplies_section": "供給と包装"
   },
@@ -250,10 +250,10 @@
     "roi": "投資利益率 (ROI)",
     "profit_per_euro": "€ あたりの利益",
     "edit_ingredient_title": "Edit Ingredient",
-    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_recipe_item_title": "Add Component to Recipe",
     "recipe_details_title": "Recipe Details",
     "add_unit_title": "Add Unit",
-    "add_ingredient_title": "Add Ingredient",
+    "add_ingredient_title": "Add Component",
     "add_conversion_title": "Add Conversion"
   },
   "stats": {

@@ -59,7 +59,7 @@
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
-    "add_ingredient_button": "Add Ingredient",
+    "add_ingredient_button": "Add Components",
     "portions_placeholder": "1",
     "ingredients_section": "Ingrediënten",
     "supplies_section": "Verbruiksartikelen en verpakking"
@@ -249,10 +249,10 @@
     "profit_margin": "Winstmarge",
     "roi": "Return on Investment (ROI)",
     "profit_per_euro": "Winst per €",
-    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_recipe_item_title": "Add Component to Recipe",
     "add_unit_title": "Add Unit",
     "recipe_details_title": "Recipe Details",
-    "add_ingredient_title": "Add Ingredient",
+    "add_ingredient_title": "Add Component",
     "add_conversion_title": "Add Conversion",
     "edit_ingredient_title": "Edit Ingredient"
   },

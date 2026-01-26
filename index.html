@@ -577,7 +577,7 @@
                     class="flex-1 bg-primary text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
                     style="background-color: var(--primary)" onclick="openRecipeItemModal()"
                     data-i18n="recipe.add_ingredient_button">
-                    <i class="fas fa-plus-circle"></i> Añadir Ingrediente
+                    <i class="fas fa-plus-circle"></i> Añadir Componentes
                   </button>
                   <button
                     class="bg-gray-100 text-gray-500 px-6 py-3 rounded-2xl font-bold hover:bg-gray-200 transition-all"
@@ -625,7 +625,7 @@
           <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50">
             <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="book.title">Mis Recetas</h2>
             <div id="recipe-book"
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[60vh] overflow-y-auto pr-2 no-scrollbar">
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-2 no-scrollbar">
               <!-- Recetas guardadas -->
             </div>
             <div class="flex gap-4 mt-8">
@@ -855,8 +855,7 @@
                 onclick="importSingleRecipe()">Importar Receta</button>
             </div>
           </h2>
-          <div id="recipe-book-desk" class="list-container"
-            style="max-height: 400px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px;">
+          <div id="recipe-book-desk" class="list-container">
             <!-- Recetas guardadas -->
           </div>
           <input type="file" id="recipe-file-input-desk" style="display:none;" accept=".json"
@@ -996,7 +995,7 @@
         <div class="modal-content">
           <div class="modal-header flex justify-between items-center mb-6">
             <h3 class="text-xl font-bold text-gray-800" id="ing-modal-title" data-i18n="modal.add_ingredient_title">
-              Añadir Ingrediente</h3>
+              Añadir Componente</h3>
             <button
               class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:text-gray-600 transition-all font-bold"
               onclick="closeIngredientModal()">×</button>
@@ -1069,7 +1068,7 @@
       <div id="recipe-add-item-modal" class="modal">
         <div class="modal-content">
           <div class="modal-header flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-800" data-i18n="modal.add_recipe_item_title">Añadir Ingrediente a
+            <h3 class="text-lg font-semibold text-gray-800" data-i18n="modal.add_recipe_item_title">Añadir Componente a
               Receta</h3>
             <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeRecipeItemModal()">×</button>
           </div>
@@ -2804,51 +2803,49 @@
         // ====== Libro de Recetas ======
         function renderBook() {
           const container = document.getElementById('recipe-book');
+          if (!container) return;
           container.innerHTML = '';
 
           recipeBook.forEach(rec => {
             const div = document.createElement('div');
-            div.className = 'bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50 hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer group relative overflow-hidden';
+            // Same classes as pantry cards
+            div.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all ing-card-mobile';
 
-            // Background decoration
-            const decor = document.createElement('div');
-            decor.className = 'absolute -right-4 -top-4 w-24 h-24 bg-sage-50 rounded-full opacity-50 group-hover:scale-110 transition-transform';
-            decor.style.backgroundColor = '#f0f4f2';
-            div.appendChild(decor);
-
-            const content = document.createElement('div');
-            content.className = 'relative z-10';
-            content.innerHTML = `
-              <div class="flex items-center gap-2 mb-4">
-                <div class="w-2 h-2 rounded-full bg-primary" style="background-color: var(--primary)"></div>
-                <h3 class="text-lg font-black text-gray-800 truncate">${rec.name}</h3>
-              </div>
-              <div class="flex items-center gap-4 mb-6">
-                <div class="flex -space-x-2">
-                  ${rec.items.slice(0, 3).map(() => `<div class="w-7 h-7 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-[10px] text-gray-400"><i class="fas fa-leaf"></i></div>`).join('')}
-                  ${rec.items.length > 3 ? `<div class="w-7 h-7 rounded-full bg-primary-light border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">+${rec.items.length - 3}</div>` : ''}
-                </div>
-                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">${rec.items.length} ${t('modal.ingredients')}</span>
-              </div>
-              <div class="grid grid-cols-2 gap-3 pt-4 border-t border-gray-50">
-                <div>
-                  <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1" data-i18n="book.total_cost">${t('book.total_cost', 'Costo')}</div>
-                  <div class="text-sm font-black text-red-400">${rec.cost.toFixed(2)}€</div>
-                </div>
-                <div>
-                  <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1" data-i18n="book.sale_price">${t('book.sale_price', 'Venta')}</div>
-                  <div class="text-sm font-black text-primary" style="color: var(--primary)">${rec.price.toFixed(2)}€</div>
-                </div>
-              </div>
-            `;
-            div.appendChild(content);
-            div.onclick = () => openRecipeModal(rec.id);
+            div.innerHTML = `
+          <div class="flex-1 cursor-pointer" onclick="openRecipeModal(${rec.id})">
+            <div class="flex items-center mb-1">
+              <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color: var(--primary)"></span>
+              <i class="fas fa-utensils text-[10px] mr-1.5 opacity-40"></i>
+              <b class="text-sm text-gray-800 font-bold">${rec.name}</b>
+            </div>
+            <div class="flex items-center flex-wrap gap-1">
+              <span class="text-xs text-gray-400 font-medium">${rec.portions || 1} ${t('book.portions')} · ${rec.price.toFixed(2)}€</span>
+            </div>
+          </div>
+          <div class="flex gap-2 ml-2">
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-primary-light hover:text-white transition-all" onclick="editRecipeFromList(${rec.id})" title="${t('desktop.edit')}">
+              <i class="fas fa-edit text-xs"></i>
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all" onclick="deleteFromBook(${rec.id})" title="${t('book.delete')}">
+              <i class="fas fa-trash text-xs"></i>
+            </button>
+          </div>
+        `;
             container.appendChild(div);
           });
 
           // Sincronizar con escritorio
           renderBookDesk();
         }
+
+        function editRecipeFromList(id) {
+          const rec = recipeBook.find(r => r.id === id);
+          if (!rec) return;
+          currentRecipeModal = rec;
+          editRecipe();
+          switchTab('tab-receta');
+        }
+
 
         function renderBookDesk() {
           const container = document.getElementById('recipe-book-desk');
@@ -2858,23 +2855,17 @@
 
           recipeBook.forEach(rec => {
             const div = document.createElement('div');
-            div.className = 'bg-white border border-gray-300 rounded p-4 cursor-pointer hover:shadow-md transition-shadow';
+            div.className = 'card cursor-pointer'; // Use pantry desk classes
             div.innerHTML = `
-          <div class="text-yellow-600 font-semibold mb-2 text-sm">${rec.name}</div>
-          <div class="text-gray-500 text-xs leading-relaxed mb-2">
-            ${rec.items.map(i => {
-              const dQty = i.displayUnit ? i.displayQty : i.qty;
-              const dUnit = i.displayUnit || i.rarity;
-              return `${i.name} ${dQty.toFixed(2)} ${getUnitLabel(dUnit)}`;
-            }).join('<br>')}
+          <div class="card-info" onclick="openRecipeModal(${rec.id})">
+            <b><span class="rarity-dot" style="background: var(--primary)"></span><i class="fas fa-utensils" style="font-size: 8px; opacity: 0.5; margin-right: 4px;"></i>${rec.name}</b>
+            <span>${rec.portions || 1} ${t('book.portions')} · Venta: ${rec.price.toFixed(2)}€</span>
           </div>
-          <div class="border-t pt-2"></div>
-          <div class="flex justify-between text-xs">
-            <span class="text-green-600">Venta: ${rec.price.toFixed(2)}€</span>
-            <span class="text-red-600">Costo: ${rec.cost.toFixed(2)}€</span>
+          <div style="display: flex; gap: 4px;">
+            <button class="btn btn-primary" style="padding:4px 6px; font-size:8px" onclick="editRecipeFromList(${rec.id})">E</button>
+            <button class="btn btn-danger" style="padding:4px 6px; font-size:8px" onclick="deleteFromBook(${rec.id})">X</button>
           </div>
         `;
-            div.onclick = () => openRecipeModal(rec.id);
             container.appendChild(div);
           });
         }

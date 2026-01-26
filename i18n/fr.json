@@ -59,7 +59,7 @@
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
-    "add_ingredient_button": "Add Ingredient",
+    "add_ingredient_button": "Ajouter des Composants",
     "portions_placeholder": "1",
     "ingredients_section": "Ingrédients",
     "supplies_section": "Fournitures et emballage"
@@ -249,10 +249,10 @@
     "profit_margin": "Marge Bénéficiaire",
     "roi": "Retour sur Investissement (ROI)",
     "profit_per_euro": "Bénéfice par €",
-    "add_recipe_item_title": "Add Ingredient to Recipe",
+    "add_recipe_item_title": "Ajouter un Composant à la Recette",
     "add_unit_title": "Add Unit",
     "recipe_details_title": "Recipe Details",
-    "add_ingredient_title": "Add Ingredient",
+    "add_ingredient_title": "Ajouter un Composant",
     "add_conversion_title": "Add Conversion",
     "edit_ingredient_title": "Edit Ingredient"
   },
