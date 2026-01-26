@@ -1710,10 +1710,11 @@
         }
 
         function closeConfirmModal(confirmed) {
+          const callback = confirmCallback;
+          confirmCallback = null; // Limpiar antes de ejecutar para permitir re-asignación anidada
           document.getElementById('confirm-modal').classList.remove('active');
-          if (confirmCallback) {
-            confirmCallback(confirmed);
-            confirmCallback = null;
+          if (callback) {
+            callback(confirmed);
           }
         }
 
