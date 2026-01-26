@@ -108,13 +108,101 @@
 
     .modal-content {
       background: var(--bg-card);
-      padding: 2rem;
+      padding: 1.5rem;
       width: 90%;
       max-width: 600px;
       border-radius: 1.5rem;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
       max-height: 90vh;
       overflow-y: auto;
+    }
+
+    /* Mobile fine-tuning */
+    @media (max-width: 640px) {
+      :root {
+        --radius: 0.75rem;
+      }
+
+      .modal-content {
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+      }
+
+      header {
+        padding: 0.75rem 1rem !important;
+      }
+
+      header h1 {
+        font-size: 1rem !important;
+      }
+
+      .card {
+        padding: 1rem !important;
+        margin-bottom: 0.75rem !important;
+      }
+
+      section {
+        padding: 1.5rem !important;
+        border-radius: 1.5rem !important;
+      }
+
+      .fab {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 80px !important;
+        right: 16px !important;
+      }
+
+      .btn {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+      }
+
+      #toast-container {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+      }
+
+      .toast {
+        min-width: auto;
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+      }
+
+      .main-content-p {
+        padding: 0.75rem !important;
+        padding-bottom: 5rem !important;
+      }
+
+      .bottom-nav-m {
+        bottom: 1rem !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+
+      .rec-summary {
+        padding: 1rem !important;
+      }
+
+      .rec-summary h3 {
+        font-size: 1.25rem !important;
+      }
+
+      .ing-card-mobile {
+        padding: 0.75rem !important;
+        border-radius: 1rem !important;
+      }
+
+      .ing-card-mobile b {
+        font-size: 0.875rem;
+      }
+
+      .ing-card-mobile span {
+        font-size: 0.75rem;
+      }
     }
 
     .tab-content {
@@ -410,7 +498,7 @@
 
       <!-- Bottom Nav for Mobile -->
       <div
-        class="md:hidden fixed bottom-6 left-6 right-6 bg-white border border-gray-100 flex justify-around py-4 z-40 rounded-[2rem] shadow-2xl shadow-primary/10">
+        class="md:hidden fixed bottom-6 left-6 right-6 bg-white border border-gray-100 flex justify-around py-4 z-40 rounded-[2rem] shadow-2xl shadow-primary/10 bottom-nav-m">
         <button id="bottom-ingredientes"
           class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
           onclick="switchTab('tab-ingredientes')" title="Ingredientes">
@@ -433,7 +521,7 @@
         </button>
       </div>
 
-      <div class="flex-1 overflow-y-auto p-4 pb-16 md:pb-4 overflow-x-hidden">
+      <div class="flex-1 overflow-y-auto p-4 pb-16 md:pb-4 overflow-x-hidden main-content-p">
 
         <!-- TAB 1: INGREDIENTES -->
         <div id="tab-ingredientes" class="tab-content">
@@ -447,9 +535,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ing-list">
               <!-- Listado de ingredientes -->
             </div>
-            
+
             <!-- Botón Flotante -->
-            <button class="fab" onclick="openIngredientModal()" title="Añadir Ingrediente" data-i18n-title="modal.add_ingredient_title">
+            <button class="fab" onclick="openIngredientModal()" title="Añadir Ingrediente"
+              data-i18n-title="modal.add_ingredient_title">
               <i class="fas fa-plus text-xl"></i>
             </button>
           </section>
@@ -462,7 +551,8 @@
               <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="recipe.title">Creador de Recetas</h2>
               <div class="space-y-6">
                 <!-- Resumen de Receta (Solo lectura) -->
-                <div class="bg-gray-50 p-6 rounded-[1.5rem] flex justify-between items-center border border-gray-100">
+                <div
+                  class="bg-gray-50 p-6 rounded-[1.5rem] flex justify-between items-center border border-gray-100 rec-summary">
                   <div>
                     <h3 class="text-2xl font-black text-gray-900" id="display-rec-name" data-i18n="common.new_recipe">
                       Nueva Receta</h3>
@@ -475,10 +565,10 @@
                     </div>
                   </div>
                   <button
-                    class="w-12 h-12 bg-white text-primary border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all flex items-center justify-center"
+                    class="w-10 h-10 bg-white text-primary border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all flex items-center justify-center"
                     style="color: var(--primary)" onclick="openRecipeDetailsModal()" title="Editar Detalles"
                     data-i18n-title="common.edit_details">
-                    <i class="fas fa-pen"></i>
+                    <i class="fas fa-pen text-sm"></i>
                   </button>
                 </div>
 
@@ -674,16 +764,26 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
               <div class="form-group">
                 <label data-i18n="recipe.ingredient">Ingrediente</label>
-                <select id="rec-ing-select-desk" onchange="updateUnitSelectorDesk()"></select>
+                <select id="rec-ing-select-desk" onchange="updateTypeSelector('desk', 'ing')"></select>
               </div>
               <div class="form-group">
-                <label data-i18n="recipe.quantity">Cantidad</label>
-                <input type="number" id="rec-qty-desk" value="100" min="0.01" step="0.1">
+                <label data-i18n="recipe.supplies_section">Insumo</label>
+                <select id="rec-supply-select-desk" onchange="updateTypeSelector('desk', 'supply')"></select>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+              <div class="form-group">
+                <label data-i18n="nav.my_recipes">Sub-Receta</label>
+                <select id="rec-recipe-select-desk" onchange="updateTypeSelector('desk', 'recipe')"></select>
+              </div>
+              <div class="form-group">
+                <label data-i18n="recipe.unit">Unidad</label>
+                <select id="rec-unit-select-desk"></select>
               </div>
             </div>
             <div class="form-group">
-              <label data-i18n="recipe.unit">Unidad</label>
-              <select id="rec-unit-select-desk"></select>
+              <label data-i18n="recipe.quantity">Cantidad</label>
+              <input type="number" id="rec-qty-desk" value="100" min="0.01" step="0.1">
             </div>
 
             <div class="btn-grid">
@@ -975,10 +1075,22 @@
           </div>
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.ingredient">Ingrediente</label>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                data-i18n="recipe.ingredient">Ingrediente</label>
+              <select
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2"
+                id="rec-ing-select" onchange="updateTypeSelector('mobile', 'ing')"></select>
+
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                data-i18n="recipe.supplies_section">Insumo</label>
+              <select
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2"
+                id="rec-supply-select" onchange="updateTypeSelector('mobile', 'supply')"></select>
+
+              <label class="block text-sm font-medium text-gray-700 mb-1" data-i18n="nav.my_recipes">Sub-Receta</label>
               <select
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                id="rec-ing-select" onchange="updateUnitSelector()"></select>
+                id="rec-recipe-select" onchange="updateTypeSelector('mobile', 'recipe')"></select>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700" data-i18n="recipe.quantity">Cantidad</label>
@@ -1844,31 +1956,33 @@
 
         function renderIngredients() {
           const list = document.getElementById('ing-list');
-          const select = document.getElementById('rec-ing-select');
+          const ingSelect = document.getElementById('rec-ing-select');
+          const supplySelect = document.getElementById('rec-supply-select');
+          const recipeSelect = document.getElementById('rec-recipe-select');
 
           list.innerHTML = '';
-          select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
+          const placeholder = '<option value="">' + t('recipe.select_ingredient') + '</option>';
+          if (ingSelect) ingSelect.innerHTML = placeholder;
+          if (supplySelect) supplySelect.innerHTML = placeholder;
+          if (recipeSelect) recipeSelect.innerHTML = placeholder;
 
           const foodItems = ingredients.filter(i => (i.category || 'food') === 'food');
           const supplyItems = ingredients.filter(i => i.category === 'supply');
 
-          const appendGroup = (items, labelKey, container) => {
-            if (items.length === 0) return;
-            const group = document.createElement('optgroup');
-            group.label = t(labelKey);
+          const populateSelect = (items, container) => {
+            if (!container) return;
             items.forEach(ing => {
               const opt = document.createElement('option');
               opt.value = ing.id;
               opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
-              group.appendChild(opt);
+              container.appendChild(opt);
             });
-            container.appendChild(group);
           };
 
           ingredients.forEach(ing => {
             // Listado lateral móvil
             const card = document.createElement('div');
-            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all';
+            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all ing-card-mobile';
             const unitPrice = getUnitCost(ing);
             const priceExtra = ing.priceType === 'pack' ? ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€</span>` : '';
             const isSupply = ing.category === 'supply';
@@ -1898,21 +2012,18 @@
             list.appendChild(card);
           });
 
-          // Llenar selectores con grupos
-          appendGroup(foodItems, 'recipe.ingredients_section', select);
-          appendGroup(supplyItems, 'recipe.supplies_section', select);
+          // Llenar selectores por separado
+          populateSelect(foodItems, ingSelect);
+          populateSelect(supplyItems, supplySelect);
 
-          // AÑADIR RECETAS COMO SUB-RECETAS
-          if (recipeBook.length > 0) {
-            const recipeGroup = document.createElement('optgroup');
-            recipeGroup.label = "── " + t('nav.my_recipes').toUpperCase() + " ──";
+          // AÑADIR RECETAS
+          if (recipeBook.length > 0 && recipeSelect) {
             recipeBook.forEach(rec => {
               const opt = document.createElement('option');
               opt.value = `R-${rec.id}`;
               opt.innerText = `${t('common.subrecipe_prefix', '[R]')} ${rec.name} (${rec.portions} ${t('book.portions')})`;
-              recipeGroup.appendChild(opt);
+              recipeSelect.appendChild(opt);
             });
-            select.appendChild(recipeGroup);
           }
 
           // Actualizar selectores de unidades
@@ -1922,6 +2033,7 @@
           // Sincronizar con versión desktop
           renderIngredientsDesk();
         }
+
 
         // ====== Manejo de Ingredientes - ESCRITORIO ======
         function addIngredientDesk() {
@@ -1942,25 +2054,27 @@
 
         function renderIngredientsDesk() {
           const list = document.getElementById('ing-list-desk');
-          const select = document.getElementById('rec-ing-select-desk');
+          const ingSelect = document.getElementById('rec-ing-select-desk');
+          const supplySelect = document.getElementById('rec-supply-select-desk');
+          const recipeSelect = document.getElementById('rec-recipe-select-desk');
 
-          list.innerHTML = '';
-          select.innerHTML = '<option value="">' + t('recipe.select_ingredient') + '</option>';
+          if (list) list.innerHTML = '';
+          const placeholder = '<option value="">' + t('recipe.select_ingredient') + '</option>';
+          if (ingSelect) ingSelect.innerHTML = placeholder;
+          if (supplySelect) supplySelect.innerHTML = placeholder;
+          if (recipeSelect) recipeSelect.innerHTML = placeholder;
 
           const foodItems = ingredients.filter(i => (i.category || 'food') === 'food');
           const supplyItems = ingredients.filter(i => i.category === 'supply');
 
-          const appendGroup = (items, labelKey, container) => {
-            if (items.length === 0) return;
-            const group = document.createElement('optgroup');
-            group.label = t(labelKey);
+          const populateSelect = (items, container) => {
+            if (!container) return;
             items.forEach(ing => {
               const opt = document.createElement('option');
               opt.value = ing.id;
               opt.innerText = `${ing.name} (${getUnitLabel(ing.rarity)})`;
-              group.appendChild(opt);
+              container.appendChild(opt);
             });
-            container.appendChild(group);
           };
 
           ingredients.forEach(ing => {
@@ -1982,24 +2096,21 @@
             <button class="btn btn-danger" style="padding:4px 6px; font-size:8px" onclick="deleteIngredientDesk(${ing.id})">X</button>
           </div>
         `;
-            list.appendChild(card);
+            if (list) list.appendChild(card);
           });
 
           // Llenar selectores escritorio
-          appendGroup(foodItems, 'recipe.ingredients_section', select);
-          appendGroup(supplyItems, 'recipe.supplies_section', select);
+          populateSelect(foodItems, ingSelect);
+          populateSelect(supplyItems, supplySelect);
 
-          // AÑADIR RECETAS COMO SUB-RECETAS EN ESCRITORIO
-          if (recipeBook.length > 0) {
-            const recGroup = document.createElement('optgroup');
-            recGroup.label = "── " + t('nav.my_recipes').toUpperCase() + " ──";
+          // AÑADIR RECETAS EN ESCRITORIO
+          if (recipeBook.length > 0 && recipeSelect) {
             recipeBook.forEach(rec => {
               const opt = document.createElement('option');
               opt.value = `R-${rec.id}`;
               opt.innerText = `${t('common.subrecipe_prefix', '[R]')} ${rec.name}`;
-              recGroup.appendChild(opt);
+              recipeSelect.appendChild(opt);
             });
-            select.appendChild(recGroup);
           }
         }
 
@@ -2088,10 +2199,46 @@
           document.getElementById('recipe-add-item-modal').classList.remove('active');
         }
 
+        function updateTypeSelector(view, currentType) {
+          const suffix = view === 'desk' ? '-desk' : '';
+          const ingSelect = document.getElementById(`rec-ing-select${suffix}`);
+          const supplySelect = document.getElementById(`rec-supply-select${suffix}`);
+          const recipeSelect = document.getElementById(`rec-recipe-select${suffix}`);
+
+          // Limpiar otros si este tiene valor
+          if (currentType === 'ing' && ingSelect.value) {
+            if (supplySelect) supplySelect.value = '';
+            if (recipeSelect) recipeSelect.value = '';
+          } else if (currentType === 'supply' && supplySelect.value) {
+            if (ingSelect) ingSelect.value = '';
+            if (recipeSelect) recipeSelect.value = '';
+          } else if (currentType === 'recipe' && recipeSelect.value) {
+            if (ingSelect) ingSelect.value = '';
+            if (supplySelect) supplySelect.value = '';
+          }
+
+          updateUnitSelectorWithView(view);
+        }
+
         function updateUnitSelector() {
-          const selectValue = document.getElementById('rec-ing-select').value;
-          const unitSelect = document.getElementById('rec-unit-select');
+          updateUnitSelectorWithView('mobile');
+        }
+
+        function updateUnitSelectorDesk() {
+          updateUnitSelectorWithView('desk');
+        }
+
+        function updateUnitSelectorWithView(view) {
+          const suffix = view === 'desk' ? '-desk' : '';
+          const ingSelect = document.getElementById(`rec-ing-select${suffix}`);
+          const supplySelect = document.getElementById(`rec-supply-select${suffix}`);
+          const recipeSelect = document.getElementById(`rec-recipe-select${suffix}`);
+          const unitSelect = document.getElementById(`rec-unit-select${suffix}`);
+
+          if (!unitSelect) return;
           unitSelect.innerHTML = '';
+
+          const selectValue = (ingSelect && ingSelect.value) || (supplySelect && supplySelect.value) || (recipeSelect && recipeSelect.value);
 
           if (!selectValue) return;
 
@@ -2138,7 +2285,11 @@
         }
 
         function addToRecipe() {
-          const selectValue = document.getElementById('rec-ing-select').value;
+          const ingVal = document.getElementById('rec-ing-select').value;
+          const supplyVal = document.getElementById('rec-supply-select').value;
+          const recipeVal = document.getElementById('rec-recipe-select').value;
+          const selectValue = ingVal || supplyVal || recipeVal;
+
           const qty = parseFloat(document.getElementById('rec-qty').value);
           const selectedUnit = document.getElementById('rec-unit-select').value;
 
@@ -2481,7 +2632,11 @@
         }
 
         function addToRecipeDesk() {
-          const selectValue = document.getElementById('rec-ing-select-desk').value;
+          const ingVal = document.getElementById('rec-ing-select-desk').value;
+          const supplyVal = document.getElementById('rec-supply-select-desk').value;
+          const recipeVal = document.getElementById('rec-recipe-select-desk').value;
+          const selectValue = ingVal || supplyVal || recipeVal;
+
           const qty = parseFloat(document.getElementById('rec-qty-desk').value);
           const selectedUnit = document.getElementById('rec-unit-select-desk').value;
 
