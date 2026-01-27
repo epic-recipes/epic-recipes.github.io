@@ -764,7 +764,8 @@
               </div>
               <div class="form-group">
                 <label data-i18n="ingredients.pack_size">Tamaño del Pack (cantidad)</label>
-                <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="1" step="1">
+                <input type="number" id="ing-pack-size-desk" placeholder="1" value="1" min="0.01" step="0.01"
+                  oninput="validatePackSize('ing-pack-size-desk', 'ing-rarity-desk')">
               </div>
             </div>
             <div class="btn-grid">
@@ -1079,7 +1080,8 @@
                   data-i18n="ingredients.pack_size">Pack Size</label>
                 <input
                   class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                  type="number" id="ing-pack-size" placeholder="1" value="1" min="1" step="1">
+                  type="number" id="ing-pack-size" placeholder="1" value="1" min="0.01" step="0.01"
+                  oninput="validatePackSize('ing-pack-size', 'ing-rarity')">
               </div>
             </div>
             <div class="flex gap-4 pt-6">
@@ -1906,14 +1908,28 @@
 
         function addIngredient() {
           const name = document.getElementById('ing-name').value.trim();
-          const cost = parseFloat(document.getElementById('ing-cost').value);
-          const rarity = document.getElementById('ing-rarity').value;
+          let cost = parseFloat(document.getElementById('ing-cost').value);
+          let rarity = document.getElementById('ing-rarity').value;
           const category = document.getElementById('ing-category').value || 'food';
 
           const priceType = document.getElementById('ing-price-type') ? document.getElementById('ing-price-type').value : 'unit';
-          const packSize = document.getElementById('ing-pack-size') ? parseInt(document.getElementById('ing-pack-size').value) || 1 : 1;
+          let packSize = document.getElementById('ing-pack-size') ? parseFloat(document.getElementById('ing-pack-size').value) || 1 : 1;
 
           if (!name || isNaN(cost)) return showToast(t('toasts.error', 'Faltan datos del ingrediente'));
+
+          // Validar pack size decimal
+          if (!validatePackSizeValue(packSize, rarity)) return;
+
+          // Si el pack size es decimal, convertir a la unidad equivalente más apropiada
+          if (!Number.isInteger(packSize) && priceType === 'pack') {
+            const equivalent = getBestEquivalentUnit(packSize, rarity);
+            if (equivalent.unit !== rarity) {
+              // Convertir a la nueva unidad
+              packSize = equivalent.packSize;
+              rarity = equivalent.unit;
+              showToast(`✓ Convertido a ${packSize} ${equivalent.unitLabel} para mayor precisión`, 'success');
+            }
+          }
 
           ingredients.push({ id: Date.now(), name, cost, rarity, priceType, packSize, category });
           saveState();
@@ -1963,13 +1979,27 @@
 
         function updateIngredient(id) {
           const name = document.getElementById('ing-name').value.trim();
-          const cost = parseFloat(document.getElementById('ing-cost').value);
-          const rarity = document.getElementById('ing-rarity').value;
+          let cost = parseFloat(document.getElementById('ing-cost').value);
+          let rarity = document.getElementById('ing-rarity').value;
           const category = document.getElementById('ing-category').value || 'food';
           const priceType = document.getElementById('ing-price-type') ? document.getElementById('ing-price-type').value : 'unit';
-          const packSize = document.getElementById('ing-pack-size') ? parseInt(document.getElementById('ing-pack-size').value) || 1 : 1;
+          let packSize = document.getElementById('ing-pack-size') ? parseFloat(document.getElementById('ing-pack-size').value) || 1 : 1;
 
           if (!name || isNaN(cost)) return showToast(t('toasts.error', 'Faltan datos del ingrediente'));
+
+          // Validar pack size decimal
+          if (!validatePackSizeValue(packSize, rarity)) return;
+
+          // Si el pack size es decimal, convertir a la unidad equivalente más apropiada
+          if (!Number.isInteger(packSize) && priceType === 'pack') {
+            const equivalent = getBestEquivalentUnit(packSize, rarity);
+            if (equivalent.unit !== rarity) {
+              // Convertir a la nueva unidad
+              packSize = equivalent.packSize;
+              rarity = equivalent.unit;
+              showToast(`✓ Convertido a ${packSize} ${equivalent.unitLabel} para mayor precisión`, 'success');
+            }
+          }
 
           const index = ingredients.findIndex(i => i.id === id);
           if (index !== -1) {
@@ -2011,7 +2041,17 @@
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all ing-card-mobile';
             const unitPrice = getUnitCost(ing);
-            const priceExtra = ing.priceType === 'pack' ? ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€</span>` : '';
+
+            // Convertir pack size a unidad equivalente si es decimal
+            let priceExtra = '';
+            if (ing.priceType === 'pack') {
+              const equivalent = getBestEquivalentUnit(ing.packSize, ing.rarity);
+              const packSizeDisplay = Number.isInteger(equivalent.packSize)
+                ? equivalent.packSize
+                : equivalent.packSize.toFixed(2);
+              priceExtra = ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€ / ${packSizeDisplay} ${equivalent.unitLabel}</span>`;
+            }
+
             const isSupply = ing.category === 'supply';
             const categoryIcon = isSupply ? 'fas fa-box' : 'fas fa-leaf';
 
@@ -2109,7 +2149,17 @@
             const card = document.createElement('div');
             card.className = 'card';
             const unitPrice = getUnitCost(ing);
-            const priceExtra = ing.priceType === 'pack' ? ` — Pack: ${ing.cost.toFixed(2)}€ / ${ing.packSize}` : '';
+
+            // Convertir pack size a unidad equivalente si es decimal
+            let priceExtra = '';
+            if (ing.priceType === 'pack') {
+              const equivalent = getBestEquivalentUnit(ing.packSize, ing.rarity);
+              const packSizeDisplay = Number.isInteger(equivalent.packSize)
+                ? equivalent.packSize
+                : equivalent.packSize.toFixed(2);
+              priceExtra = ` — Pack: ${ing.cost.toFixed(2)}€ / ${packSizeDisplay} ${equivalent.unitLabel}`;
+            }
+
             const isSupply = ing.category === 'supply';
             const categoryIcon = isSupply ? 'box' : 'leaf';
 
@@ -3330,6 +3380,22 @@
         let customUnits = JSON.parse(localStorage.getItem('rpg_units') || '{}');
         let customConversions = JSON.parse(localStorage.getItem('rpg_conversions') || '{}');
 
+        // Inicializar conversiones por defecto si no existen
+        const DEFAULT_CONVERSIONS = {
+          'kilogramo-gramo': 1000,
+          'gramo-kilogramo': 0.001,
+          'litro-mililitro': 1000,
+          'mililitro-litro': 0.001
+        };
+
+        // Agregar conversiones por defecto si no existen
+        Object.keys(DEFAULT_CONVERSIONS).forEach(key => {
+          if (!customConversions[key]) {
+            customConversions[key] = DEFAULT_CONVERSIONS[key];
+          }
+        });
+        localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+
         const DEFAULT_UNITS = {
           'kilogramo': 'kg',
           'gramo': 'g',
@@ -3637,6 +3703,100 @@
           }
 
           return value; // Sin conversión
+        }
+
+        // Verificar si una unidad tiene equivalencias definidas
+        function hasConversions(unit) {
+          return Object.keys(customConversions).some(key => {
+            const [from, to] = key.split('-');
+            return from === unit || to === unit;
+          });
+        }
+
+        // Obtener la mejor unidad equivalente para mostrar un pack decimal
+        function getBestEquivalentUnit(packSize, unit) {
+          // Si es entero, no necesitamos conversión
+          if (Number.isInteger(packSize)) {
+            return { packSize, unit, unitLabel: getUnitLabel(unit) };
+          }
+
+          // Buscar conversiones disponibles para esta unidad
+          const conversions = Object.keys(customConversions).filter(key => {
+            const [from] = key.split('-');
+            return from === unit;
+          });
+
+          // Si no hay conversiones, devolver tal cual
+          if (conversions.length === 0) {
+            return { packSize, unit, unitLabel: getUnitLabel(unit) };
+          }
+
+          // Probar cada conversión y ver cuál da un número más "limpio"
+          let bestConversion = { packSize, unit, unitLabel: getUnitLabel(unit), score: 0 };
+
+          conversions.forEach(key => {
+            const [from, to] = key.split('-');
+            const factor = customConversions[key];
+            const convertedSize = packSize * factor;
+
+            // Calcular "score" - preferimos números enteros o con pocos decimales
+            let score = 0;
+            if (Number.isInteger(convertedSize)) {
+              score = 1000; // Entero es lo mejor
+            } else if (convertedSize >= 1) {
+              // Contar decimales significativos
+              const decimals = convertedSize.toString().split('.')[1]?.length || 0;
+              score = 100 - decimals; // Menos decimales = mejor score
+            }
+
+            // Si este es mejor que el actual, usarlo
+            if (score > bestConversion.score) {
+              bestConversion = {
+                packSize: convertedSize,
+                unit: to,
+                unitLabel: getUnitLabel(to),
+                score: score
+              };
+            }
+          });
+
+          return bestConversion;
+        }
+
+        // Validar pack size en tiempo real
+        function validatePackSize(packSizeId, rarityId) {
+          const packSizeInput = document.getElementById(packSizeId);
+          const raritySelect = document.getElementById(rarityId);
+
+          if (!packSizeInput || !raritySelect) return;
+
+          const packSize = parseFloat(packSizeInput.value);
+          const rarity = raritySelect.value;
+
+          // Si es un número entero o la unidad tiene equivalencias, es válido
+          if (Number.isInteger(packSize) || hasConversions(rarity)) {
+            packSizeInput.style.borderColor = '';
+            packSizeInput.style.backgroundColor = '';
+          } else {
+            // Mostrar feedback visual
+            packSizeInput.style.borderColor = '#f59e0b';
+            packSizeInput.style.backgroundColor = '#fffbeb';
+          }
+        }
+
+        // Validar pack size al guardar
+        function validatePackSizeValue(packSize, rarity) {
+          // Si es un número entero, siempre es válido
+          if (Number.isInteger(packSize)) return true;
+
+          // Si tiene decimales, verificar que la unidad tenga equivalencias
+          if (!hasConversions(rarity)) {
+            const unitName = getUnitName(rarity);
+            showToast(`⚠️ No se pueden usar decimales en "${unitName}" sin equivalencias definidas. Agrega una equivalencia primero.`, 'warning');
+            return false;
+          }
+
+          return true;
         }
 
         function resetAllData() {
