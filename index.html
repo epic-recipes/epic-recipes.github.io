@@ -182,11 +182,13 @@
       }
 
       .bottom-nav-m {
-        bottom: 1rem !important;
-        left: 1rem !important;
-        right: 1rem !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
+        border-top: 1px solid #f3f4f6 !important;
         padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
+        padding-bottom: env(safe-area-inset-bottom, 1rem) !important;
       }
 
       .rec-summary {
@@ -523,8 +525,7 @@
       </div>
 
       <!-- Bottom Nav for Mobile -->
-      <div
-        class="md:hidden fixed bottom-6 left-6 right-6 bg-white border border-gray-100 flex justify-around py-4 z-40 rounded-[2rem] shadow-2xl shadow-primary/10 bottom-nav-m">
+      <div class="md:hidden fixed bg-white flex justify-around z-40 shadow-2xl shadow-primary/10 bottom-nav-m">
         <button id="bottom-ingredientes"
           class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
           onclick="switchTab('tab-ingredientes')" title="Ingredientes">
