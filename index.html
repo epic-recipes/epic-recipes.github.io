@@ -146,11 +146,17 @@
         border-radius: 1.5rem !important;
       }
 
-      .fab {
+      .fab,
+      .fab-save {
         width: 50px !important;
         height: 50px !important;
         bottom: 80px !important;
         right: 16px !important;
+      }
+
+      .fab-save {
+        width: auto !important;
+        padding: 0 1.25rem !important;
       }
 
       .btn {
@@ -248,7 +254,8 @@
     }
 
     /* FAB - Floating Action Button */
-    .fab {
+    .fab,
+    .fab-save {
       position: fixed;
       bottom: 100px;
       /* Above bottom nav */
@@ -268,18 +275,37 @@
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .fab:hover {
+    .fab:hover,
+    .fab-save:hover {
       transform: scale(1.1) translateY(-5px);
       box-shadow: 0 15px 30px rgba(124, 157, 142, 0.6);
       background-color: var(--primary-dark);
     }
 
-    .fab:active {
+    .fab:active,
+    .fab-save:active {
       transform: scale(0.95);
     }
 
+    .fab-save {
+      width: auto;
+      padding: 0 1.5rem;
+      border-radius: 30px;
+      background-color: #fbbf24;
+      color: #1f2937;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+    }
+
+    .fab-save:hover {
+      background-color: #f59e0b;
+      box-shadow: 0 15px 30px rgba(251, 191, 36, 0.6);
+    }
+
     @media (min-width: 768px) {
-      .fab {
+
+      .fab,
+      .fab-save {
         position: sticky;
         bottom: 24px;
         right: 0;
@@ -613,8 +639,9 @@
                     <div class="text-lg font-semibold text-green-600" id="stat-roi">0.00x</div>
                   </div>
                 </div>
-                <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded font-semibold"
-                  id="btn-save-recipe" onclick="saveRecipe()" data-i18n="recipe.save_button">Guardar Receta</button>
+                <!-- Botón Flotante de Guardado -->
+                <button class="fab-save" id="btn-save-recipe" onclick="saveRecipe()"
+                  data-i18n="recipe.save_button">Guardar Receta</button>
               </div>
             </section>
           </div>
