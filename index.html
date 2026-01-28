@@ -185,10 +185,18 @@
         bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
+        width: 100% !important;
+        height: auto !important;
         border-radius: 0 !important;
         border-top: 1px solid #f3f4f6 !important;
-        padding-top: 0.75rem !important;
-        padding-bottom: env(safe-area-inset-bottom, 1rem) !important;
+        padding: 0.75rem 0 !important;
+        padding-bottom: calc(env(safe-area-inset-bottom, 0.5rem) + 0.5rem) !important;
+      }
+
+      .bottom-nav-m button {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
+        flex-shrink: 0 !important;
       }
 
       .rec-summary {
@@ -617,27 +625,38 @@
                   </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  <div class="bg-gray-50 p-3 rounded">
-                    <div class="text-xs text-gray-500" data-i18n="recipe.stats.cost">Costo Ingredientes</div>
-                    <div class="text-lg font-semibold text-green-600" id="stat-cost">0.00€</div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl border border-blue-200">
+                    <div class="text-[10px] text-blue-600 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.base_cost">Costo Base</div>
+                    <div class="text-lg font-black text-blue-700" id="stat-base-cost">0.00€</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded">
-                    <div class="text-xs text-gray-500" data-i18n="recipe.stats.profit">Beneficio Neto</div>
-                    <div class="text-lg font-semibold text-green-600" id="stat-profit">0.00€</div>
+                  <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-xl border border-orange-200">
+                    <div class="text-[10px] text-orange-600 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.service_cost">Gastos Servicios</div>
+                    <div class="text-lg font-black text-orange-700" id="stat-service-cost">0.00€</div>
+                    <div class="text-[9px] text-orange-500 font-medium">(<span id="display-service-pct">0</span>%)</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded">
-                    <div class="text-xs text-gray-500" data-i18n="recipe.stats.price_per_portion">Precio por Porción
-                    </div>
-                    <div class="text-lg font-semibold text-green-600" id="stat-price-per-portion">0.00€</div>
+                  <div class="bg-gradient-to-br from-red-50 to-red-100 p-3 rounded-xl border border-red-200">
+                    <div class="text-[10px] text-red-600 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.total_cost">Costo Total</div>
+                    <div class="text-lg font-black text-red-700" id="stat-total-cost">0.00€</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded">
-                    <div class="text-xs text-gray-500" data-i18n="recipe.stats.margin">Margen %</div>
-                    <div class="text-lg font-semibold text-green-600" id="stat-margin">0%</div>
+                  <div class="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-xl border border-green-200">
+                    <div class="text-[10px] text-green-600 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.suggested_price">Precio Sugerido</div>
+                    <div class="text-lg font-black text-green-700" id="stat-suggested-price">0.00€</div>
+                    <div class="text-[9px] text-green-500 font-medium">(+<span id="display-profit-pct">0</span>%)</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded">
-                    <div class="text-xs text-gray-500" data-i18n="recipe.stats.roi">Rentabilidad</div>
-                    <div class="text-lg font-semibold text-green-600" id="stat-roi">0.00x</div>
+                  <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.profit">Beneficio Real</div>
+                    <div class="text-lg font-black" id="stat-profit">0.00€</div>
+                  </div>
+                  <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider"
+                      data-i18n="recipe.stats.price_per_portion">Precio/Porción</div>
+                    <div class="text-lg font-black text-gray-700" id="stat-price-per-portion">0.00€</div>
                   </div>
                 </div>
                 <!-- Botón Flotante de Guardado -->
@@ -696,6 +715,37 @@
                 </button>
               </div>
               <div id="conversions-list" class="grid grid-cols-1 gap-2 mb-8 max-h-48 overflow-y-auto pr-2 no-scrollbar">
+              </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-8 mb-8">
+              <h3 class="text-xs font-black text-primary uppercase tracking-widest mb-4" style="color: var(--primary)"
+                data-i18n="settings.accounting_title">Cálculos Contables</h3>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                    data-i18n="settings.service_percentage">Gastos de Servicios (%)</label>
+                  <input type="number" id="service-percentage"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="0" min="0" max="100" step="0.1" value="0"
+                    oninput="updateServicePercentage(this.value)">
+                  <p class="text-[10px] text-gray-400 mt-1 ml-1" data-i18n="settings.service_percentage_hint">
+                    Electricidad, gas, agua, etc.
+                  </p>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1"
+                    data-i18n="settings.profit_percentage">Margen de Ganancias (%)</label>
+                  <input type="number" id="profit-percentage"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="0" min="0" max="1000" step="0.1" value="0"
+                    oninput="updateProfitPercentage(this.value)">
+                  <p class="text-[10px] text-gray-400 mt-1 ml-1" data-i18n="settings.profit_percentage_hint">
+                    Ganancia deseada sobre el costo total
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -2506,19 +2556,31 @@
         function updateStats() {
           const price = parseFloat(document.getElementById('rec-price').value) || 0;
           const portions = parseInt(document.getElementById('rec-portions').value) || 1;
-          const cost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
+          const baseCost = activeRecipe.items.reduce((acc, curr) => acc + (getUnitCost(curr) * curr.qty), 0);
 
-          const profit = price - cost;
+          // Nuevos cálculos con porcentajes
+          const serviceCost = baseCost * (servicePercentage / 100);
+          const totalCost = baseCost + serviceCost;
+          const suggestedPrice = totalCost * (1 + profitPercentage / 100);
+
+          // Cálculos existentes actualizados
+          const profit = price - totalCost;
           const margin = price > 0 ? (profit / price) * 100 : 0;
-          const roi = cost > 0 ? price / cost : 0;
+          const roi = totalCost > 0 ? price / totalCost : 0;
           const pricePerPortion = portions > 0 ? price / portions : 0;
 
-          document.getElementById('stat-cost').innerText = cost.toFixed(2) + '€';
+          // Actualizar UI con desglose
+          document.getElementById('stat-base-cost').innerText = baseCost.toFixed(2) + '€';
+          document.getElementById('stat-service-cost').innerText = serviceCost.toFixed(2) + '€';
+          document.getElementById('stat-total-cost').innerText = totalCost.toFixed(2) + '€';
+          document.getElementById('stat-suggested-price').innerText = suggestedPrice.toFixed(2) + '€';
           document.getElementById('stat-profit').innerText = profit.toFixed(2) + '€';
           document.getElementById('stat-profit').style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
           document.getElementById('stat-price-per-portion').innerText = pricePerPortion.toFixed(2) + '€';
-          document.getElementById('stat-margin').innerText = margin.toFixed(1) + '%';
-          document.getElementById('stat-roi').innerText = roi.toFixed(2) + 'x';
+
+          // Actualizar displays de porcentajes
+          document.getElementById('display-service-pct').innerText = servicePercentage.toFixed(1);
+          document.getElementById('display-profit-pct').innerText = profitPercentage.toFixed(1);
         }
 
         function openRecipeDetailsModal() {
@@ -3396,6 +3458,10 @@
         });
         localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
 
+        // ====== Porcentajes de Cálculo Contable ======
+        let servicePercentage = parseFloat(localStorage.getItem('rpg_service_pct') || '0');
+        let profitPercentage = parseFloat(localStorage.getItem('rpg_profit_pct') || '0');
+
         const DEFAULT_UNITS = {
           'kilogramo': 'kg',
           'gramo': 'g',
@@ -3808,10 +3874,16 @@
                   recipeBook = [];
                   customUnits = {};
                   customConversions = {};
+                  servicePercentage = 0;
+                  profitPercentage = 0;
                   localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
                   localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
                   localStorage.setItem('rpg_units', JSON.stringify(customUnits));
                   localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+                  localStorage.setItem('rpg_service_pct', '0');
+                  localStorage.setItem('rpg_profit_pct', '0');
+                  document.getElementById('service-percentage').value = '0';
+                  document.getElementById('profit-percentage').value = '0';
                   renderIngredients();
                   renderBook();
                   renderUnitsList();
@@ -3821,6 +3893,21 @@
               });
             }
           });
+        }
+
+        // ====== Funciones de Porcentajes Contables ======
+        function updateServicePercentage(value) {
+          servicePercentage = parseFloat(value) || 0;
+          localStorage.setItem('rpg_service_pct', servicePercentage.toString());
+          updateStats();
+          updateStatsDesk();
+        }
+
+        function updateProfitPercentage(value) {
+          profitPercentage = parseFloat(value) || 0;
+          localStorage.setItem('rpg_profit_pct', profitPercentage.toString());
+          updateStats();
+          updateStatsDesk();
         }
 
         // Cerrar modal al hacer click fuera
@@ -3906,6 +3993,10 @@
           renderUnitsList();
           renderConversionsList();
           initSPA();
+
+          // Inicializar valores de porcentajes
+          document.getElementById('service-percentage').value = servicePercentage.toFixed(1);
+          document.getElementById('profit-percentage').value = profitPercentage.toFixed(1);
 
           // Registrar Service Worker para PWA
           if ('serviceWorker' in navigator) {

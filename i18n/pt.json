@@ -52,10 +52,14 @@
     "save_button": "Salvar Receita",
     "stats": {
       "cost": "Custo dos Ingredientes",
-      "profit": "Lucro Líquido",
-      "price_per_portion": "Preço por Porção",
+      "profit": "Lucro Real",
+      "price_per_portion": "Preço / Porção",
       "margin": "Margem %",
-      "roi": "Lucratividade"
+      "roi": "Lucratividade",
+      "base_cost": "Custo Base",
+      "service_cost": "Custos de Serviços",
+      "total_cost": "Custo Total",
+      "suggested_price": "Preço Sugerido"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -118,7 +122,12 @@
       "cucharadita": "Teaspoon",
       "taza": "Cup",
       "pieza": "Piece"
-    }
+    },
+    "accounting_title": "Cálculos Contábeis",
+    "service_percentage": "Custos de Serviços (%)",
+    "service_percentage_hint": "Eletricidade, gás, água, etc.",
+    "profit_percentage": "Margem de Lucro (%)",
+    "profit_percentage_hint": "Lucro desejado sobre o custo total"
   },
   "donation": {
     "title": "Doações",

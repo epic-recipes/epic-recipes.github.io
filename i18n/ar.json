@@ -55,10 +55,14 @@
     "save_button": "حفظ الوصفة",
     "stats": {
       "cost": "تكلفة المكونات",
-      "profit": "الربح الصافي",
+      "profit": "الربح الفعلي",
       "price_per_portion": "السعر لكل حصة",
       "margin": "الهامش %",
-      "roi": "العائد على الاستثمار"
+      "roi": "العائد على الاستثمار",
+      "base_cost": "التكلفة الأساسية",
+      "service_cost": "تكاليف الخدمات",
+      "total_cost": "التكلفة الإجمالية",
+      "suggested_price": "السعر المقترح"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "مكونات",
@@ -118,7 +122,12 @@
       "cucharadita": "ملعقة صغيرة",
       "taza": "كوب",
       "pieza": "قطعة"
-    }
+    },
+    "accounting_title": "الحسابات المحاسبية",
+    "service_percentage": "تكاليف الخدمات (%)",
+    "service_percentage_hint": "الكهرباء، الغاز، الماء، إلخ.",
+    "profit_percentage": "هامش الربح (%)",
+    "profit_percentage_hint": "الربح المطلوب على التكلفة الإجمالية"
   },
   "donation": {
     "title": "التبرعات",

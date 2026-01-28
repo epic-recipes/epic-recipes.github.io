@@ -55,10 +55,14 @@
     "save_button": "レシピを保存",
     "stats": {
       "cost": "材料コスト",
-      "profit": "純利益",
+      "profit": "実際の利益",
       "price_per_portion": "1ポーションあたりの価格",
       "margin": "マージン %",
-      "roi": "収益性"
+      "roi": "収益性",
+      "base_cost": "基本コスト",
+      "service_cost": "サービス費用",
+      "total_cost": "総コスト",
+      "suggested_price": "推奨価格"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "材料",
@@ -118,7 +122,12 @@
       "cucharadita": "小さじ",
       "taza": "カップ",
       "pieza": "ピース"
-    }
+    },
+    "accounting_title": "会計計算",
+    "service_percentage": "サービス費用 (%)",
+    "service_percentage_hint": "電気、ガス、水道など",
+    "profit_percentage": "利益率 (%)",
+    "profit_percentage_hint": "総コストに対する希望利益"
   },
   "donation": {
     "title": "寄付",

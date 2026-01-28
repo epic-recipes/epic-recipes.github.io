@@ -52,10 +52,14 @@
     "save_button": "Sauvegarder la Recette",
     "stats": {
       "cost": "Coût des Ingrédients",
-      "profit": "Bénéfice Net",
-      "price_per_portion": "Prix par Portion",
+      "profit": "Bénéfice Réel",
+      "price_per_portion": "Prix/Portion",
       "margin": "Marge %",
-      "roi": "Rentabilité"
+      "roi": "Rentabilité",
+      "base_cost": "Coût de Base",
+      "service_cost": "Frais de Services",
+      "total_cost": "Coût Total",
+      "suggested_price": "Prix Suggéré"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -108,6 +112,11 @@
     "export_all": "Exporter Tout (Recettes + Ingrédients)",
     "import_data": "Importer les Données",
     "clear_all": "Effacer Tout (⚠️)",
+    "accounting_title": "Calculs Comptables",
+    "service_percentage": "Frais de Services (%)",
+    "service_percentage_hint": "Électricité, gaz, eau, etc.",
+    "profit_percentage": "Marge Bénéficiaire (%)",
+    "profit_percentage_hint": "Bénéfice souhaité sur le coût total",
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",

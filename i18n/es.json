@@ -58,10 +58,14 @@
     "save_button": "Guardar Receta",
     "stats": {
       "cost": "Costo Ingredientes",
-      "profit": "Beneficio Neto",
-      "price_per_portion": "Precio por Porción",
+      "profit": "Beneficio Real",
+      "price_per_portion": "Precio/Porción",
       "margin": "Margen %",
-      "roi": "Rentabilidad"
+      "roi": "Rentabilidad",
+      "base_cost": "Costo Base",
+      "service_cost": "Gastos Servicios",
+      "total_cost": "Costo Total",
+      "suggested_price": "Precio Sugerido"
     }
   },
   "book": {
@@ -108,6 +112,11 @@
     "export_all": "Exportar Todo (Recetas + Ingredientes)",
     "import_data": "Importar Datos",
     "clear_all": "Limpiar Todo (⚠️)",
+    "accounting_title": "Cálculos Contables",
+    "service_percentage": "Gastos de Servicios (%)",
+    "service_percentage_hint": "Electricidad, gas, agua, etc.",
+    "profit_percentage": "Margen de Ganancias (%)",
+    "profit_percentage_hint": "Ganancia deseada sobre el costo total",
     "units": {
       "kilogramo": "Kilogramo",
       "gramo": "Gramo",

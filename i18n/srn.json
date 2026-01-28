@@ -52,10 +52,14 @@
     "save_button": "Seif Resep",
     "stats": {
       "cost": "Ingridienti Kosto",
-      "profit": "Neti Profit",
-      "price_per_portion": "Pris per Porti",
+      "profit": "Real Profit",
+      "price_per_portion": "Pris / Porti",
       "margin": "Margin %",
-      "roi": "Profit"
+      "roi": "Profit",
+      "base_cost": "Base Cost",
+      "service_cost": "Service Costs",
+      "total_cost": "Total Cost",
+      "suggested_price": "Suggested Price"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -118,7 +122,12 @@
       "cucharadita": "Teaspoon",
       "taza": "Cup",
       "pieza": "Piece"
-    }
+    },
+    "accounting_title": "Accounting Calculations",
+    "service_percentage": "Service Costs (%)",
+    "service_percentage_hint": "Electricity, gas, water, etc.",
+    "profit_percentage": "Profit Margin (%)",
+    "profit_percentage_hint": "Desired profit on total cost"
   },
   "donation": {
     "title": "Donasi",

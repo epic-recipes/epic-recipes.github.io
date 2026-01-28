@@ -55,10 +55,14 @@
     "save_button": "Zapisz przepis",
     "stats": {
       "cost": "Koszt składników",
-      "profit": "Zysk netto",
-      "price_per_portion": "Cena za porcję",
+      "profit": "Rzeczywisty Zysk",
+      "price_per_portion": "Cena za /cję",
       "margin": "Marża %",
-      "roi": "Rentowność"
+      "roi": "Rentowność",
+      "base_cost": "Koszt Bazowy",
+      "service_cost": "Koszty Usług",
+      "total_cost": "Koszt Całkowity",
+      "suggested_price": "Sugerowana Cena"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "Składniki",
@@ -118,7 +122,12 @@
       "cucharadita": "Łyżka do herbaty",
       "taza": "Kubek",
       "pieza": "Kawałek"
-    }
+    },
+    "accounting_title": "Obliczenia Księgowe",
+    "service_percentage": "Koszty Usług (%)",
+    "service_percentage_hint": "Elektryczność, gaz, woda, itp.",
+    "profit_percentage": "Marża Zysku (%)",
+    "profit_percentage_hint": "Pożądany zysk na całkowity koszt"
   },
   "donation": {
     "title": "Darowizny",

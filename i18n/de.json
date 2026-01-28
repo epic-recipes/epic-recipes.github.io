@@ -52,10 +52,14 @@
     "save_button": "Rezept Speichern",
     "stats": {
       "cost": "Zutatenkosten",
-      "profit": "Nettogewinn",
+      "profit": "Tatsächlicher Gewinn",
       "price_per_portion": "Preis pro Portion",
       "margin": "Marge %",
-      "roi": "Rentabilität"
+      "roi": "Rentabilität",
+      "base_cost": "Grundkosten",
+      "service_cost": "Servicekosten",
+      "total_cost": "Gesamtkosten",
+      "suggested_price": "Empfohlener Preis"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -118,7 +122,12 @@
       "cucharadita": "Teaspoon",
       "taza": "Cup",
       "pieza": "Piece"
-    }
+    },
+    "accounting_title": "Buchhaltungsberechnungen",
+    "service_percentage": "Servicekosten (%)",
+    "service_percentage_hint": "Strom, Gas, Wasser, usw.",
+    "profit_percentage": "Gewinnmarge (%)",
+    "profit_percentage_hint": "Gewünschter Gewinn auf Gesamtkosten"
   },
   "donation": {
     "title": "Spenden",

@@ -55,10 +55,14 @@
     "save_button": "Lưu công thức",
     "stats": {
       "cost": "Chi phí nguyên liệu",
-      "profit": "Lợi nhuận ròng",
+      "profit": "Lợi Nhuận Thực Tế",
       "price_per_portion": "Giá mỗi phần",
       "margin": "Biên lợi nhuận %",
-      "roi": "Tính lợi nhuận"
+      "roi": "Tính lợi nhuận",
+      "base_cost": "Chi Phí Cơ Bản",
+      "service_cost": "Chi Phí Dịch Vụ",
+      "total_cost": "Tổng Chi Phí",
+      "suggested_price": "Giá Đề Xuất"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "Thành phần",
@@ -118,7 +122,12 @@
       "cucharadita": "Muỗng cà phê",
       "taza": "Cốc",
       "pieza": "Miếng"
-    }
+    },
+    "accounting_title": "Tính Toán Kế Toán",
+    "service_percentage": "Chi Phí Dịch Vụ (%)",
+    "service_percentage_hint": "Điện, gas, nước, v.v.",
+    "profit_percentage": "Tỷ Lệ Lợi Nhuận (%)",
+    "profit_percentage_hint": "Lợi nhuận mong muốn trên tổng chi phí"
   },
   "donation": {
     "title": "Quyên góp",

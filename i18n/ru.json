@@ -55,10 +55,14 @@
     "save_button": "Сохранить рецепт",
     "stats": {
       "cost": "Стоимость ингредиентов",
-      "profit": "Чистая прибыль",
+      "profit": "Реальная Прибыль",
       "price_per_portion": "Цена за порцию",
       "margin": "Маржа %",
-      "roi": "Рентабельность"
+      "roi": "Рентабельность",
+      "base_cost": "Базовая Стоимость",
+      "service_cost": "Расходы на Услуги",
+      "total_cost": "Общая Стоимость",
+      "suggested_price": "Рекомендуемая Цена"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "Ингредиенты",
@@ -118,7 +122,12 @@
       "cucharadita": "Чайная ложка",
       "taza": "Чашка",
       "pieza": "Кусок"
-    }
+    },
+    "accounting_title": "Бухгалтерские Расчеты",
+    "service_percentage": "Расходы на Услуги (%)",
+    "service_percentage_hint": "Электричество, газ, вода и т.д.",
+    "profit_percentage": "Маржа Прибыли (%)",
+    "profit_percentage_hint": "Желаемая прибыль от общей стоимости"
   },
   "donation": {
     "title": "Пожертвования",

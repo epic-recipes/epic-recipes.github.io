@@ -55,10 +55,14 @@
     "save_button": "保存食谱",
     "stats": {
       "cost": "食材成本",
-      "profit": "净利润",
+      "profit": "实际利润",
       "price_per_portion": "每份价格",
       "margin": "利润率 %",
-      "roi": "投资回报率"
+      "roi": "投资回报率",
+      "base_cost": "基本成本",
+      "service_cost": "服务成本",
+      "total_cost": "总成本",
+      "suggested_price": "建议价格"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "配料",
@@ -118,7 +122,12 @@
       "cucharadita": "茶匙",
       "taza": "杯",
       "pieza": "块"
-    }
+    },
+    "accounting_title": "会计计算",
+    "service_percentage": "服务成本 (%)",
+    "service_percentage_hint": "电力、燃气、水等",
+    "profit_percentage": "利润率 (%)",
+    "profit_percentage_hint": "总成本上的期望利润"
   },
   "donation": {
     "title": "捐赠",

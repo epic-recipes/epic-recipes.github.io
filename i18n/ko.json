@@ -55,10 +55,14 @@
     "save_button": "레시피 저장",
     "stats": {
       "cost": "재료 비용",
-      "profit": "순이익",
+      "profit": "실제 이익",
       "price_per_portion": "1인분 가격",
       "margin": "마진 %",
-      "roi": "수익성"
+      "roi": "수익성",
+      "base_cost": "기본 비용",
+      "service_cost": "서비스 비용",
+      "total_cost": "총 비용",
+      "suggested_price": "제안 가격"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "재료",
@@ -118,7 +122,12 @@
       "cucharadita": "작은 숟가락",
       "taza": "컵",
       "pieza": "조각"
-    }
+    },
+    "accounting_title": "회계 계산",
+    "service_percentage": "서비스 비용 (%)",
+    "service_percentage_hint": "전기, 가스, 물 등",
+    "profit_percentage": "이익률 (%)",
+    "profit_percentage_hint": "총 비용에 대한 원하는 이익"
   },
   "donation": {
     "title": "기부",

@@ -52,10 +52,14 @@
     "save_button": "Recept Opslaan",
     "stats": {
       "cost": "Kosten Ingrediënten",
-      "profit": "Nettowinst",
-      "price_per_portion": "Prijs per Portie",
+      "profit": "Werkelijke Winst",
+      "price_per_portion": "Prijs / Portie",
       "margin": "Marge %",
-      "roi": "Winstgevendheid"
+      "roi": "Winstgevendheid",
+      "base_cost": "Basiskosten",
+      "service_cost": "Servicekosten",
+      "total_cost": "Totale Kosten",
+      "suggested_price": "Voorgestelde Prijs"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -118,7 +122,12 @@
       "cucharadita": "Teaspoon",
       "taza": "Cup",
       "pieza": "Piece"
-    }
+    },
+    "accounting_title": "Boekhoudkundige Berekeningen",
+    "service_percentage": "Servicekosten (%)",
+    "service_percentage_hint": "Elektriciteit, gas, water, enz.",
+    "profit_percentage": "Winstmarge (%)",
+    "profit_percentage_hint": "Gewenste winst op totale kosten"
   },
   "donation": {
     "title": "Donaties",

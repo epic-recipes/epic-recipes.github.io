@@ -55,10 +55,14 @@
     "save_button": "Save Recipe",
     "stats": {
       "cost": "Ingredients Cost",
-      "profit": "Net Profit",
-      "price_per_portion": "Price per Portion",
+      "profit": "Real Profit",
+      "price_per_portion": "Price/Portion",
       "margin": "Margin %",
-      "roi": "Profitability"
+      "roi": "Profitability",
+      "base_cost": "Base Cost",
+      "service_cost": "Service Costs",
+      "total_cost": "Total Cost",
+      "suggested_price": "Suggested Price"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -108,6 +112,11 @@
     "export_all": "Export All (Recipes + Ingredients)",
     "import_data": "Import Data",
     "clear_all": "Clear All (⚠️)",
+    "accounting_title": "Accounting Calculations",
+    "service_percentage": "Service Costs (%)",
+    "service_percentage_hint": "Electricity, gas, water, etc.",
+    "profit_percentage": "Profit Margin (%)",
+    "profit_percentage_hint": "Desired profit on total cost",
     "units": {
       "kilogramo": "Kilogram",
       "gramo": "Gram",

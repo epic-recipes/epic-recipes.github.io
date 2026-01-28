@@ -52,10 +52,14 @@
     "save_button": "Salva Ricetta",
     "stats": {
       "cost": "Costo Ingredienti",
-      "profit": "Profitto Netto",
-      "price_per_portion": "Prezzo per Porzione",
+      "profit": "Profitto Reale",
+      "price_per_portion": "Prezzo / Porzione",
       "margin": "Margine %",
-      "roi": "Redditività"
+      "roi": "Redditività",
+      "base_cost": "Costo Base",
+      "service_cost": "Costi di Servizio",
+      "total_cost": "Costo Totale",
+      "suggested_price": "Prezzo Suggerito"
     },
     "price_placeholder": "0.00",
     "quantity_placeholder": "100",
@@ -118,7 +122,12 @@
       "cucharadita": "Teaspoon",
       "taza": "Cup",
       "pieza": "Piece"
-    }
+    },
+    "accounting_title": "Calcoli Contabili",
+    "service_percentage": "Costi di Servizio (%)",
+    "service_percentage_hint": "Elettricità, gas, acqua, ecc.",
+    "profit_percentage": "Margine di Profitto (%)",
+    "profit_percentage_hint": "Profitto desiderato sul costo totale"
   },
   "donation": {
     "title": "Donazioni",

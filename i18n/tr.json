@@ -55,10 +55,14 @@
     "save_button": "Tarifu Kaydet",
     "stats": {
       "cost": "Malzeme Maliyeti",
-      "profit": "Net Kar",
+      "profit": "Gerçek Kâr",
       "price_per_portion": "Porsiyon Başına Fiyat",
       "margin": "Marj %",
-      "roi": "Karlılık"
+      "roi": "Karlılık",
+      "base_cost": "Temel Maliyet",
+      "service_cost": "Hizmet Maliyetleri",
+      "total_cost": "Toplam Maliyet",
+      "suggested_price": "Önerilen Fiyat"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "Malzemeler",
@@ -118,7 +122,12 @@
       "cucharadita": "Çay Kaşığı",
       "taza": "Fincan",
       "pieza": "Parça"
-    }
+    },
+    "accounting_title": "Muhasebe Hesaplamaları",
+    "service_percentage": "Hizmet Maliyetleri (%)",
+    "service_percentage_hint": "Elektrik, gaz, su, vb.",
+    "profit_percentage": "Kâr Marjı (%)",
+    "profit_percentage_hint": "Toplam maliyete istenen kâr"
   },
   "donation": {
     "title": "Bağışlar",

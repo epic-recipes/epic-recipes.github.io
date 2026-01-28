@@ -55,10 +55,14 @@
     "save_button": "บันทึกสูตร",
     "stats": {
       "cost": "ต้นทุนวัตถุดิบ",
-      "profit": "กำไรสุทธิ",
+      "profit": "กำไรจริง",
       "price_per_portion": "ราคาต่อเสิร์ฟ",
       "margin": "มาร์จิน %",
-      "roi": "ผลตอบแทน"
+      "roi": "ผลตอบแทน",
+      "base_cost": "ต้นทุนพื้นฐาน",
+      "service_cost": "ค่าบริการ",
+      "total_cost": "ต้นทุนรวม",
+      "suggested_price": "ราคาแนะนำ"
     },
     "add_ingredient_button": "Add Components",
     "ingredients_section": "ส่วนผสม",
@@ -118,7 +122,12 @@
       "cucharadita": "ช้อนชา",
       "taza": "ถ้วย",
       "pieza": "ชิ้น"
-    }
+    },
+    "accounting_title": "การคำนวณบัญชี",
+    "service_percentage": "ค่าบริการ (%)",
+    "service_percentage_hint": "ไฟฟ้า ก๊าซ น้ำ ฯลฯ",
+    "profit_percentage": "อัตรากำไร (%)",
+    "profit_percentage_hint": "กำไรที่ต้องการจากต้นทุนรวม"
   },
   "donation": {
     "title": "บริจาค",
