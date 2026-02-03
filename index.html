@@ -453,28 +453,7 @@
 
 <body>
 
-  <!-- PWA Install Banner + Language Selector -->
-  <div id="install-banner"
-    class="hidden fixed top-4 left-4 right-4 bg-primary text-white p-4 shadow-2xl rounded-2xl z-50 animate-bounce"
-    style="background-color: var(--primary)">
-    <div class="flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-          <i class="fas fa-mobile-alt"></i>
-        </div>
-        <div>
-          <div class="font-bold text-sm" data-i18n="donation.install_app">📱 Instalar como App</div>
-          <div class="text-[10px] opacity-80" data-i18n="donation.install_description">Acceso rápido sin conexión</div>
-        </div>
-      </div>
-      <div class="flex gap-2">
-        <button class="bg-white text-primary px-4 py-1.5 rounded-lg text-xs font-bold shadow-sm"
-          style="color: var(--primary)" onclick="installApp()" data-i18n="donation.install_button">Instalar</button>
-        <button class="bg-primary-dark text-white px-2 py-1.5 rounded-lg text-xs"
-          onclick="dismissInstallBanner()">✕</button>
-      </div>
-    </div>
-  </div>
+
 
   <!-- MODAL de Idioma (Rediseñado) -->
   <div id="language-modal" class="modal">
@@ -1072,21 +1051,36 @@
           <button
             class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all z-20 text-xl font-bold border border-gray-100"
             onclick="closeDonationModal()">×</button>
-          
+
           <div class="p-6 bg-gray-50 border-b border-gray-100">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-lg shadow-inner">
-                <i class="fas fa-heart"></i>
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-lg shadow-inner">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-black text-gray-800 tracking-tight leading-none mb-1"
+                    data-i18n="donation.title">Donaciones</h3>
+                  <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest"
+                    data-i18n="donation.support_project">Support the project</div>
+                </div>
               </div>
-              <div>
-                <h3 class="text-lg font-black text-gray-800 tracking-tight leading-none mb-1" data-i18n="donation.title">Donaciones</h3>
-                <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest" data-i18n="donation.support_project">Support the project</div>
-              </div>
+              
+              <!-- Botón de Instalación dinámico para móvil -->
+              <button id="modal-install-btn" 
+                class="hidden md:hidden items-center gap-2 bg-primary text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-lg shadow-primary/20 animate-pulse"
+                style="background-color: var(--primary)"
+                onclick="installApp()">
+                <i class="fas fa-mobile-alt"></i>
+                <span data-i18n="donation.install_button">Instalar</span>
+              </button>
             </div>
           </div>
 
           <div class="iframe-container bg-white">
-            <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" frameborder="0" scrolling="yes">
+            <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
+              frameborder="0" scrolling="yes">
               Can't load widget
             </iframe>
           </div>
@@ -1951,11 +1945,17 @@
         // ====== Donaciones ======
         function openDonationModal() {
           document.getElementById('donation-modal').classList.add('active');
-          const installPrompt = document.getElementById('install-prompt');
-          if (deferredPrompt) {
-            installPrompt.style.display = 'block';
-          } else {
-            installPrompt.style.display = 'none';
+          
+          // Lógica para mostrar el botón de instalación en móvil si el prompt está disponible
+          const modalInstallBtn = document.getElementById('modal-install-btn');
+          if (modalInstallBtn) {
+            if (deferredPrompt && window.innerWidth < 768) {
+              modalInstallBtn.classList.remove('hidden');
+              modalInstallBtn.classList.add('flex');
+            } else {
+              modalInstallBtn.classList.add('hidden');
+              modalInstallBtn.classList.remove('flex');
+            }
           }
         }
 
