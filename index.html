@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -22,6 +22,9 @@
       --bg: #F8F9F5;
       --bg-card: #FFFFFF;
       --accent: #D9AD98;
+      --accent-light: #E5C3B1;
+      --accent-dark: #B88D75;
+      --border-soft: #E5E7EB;
       --text: #2C3E50;
       --text-muted: #7F8C8D;
       --danger: #E74C3C;
@@ -335,7 +338,7 @@
     }
 
     .btn-icon:hover {
-      background-color: #fca5a5;
+      background-color: var(--primary-light);
       color: white;
     }
 
@@ -524,9 +527,10 @@
   </div>
 
   <div class="flex h-screen bg-gray-50 overflow-x-hidden">
-    <aside class="hidden md:flex flex-col items-center py-6 w-24 bg-white border-r border-gray-100">
+    <aside class="hidden md:flex flex-col items-center py-6 w-24 bg-white border-r border-gray-100"
+      style="background-color: var(--bg-card)">
       <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-10 shadow-sm"
-        style="background-color: var(--primary-light)">
+        style="background-color: var(--accent-light)">
         <i class="fas fa-utensils text-white text-xl"></i>
       </div>
       <button id="sidebar-ingredientes"
@@ -552,21 +556,23 @@
       </button>
     </aside>
     <main class="flex-1 md:ml-0 flex flex-col">
-      <header
-        class="bg-white sticky top-0 z-30 p-4 px-6 flex justify-between items-center border-b border-gray-100 shadow-sm">
+      <header class="sticky top-0 z-30 p-4 px-6 flex justify-between items-center border-b border-gray-100 shadow-sm"
+        style="background-color: var(--bg-card)">
         <div class="flex items-center">
           <div class="w-2 h-8 rounded-full mr-3" style="background-color: var(--primary)"></div>
-          <h1 class="text-xl font-extrabold tracking-tight text-gray-800" data-i18n="app_name">RECETARIO ÉPICO</h1>
+          <h1 class="text-xl font-extrabold tracking-tight" style="color: var(--text)" data-i18n="app_name">RECETARIO
+            ÉPICO</h1>
         </div>
         <div class="flex gap-3">
           <button
             class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors"
-            onclick="toggleLangBar()" title="Cambiar idioma" data-i18n-title="settings.title">
+            onclick="toggleLangBar()" title="Cambiar idioma" data-i18n-title="settings.title"
+            style="background-color: var(--bg)">
             <i class="fas fa-language text-lg"></i>
           </button>
           <button
             class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors"
-            onclick="shareApp()" title="Compartir App" data-i18n-title="book.share">
+            onclick="shareApp()" title="Compartir App" data-i18n-title="book.share" style="background-color: var(--bg)">
             <i class="fas fa-share-alt text-lg"></i>
           </button>
           <button
@@ -582,12 +588,14 @@
         <div class="flex items-center gap-4 flex-1">
           <div class="w-12 h-12 flex-shrink-0 animate-bounce">
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-              <circle cx='256' cy='256' r='230' fill='#D2691E' />
-              <circle cx='180' cy='180' r='30' fill='#4B2C20' />
-              <circle cx='330' cy='220' r='30' fill='#4B2C20' />
-              <circle cx='240' cy='320' r='30' fill='#4B2C20' />
-              <circle cx='380' cy='350' r='30' fill='#4B2C20' />
-              <circle cx='130' cy='340' r='30' fill='#4B2C20' />
+              <path
+                d="M256,42c-118.2,0-214,95.8-214,214s95.8,214,214,214s214-95.8,214-214c0-43.3-12.8-83.6-34.9-117.2c3.7,10.1,5.9,21.1,5.9,32.6c0,53-43,96-96,96s-96-43-96-96s43-96,96-96c11.5,0,22.5,2.1,32.6,5.9C339.6,54.8,299.3,42,256,42z"
+                fill="#D2691E" />
+              <circle cx="160" cy="190" r="22" fill="#4B2C20" />
+              <circle cx="320" cy="290" r="22" fill="#4B2C20" />
+              <circle cx="230" cy="400" r="22" fill="#4B2C20" />
+              <circle cx="110" cy="340" r="22" fill="#4B2C20" />
+              <circle cx="390" cy="410" r="22" fill="#4B2C20" />
             </svg>
           </div>
           <div class="flex-1">
@@ -607,7 +615,8 @@
       </div>
 
       <!-- Bottom Nav for Mobile -->
-      <div class="md:hidden fixed bg-white flex justify-around z-40 shadow-2xl shadow-primary/10 bottom-nav-m">
+      <div class="md:hidden fixed flex justify-around z-40 shadow-2xl shadow-primary/10 bottom-nav-m"
+        style="background-color: var(--bg-card)">
         <button id="bottom-ingredientes"
           class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
           onclick="switchTab('tab-ingredientes')" title="Ingredientes">
@@ -634,11 +643,14 @@
 
         <!-- TAB 1: INGREDIENTES -->
         <div id="tab-ingredientes" class="tab-content">
-          <section class="bg-white rounded-[2rem] shadow-sm p-8 mb-20 border border-gray-50">
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 mb-20 border"
+            style="background-color: var(--bg-card); border-color: var(--border-soft)">
             <div class="flex justify-between items-center mb-8">
               <div>
-                <h3 class="text-xl font-bold text-gray-800" data-i18n="ingredients.list_title">Despensa</h3>
-                <p class="text-sm text-gray-500" data-i18n="app_description">Gestor de ingredientes</p>
+                <h3 class="text-xl font-bold" style="color: var(--text)" data-i18n="ingredients.list_title">Despensa
+                </h3>
+                <p class="text-sm" style="color: var(--text-muted)" data-i18n="app_description">Gestor de ingredientes
+                </p>
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ing-list">
@@ -660,27 +672,31 @@
               <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="recipe.title">Creador de Recetas</h2>
               <div class="space-y-6">
                 <!-- Resumen de Receta (Solo lectura) -->
-                <div
-                  class="bg-gray-50 p-6 rounded-[1.5rem] flex justify-between items-center border border-gray-100 rec-summary">
+                <div class="p-6 rounded-[1.5rem] flex justify-between items-center border rec-summary"
+                  style="background-color: var(--bg); border-color: var(--border-soft)">
                   <div>
-                    <h3 class="text-2xl font-black text-gray-900" id="display-rec-name" data-i18n="common.new_recipe">
+                    <h3 class="text-2xl font-black" style="color: var(--text)" id="display-rec-name"
+                      data-i18n="common.new_recipe">
                       Nueva Receta</h3>
-                    <div class="flex items-center gap-4 text-sm text-gray-500 mt-2">
-                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100">
+                    <div class="flex items-center gap-4 text-sm mt-2" style="color: var(--text-muted)">
+                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100"
+                        style="background-color: var(--bg-card)">
                         <span id="display-rec-portions">1</span> <span data-i18n="book.portions">porciones</span>
                       </span>
-                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100">
+                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100"
+                        style="background-color: var(--bg-card)">
                         <span id="display-service-pct-val">0</span>% <span
                           data-i18n="recipe.stats.service_cost">Servicios</span>
                       </span>
-                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100">
+                      <span class="bg-white px-2 py-1 rounded-lg border border-gray-100"
+                        style="background-color: var(--bg-card)">
                         +<span id="display-profit-pct-val">0</span>% <span
                           data-i18n="settings.profit_percentage">Ganancia</span>
                       </span>
                     </div>
                     <div class="mt-3">
-                      <span class="bg-sage-50 text-primary font-bold px-3 py-1.5 rounded-lg border border-sage-100"
-                        style="color: var(--primary); background-color: #f0f4f2;">
+                      <span class="font-bold px-3 py-1.5 rounded-lg border"
+                        style="color: var(--primary); background-color: var(--bg-card); border-color: var(--primary-light)">
                         <span id="display-rec-price">0.00€</span> <span data-i18n="modal.sale_price">Venta por
                           Porción</span>
                       </span>
@@ -713,39 +729,45 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                  <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-2 rounded-xl border border-blue-200">
-                    <div class="text-[9px] text-blue-600 font-bold uppercase tracking-wider"
+                  <div class="p-2 rounded-xl border"
+                    style="background-color: var(--bg); border-color: var(--border-soft)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--accent-dark)"
                       data-i18n="recipe.stats.base_cost">Costo Base</div>
-                    <div class="text-sm font-black text-blue-700" id="stat-base-cost">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--accent-dark)" id="stat-base-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-2 rounded-xl border border-orange-200">
-                    <div class="text-[9px] text-orange-600 font-bold uppercase tracking-wider">
+                  <div class="p-2 rounded-xl border" style="background-color: var(--bg); border-color: var(--warning)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--text)">
                       <span data-i18n="recipe.stats.service_cost">Gastos Servicios</span>
                       <span class="text-[8px] opacity-70 ml-1">(<span id="display-service-pct">0</span>%)</span>
                     </div>
-                    <div class="text-sm font-black text-orange-700" id="stat-service-cost">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--text)" id="stat-service-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-red-50 to-red-100 p-2 rounded-xl border border-red-200">
-                    <div class="text-[9px] text-red-600 font-bold uppercase tracking-wider"
+                  <div class="p-2 rounded-xl border"
+                    style="background-color: var(--bg); border-color: var(--border-soft)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--primary)"
                       data-i18n="recipe.stats.total_cost">Costo Total</div>
-                    <div class="text-sm font-black text-red-700" id="stat-total-cost">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--primary)" id="stat-total-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-green-50 to-green-100 p-2 rounded-xl border border-green-200">
-                    <div class="text-[9px] text-green-600 font-bold uppercase tracking-wider">
+                  <div class="p-2 rounded-xl border"
+                    style="background-color: var(--bg); border-color: var(--border-soft)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--accent-dark)">
                       <span data-i18n="recipe.stats.suggested_price">Precio Sugerido</span>
                       <span class="text-[8px] opacity-70 ml-1">(+<span id="display-profit-pct">0</span>%)</span>
                     </div>
-                    <div class="text-sm font-black text-green-700" id="stat-suggested-price">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--accent-dark)" id="stat-suggested-price">0.00€
+                    </div>
                   </div>
-                  <div class="bg-gray-50 p-2 rounded-xl border border-gray-200">
-                    <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider"
+                  <div class="p-2 rounded-xl border"
+                    style="background-color: var(--bg-card); border-color: var(--border-soft)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--text-muted)"
                       data-i18n="recipe.stats.profit">Beneficio Real</div>
-                    <div class="text-sm font-black" id="stat-profit">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--text)" id="stat-profit">0.00€</div>
                   </div>
-                  <div class="bg-gray-50 p-2 rounded-xl border border-gray-200">
-                    <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider"
+                  <div class="p-2 rounded-xl border"
+                    style="background-color: var(--bg-card); border-color: var(--border-soft)">
+                    <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--text-muted)"
                       data-i18n="recipe.stats.price_per_portion">Precio/Porción</div>
-                    <div class="text-sm font-black text-gray-700" id="stat-price-per-portion">0.00€</div>
+                    <div class="text-sm font-black" style="color: var(--text)" id="stat-price-per-portion">0.00€</div>
                   </div>
                 </div>
                 <!-- Botón Flotante de Guardado -->
@@ -766,21 +788,18 @@
               <!-- Recetas guardadas -->
             </div>
             <div class="flex gap-4 mt-8">
-              <button class="flex-1 btn btn-secondary text-sm py-3" onclick="exportRecipeBook()"
-                data-i18n="book.export">Exportar recetas</button>
-              <button class="flex-1 btn btn-secondary text-sm py-3" onclick="importRecipeBook()"
-                data-i18n="book.import">Importar recetas</button>
+              <p class="text-xs text-center w-full text-gray-400" data-i18n="settings.export_centralized">La exportación
+                e importación se gestiona desde Configuración</p>
             </div>
             <input type="file" id="file-input" class="hidden" accept=".json" onchange="handleFileImport()">
-            <input type="file" id="recipe-file-input" class="hidden" accept=".json" onchange="handleRecipeImport()">
-            <input type="file" id="units-file-input" class="hidden" accept=".json" onchange="handleUnitsImport()">
           </section>
         </div>
 
         <!-- TAB 4: CONFIGURACIÓN -->
         <div id="tab-config" class="tab-content">
-          <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50">
-            <h2 class="text-xl font-bold text-gray-800 mb-8" data-i18n="settings.title">Configuración</h2>
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 border"
+            style="background-color: var(--bg-card); border-color: var(--border-soft)">
+            <h2 class="text-xl font-bold mb-8" style="color: var(--text)" data-i18n="settings.title">Configuración</h2>
 
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-xs font-black text-primary uppercase tracking-widest" style="color: var(--primary)"
@@ -839,31 +858,42 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-4 mb-10">
-              <button class="btn btn-secondary text-sm" onclick="exportUnitsAndConversions()"
-                data-i18n="settings.export_units">Exportar Unidades</button>
-              <button class="btn btn-secondary text-sm" onclick="importUnitsAndConversions()"
-                data-i18n="settings.import_units">Importar Unidades</button>
-            </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4"
+            <div class="bg-gray-50 rounded-[2rem] p-6 mt-8 border border-gray-100/50"
+              style="background-color: var(--bg); border-color: var(--accent-light)">
+              <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-5 ml-1"
                 data-i18n="settings.data_title">
                 Gestión de Datos</h3>
-              <div class="space-y-3">
-                <button class="w-full btn btn-secondary justify-start text-sm" onclick="exportRecipeBook()"
-                  data-i18n="settings.export_all">
-                  <i class="fas fa-download mr-2 opacity-50"></i> Exportar Todo
+              <div class="grid grid-cols-2 gap-4 mb-5">
+                <button
+                  class="flex flex-col items-center justify-center p-5 bg-white border border-gray-100 rounded-[1.5rem] hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all group"
+                  style="background-color: var(--bg-card)" onclick="exportBulkData()">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"
+                    style="background-color: var(--bg); color: var(--accent)">
+                    <i class="fas fa-cloud-download-alt text-xl"></i>
+                  </div>
+                  <span class="text-[9px] font-black uppercase tracking-widest text-center"
+                    style="color: var(--text-muted)" data-i18n="settings.export_all">Exportar Todo</span>
                 </button>
-                <button class="w-full btn btn-secondary justify-start text-sm" onclick="importRecipeBook()"
-                  data-i18n="settings.import_data">
-                  <i class="fas fa-upload mr-2 opacity-50"></i> Importar Datos
-                </button>
-                <button class="w-full btn justify-start text-sm text-red-500 hover:bg-red-50" onclick="resetAllData()"
-                  data-i18n="settings.clear_all">
-                  <i class="fas fa-trash-alt mr-2 opacity-50"></i> Limpiar Todo (⚠️)
+                <button
+                  class="flex flex-col items-center justify-center p-5 bg-white border border-gray-100 rounded-[1.5rem] hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all group"
+                  style="background-color: var(--bg-card)" onclick="importBulkData()">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"
+                    style="background-color: var(--bg); color: var(--accent)">
+                    <i class="fas fa-cloud-upload-alt text-xl"></i>
+                  </div>
+                  <span class="text-[9px] font-black uppercase tracking-widest text-center"
+                    style="color: var(--text-muted)" data-i18n="settings.import_data">Importar Datos</span>
                 </button>
               </div>
+              <button
+                class="w-full py-4 flex items-center justify-center gap-2 text-[10px] font-bold text-red-300 hover:text-red-500 hover:bg-red-50/50 rounded-2xl transition-all border border-transparent hover:border-red-100"
+                onclick="resetAllData()">
+                <i class="fas fa-trash-alt text-[10px] opacity-60"></i>
+                <span data-i18n="settings.clear_all">Limpiar Todo (⚠️)</span>
+              </button>
             </div>
           </section>
         </div>
@@ -1017,20 +1047,13 @@
         <section class="panel" style="margin-top:20px; display: none;" id="recipe-book-section-desk">
           <h2 data-i18n="desktop.my_recipes">Mis Recetas
             <div style="display:flex; gap:5px; justify-self:end">
-              <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
-                onclick="exportRecipeBook()">Exportar recetas</button>
-              <button class="btn btn-secondary" style="padding:5px 10px; font-size:9px"
-                onclick="importRecipeBook()">Importar recetas</button>
-              <button class="btn btn-info" style="padding:5px 10px; font-size:9px"
-                onclick="importSingleRecipe()">Importar
-                Receta</button>
+              <p class="text-[9px] text-gray-400 font-normal" data-i18n="settings.export_centralized">La exportación e
+                importación se gestiona desde Configuración</p>
             </div>
           </h2>
           <div id="recipe-book-desk" class="list-container">
             <!-- Recetas guardadas -->
           </div>
-          <input type="file" id="recipe-file-input-desk" style="display:none;" accept=".json"
-            onchange="handleRecipeImport()">
         </section>
       </div>
 
@@ -1462,10 +1485,10 @@
 
         // Constantes de color (Soft Palette)
         const RARITY_COLORS = {
-          common: '#E2E8F0',
-          rare: '#BFDBFE',
-          epic: '#E9D5FF',
-          legendary: '#FED7AA'
+          common: '#CBD5E0',
+          rare: '#6A994E',
+          epic: '#BC4749',
+          legendary: '#212529'
         };
 
         // ====== Funciones de Tabs (SPA - Single Page Application) ======
@@ -1496,7 +1519,7 @@
           const sidebarBtn = document.getElementById(sidebarId);
           if (sidebarBtn) {
             sidebarBtn.classList.remove('text-gray-400');
-            sidebarBtn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
+            sidebarBtn.classList.add('bg-primary', 'text-white', 'shadow-md');
             sidebarBtn.style.backgroundColor = 'var(--primary)';
           }
 
@@ -1528,28 +1551,32 @@
           document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
           // Remover clases activas de sidebar
           document.querySelectorAll('[id^="sidebar-"]').forEach(btn => {
-            btn.classList.remove('bg-yellow-300', 'text-gray-800');
-            btn.classList.add('hover:bg-gray-200', 'text-gray-600');
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('text-gray-400');
+            btn.style.backgroundColor = '';
           });
           // Remover clases activas de bottom nav
           document.querySelectorAll('[id^="bottom-"]').forEach(btn => {
-            btn.classList.remove('text-yellow-600');
-            btn.classList.add('text-gray-600');
+            btn.classList.remove('text-primary');
+            btn.classList.add('text-gray-400');
+            btn.style.color = '';
           });
           document.getElementById(tabId).classList.add('active');
           // Activar botón correspondiente en sidebar
           const sidebarId = 'sidebar-' + tabId.replace('tab-', '');
           const sidebarBtn = document.getElementById(sidebarId);
           if (sidebarBtn) {
-            sidebarBtn.classList.remove('hover:bg-gray-200', 'text-gray-600');
-            sidebarBtn.classList.add('bg-yellow-300', 'text-gray-800');
+            sidebarBtn.classList.remove('text-gray-400');
+            sidebarBtn.classList.add('bg-primary', 'text-white');
+            sidebarBtn.style.backgroundColor = 'var(--primary)';
           }
           // Activar botón correspondiente en bottom nav
           const bottomId = 'bottom-' + tabId.replace('tab-', '');
           const bottomBtn = document.getElementById(bottomId);
           if (bottomBtn) {
-            bottomBtn.classList.remove('text-gray-600');
-            bottomBtn.classList.add('text-yellow-600');
+            bottomBtn.classList.remove('text-gray-400');
+            bottomBtn.classList.add('text-primary');
+            bottomBtn.style.color = 'var(--primary)';
           }
           // Buscar y activar botón correspondiente
           document.querySelectorAll('.tab-button').forEach(btn => {
@@ -1617,13 +1644,13 @@
 
           let detailsHTML = `
         <div style="margin-bottom: 15px;">
-          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Ingredientes</h4>
-          <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em;">Ingredientes</h4>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; border-radius: 12px; overflow: hidden;">
             <thead>
-              <tr style="background-color: #f9f9f9;">
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Ingrediente</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Cantidad</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Costo</th>
+              <tr style="background-color: var(--bg);">
+                <th style="padding: 10px; text-align: left; color: var(--text-muted); font-weight: 600;">Ingrediente</th>
+                <th style="padding: 10px; text-align: center; color: var(--text-muted); font-weight: 600;">Cantidad</th>
+                <th style="padding: 10px; text-align: right; color: var(--text-muted); font-weight: 600;">Costo</th>
               </tr>
             </thead>
             <tbody>
@@ -1631,49 +1658,43 @@
             const dQty = i.displayUnit ? i.displayQty : i.qty;
             const dUnit = i.displayUnit || i.rarity;
             return `
-                  <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">${i.name}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${dQty} ${getUnitLabel(dUnit)}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">${(getUnitCost(i) * i.qty).toFixed(2)}€</td>
+                  <tr style="border-bottom: 1px solid var(--bg);">
+                    <td style="padding: 10px; color: var(--text); font-weight: 500;">${i.name}</td>
+                    <td style="padding: 10px; text-align: center; color: var(--text-muted);">${dQty} ${getUnitLabel(dUnit)}</td>
+                    <td style="padding: 10px; text-align: right; color: var(--text); font-weight: 600;">${(getUnitCost(i) * i.qty).toFixed(2)}€</td>
                   </tr>
                 `}).join('')}
             </tbody>
           </table>
         </div>
         ${recipe.instructions ? `
-        <div class="divider"></div>
+        <div class="divider" style="height: 1px; background: var(--bg); margin: 15px 0;"></div>
         <div style="margin-bottom: 15px;">
-          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Método de Preparación</h4>
-          <div style="font-size: 10px; line-height: 1.5; color: var(--text); white-space: pre-wrap;">${recipe.instructions}</div>
+          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em;">Método de Preparación</h4>
+          <div style="font-size: 12px; line-height: 1.6; color: var(--text); white-space: pre-wrap; background: var(--bg); padding: 15px; border-radius: 12px;">${recipe.instructions}</div>
         </div>
         ` : ''}
-        <div class="divider"></div>
+        <div class="divider" style="height: 1px; background: var(--bg); margin: 15px 0;"></div>
         <div style="margin-bottom: 15px;">
-          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase;">Análisis Financiero</h4>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('recipe.stats.base_cost')}:</strong> <span>${recipe.cost.toFixed(2)}€</span>
+          <h4 style="color: var(--accent); font-size: 11px; margin: 0 0 10px 0; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em;">Análisis Financiero</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px;">
+            <div style="background: var(--bg); padding: 12px; border-radius: 12px; border: 1px solid var(--accent-light);">
+              <strong style="color: var(--text-muted)">${t('recipe.stats.base_cost')}:</strong> <span style="color: var(--text); font-weight: 700;">${recipe.cost.toFixed(2)}€</span>
             </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('recipe.stats.service_cost')} (${localServicePct}%):</strong> <span>${serviceCost.toFixed(2)}€</span>
+            <div style="background: var(--bg); padding: 12px; border-radius: 12px; border: 1px solid var(--warning);">
+              <strong style="color: var(--text-muted)">${t('recipe.stats.service_cost')} (${localServicePct}%):</strong> <span style="color: var(--text); font-weight: 700;">${serviceCost.toFixed(2)}€</span>
             </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('book.total_cost')}:</strong> <span style="color: var(--danger)">${totalCost.toFixed(2)}€</span>
+            <div style="background: var(--bg); padding: 12px; border-radius: 12px; border: 1px solid var(--primary);">
+              <strong style="color: var(--text-muted)">${t('book.total_cost')}:</strong> <span style="color: var(--primary); font-weight: 900;">${totalCost.toFixed(2)}€</span>
             </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('book.sale_price')}:</strong> <span style="color: var(--success)">${recipe.price.toFixed(2)}€</span>
+            <div style="background: var(--bg); padding: 12px; border-radius: 12px; border: 1px solid var(--accent);">
+              <strong style="color: var(--text-muted)">${t('book.sale_price')}:</strong> <span style="color: var(--accent-dark); font-weight: 900;">${recipe.price.toFixed(2)}€</span>
             </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Precio Sugerido (+${localProfitPct}%):</strong> <span>${suggestedPrice.toFixed(2)}€</span>
+            <div style="background: var(--bg-card); padding: 12px; border-radius: 12px; border: 1px solid var(--bg);">
+              <strong style="color: var(--text-muted)">Precio Sugerido (+${localProfitPct}%):</strong> <span style="color: var(--text); font-weight: 700;">${suggestedPrice.toFixed(2)}€</span>
             </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('stats.price_per_portion')}:</strong> ${pricePerPortion.toFixed(2)}€ (${portions} ${t('book.portions')})
-            </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>${t('book.net_profit')}:</strong> <span style="color: ${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">${profit.toFixed(2)}€</span>
-            </div>
-            <div style="background: #f0f0f0; padding: 10px; border-radius: 5px;">
-              <strong>Margen de Ganancia:</strong> ${margin.toFixed(1)}%
+            <div style="background: var(--bg-card); padding: 12px; border-radius: 12px; border: 1px solid var(--bg);">
+              <strong style="color: var(--text-muted)">${t('stats.price_per_portion')}:</strong> <span style="color: var(--text); font-weight: 700;">${pricePerPortion.toFixed(2)}€</span>
             </div>
           </div>
         </div>
@@ -2176,7 +2197,7 @@
           ingredients.forEach(ing => {
             // Listado lateral móvil
             const card = document.createElement('div');
-            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all ing-card-mobile';
+            card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100/50 hover:shadow-md transition-all ing-card-mobile';
             const unitPrice = getUnitCost(ing);
 
             // Convertir pack size a unidad equivalente si es decimal
@@ -2186,7 +2207,7 @@
               const packSizeDisplay = Number.isInteger(equivalent.packSize)
                 ? equivalent.packSize
                 : equivalent.packSize.toFixed(2);
-              priceExtra = ` <span class="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded ml-1">Pack: ${ing.cost.toFixed(2)}€ / ${packSizeDisplay} ${equivalent.unitLabel}</span>`;
+              priceExtra = ` <span class="text-[10px] bg-gray-50 px-1.5 py-0.5 rounded ml-1" style="background-color: var(--bg)">Pack: ${ing.cost.toFixed(2)}€ / ${packSizeDisplay} ${equivalent.unitLabel}</span>`;
             }
 
             const isSupply = ing.category === 'supply';
@@ -2197,18 +2218,18 @@
             <div class="flex items-center mb-1">
               <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color:${RARITY_COLORS[ing.rarity] || '#a9b0c2'}"></span>
               <i class="${categoryIcon} text-[10px] mr-1.5 opacity-40"></i>
-              <b class="text-sm text-gray-800 font-bold">${ing.name}</b>
+              <b class="text-sm font-bold" style="color: var(--text)">${ing.name}</b>
             </div>
             <div class="flex items-center flex-wrap gap-1">
-              <span class="text-xs text-gray-400 font-medium">${unitPrice.toFixed(2)}€ / ${getUnitLabel(ing.rarity)}</span>
+              <span class="text-xs font-medium" style="color: var(--text-muted)">${unitPrice.toFixed(2)}€ / ${getUnitLabel(ing.rarity)}</span>
               ${priceExtra}
             </div>
           </div>
           <div class="flex gap-2 ml-2">
-            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-primary-light hover:text-white transition-all" onclick="editIngredient(${ing.id})" title="${t('ingredients.edit_button')}" data-i18n-title="ingredients.edit_button">
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-accent hover:text-white transition-all" onclick="editIngredient(${ing.id})" title="${t('ingredients.edit_button')}" data-i18n-title="ingredients.edit_button">
               <i class="fas fa-edit text-xs"></i>
             </button>
-            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all" onclick="deleteIngredient(${ing.id})" title="${t('ingredients.delete_button')}" data-i18n-title="ingredients.delete_button">
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all font-bold" onclick="deleteIngredient(${ing.id})" title="${t('ingredients.delete_button')}" data-i18n-title="ingredients.delete_button">
               <i class="fas fa-trash text-xs"></i>
             </button>
           </div>
@@ -2302,12 +2323,12 @@
 
             card.innerHTML = `
           <div class="card-info">
-            <b><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span><i class="fas fa-${categoryIcon}" style="font-size: 8px; opacity: 0.5; margin-right: 4px;"></i>${ing.name}</b>
-            <span>Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
+            <b style="color: var(--text)"><span class="rarity-dot" style="background:${RARITY_COLORS[ing.rarity]}"></span><i class="fas fa-${categoryIcon}" style="font-size: 8px; opacity: 0.5; margin-right: 4px; color: var(--accent)"></i>${ing.name}</b>
+            <span style="color: var(--text-muted)">Precio: ${unitPrice.toFixed(2)}€ (${getUnitLabel(ing.rarity)})${priceExtra}</span>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button class="btn btn-primary" style="padding:4px 6px; font-size:8px" onclick="editIngredientDesk(${ing.id})">E</button>
-            <button class="btn btn-danger" style="padding:4px 6px; font-size:8px" onclick="deleteIngredientDesk(${ing.id})">X</button>
+            <button class="btn btn-primary" style="padding:4px 6px; font-size:8px; background-color: var(--accent); border:none;" onclick="editIngredientDesk(${ing.id})">E</button>
+            <button class="btn btn-danger" style="padding:4px 6px; font-size:8px; background-color: var(--primary); border:none;" onclick="deleteIngredientDesk(${ing.id})">X</button>
           </div>
         `;
             if (list) list.appendChild(card);
@@ -2581,7 +2602,7 @@
             items.forEach((item) => {
               const index = activeRecipe.items.indexOf(item);
               const card = document.createElement('div');
-              card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:bg-gray-50 transition-all mb-2';
+              card.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-50 hover:border-accent/20 transition-all mb-2';
 
               const displayQty = item.displayUnit ? item.displayQty : item.qty;
               const displayUnit = item.displayUnit || item.rarity;
@@ -2591,19 +2612,19 @@
               card.innerHTML = `
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-1">
-                <i class="${iconClass} text-[10px] opacity-30"></i>
-                <div class="font-bold text-gray-800 text-sm">${item.name}</div>
+                <i class="${iconClass} text-[10px] opacity-30" style="color: var(--accent)"></i>
+                <div class="font-bold text-sm" style="color: var(--text)">${item.name}</div>
               </div>
               <div class="flex items-center gap-2">
                 <input type="number" value="${displayQty.toFixed(2)}" min="0.01" step="0.1" 
-                  class="w-20 px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-bold focus:ring-2 focus:ring-primary/20 outline-none" 
-                  onchange="updateRecipeItemQty(${index}, this.value)">
-                <span class="text-xs text-gray-400 font-medium">${getUnitLabel(displayUnit)}</span>
+                  class="w-20 px-2 py-1 bg-white border border-gray-100 rounded-lg text-xs font-bold focus:ring-2 focus:ring-primary/20 outline-none" 
+                  onchange="updateRecipeItemQty(${index}, this.value)" style="background-color: var(--bg); color: var(--text)">
+                <span class="text-xs font-medium" style="color: var(--text-muted)">${getUnitLabel(displayUnit)}</span>
               </div>
             </div>
             <div class="text-right mr-4">
-              <div class="text-[9px] text-gray-300 font-bold uppercase tracking-wider">Costo</div>
-              <div class="text-sm font-black text-gray-700">${(getUnitCost(item) * item.qty).toFixed(2)}€</div>
+              <div class="text-[9px] font-bold uppercase tracking-wider" style="color: var(--text-muted)">Costo</div>
+              <div class="text-sm font-black" style="color: var(--text)">${(getUnitCost(item) * item.qty).toFixed(2)}€</div>
             </div>
             <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-all outline-none" onclick="removeFromRecipe(${index})">
               <i class="fas fa-minus text-xs"></i>
@@ -3109,24 +3130,24 @@
           recipeBook.forEach(rec => {
             const div = document.createElement('div');
             // Same classes as pantry cards
-            div.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100 hover:shadow-md transition-all ing-card-mobile';
+            div.className = 'bg-white rounded-2xl p-4 flex justify-between items-center shadow-sm border border-gray-100/50 hover:shadow-md transition-all ing-card-mobile';
 
             div.innerHTML = `
           <div class="flex-1 cursor-pointer" onclick="openRecipeModal(${rec.id})">
             <div class="flex items-center mb-1">
-              <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color: var(--primary)"></span>
+              <span class="inline-block w-2.5 h-2.5 rounded-full mr-2 shadow-sm" style="background-color: var(--accent)"></span>
               <i class="fas fa-utensils text-[10px] mr-1.5 opacity-40"></i>
-              <b class="text-sm text-gray-800 font-bold">${rec.name}</b>
+              <b class="text-sm font-bold" style="color: var(--text)">${rec.name}</b>
             </div>
             <div class="flex items-center flex-wrap gap-1">
-              <span class="text-xs text-gray-400 font-medium">${rec.portions || 1} ${t('book.portions')} · ${rec.price.toFixed(2)}€</span>
+              <span class="text-xs font-medium" style="color: var(--text-muted)">${rec.portions || 1} ${t('book.portions')} · ${rec.price.toFixed(2)}€</span>
             </div>
           </div>
           <div class="flex gap-2 ml-2">
-            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-primary-light hover:text-white transition-all" onclick="editRecipeFromList(${rec.id})" title="${t('desktop.edit')}">
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-accent hover:text-white transition-all" onclick="editRecipeFromList(${rec.id})" title="${t('desktop.edit')}">
               <i class="fas fa-edit text-xs"></i>
             </button>
-            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all" onclick="deleteFromBook(${rec.id})" title="${t('book.delete')}">
+            <button class="w-8 h-8 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all font-bold" onclick="deleteFromBook(${rec.id})" title="${t('book.delete')}">
               <i class="fas fa-trash text-xs"></i>
             </button>
           </div>
@@ -3182,17 +3203,22 @@
           });
         }
 
-        // ====== Exportar/Importar ======
-        function exportRecipeBook() {
-          if (recipeBook.length === 0 && Object.keys(ingredients).length === 0) return showToast("No hay datos para exportar");
+        // ====== Exportar/Importar Bulk ======
+        function exportBulkData() {
+          if (recipeBook.length === 0 && Object.keys(ingredients).length === 0) return showToast(t('toasts.no_data_export', "No hay datos para exportar"));
 
-          // Incluir recetas, ingredientes y unidades personalizadas
           const data = {
             recetas: recipeBook,
             ingredientes: ingredients,
             unidades: customUnits,
             conversiones: customConversions,
-            exportDate: new Date().toISOString()
+            configuracion: {
+              servicePercentage: servicePercentage,
+              profitPercentage: profitPercentage,
+              language: currentLanguage
+            },
+            exportDate: new Date().toISOString(),
+            version: "1.0"
           };
 
           const jsonData = JSON.stringify(data, null, 2);
@@ -3200,48 +3226,16 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = `recetas_${new Date().toISOString().slice(0, 10)}.json`;
+          a.download = `recetario_bulk_${new Date().toISOString().slice(0, 10)}.json`;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-          showToast(t('toasts.data_exported', 'Recetario, productos y configuración exportados'));
+          showToast(t('toasts.full_config_exported', 'Configuración completa exportada'));
         }
 
-        function exportUnitsAndConversions() {
-          if (Object.keys(customUnits).length === 0 && Object.keys(customConversions).length === 0) {
-            return showToast("No hay unidades o equivalencias personalizadas para exportar");
-          }
-
-          const data = {
-            unidades: customUnits,
-            conversiones: customConversions,
-            exportDate: new Date().toISOString()
-          };
-
-          const jsonData = JSON.stringify(data, null, 2);
-          const blob = new Blob([jsonData], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `unidades_${new Date().toISOString().slice(0, 10)}.json`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-          showToast('Unidades y equivalencias exportadas');
-        }
-
-        function importRecipeBook() {
+        function importBulkData() {
           document.getElementById('file-input').click();
-        }
-
-        function importUnitsAndConversions() {
-          document.getElementById('units-file-input').click();
-        }
-
-        function importSingleRecipe() {
-          document.getElementById('recipe-file-input').click();
         }
 
         function handleFileImport() {
@@ -3253,259 +3247,61 @@
             try {
               const imported = JSON.parse(e.target.result);
 
-              // Soporte para formato antiguo (solo array) y nuevo (objeto con recetas e ingredientes)
-              let importedRecipes = Array.isArray(imported) ? imported : (imported.recetas || []);
-              let importedIngredients = imported.ingredientes || [];
-              let importedUnits = imported.unidades || {};
-              let importedConversions = imported.conversiones || {};
-
-              if (!Array.isArray(importedRecipes)) return showToast("Formato JSON inválido");
-
-              // Importar ingredientes
-              if (importedIngredients.length > 0) {
-                showConfirmModal(
-                  `Se encontraron ${importedIngredients.length} ingredientes.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeIngs) => {
-                    if (mergeIngs) {
-                      // Unificar ingredientes (evitar duplicados por nombre)
-                      const existingNames = new Set(ingredients.map(i => i.name.toLowerCase()));
-                      importedIngredients.forEach(newIng => {
-                        if (!existingNames.has(newIng.name.toLowerCase())) {
-                          ingredients.push(newIng);
-                          existingNames.add(newIng.name.toLowerCase());
-                        }
-                      });
-                      showToast(`${importedIngredients.length} ingrediente(s) importado(s)`);
-                    } else {
-                      ingredients = importedIngredients;
-                      showToast("Ingredientes reemplazados");
-                    }
-                    saveState();
-                    renderIngredients();
-                  }
-                );
+              // Validar que sea un bulk o al menos tenga algo
+              if (!imported.recetas && !imported.ingredientes && !Array.isArray(imported)) {
+                return showToast(t('messages.invalid_json', "Formato JSON inválido"));
               }
 
-              // Importar unidades personalizadas
-              if (Object.keys(importedUnits).length > 0) {
-                showConfirmModal(
-                  `Se encontraron ${Object.keys(importedUnits).length} unidades personalizadas.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeUnitsChoice) => {
-                    if (mergeUnitsChoice) {
-                      // Unificar unidades
-                      customUnits = Object.assign({}, customUnits, importedUnits);
-                      showToast("Unidades unificadas");
-                    } else {
-                      customUnits = importedUnits;
-                      showToast("Unidades reemplazadas");
-                    }
-                    localStorage.setItem('rpg_units', JSON.stringify(customUnits));
-                    renderUnitsList();
-                    renderIngredients();
-                  }
-                );
-              }
+              showConfirmModal(
+                t('confirm.bulk_import_replace', "¿Deseas reemplazar TODOS los datos actuales con la información de este archivo? Esta acción no se puede deshacer."),
+                (confirmed) => {
+                  if (confirmed) {
+                    // Soporte para formato antiguo (solo array de recetas) y nuevo bulk
+                    recipeBook = Array.isArray(imported) ? imported : (imported.recetas || []);
+                    ingredients = imported.ingredientes || [];
+                    customUnits = imported.unidades || {};
+                    customConversions = imported.conversiones || {};
 
-              // Importar conversiones personalizadas
-              if (Object.keys(importedConversions).length > 0) {
-                showConfirmModal(
-                  `Se encontraron ${Object.keys(importedConversions).length} conversiones personalizadas.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeConvs) => {
-                    if (mergeConvs) {
-                      // Unificar conversiones
-                      customConversions = Object.assign({}, customConversions, importedConversions);
-                      showToast("Conversiones unificadas");
-                    } else {
-                      customConversions = importedConversions;
-                      showToast("Conversiones reemplazadas");
+                    if (imported.configuracion) {
+                      servicePercentage = imported.configuracion.servicePercentage || 0;
+                      profitPercentage = imported.configuracion.profitPercentage || 0;
+                      if (imported.configuracion.language) {
+                        currentLanguage = imported.configuracion.language;
+                        localStorage.setItem('appLanguage', currentLanguage);
+                      }
                     }
-                    localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
-                    renderConversionsList();
-                  }
-                );
-              }
 
-              // Importar recetas
-              if (recipeBook.length > 0 && importedRecipes.length > 0) {
-                showConfirmModal(
-                  "Ya tienes recetas guardadas.\n\n¿Reemplazar (OK) o unificar (Cancelar)?",
-                  (mergeChoice) => {
-                    if (mergeChoice) {
-                      recipeBook = importedRecipes;
-                    } else {
-                      const mergedNames = new Set(recipeBook.map(r => r.name.toLowerCase()));
-                      importedRecipes.forEach(newRec => {
-                        if (!mergedNames.has(newRec.name.toLowerCase())) {
-                          recipeBook.push(newRec);
-                          mergedNames.add(newRec.name.toLowerCase());
-                        }
-                      });
-                      showToast("Recetas unificadas (duplicados eliminados)");
-                    }
+                    // Guardar todo en localStorage
                     localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
-                    renderBook();
-                  }
-                );
-              } else if (importedRecipes.length > 0) {
-                recipeBook = importedRecipes;
-                localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
-                renderBook();
-              }
+                    localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+                    localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+                    localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+                    localStorage.setItem('rpg_service_pct', servicePercentage.toString());
+                    localStorage.setItem('rpg_profit_pct', profitPercentage.toString());
 
-              configLoaded = true;
-              localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
-              renderBook();
-              showToast(`${importedRecipes.length} receta(s) importada(s)`);
+                    // Actualizar UI
+                    document.getElementById('service-percentage').value = servicePercentage;
+                    document.getElementById('profit-percentage').value = profitPercentage;
+
+                    renderIngredients();
+                    renderBook();
+                    renderUnitsList();
+                    renderConversionsList();
+                    loadI18nData().then(() => {
+                      updateI18n();
+                      showToast(t('toasts.data_imported', "Datos importados correctamente"));
+                    });
+                  }
+                }
+              );
             } catch (err) {
-              showToast("Error al leer el archivo JSON");
+              showToast(t('messages.error_reading_file', "Error al leer el archivo JSON"));
             }
           };
           reader.readAsText(file);
           document.getElementById('file-input').value = '';
         }
 
-        function importSingleRecipe() {
-          document.getElementById('recipe-file-input').click();
-        }
-
-        function handleRecipeImport() {
-          const file = document.getElementById('recipe-file-input').files[0] || document.getElementById('recipe-file-input-desk').files[0];
-          if (!file) return;
-
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              const imported = JSON.parse(e.target.result);
-              const importedRecipe = imported.receta;
-
-              if (!importedRecipe || !importedRecipe.name) return showToast("Formato JSON de receta inválido");
-
-              // Verificar si ya existe
-              const existing = recipeBook.find(r => r.name.toLowerCase() === importedRecipe.name.toLowerCase());
-              if (existing) {
-                showConfirmModal(`Ya existe una receta con el nombre "${importedRecipe.name}". ¿Reemplazar?`, (replace) => {
-                  if (replace) {
-                    const index = recipeBook.findIndex(r => r.id === existing.id);
-                    recipeBook[index] = importedRecipe;
-                    localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
-                    renderBook();
-                    showToast(`Receta "${importedRecipe.name}" reemplazada`);
-                  }
-                });
-              } else {
-                recipeBook.unshift(importedRecipe);
-                localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
-                renderBook();
-                showToast(`Receta "${importedRecipe.name}" importada`);
-              }
-            } catch (err) {
-              showToast("Error al leer el archivo JSON de receta");
-            }
-          };
-          reader.readAsText(file);
-          document.getElementById('recipe-file-input').value = '';
-          if (document.getElementById('recipe-file-input-desk')) document.getElementById('recipe-file-input-desk').value = '';
-        }
-
-        function handleUnitsImport() {
-          const file = document.getElementById('units-file-input').files[0];
-          if (!file) return;
-
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              const imported = JSON.parse(e.target.result);
-
-              // Verificar formato
-              if (!imported.unidades && !imported.conversiones) {
-                return showToast("El archivo no contiene unidades o equivalencias válidas");
-              }
-
-              let importedUnits = imported.unidades || {};
-              let importedConversions = imported.conversiones || {};
-
-              let hasUnits = Object.keys(importedUnits).length > 0;
-              let hasConversions = Object.keys(importedConversions).length > 0;
-
-              if (hasUnits && hasConversions) {
-                showConfirmModal(
-                  `Se encontraron ${Object.keys(importedUnits).length} unidades y ${Object.keys(importedConversions).length} equivalencias.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeChoice) => {
-                    if (mergeChoice) {
-                      // Unificar unidades
-                      Object.keys(importedUnits).forEach(key => {
-                        if (!customUnits[key]) {
-                          customUnits[key] = importedUnits[key];
-                        }
-                      });
-                      // Unificar conversiones
-                      Object.keys(importedConversions).forEach(key => {
-                        if (!customConversions[key]) {
-                          customConversions[key] = importedConversions[key];
-                        }
-                      });
-                      showToast("Unidades y equivalencias unificadas");
-                    } else {
-                      customUnits = importedUnits;
-                      customConversions = importedConversions;
-                      showToast("Unidades y equivalencias reemplazadas");
-                    }
-                    localStorage.setItem('rpg_units', JSON.stringify(customUnits));
-                    localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
-                    renderUnitsList();
-                    renderConversionsList();
-                    renderIngredients();
-                  }
-                );
-              } else if (hasUnits) {
-                showConfirmModal(
-                  `Se encontraron ${Object.keys(importedUnits).length} unidades.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeChoice) => {
-                    if (mergeChoice) {
-                      Object.keys(importedUnits).forEach(key => {
-                        if (!customUnits[key]) {
-                          customUnits[key] = importedUnits[key];
-                        }
-                      });
-                      showToast("Unidades unificadas");
-                    } else {
-                      customUnits = importedUnits;
-                      showToast("Unidades reemplazadas");
-                    }
-                    localStorage.setItem('rpg_units', JSON.stringify(customUnits));
-                    renderUnitsList();
-                    renderIngredients();
-                  }
-                );
-              } else if (hasConversions) {
-                showConfirmModal(
-                  `Se encontraron ${Object.keys(importedConversions).length} equivalencias.\n\n¿Unificar (OK) o reemplazar (Cancelar)?`,
-                  (mergeChoice) => {
-                    if (mergeChoice) {
-                      Object.keys(importedConversions).forEach(key => {
-                        if (!customConversions[key]) {
-                          customConversions[key] = importedConversions[key];
-                        }
-                      });
-                      showToast("Equivalencias unificadas");
-                    } else {
-                      customConversions = importedConversions;
-                      showToast("Equivalencias reemplazadas");
-                    }
-                    localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
-                    renderConversionsList();
-                  }
-                );
-              }
-
-              showToast('Importación completada');
-            } catch (err) {
-              showToast("Error al leer el archivo JSON de unidades");
-            }
-          };
-          reader.readAsText(file);
-          document.getElementById('units-file-input').value = '';
-        }
 
         // ====== Utilidades ======
         function getUnitLabel(rarity) {
