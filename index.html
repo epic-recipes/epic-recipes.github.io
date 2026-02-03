@@ -117,6 +117,47 @@
       overflow-y: auto;
     }
 
+    /* Donation Modal Specifics */
+    .donation-modal .modal-content {
+      max-height: 98vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .iframe-container {
+      width: 100%;
+      min-height: 650px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      margin: 0 auto;
+    }
+
+    .iframe-container iframe {
+      width: 100% !important;
+      max-width: 350px;
+      height: 650px !important;
+      border: none;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .donation-modal .modal-content {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      .iframe-container {
+        min-height: 650px;
+        padding-bottom: env(safe-area-inset-bottom, 2rem);
+      }
+    }
+
     /* Mobile fine-tuning */
     @media (max-width: 640px) {
       :root {
@@ -1026,78 +1067,28 @@
 
       <!-- MODAL de Donaciones -->
       <div id="donation-modal" class="modal donation-modal">
-        <div class="modal-content max-w-3xl p-0 overflow-hidden border-0">
-          <div class="grid grid-cols-1 md:grid-cols-2">
-            <!-- COLUMNA IZQUIERDA: INFO -->
-            <div class="p-5 md:p-7 bg-gray-50 flex flex-col gap-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div
-                    class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-lg shadow-inner">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-black text-gray-800 tracking-tight leading-none mb-1"
-                      data-i18n="donation.title">Donaciones</h3>
-                    <div class="text-[8px] text-gray-400 font-bold uppercase tracking-widest">Support the project</div>
-                  </div>
-                </div>
-                <button
-                  class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg bg-white text-gray-400 border border-gray-100 shadow-sm"
-                  onclick="closeDonationModal()">×</button>
+        <div class="modal-content max-w-md p-0 overflow-hidden border-0 relative shadow-2xl">
+          <!-- Close Button -->
+          <button
+            class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all z-20 text-xl font-bold border border-gray-100"
+            onclick="closeDonationModal()">×</button>
+          
+          <div class="p-6 bg-gray-50 border-b border-gray-100">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center text-lg shadow-inner">
+                <i class="fas fa-heart"></i>
               </div>
-
-
-
-              <!-- DIGICEL -->
-              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex justify-between items-center mb-3">
-                  <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 uppercase tracking-widest">
-                    <i class="fas fa-mobile-alt text-primary/30"></i>
-                    <span data-i18n="donation.digicel_label">Digicel</span>
-                  </div>
-                  <span class="text-xs font-black text-primary/60 font-mono">+5977479759</span>
-                </div>
-                <div class="flex gap-2">
-                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
-                    onclick="copyToClipboard('+5977479759')" data-i18n="donation.copy_button">Copiar</button>
-                  <a class="flex-1 btn btn-primary text-[9px] py-2 rounded-xl shadow-sm no-underline text-center"
-                    href="https://topup.digicelgroup.com/" target="_blank" data-i18n="donation.digicel_topup"
-                    style="background-color: var(--primary)">Recargar</a>
-                </div>
-              </div>
-
-              <!-- CRYPTO -->
-              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex items-center gap-2 text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3">
-                  <i class="fab fa-ethereum text-primary/30"></i>
-                  <span data-i18n="donation.crypto_label">USDC (Polygon)</span>
-                </div>
-                <div class="bg-gray-50 p-3 rounded-xl mb-3 border border-gray-100">
-                  <code id="crypto-address"
-                    class="text-[8px] text-gray-400 break-all font-mono leading-tight block text-center">0xFeedf38871ee992CF91d2e2A722b8c3073F81a32</code>
-                </div>
-                <div class="flex gap-2">
-                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
-                    onclick="copyToClipboard(document.getElementById('crypto-address').innerText)"
-                    data-i18n="donation.copy_button">Copiar</button>
-                  <button class="flex-1 btn btn-secondary text-[9px] py-2 rounded-xl border-gray-100"
-                    onclick="(function(){ const u = document.getElementById('crypto-address').innerText; window.open('https://polygonscan.com/address/'+u,'_blank'); return false; })()"
-                    data-i18n="donation.view_on_explorer">Explorer</button>
-                </div>
+              <div>
+                <h3 class="text-lg font-black text-gray-800 tracking-tight leading-none mb-1" data-i18n="donation.title">Donaciones</h3>
+                <div class="text-[9px] text-gray-400 font-bold uppercase tracking-widest" data-i18n="donation.support_project">Support the project</div>
               </div>
             </div>
+          </div>
 
-            <!-- COLUMNA DERECHA: WIDGET -->
-            <div class="relative bg-white flex flex-col border-t md:border-t-0 md:border-l border-gray-100">
-              <button
-                class="hidden md:flex absolute top-4 right-4 w-9 h-9 items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-gray-100 transition-all z-10"
-                onclick="closeDonationModal()">×</button>
-              <div class="flex-1 min-h-[420px]">
-                <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352"
-                  width="100%" height="100%" frameborder="0" class="w-full h-full border-none"></iframe>
-              </div>
-            </div>
+          <div class="iframe-container bg-white">
+            <iframe src="https://nowpayments.io/embeds/donation-widget?api_key=fdda84fb-c7f9-409f-9f7d-bde15b5ab352" frameborder="0" scrolling="yes">
+              Can't load widget
+            </iframe>
           </div>
         </div>
       </div>
@@ -1993,7 +1984,7 @@
         function copyToClipboard(text) {
           try {
             navigator.clipboard.writeText(text.toString());
-            showToast(t('toasts.data_exported', 'Copiado al portapapeles'));
+            showToast(t('toasts.copied', 'Copiado al portapapeles'), 'success');
           } catch (err) {
             // Fallback
             const ta = document.createElement('textarea');
@@ -2002,7 +1993,7 @@
             ta.select();
             document.execCommand('copy');
             ta.remove();
-            showToast(t('toasts.data_exported', 'Copiado al portapapeles'));
+            showToast(t('toasts.copied', 'Copiado al portapapeles'), 'success');
           }
         }
 
