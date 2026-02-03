@@ -200,11 +200,43 @@
       }
 
       .rec-summary {
-        padding: 1rem !important;
+        padding: 1.25rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1.25rem !important;
+        position: relative;
+      }
+
+      .rec-summary>div:first-child {
+        width: 100%;
       }
 
       .rec-summary h3 {
         font-size: 1.25rem !important;
+        padding-right: 3rem;
+        word-break: break-word;
+      }
+
+      .rec-summary .gap-4 {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+      }
+
+      .rec-summary .gap-4>span {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.5rem !important;
+      }
+
+      .rec-summary button {
+        position: absolute !important;
+        top: 1.25rem;
+        right: 1.25rem;
+      }
+
+      .rec-summary .mt-3 span {
+        display: inline-block;
+        max-width: 100%;
+        font-size: 0.875rem !important;
       }
 
       .ing-card-mobile {
@@ -364,6 +396,16 @@
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    /* Ocultar botones flotantes cuando hay un modal activo */
+    body:has(.modal.active) .fab,
+    body:has(.modal.active) .fab-save {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.8);
+      transition: all 0.3s ease;
     }
   </style>
 </head>
@@ -638,38 +680,40 @@
                   </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-xl border border-blue-200">
-                    <div class="text-[10px] text-blue-600 font-bold uppercase tracking-wider"
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                  <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-2 rounded-xl border border-blue-200">
+                    <div class="text-[9px] text-blue-600 font-bold uppercase tracking-wider"
                       data-i18n="recipe.stats.base_cost">Costo Base</div>
-                    <div class="text-lg font-black text-blue-700" id="stat-base-cost">0.00€</div>
+                    <div class="text-sm font-black text-blue-700" id="stat-base-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-xl border border-orange-200">
-                    <div class="text-[10px] text-orange-600 font-bold uppercase tracking-wider"
-                      data-i18n="recipe.stats.service_cost">Gastos Servicios</div>
-                    <div class="text-lg font-black text-orange-700" id="stat-service-cost">0.00€</div>
-                    <div class="text-[9px] text-orange-500 font-medium">(<span id="display-service-pct">0</span>%)</div>
+                  <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-2 rounded-xl border border-orange-200">
+                    <div class="text-[9px] text-orange-600 font-bold uppercase tracking-wider">
+                      <span data-i18n="recipe.stats.service_cost">Gastos Servicios</span>
+                      <span class="text-[8px] opacity-70 ml-1">(<span id="display-service-pct">0</span>%)</span>
+                    </div>
+                    <div class="text-sm font-black text-orange-700" id="stat-service-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-red-50 to-red-100 p-3 rounded-xl border border-red-200">
-                    <div class="text-[10px] text-red-600 font-bold uppercase tracking-wider"
+                  <div class="bg-gradient-to-br from-red-50 to-red-100 p-2 rounded-xl border border-red-200">
+                    <div class="text-[9px] text-red-600 font-bold uppercase tracking-wider"
                       data-i18n="recipe.stats.total_cost">Costo Total</div>
-                    <div class="text-lg font-black text-red-700" id="stat-total-cost">0.00€</div>
+                    <div class="text-sm font-black text-red-700" id="stat-total-cost">0.00€</div>
                   </div>
-                  <div class="bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-xl border border-green-200">
-                    <div class="text-[10px] text-green-600 font-bold uppercase tracking-wider"
-                      data-i18n="recipe.stats.suggested_price">Precio Sugerido</div>
-                    <div class="text-lg font-black text-green-700" id="stat-suggested-price">0.00€</div>
-                    <div class="text-[9px] text-green-500 font-medium">(+<span id="display-profit-pct">0</span>%)</div>
+                  <div class="bg-gradient-to-br from-green-50 to-green-100 p-2 rounded-xl border border-green-200">
+                    <div class="text-[9px] text-green-600 font-bold uppercase tracking-wider">
+                      <span data-i18n="recipe.stats.suggested_price">Precio Sugerido</span>
+                      <span class="text-[8px] opacity-70 ml-1">(+<span id="display-profit-pct">0</span>%)</span>
+                    </div>
+                    <div class="text-sm font-black text-green-700" id="stat-suggested-price">0.00€</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider"
+                  <div class="bg-gray-50 p-2 rounded-xl border border-gray-200">
+                    <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider"
                       data-i18n="recipe.stats.profit">Beneficio Real</div>
-                    <div class="text-lg font-black" id="stat-profit">0.00€</div>
+                    <div class="text-sm font-black" id="stat-profit">0.00€</div>
                   </div>
-                  <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider"
+                  <div class="bg-gray-50 p-2 rounded-xl border border-gray-200">
+                    <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider"
                       data-i18n="recipe.stats.price_per_portion">Precio/Porción</div>
-                    <div class="text-lg font-black text-gray-700" id="stat-price-per-portion">0.00€</div>
+                    <div class="text-sm font-black text-gray-700" id="stat-price-per-portion">0.00€</div>
                   </div>
                 </div>
                 <!-- Botón Flotante de Guardado -->
@@ -1003,11 +1047,7 @@
                   onclick="closeDonationModal()">×</button>
               </div>
 
-              <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3">
-                <i class="fas fa-magic text-primary/40 text-xs"></i>
-                <p class="text-[11px] text-gray-500 leading-tight font-medium" data-i18n="donation.support_description">
-                  Tu ayuda mantiene este proyecto independiente y vivo.</p>
-              </div>
+
 
               <!-- DIGICEL -->
               <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
