@@ -31,7 +31,8 @@
     "price_placeholder": "0.00",
     "category_label": "Category",
     "type_food": "Ingredient",
-    "type_supply": "Supply / Packaging"
+    "type_supply": "Supply / Packaging",
+    "add_ingredient": "Add Ingredient"
   },
   "recipe": {
     "title": "Recipe Creator",
@@ -113,6 +114,9 @@
     "export_all": "Export All (Recipes + Ingredients)",
     "import_data": "Import Data",
     "clear_all": "Clear All (⚠️)",
+    "export_btn": "Export",
+    "import_btn": "Import",
+    "clear_btn": "Clear",
     "accounting_title": "Accounting Calculations",
     "service_percentage": "Service Costs (%)",
     "service_percentage_hint": "Electricity, gas, water, etc.",

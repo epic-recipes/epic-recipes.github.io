@@ -31,7 +31,8 @@
     "update_button": "Actualizar",
     "category_label": "Categoría",
     "type_food": "Ingrediente",
-    "type_supply": "Insumo / Empaque"
+    "type_supply": "Insumo / Empaque",
+    "add_ingredient": "Añadir Ingrediente"
   },
   "recipe": {
     "title": "Creador de Recetas",
@@ -113,6 +114,9 @@
     "export_all": "Exportar Todo (Recetas + Ingredientes)",
     "import_data": "Importar Datos",
     "clear_all": "Limpiar Todo (⚠️)",
+    "export_btn": "Exportar",
+    "import_btn": "Importar",
+    "clear_btn": "Limpiar",
     "accounting_title": "Cálculos Contables",
     "service_percentage": "Gastos de Servicios (%)",
     "service_percentage_hint": "Electricidad, gas, agua, etc.",
