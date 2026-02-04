@@ -294,7 +294,8 @@
     "update": "更新",
     "default": "デフォルト",
     "recipe_prefix": "[レシピ]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

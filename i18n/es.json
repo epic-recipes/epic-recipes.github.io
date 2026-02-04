@@ -251,7 +251,8 @@
     "new_recipe": "Nueva Receta",
     "default": "Por defecto",
     "recipe_prefix": "[RECETA]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unidad"
   },
   "stats": {
     "cost_label": "Costo Ingredientes",

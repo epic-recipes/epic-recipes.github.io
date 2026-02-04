@@ -281,7 +281,8 @@
     "new_recipe": "New Recipe",
     "default": "Default",
     "recipe_prefix": "[RECIPE]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "stats": {
     "cost_label": "Ingredients Cost",

@@ -294,7 +294,8 @@
     "edit_details": "Seti fini fini",
     "default": "Standard",
     "recipe_prefix": "[RECIPE]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

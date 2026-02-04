@@ -294,7 +294,8 @@
     "edit_details": "Editar Detalhes",
     "default": "Padrão",
     "recipe_prefix": "[RECEITA]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

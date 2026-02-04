@@ -294,7 +294,8 @@
     "update": "Обновить",
     "default": "По умолчанию",
     "recipe_prefix": "[РЕЦЕПТ]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",

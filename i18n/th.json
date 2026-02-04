@@ -294,7 +294,8 @@
     "update": "อัปเดต",
     "default": "ค่าเริ่มต้น",
     "recipe_prefix": "[สูตร]",
-    "subrecipe_prefix": "[R]"
+    "subrecipe_prefix": "[R]",
+    "unit": "unit"
   },
   "share": {
     "app_branding": "EPIC RECIPE BOOK · RECETARIO ÉPICO",
