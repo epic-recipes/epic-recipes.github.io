@@ -177,7 +177,20 @@
     "pwa_install_error": "Nie można zainstalować aplikacji w tym momencie. Upewnij się, że używasz kompatybilnej przeglądarki",
     "full_config_exported": "Pełna konfiguracja wyeksportowana (przepisy, składniki, jednostki i konwersje)",
     "no_data_export": "Brak danych do eksportu",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Brakujące dane",
+    "auth_login_success": "Pomyślnie zalogowano",
+    "auth_signup_success": "Rejestracja zakończona. Sprawdź swój email, aby potwierdzić.",
+    "auth_logout": "Wylogowano",
+    "auth_required": "Musisz się zalogować",
+    "sync_uploading": "Przesyłanie danych...",
+    "sync_upload_success": "Dane przesłane pomyślnie",
+    "sync_upload_error": "Błąd przesyłania danych",
+    "sync_completed": "Synchronizacja zakończona",
+    "supabase_missing_credentials": "Brakujące dane uwierzytelniające Supabase",
+    "supabase_connected": "Supabase połączony i zsynchronizowany",
+    "supabase_error": "Błąd połączenia z Supabase",
+    "supabase_disconnected": "Rozłączono z Supabase"
   },
   "messages": {
     "editing_recipe": "Edycja \\\"{name}\\\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Zaloguj się",
+    "signup_title": "Utwórz Konto",
+    "email_label": "Email",
+    "email_placeholder": "ty@email.com",
+    "password_label": "Hasło",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Potwierdź",
+    "no_account": "Nie masz konta?",
+    "have_account": "Masz już konto?",
+    "signup_link": "Zarejestruj się",
+    "login_link": "Zaloguj się",
+    "logged_in_as": "Zalogowany",
+    "logout_button": "Wyloguj się"
+  },
+  "account": {
+    "guest_title": "Dołącz do Kuchni",
+    "guest_description": "Utwórz konto, aby zapisać swoje przepisy w chmurze, uzyskać dostęp z dowolnego urządzenia i upewnić się, że Twoje kreacje nigdy nie zostaną utracone.",
+    "signup_free": "Zarejestruj się za Darmo",
+    "have_account_button": "Mam już konto",
+    "feature_backup": "Kopia zapasowa",
+    "feature_multidevice": "Wiele urządzeń",
+    "feature_private": "Prywatne",
+    "connected_status": "Połączony",
+    "stats_recipes": "Przepisy",
+    "stats_ingredients": "Składniki",
+    "actions_title": "Działania",
+    "sync_data": "Synchronizuj Dane",
+    "sync_status_ready": "Status: Gotowy",
+    "sync_status_syncing": "Synchronizacja...",
+    "sync_status_error": "Błąd połączenia",
+    "sync_status_disconnected": "Niepołączony",
+    "migrate_data": "Migruj Dane Lokalne",
+    "migrate_description": "Prześlij moje aktualne dane do chmury"
   }
 }

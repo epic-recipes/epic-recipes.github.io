@@ -177,7 +177,20 @@
     "pwa_install_error": "此时无法安装应用。请确保您正在使用兼容的浏览器",
     "full_config_exported": "完整配置已导出（食谱、食材、单位和转换）",
     "no_data_export": "没有数据可导出",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "缺少数据",
+    "auth_login_success": "登录成功",
+    "auth_signup_success": "注册完成。请检查您的电子邮件以确认。",
+    "auth_logout": "已登出",
+    "auth_required": "您必须登录",
+    "sync_uploading": "上传数据中...",
+    "sync_upload_success": "数据上传成功",
+    "sync_upload_error": "数据上传错误",
+    "sync_completed": "同步完成",
+    "supabase_missing_credentials": "缺少Supabase凭据",
+    "supabase_connected": "Supabase已连接并同步",
+    "supabase_error": "连接Supabase错误",
+    "supabase_disconnected": "已从Supabase断开连接"
   },
   "messages": {
     "editing_recipe": "编辑 \\\"{name}\\\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "登录",
+    "signup_title": "创建账户",
+    "email_label": "电子邮件",
+    "email_placeholder": "you@email.com",
+    "password_label": "密码",
+    "password_placeholder": "••••••••",
+    "confirm_button": "确认",
+    "no_account": "还没有账户？",
+    "have_account": "已有账户？",
+    "signup_link": "注册",
+    "login_link": "登录",
+    "logged_in_as": "已登录",
+    "logout_button": "登出"
+  },
+  "account": {
+    "guest_title": "加入厨房",
+    "guest_description": "创建账户以将您的食谱保存到云端，从任何设备访问，并确保您的创作永不丢失。",
+    "signup_free": "免费注册",
+    "have_account_button": "我已有账户",
+    "feature_backup": "备份",
+    "feature_multidevice": "多设备",
+    "feature_private": "私密",
+    "connected_status": "已连接",
+    "stats_recipes": "食谱",
+    "stats_ingredients": "食材",
+    "actions_title": "操作",
+    "sync_data": "同步数据",
+    "sync_status_ready": "状态：就绪",
+    "sync_status_syncing": "同步中...",
+    "sync_status_error": "连接错误",
+    "sync_status_disconnected": "未连接",
+    "migrate_data": "迁移本地数据",
+    "migrate_description": "将我的当前数据上传到云端"
   }
 }

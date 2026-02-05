@@ -177,7 +177,20 @@
     "pwa_install_error": "App no kan install now. Cheki browser support",
     "full_config_exported": "Furu konfig export (resipì, ingredient, yunit nanga equivalent)",
     "no_data_export": "No data fu export",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Data no de",
+    "auth_login_success": "Yu kon ini bun",
+    "auth_signup_success": "Skrifi kaba. Luku yu email fu taki troe.",
+    "auth_logout": "Yu go tapu",
+    "auth_required": "Yu musu kon ini",
+    "sync_uploading": "E poti data...",
+    "sync_upload_success": "Data poti bun",
+    "sync_upload_error": "Probleem fu poti data",
+    "sync_completed": "Sinkroniseri kaba",
+    "supabase_missing_credentials": "Supabase data no de",
+    "supabase_connected": "Supabase konnekt nanga sinkroniseri",
+    "supabase_error": "Probleem fu konnekt nanga Supabase",
+    "supabase_disconnected": "Diskonnekt foe Supabase"
   },
   "messages": {
     "editing_recipe": "Mi o fesibE di \"{name}\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Kon Ini",
+    "signup_title": "Meki Akontoe",
+    "email_label": "Email",
+    "email_placeholder": "yu@email.com",
+    "password_label": "Wortoe",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Taki Troe",
+    "no_account": "Yu no abi akontoe?",
+    "have_account": "Yu abi akontoe kba?",
+    "signup_link": "Skrifi Yu Nen",
+    "login_link": "Kon Ini",
+    "logged_in_as": "Yu kon ini",
+    "logout_button": "Go Tapu"
+  },
+  "account": {
+    "guest_title": "Kon Na a Kuku",
+    "guest_description": "Meki wan akontoe fu seyfi yu resepti na a wolku, yu kan piki en foe ala masyin nanga meki soro taki yu wroko no sa lasi.",
+    "signup_free": "Skrifi Yu Nen Fri",
+    "have_account_button": "Mi abi akontoe kba",
+    "feature_backup": "Seyfi",
+    "feature_multidevice": "Moro Masyin",
+    "feature_private": "Preve",
+    "connected_status": "Konnekt",
+    "stats_recipes": "Resepti",
+    "stats_ingredients": "Sani fu Kuku",
+    "actions_title": "Wroko",
+    "sync_data": "Sinkroniseri Data",
+    "sync_status_ready": "Taki: Klar",
+    "sync_status_syncing": "E sinkroniseri...",
+    "sync_status_error": "Konneksi probleem",
+    "sync_status_disconnected": "No konnekt",
+    "migrate_data": "Poti Lokali Data",
+    "migrate_description": "Poti mi data na a wolku"
   }
 }

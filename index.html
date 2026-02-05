@@ -1748,6 +1748,19 @@
               if (recError) throw recError;
             }
 
+            // 3. Upload Custom Units and Conversions
+            const configData = {
+              user_id: currentUser.id,
+              custom_units: customUnits,
+              custom_conversions: customConversions,
+              service_percentage: servicePercentage,
+              profit_percentage: profitPercentage,
+              language: currentLanguage,
+              updated_at: new Date().toISOString()
+            };
+            const { error: configError } = await supabaseClient.from('user_config').upsert(configData);
+            if (configError) throw configError;
+
             showToast("Datos subidos correctamente", "success");
             await syncDataWithSupabase(); // Refresh local state
           } catch (e) {
@@ -1909,6 +1922,56 @@
               if (upsertBookError) throw upsertBookError;
             }
 
+            // 3. Sincronizar Unidades y Conversiones Personalizadas
+            const { data: remoteConfig, error: configError } = await supabaseClient.from('user_config').select('*').eq('user_id', currentUser?.id).maybeSingle();
+
+            if (remoteConfig) {
+              // Descargar configuración desde la nube
+              if (remoteConfig.custom_units) {
+                customUnits = remoteConfig.custom_units;
+                localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+              }
+              if (remoteConfig.custom_conversions) {
+                customConversions = remoteConfig.custom_conversions;
+                localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+              }
+              if (remoteConfig.service_percentage !== undefined) {
+                servicePercentage = remoteConfig.service_percentage;
+                localStorage.setItem('rpg_service_pct', servicePercentage.toString());
+              }
+              if (remoteConfig.profit_percentage !== undefined) {
+                profitPercentage = remoteConfig.profit_percentage;
+                localStorage.setItem('rpg_profit_pct', profitPercentage.toString());
+              }
+              if (remoteConfig.language) {
+                currentLanguage = remoteConfig.language;
+                localStorage.setItem('appLanguage', currentLanguage);
+              }
+
+              // Actualizar UI
+              renderUnitsList();
+              renderConversionsList();
+              if (document.getElementById('service-percentage')) {
+                document.getElementById('service-percentage').value = servicePercentage;
+              }
+              if (document.getElementById('profit-percentage')) {
+                document.getElementById('profit-percentage').value = profitPercentage;
+              }
+            } else if (Object.keys(customUnits).length > 0 || Object.keys(customConversions).length > 0) {
+              // Subir configuración local a la nube si no existe en remoto
+              const configData = {
+                user_id: currentUser?.id,
+                custom_units: customUnits,
+                custom_conversions: customConversions,
+                service_percentage: servicePercentage,
+                profit_percentage: profitPercentage,
+                language: currentLanguage,
+                updated_at: new Date().toISOString()
+              };
+              const { error: upsertConfigError } = await supabaseClient.from('user_config').upsert(configData);
+              if (upsertConfigError) throw upsertConfigError;
+            }
+
             document.getElementById('sb-status').textContent = "Conectado y sincronizado";
             document.getElementById('sb-status').style.color = "var(--primary)";
           } catch (e) {
@@ -1916,6 +1979,27 @@
             document.getElementById('sb-status').textContent = "Error: " + (e.message || "Sincronización fallida");
             document.getElementById('sb-status').style.color = "var(--danger)";
             throw e;
+          }
+        }
+
+        // Función auxiliar para sincronizar solo la configuración con la nube
+        async function syncConfigToCloud() {
+          if (!currentUser || !supabaseClient) return; // Solo sincronizar si hay usuario autenticado
+
+          try {
+            const configData = {
+              user_id: currentUser.id,
+              custom_units: customUnits,
+              custom_conversions: customConversions,
+              service_percentage: servicePercentage,
+              profit_percentage: profitPercentage,
+              language: currentLanguage,
+              updated_at: new Date().toISOString()
+            };
+            const { error } = await supabaseClient.from('user_config').upsert(configData);
+            if (error) console.error("Config sync error:", error);
+          } catch (e) {
+            console.error("Error syncing config to cloud:", e);
           }
         }
 
@@ -4032,6 +4116,7 @@
 
           customUnits[key] = value;
           localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+          syncConfigToCloud(); // Sincronizar con la nube
           renderUnitsList();
           // REFRESCAR TODO
           refreshAllUnitSelectors();
@@ -4049,6 +4134,7 @@
             if (confirmed) {
               delete customUnits[key];
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+              syncConfigToCloud(); // Sincronizar con la nube
               renderUnitsList();
               renderIngredients();
               refreshAllUnitSelectors();
@@ -4062,6 +4148,7 @@
             if (confirmed) {
               customUnits = {};
               localStorage.setItem('rpg_units', JSON.stringify(customUnits));
+              syncConfigToCloud(); // Sincronizar con la nube
               renderUnitsList();
               renderIngredients();
               refreshAllUnitSelectors();
@@ -4148,6 +4235,7 @@
           customConversions[key] = factor;
           customConversions[reverseKey] = reverseFactor; // Agregar conversión inversa
           localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+          syncConfigToCloud(); // Sincronizar con la nube
 
           // REFRESCAR SELECTORES
           refreshAllUnitSelectors();
@@ -4166,6 +4254,7 @@
               delete customConversions[reverseKey];
 
               localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+              syncConfigToCloud(); // Sincronizar con la nube
 
               // Revertir ingredientes en recetas que usen esta conversión
               const revertItems = (items) => {
@@ -4196,6 +4285,7 @@
             if (confirmed) {
               customConversions = {};
               localStorage.setItem('rpg_conversions', JSON.stringify(customConversions));
+              syncConfigToCloud(); // Sincronizar con la nube
 
               const clearDisplay = (items) => {
                 items.forEach(item => {

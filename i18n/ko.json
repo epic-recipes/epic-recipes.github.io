@@ -177,7 +177,20 @@
     "pwa_install_error": "지금은 앱을 설치할 수 없습니다. 호환 가능한 브라우저를 사용하고 있는지 확인하세요",
     "full_config_exported": "완전한 설정이 내보내졌습니다 (레시피, 재료, 단위 및 환산)",
     "no_data_export": "내보낼 데이터가 없습니다",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "데이터 누락",
+    "auth_login_success": "로그인 성공",
+    "auth_signup_success": "등록이 완료되었습니다. 확인을 위해 이메일을 확인하세요.",
+    "auth_logout": "로그아웃됨",
+    "auth_required": "로그인해야 합니다",
+    "sync_uploading": "데이터 업로드 중...",
+    "sync_upload_success": "데이터 업로드 성공",
+    "sync_upload_error": "데이터 업로드 오류",
+    "sync_completed": "동기화 완료",
+    "supabase_missing_credentials": "Supabase 자격 증명 누락",
+    "supabase_connected": "Supabase 연결 및 동기화됨",
+    "supabase_error": "Supabase 연결 오류",
+    "supabase_disconnected": "Supabase에서 연결 해제됨"
   },
   "messages": {
     "editing_recipe": "\\\"{name}\\\" 수정 중",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "로그인",
+    "signup_title": "계정 만들기",
+    "email_label": "이메일",
+    "email_placeholder": "you@email.com",
+    "password_label": "비밀번호",
+    "password_placeholder": "••••••••",
+    "confirm_button": "확인",
+    "no_account": "계정이 없으신가요?",
+    "have_account": "이미 계정이 있으신가요?",
+    "signup_link": "가입하기",
+    "login_link": "로그인",
+    "logged_in_as": "로그인됨",
+    "logout_button": "로그아웃"
+  },
+  "account": {
+    "guest_title": "주방에 참여하세요",
+    "guest_description": "계정을 만들어 레시피를 클라우드에 저장하고, 모든 기기에서 액세스하며, 작품이 절대 손실되지 않도록 하세요.",
+    "signup_free": "무료 가입",
+    "have_account_button": "이미 계정이 있습니다",
+    "feature_backup": "백업",
+    "feature_multidevice": "멀티 디바이스",
+    "feature_private": "비공개",
+    "connected_status": "연결됨",
+    "stats_recipes": "레시피",
+    "stats_ingredients": "재료",
+    "actions_title": "작업",
+    "sync_data": "데이터 동기화",
+    "sync_status_ready": "상태: 준비됨",
+    "sync_status_syncing": "동기화 중...",
+    "sync_status_error": "연결 오류",
+    "sync_status_disconnected": "연결되지 않음",
+    "migrate_data": "로컬 데이터 마이그레이션",
+    "migrate_description": "현재 데이터를 클라우드에 업로드"
   }
 }

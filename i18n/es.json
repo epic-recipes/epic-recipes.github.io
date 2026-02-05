@@ -182,7 +182,20 @@
     "import_completed": "Importación completada",
     "shared_with_image": "¡Compartido con imagen!",
     "conversions_merged": "Equivalencias fusionadas",
-    "units_merged": "Unidades fusionadas"
+    "units_merged": "Unidades fusionadas",
+    "auth_missing_data": "Faltan datos",
+    "auth_login_success": "Sesión iniciada correctamente",
+    "auth_signup_success": "Registro completado. Revisa tu email para confirmar.",
+    "auth_logout": "Sesión cerrada",
+    "auth_required": "Debes iniciar sesión",
+    "sync_uploading": "Subiendo datos...",
+    "sync_upload_success": "Datos subidos correctamente",
+    "sync_upload_error": "Error al subir datos",
+    "sync_completed": "Sincronización completada",
+    "supabase_missing_credentials": "Faltan credenciales de Supabase",
+    "supabase_connected": "Supabase conectado y sincronizado",
+    "supabase_error": "Error al conectar con Supabase",
+    "supabase_disconnected": "Desconectado de Supabase"
   },
   "confirm": {
     "delete_ingredient": "¿Eliminar \"{name}\" de la despensa?",
@@ -308,5 +321,40 @@
     "promo_phrase": "Eficiencia y Elegancia para cada Chef.",
     "footer_branding": "DISEÑADO PARA PROFESIONALES DE LA GASTRONOMÍA",
     "app_share_text": "🍽️ Descubre Recetario Épico: Gestor de recetas con análisis de costos y rentabilidad. ¡La herramienta definitiva para chefs!"
+  },
+  "auth": {
+    "login_title": "Iniciar Sesión",
+    "signup_title": "Crear Cuenta",
+    "email_label": "Email",
+    "email_placeholder": "tu@email.com",
+    "password_label": "Contraseña",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Confirmar",
+    "no_account": "¿No tienes cuenta?",
+    "have_account": "¿Ya tienes cuenta?",
+    "signup_link": "Regístrate",
+    "login_link": "Entrar",
+    "logged_in_as": "Sesión iniciada",
+    "logout_button": "Cerrar Sesión"
+  },
+  "account": {
+    "guest_title": "Únete a la Cocina",
+    "guest_description": "Crea una cuenta para guardar tus recetas en la nube, acceder desde cualquier dispositivo y asegurar que tus creaciones nunca se pierdan.",
+    "signup_free": "Registrarse Gratis",
+    "have_account_button": "Ya tengo cuenta",
+    "feature_backup": "Backup",
+    "feature_multidevice": "Multi-Device",
+    "feature_private": "Privado",
+    "connected_status": "Conectado",
+    "stats_recipes": "Recetas",
+    "stats_ingredients": "Ingredientes",
+    "actions_title": "Acciones",
+    "sync_data": "Sincronizar Datos",
+    "sync_status_ready": "Estado: Listo",
+    "sync_status_syncing": "Pulsando sincronización...",
+    "sync_status_error": "Error de conexión",
+    "sync_status_disconnected": "No conectado",
+    "migrate_data": "Migrar Datos Locales",
+    "migrate_description": "Subir mis datos actuales a la nube"
   }
 }

@@ -177,7 +177,20 @@
     "pwa_install_error": "De app kan op dit moment niet worden geïnstalleerd. Zorg ervoor dat je een compatibele browser gebruikt",
     "full_config_exported": "Volledige configuratie geëxporteerd (recepten, ingrediënten, eenheden en equivalenties)",
     "no_data_export": "Geen gegevens om te exporteren",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Ontbrekende gegevens",
+    "auth_login_success": "Succesvol ingelogd",
+    "auth_signup_success": "Registratie voltooid. Controleer je e-mail om te bevestigen.",
+    "auth_logout": "Uitgelogd",
+    "auth_required": "Je moet inloggen",
+    "sync_uploading": "Gegevens uploaden...",
+    "sync_upload_success": "Gegevens succesvol geüpload",
+    "sync_upload_error": "Fout bij uploaden van gegevens",
+    "sync_completed": "Synchronisatie voltooid",
+    "supabase_missing_credentials": "Supabase-referenties ontbreken",
+    "supabase_connected": "Supabase verbonden en gesynchroniseerd",
+    "supabase_error": "Fout bij verbinden met Supabase",
+    "supabase_disconnected": "Losgekoppeld van Supabase"
   },
   "messages": {
     "editing_recipe": "Bewerken van \"{name}\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Inloggen",
+    "signup_title": "Account Aanmaken",
+    "email_label": "E-mail",
+    "email_placeholder": "jij@email.com",
+    "password_label": "Wachtwoord",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Bevestigen",
+    "no_account": "Nog geen account?",
+    "have_account": "Heb je al een account?",
+    "signup_link": "Registreren",
+    "login_link": "Inloggen",
+    "logged_in_as": "Ingelogd",
+    "logout_button": "Uitloggen"
+  },
+  "account": {
+    "guest_title": "Word Lid van de Keuken",
+    "guest_description": "Maak een account aan om je recepten in de cloud op te slaan, vanaf elk apparaat toegang te krijgen en ervoor te zorgen dat je creaties nooit verloren gaan.",
+    "signup_free": "Gratis Registreren",
+    "have_account_button": "Ik heb al een account",
+    "feature_backup": "Back-up",
+    "feature_multidevice": "Multi-Apparaat",
+    "feature_private": "Privé",
+    "connected_status": "Verbonden",
+    "stats_recipes": "Recepten",
+    "stats_ingredients": "Ingrediënten",
+    "actions_title": "Acties",
+    "sync_data": "Gegevens Synchroniseren",
+    "sync_status_ready": "Status: Klaar",
+    "sync_status_syncing": "Synchroniseren...",
+    "sync_status_error": "Verbindingsfout",
+    "sync_status_disconnected": "Niet verbonden",
+    "migrate_data": "Lokale Gegevens Migreren",
+    "migrate_description": "Mijn huidige gegevens uploaden naar de cloud"
   }
 }

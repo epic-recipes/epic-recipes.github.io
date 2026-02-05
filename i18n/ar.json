@@ -177,7 +177,20 @@
     "pwa_install_error": "لا يمكن تثبيت التطبيق في هذا الوقت. تأكد من استخدام متصفح متوافق",
     "full_config_exported": "تم تصدير الإعدادات الكاملة (الوصفات والمكونات والوحدات والمعادلات)",
     "no_data_export": "لا توجد بيانات للتصدير",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "بيانات مفقودة",
+    "auth_login_success": "تم تسجيل الدخول بنجاح",
+    "auth_signup_success": "اكتمل التسجيل. تحقق من بريدك الإلكتروني للتأكيد.",
+    "auth_logout": "تم تسجيل الخروج",
+    "auth_required": "يجب عليك تسجيل الدخول",
+    "sync_uploading": "جارٍ تحميل البيانات...",
+    "sync_upload_success": "تم تحميل البيانات بنجاح",
+    "sync_upload_error": "خطأ في تحميل البيانات",
+    "sync_completed": "اكتملت المزامنة",
+    "supabase_missing_credentials": "بيانات اعتماد Supabase مفقودة",
+    "supabase_connected": "تم الاتصال بـ Supabase والمزامنة",
+    "supabase_error": "خطأ في الاتصال بـ Supabase",
+    "supabase_disconnected": "تم قطع الاتصال من Supabase"
   },
   "messages": {
     "editing_recipe": "تحرير \\\"{name}\\\"",
@@ -301,5 +314,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "تسجيل الدخول",
+    "signup_title": "إنشاء حساب",
+    "email_label": "البريد الإلكتروني",
+    "email_placeholder": "you@email.com",
+    "password_label": "كلمة المرور",
+    "password_placeholder": "••••••••",
+    "confirm_button": "تأكيد",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "هل لديك حساب بالفعل؟",
+    "signup_link": "سجل",
+    "login_link": "تسجيل الدخول",
+    "logged_in_as": "تم تسجيل الدخول",
+    "logout_button": "تسجيل الخروج"
+  },
+  "account": {
+    "guest_title": "انضم إلى المطبخ",
+    "guest_description": "أنشئ حسابًا لحفظ وصفاتك في السحابة، والوصول من أي جهاز والتأكد من عدم فقدان إبداعاتك أبدًا.",
+    "signup_free": "سجل مجانًا",
+    "have_account_button": "لدي حساب بالفعل",
+    "feature_backup": "نسخ احتياطي",
+    "feature_multidevice": "متعدد الأجهزة",
+    "feature_private": "خاص",
+    "connected_status": "متصل",
+    "stats_recipes": "الوصفات",
+    "stats_ingredients": "المكونات",
+    "actions_title": "الإجراءات",
+    "sync_data": "مزامنة البيانات",
+    "sync_status_ready": "الحالة: جاهز",
+    "sync_status_syncing": "جارٍ المزامنة...",
+    "sync_status_error": "خطأ في الاتصال",
+    "sync_status_disconnected": "غير متصل",
+    "migrate_data": "نقل البيانات المحلية",
+    "migrate_description": "تحميل بياناتي الحالية إلى السحابة"
   }
 }

@@ -177,7 +177,20 @@
     "pwa_install_error": "現在アプリをインストールできません。互換性のあるブラウザを使用していることを確認してください",
     "full_config_exported": "完全な構成がエクスポートされました（レシピ、材料、単位、換算）",
     "no_data_export": "エクスポートするデータがありません",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "データが不足しています",
+    "auth_login_success": "ログインに成功しました",
+    "auth_signup_success": "登録が完了しました。確認のためメールをご確認ください。",
+    "auth_logout": "ログアウトしました",
+    "auth_required": "ログインが必要です",
+    "sync_uploading": "データをアップロード中...",
+    "sync_upload_success": "データのアップロードに成功しました",
+    "sync_upload_error": "データのアップロードエラー",
+    "sync_completed": "同期が完了しました",
+    "supabase_missing_credentials": "Supabase認証情報がありません",
+    "supabase_connected": "Supabaseに接続して同期しました",
+    "supabase_error": "Supabaseへの接続エラー",
+    "supabase_disconnected": "Supabaseから切断されました"
   },
   "messages": {
     "editing_recipe": "\\\"{name}\\\"を編集",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "ログイン",
+    "signup_title": "アカウント作成",
+    "email_label": "メール",
+    "email_placeholder": "you@email.com",
+    "password_label": "パスワード",
+    "password_placeholder": "••••••••",
+    "confirm_button": "確認",
+    "no_account": "アカウントをお持ちでないですか？",
+    "have_account": "すでにアカウントをお持ちですか？",
+    "signup_link": "登録",
+    "login_link": "ログイン",
+    "logged_in_as": "ログイン中",
+    "logout_button": "ログアウト"
+  },
+  "account": {
+    "guest_title": "キッチンに参加",
+    "guest_description": "アカウントを作成して、レシピをクラウドに保存し、どのデバイスからでもアクセスでき、作品が失われないようにします。",
+    "signup_free": "無料登録",
+    "have_account_button": "すでにアカウントがあります",
+    "feature_backup": "バックアップ",
+    "feature_multidevice": "マルチデバイス",
+    "feature_private": "プライベート",
+    "connected_status": "接続済み",
+    "stats_recipes": "レシピ",
+    "stats_ingredients": "材料",
+    "actions_title": "アクション",
+    "sync_data": "データを同期",
+    "sync_status_ready": "ステータス：準備完了",
+    "sync_status_syncing": "同期中...",
+    "sync_status_error": "接続エラー",
+    "sync_status_disconnected": "未接続",
+    "migrate_data": "ローカルデータを移行",
+    "migrate_description": "現在のデータをクラウドにアップロード"
   }
 }

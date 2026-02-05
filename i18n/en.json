@@ -182,7 +182,20 @@
     "pwa_install_error": "The app cannot be installed at this time. Make sure you are on a compatible browser",
     "full_config_exported": "Complete configuration exported (recipes, ingredients, units and equivalences)",
     "no_data_export": "No data to export",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Missing data",
+    "auth_login_success": "Successfully logged in",
+    "auth_signup_success": "Registration completed. Check your email to confirm.",
+    "auth_logout": "Logged out",
+    "auth_required": "You must log in",
+    "sync_uploading": "Uploading data...",
+    "sync_upload_success": "Data uploaded successfully",
+    "sync_upload_error": "Error uploading data",
+    "sync_completed": "Sync completed",
+    "supabase_missing_credentials": "Missing Supabase credentials",
+    "supabase_connected": "Supabase connected and synced",
+    "supabase_error": "Error connecting to Supabase",
+    "supabase_disconnected": "Disconnected from Supabase"
   },
   "messages": {
     "editing_recipe": "Editing \"{name}\"",
@@ -308,5 +321,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Log In",
+    "signup_title": "Create Account",
+    "email_label": "Email",
+    "email_placeholder": "you@email.com",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Confirm",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "signup_link": "Sign Up",
+    "login_link": "Log In",
+    "logged_in_as": "Logged in",
+    "logout_button": "Log Out"
+  },
+  "account": {
+    "guest_title": "Join the Kitchen",
+    "guest_description": "Create an account to save your recipes in the cloud, access from any device and ensure your creations are never lost.",
+    "signup_free": "Sign Up Free",
+    "have_account_button": "I already have an account",
+    "feature_backup": "Backup",
+    "feature_multidevice": "Multi-Device",
+    "feature_private": "Private",
+    "connected_status": "Connected",
+    "stats_recipes": "Recipes",
+    "stats_ingredients": "Ingredients",
+    "actions_title": "Actions",
+    "sync_data": "Sync Data",
+    "sync_status_ready": "Status: Ready",
+    "sync_status_syncing": "Syncing...",
+    "sync_status_error": "Connection error",
+    "sync_status_disconnected": "Not connected",
+    "migrate_data": "Migrate Local Data",
+    "migrate_description": "Upload my current data to the cloud"
   }
 }

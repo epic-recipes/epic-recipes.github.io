@@ -177,7 +177,20 @@
     "pwa_install_error": "Şu anda uygulama yüklenemez. Uyumlu bir tarayıcı kullandığınızdan emin olun",
     "full_config_exported": "Tam yapılandırma dışa aktarıldı (tarifler, malzemeler, birimler ve dönüşümler)",
     "no_data_export": "Dışa aktarılacak veri yok",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Eksik veriler",
+    "auth_login_success": "Başarıyla giriş yapıldı",
+    "auth_signup_success": "Kayıt tamamlandı. Onaylamak için e-postanızı kontrol edin.",
+    "auth_logout": "Çıkış yapıldı",
+    "auth_required": "Giriş yapmalısınız",
+    "sync_uploading": "Veriler yükleniyor...",
+    "sync_upload_success": "Veriler başarıyla yüklendi",
+    "sync_upload_error": "Veri yükleme hatası",
+    "sync_completed": "Senkronizasyon tamamlandı",
+    "supabase_missing_credentials": "Supabase kimlik bilgileri eksik",
+    "supabase_connected": "Supabase bağlandı ve senkronize edildi",
+    "supabase_error": "Supabase'e bağlanma hatası",
+    "supabase_disconnected": "Supabase bağlantısı kesildi"
   },
   "messages": {
     "editing_recipe": "\\\"{name}\\\" düzenleniyor",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Giriş Yap",
+    "signup_title": "Hesap Oluştur",
+    "email_label": "E-posta",
+    "email_placeholder": "sen@email.com",
+    "password_label": "Şifre",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Onayla",
+    "no_account": "Hesabınız yok mu?",
+    "have_account": "Zaten hesabınız var mı?",
+    "signup_link": "Kayıt Ol",
+    "login_link": "Giriş Yap",
+    "logged_in_as": "Giriş yapıldı",
+    "logout_button": "Çıkış Yap"
+  },
+  "account": {
+    "guest_title": "Mutfağa Katılın",
+    "guest_description": "Tariflerinizi bulutta kaydetmek, herhangi bir cihazdan erişmek ve kreasyonlarınızın asla kaybolmamasını sağlamak için bir hesap oluşturun.",
+    "signup_free": "Ücretsiz Kayıt Ol",
+    "have_account_button": "Zaten hesabım var",
+    "feature_backup": "Yedekleme",
+    "feature_multidevice": "Çoklu Cihaz",
+    "feature_private": "Özel",
+    "connected_status": "Bağlı",
+    "stats_recipes": "Tarifler",
+    "stats_ingredients": "Malzemeler",
+    "actions_title": "İşlemler",
+    "sync_data": "Verileri Senkronize Et",
+    "sync_status_ready": "Durum: Hazır",
+    "sync_status_syncing": "Senkronize ediliyor...",
+    "sync_status_error": "Bağlantı hatası",
+    "sync_status_disconnected": "Bağlı değil",
+    "migrate_data": "Yerel Verileri Taşı",
+    "migrate_description": "Mevcut verilerimi buluta yükle"
   }
 }

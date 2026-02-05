@@ -177,7 +177,20 @@
     "pwa_install_error": "Không thể cài đặt ứng dụng lúc này. Hãy chắc chắn bạn đang sử dụng trình duyệt tương thích",
     "full_config_exported": "Xuất cấu hình đầy đủ (công thức, nguyên liệu, đơn vị và chuyển đổi)",
     "no_data_export": "Không có dữ liệu để xuất",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Recipe updated",
+    "auth_missing_data": "Thiếu dữ liệu",
+    "auth_login_success": "Đăng nhập thành công",
+    "auth_signup_success": "Đăng ký hoàn tất. Kiểm tra email của bạn để xác nhận.",
+    "auth_logout": "Đã đăng xuất",
+    "auth_required": "Bạn phải đăng nhập",
+    "sync_uploading": "Đang tải dữ liệu lên...",
+    "sync_upload_success": "Tải dữ liệu lên thành công",
+    "sync_upload_error": "Lỗi tải dữ liệu lên",
+    "sync_completed": "Đồng bộ hoàn tất",
+    "supabase_missing_credentials": "Thiếu thông tin xác thực Supabase",
+    "supabase_connected": "Supabase đã kết nối và đồng bộ",
+    "supabase_error": "Lỗi kết nối với Supabase",
+    "supabase_disconnected": "Đã ngắt kết nối khỏi Supabase"
   },
   "messages": {
     "editing_recipe": "Đang chỉnh sửa \\\"{name}\\\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Đăng Nhập",
+    "signup_title": "Tạo Tài Khoản",
+    "email_label": "Email",
+    "email_placeholder": "ban@email.com",
+    "password_label": "Mật khẩu",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Xác nhận",
+    "no_account": "Chưa có tài khoản?",
+    "have_account": "Đã có tài khoản?",
+    "signup_link": "Đăng ký",
+    "login_link": "Đăng nhập",
+    "logged_in_as": "Đã đăng nhập",
+    "logout_button": "Đăng xuất"
+  },
+  "account": {
+    "guest_title": "Tham Gia Nhà Bếp",
+    "guest_description": "Tạo tài khoản để lưu công thức của bạn vào đám mây, truy cập từ bất kỳ thiết bị nào và đảm bảo tác phẩm của bạn không bao giờ bị mất.",
+    "signup_free": "Đăng Ký Miễn Phí",
+    "have_account_button": "Tôi đã có tài khoản",
+    "feature_backup": "Sao lưu",
+    "feature_multidevice": "Đa thiết bị",
+    "feature_private": "Riêng tư",
+    "connected_status": "Đã kết nối",
+    "stats_recipes": "Công thức",
+    "stats_ingredients": "Nguyên liệu",
+    "actions_title": "Hành động",
+    "sync_data": "Đồng bộ Dữ liệu",
+    "sync_status_ready": "Trạng thái: Sẵn sàng",
+    "sync_status_syncing": "Đang đồng bộ...",
+    "sync_status_error": "Lỗi kết nối",
+    "sync_status_disconnected": "Chưa kết nối",
+    "migrate_data": "Di chuyển Dữ liệu Cục bộ",
+    "migrate_description": "Tải dữ liệu hiện tại của tôi lên đám mây"
   }
 }

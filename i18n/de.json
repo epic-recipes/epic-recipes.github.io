@@ -177,7 +177,20 @@
     "pwa_install_error": "Die App kann derzeit nicht installiert werden. Stellen Sie sicher, dass Sie einen kompatiblen Browser verwenden",
     "full_config_exported": "Vollständige Konfiguration exportiert (Rezepte, Zutaten, Einheiten und Äquivalenzen)",
     "no_data_export": "Keine Daten zum Exportieren",
-    "recipe_updated": "Recipe updated"
+    "recipe_updated": "Rezept aktualisiert",
+    "auth_missing_data": "Fehlende Daten",
+    "auth_login_success": "Erfolgreich angemeldet",
+    "auth_signup_success": "Registrierung abgeschlossen. Überprüfen Sie Ihre E-Mail zur Bestätigung.",
+    "auth_logout": "Abgemeldet",
+    "auth_required": "Sie müssen sich anmelden",
+    "sync_uploading": "Daten werden hochgeladen...",
+    "sync_upload_success": "Daten erfolgreich hochgeladen",
+    "sync_upload_error": "Fehler beim Hochladen der Daten",
+    "sync_completed": "Synchronisation abgeschlossen",
+    "supabase_missing_credentials": "Supabase-Anmeldedaten fehlen",
+    "supabase_connected": "Supabase verbunden und synchronisiert",
+    "supabase_error": "Fehler beim Verbinden mit Supabase",
+    "supabase_disconnected": "Von Supabase getrennt"
   },
   "messages": {
     "editing_recipe": "Bearbeitung von \"{name}\"",
@@ -302,5 +315,40 @@
     "promo_phrase": "Efficiency and Elegance for every Chef.",
     "footer_branding": "DESIGNED FOR GASTRONOMY PROFESSIONALS",
     "app_share_text": "🍽️ Discover Epic Recipe Book: Manage costs and profitability with style. The ultimate tool for chefs!"
+  },
+  "auth": {
+    "login_title": "Anmelden",
+    "signup_title": "Konto Erstellen",
+    "email_label": "E-Mail",
+    "email_placeholder": "du@email.com",
+    "password_label": "Passwort",
+    "password_placeholder": "••••••••",
+    "confirm_button": "Bestätigen",
+    "no_account": "Noch kein Konto?",
+    "have_account": "Bereits ein Konto?",
+    "signup_link": "Registrieren",
+    "login_link": "Anmelden",
+    "logged_in_as": "Angemeldet",
+    "logout_button": "Abmelden"
+  },
+  "account": {
+    "guest_title": "Treten Sie der Küche bei",
+    "guest_description": "Erstellen Sie ein Konto, um Ihre Rezepte in der Cloud zu speichern, von jedem Gerät aus darauf zuzugreifen und sicherzustellen, dass Ihre Kreationen nie verloren gehen.",
+    "signup_free": "Kostenlos Registrieren",
+    "have_account_button": "Ich habe bereits ein Konto",
+    "feature_backup": "Sicherung",
+    "feature_multidevice": "Multi-Gerät",
+    "feature_private": "Privat",
+    "connected_status": "Verbunden",
+    "stats_recipes": "Rezepte",
+    "stats_ingredients": "Zutaten",
+    "actions_title": "Aktionen",
+    "sync_data": "Daten Synchronisieren",
+    "sync_status_ready": "Status: Bereit",
+    "sync_status_syncing": "Synchronisiere...",
+    "sync_status_error": "Verbindungsfehler",
+    "sync_status_disconnected": "Nicht verbunden",
+    "migrate_data": "Lokale Daten Migrieren",
+    "migrate_description": "Meine aktuellen Daten in die Cloud hochladen"
   }
 }
