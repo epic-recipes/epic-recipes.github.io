@@ -527,6 +527,52 @@
     </div>
   </div>
 
+  <!-- MODAL de Autenticación (Login/Signup) -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content max-w-sm">
+      <div class="modal-header flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800" id="auth-title">Iniciar Sesión</h3>
+        <button class="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 font-bold"
+          onclick="closeAuthModal()">×</button>
+      </div>
+      <div class="space-y-4" id="auth-form-container">
+        <div id="auth-inputs">
+          <div class="mb-4">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Email</label>
+            <input type="email" id="auth-email"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              placeholder="tu@email.com">
+          </div>
+          <div id="password-field">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Contraseña</label>
+            <input type="password" id="auth-password"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              placeholder="••••••••">
+          </div>
+        </div>
+        <button class="w-full btn btn-primary py-3.5" id="auth-submit-btn" onclick="handleAuth()">Confirmar</button>
+        <p class="text-center text-xs text-gray-400">
+          <span id="auth-switch-text">¿No tienes cuenta?</span>
+          <button class="text-primary font-bold ml-1" onclick="toggleAuthMode()"
+            id="auth-switch-btn">Regístrate</button>
+        </p>
+      </div>
+      <div id="user-profile-info" class="hidden space-y-4">
+        <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl">
+          <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+            <i class="fas fa-user text-xl"></i>
+          </div>
+          <div class="flex-1 overflow-hidden">
+            <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Sesión iniciada</p>
+            <p class="text-sm font-bold truncate" id="user-email-display"></p>
+          </div>
+        </div>
+        <button class="w-full btn btn-secondary py-3.5 text-red-500 border-red-50" onclick="logoutUser()">Cerrar
+          Sesión</button>
+      </div>
+    </div>
+  </div>
+
   <div class="flex h-screen bg-gray-50 overflow-x-hidden">
     <aside class="hidden md:flex flex-col items-center py-6 w-24 bg-white border-r border-gray-100"
       style="background-color: var(--bg-card)">
@@ -550,8 +596,13 @@
         data-i18n-title="nav.my_recipes">
         <i class="fas fa-book-open text-xl"></i>
       </button>
+      <button id="sidebar-cuenta"
+        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 hover:text-primary transition-all"
+        onclick="switchTab('tab-cuenta')" title="Mi Perfil" data-i18n-title="nav.profile">
+        <i class="fas fa-user-circle text-xl"></i>
+      </button>
       <button id="sidebar-config"
-        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 hover:text-primary transition-all mt-auto"
+        class="w-16 h-16 flex items-center justify-center rounded-2xl text-gray-400 hover:text-primary transition-all mt-4"
         onclick="switchTab('tab-config')" title="Configuración" data-i18n-title="nav.settings">
         <i class="fas fa-sliders-h text-xl"></i>
       </button>
@@ -637,6 +688,11 @@
           class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
           onclick="switchTab('tab-config')" title="Configuración">
           <i class="fas fa-sliders-h text-2xl"></i>
+        </button>
+        <button id="bottom-cuenta"
+          class="flex items-center justify-center text-gray-400 transition-all hover:scale-110 active:scale-95"
+          onclick="switchTab('tab-cuenta')" title="Perfil">
+          <i class="fas fa-user-circle text-2xl"></i>
         </button>
       </div>
 
@@ -797,6 +853,135 @@
           </section>
         </div>
 
+        <!-- TAB 5: CUENTA (DASHBOARD) -->
+        <div id="tab-cuenta" class="tab-content">
+          <section class="bg-white rounded-[2rem] shadow-sm p-8 border border-gray-50 mb-8"
+            style="background-color: var(--bg-card)">
+
+            <!-- Vista de Invitado -->
+            <div id="account-guest" class="text-center py-8">
+              <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-user-astronaut text-4xl text-primary"></i>
+              </div>
+              <h2 class="text-2xl font-bold mb-3" style="color: var(--text)">Únete a la Cocina</h2>
+              <p class="text-gray-500 mb-8 max-w-md mx-auto">Crea una cuenta para guardar tus recetas en la nube,
+                acceder desde cualquier dispositivo y asegurar que tus creaciones nunca se pierdan.</p>
+
+              <div class="grid grid-cols-1 gap-4 max-w-xs mx-auto">
+                <button class="btn btn-primary py-4 text-lg shadow-lg shadow-primary/30"
+                  onclick="openAuthModal('signup')">
+                  Registrarse Gratis
+                </button>
+                <button class="btn btn-secondary py-4 text-lg" onclick="openAuthModal('login')">
+                  Ya tengo cuenta
+                </button>
+              </div>
+
+              <div class="mt-12 grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div
+                    class="w-12 h-12 bg-orange-100 text-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-cloud-upload-alt text-xl"></i>
+                  </div>
+                  <p class="text-xs font-bold text-gray-400 uppercase">Backup</p>
+                </div>
+                <div>
+                  <div
+                    class="w-12 h-12 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-mobile-alt text-xl"></i>
+                  </div>
+                  <p class="text-xs font-bold text-gray-400 uppercase">Multi-Device</p>
+                </div>
+                <div>
+                  <div
+                    class="w-12 h-12 bg-green-100 text-green-500 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-shield-alt text-xl"></i>
+                  </div>
+                  <p class="text-xs font-bold text-gray-400 uppercase">Privado</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vista de Usuario Logueado -->
+            <div id="account-user" class="hidden">
+              <div class="flex items-center gap-4 mb-8 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <div
+                  class="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-lg shadow-primary/20">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="flex-1 overflow-hidden">
+                  <h3 class="text-lg font-bold truncate" style="color: var(--text)" id="dashboard-email">
+                    usuario@email.com</h3>
+                  <p class="text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span> Conectado
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
+                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Recetas</p>
+                  <p class="text-3xl font-black text-gray-800" id="dashboard-stats-recipes">0</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
+                  <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Ingredientes</p>
+                  <p class="text-3xl font-black text-gray-800" id="dashboard-stats-ingredients">0</p>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Acciones</h3>
+
+                <button
+                  class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 rounded-2xl transition-all group"
+                  onclick="manualSync()">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-bold text-gray-700 text-sm">Sincronizar Datos</p>
+                      <p class="text-xs text-gray-400" id="sb-status">Estado: Listo</p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-300"></i>
+                </button>
+
+                <button
+                  class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 rounded-2xl transition-all group"
+                  onclick="uploadLocalData()">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 bg-orange-50 text-orange-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-bold text-gray-700 text-sm">Migrar Datos Locales</p>
+                      <p class="text-xs text-gray-400">Subir mis datos actuales a la nube</p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-300"></i>
+                </button>
+
+                <div class="pt-6">
+                  <button class="w-full btn btn-secondary text-red-500 border-red-100 hover:bg-red-50 py-4"
+                    onclick="logoutUser()">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+
+                  </button>
+                </div>
+                <!-- Hidden inputs for JS compatibility -->
+                <div class="hidden">
+                  <input type="text" id="sb-url">
+                  <input type="password" id="sb-key">
+                  <button id="btn-sb-disconnect"></button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
         <!-- TAB 4: CONFIGURACIÓN -->
         <div id="tab-config" class="tab-content">
           <section class="bg-white rounded-[2rem] shadow-sm p-8 border"
@@ -863,38 +1048,6 @@
             </div>
 
 
-            <!-- Supabase Sync Section -->
-            <div class="border-t border-gray-100 pt-8 mb-8">
-              <h3 class="text-xs font-black text-primary uppercase tracking-widest mb-4" style="color: var(--primary)">
-                Sincronización en la Nube (Supabase)</h3>
-              <div class="space-y-4">
-                <div id="sb-credentials-ui" class="hidden">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Project
-                        URL</label>
-                      <input type="text" id="sb-url"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
-                        placeholder="https://your-project.supabase.co">
-                    </div>
-                    <div>
-                      <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Anon
-                        Key</label>
-                      <input type="password" id="sb-key"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
-                        placeholder="sb_publishable_...">
-                    </div>
-                  </div>
-                </div>
-                <div class="flex gap-2">
-                  <button id="btn-sb-sync" class="flex-1 btn btn-primary py-3 px-4 rounded-xl"
-                    onclick="manualSync()">Sincronizar ahora</button>
-                  <button id="btn-sb-disconnect" class="hidden btn btn-secondary py-3 px-4 rounded-xl text-red-500"
-                    onclick="disconnectSupabase()">Desconectar</button>
-                </div>
-                <div id="sb-status" class="text-[10px] text-gray-400 font-medium ml-1">Sincronización activa</div>
-              </div>
-            </div>
 
             <div class="bg-gray-50 rounded-2xl p-5 mt-8 border border-gray-100"
               style="background-color: var(--bg); border-color: var(--border-soft)">
@@ -1454,9 +1607,154 @@
       <script>
         // ====== Supabase Integration ======
         let supabaseClient = null;
+        let currentUser = null;
         const DEFAULT_SB_URL = 'https://fgiopvnkwkrlzmolrwop.supabase.co';
         const DEFAULT_SB_KEY = 'sb_publishable_tKAxO8kLkwoAoXwsgiE94A_o0rhy0iF';
 
+        // ====== Auth Modal Logic ======
+        let authMode = 'login'; // 'login' or 'signup'
+
+        function openAuthModal(mode = 'login') {
+          authMode = mode;
+          updateAuthModalText();
+          document.getElementById('auth-modal').classList.add('active');
+        }
+
+        function updateAuthModalText() {
+          document.getElementById('auth-title').textContent = authMode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta';
+          document.getElementById('auth-switch-text').textContent = authMode === 'login' ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?';
+          document.getElementById('auth-switch-btn').textContent = authMode === 'login' ? 'Regístrate' : 'Entrar';
+        }
+
+        function closeAuthModal() {
+          document.getElementById('auth-modal').classList.remove('active');
+        }
+
+        function toggleAuthMode() {
+          authMode = authMode === 'login' ? 'signup' : 'login';
+          updateAuthModalText();
+        }
+
+        async function handleAuth() {
+          const email = document.getElementById('auth-email').value.trim();
+          const password = document.getElementById('auth-password').value.trim();
+
+          if (!email || !password) return showToast("Faltan datos", "error");
+
+          try {
+            if (!supabaseClient) await connectSupabase();
+
+            if (authMode === 'login') {
+              const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+              if (error) throw error;
+              showToast("Sesión iniciada correctamente", "success");
+              closeAuthModal();
+              // Navegar al panel de cuenta y sincronizar
+              setTimeout(() => {
+                switchTab('tab-cuenta');
+              }, 300);
+            } else {
+              const { error } = await supabaseClient.auth.signUp({ email, password });
+              if (error) throw error;
+              showToast("Registro completado. Revisa tu email para confirmar.", "success");
+              closeAuthModal();
+            }
+          } catch (e) {
+            console.error("Auth error:", e);
+            showToast(e.message, "error");
+          }
+        }
+
+        async function logoutUser() {
+          if (!supabaseClient) await connectSupabase();
+          await supabaseClient.auth.signOut();
+          currentUser = null;
+          updateAuthUI();
+          showToast("Sesión cerrada");
+          closeAuthModal();
+          switchTab('tab-cuenta'); // Volver al dashboard de invitado
+        }
+
+        function updateAuthUI() {
+          const guestView = document.getElementById('account-guest');
+          const userView = document.getElementById('account-user');
+
+          if (currentUser) {
+            // Modal state
+            document.getElementById('auth-form-container').classList.add('hidden');
+            document.getElementById('user-profile-info').classList.remove('hidden');
+            document.getElementById('user-email-display').textContent = currentUser.email;
+
+            // Dashboard state
+            if (guestView) guestView.classList.add('hidden');
+            if (userView) {
+              userView.classList.remove('hidden');
+              document.getElementById('dashboard-email').textContent = currentUser.email;
+              document.getElementById('dashboard-stats-recipes').textContent = recipeBook.length;
+              document.getElementById('dashboard-stats-ingredients').textContent = ingredients.length;
+            }
+
+            // Icons - No cambiar color aquí, switchTab lo maneja
+          } else {
+            // Modal state
+            document.getElementById('auth-form-container').classList.remove('hidden');
+            document.getElementById('user-profile-info').classList.add('hidden');
+
+            // Dashboard state
+            if (guestView) guestView.classList.remove('hidden');
+            if (userView) userView.classList.add('hidden');
+
+            // Icons - No cambiar color aquí, switchTab lo maneja
+          }
+        }
+
+        async function uploadLocalData() {
+          if (!currentUser || !supabaseClient) return showToast("Debes iniciar sesión", "error");
+
+          showToast("Subiendo datos...", "info");
+
+          try {
+            // 1. Upload Ingredients
+            if (ingredients.length > 0) {
+              const ingUpload = ingredients.map(ing => ({
+                id: ing.id,
+                name: ing.name,
+                rarity: ing.rarity,
+                pack_size: ing.packSize,
+                cost: ing.cost,
+                price_type: ing.priceType,
+                category: ing.category,
+                user_id: currentUser.id
+              }));
+              const { error: ingError } = await supabaseClient.from('ingredients').upsert(ingUpload);
+              if (ingError) throw ingError;
+            }
+
+            // 2. Upload Recipes
+            if (recipeBook.length > 0) {
+              const recUpload = recipeBook.map(rec => ({
+                id: rec.id,
+                name: rec.name,
+                items: rec.items,
+                price: rec.price,
+                portions: rec.portions,
+                instructions: rec.instructions,
+                cost: rec.cost,
+                service_percentage: rec.servicePercentage,
+                profit_percentage: rec.profitPercentage,
+                user_id: currentUser.id
+              }));
+              const { error: recError } = await supabaseClient.from('recipes').upsert(recUpload);
+              if (recError) throw recError;
+            }
+
+            showToast("Datos subidos correctamente", "success");
+            await syncDataWithSupabase(); // Refresh local state
+          } catch (e) {
+            console.error("Upload error", e);
+            showToast("Error al subir datos: " + e.message, "error");
+          }
+        }
         let sb_url = localStorage.getItem('sb_url') || DEFAULT_SB_URL;
         let sb_key = localStorage.getItem('sb_key') || DEFAULT_SB_KEY;
 
@@ -1493,6 +1791,19 @@
             document.getElementById('btn-sb-disconnect').classList.remove('hidden');
             document.getElementById('sb-status').textContent = "Pulsando sincronización...";
             document.getElementById('sb-status').style.color = "var(--primary)";
+
+            // Suscribirse a cambios de auth
+            supabaseClient.auth.onAuthStateChange((event, session) => {
+              console.log("Auth Event:", event);
+              currentUser = session?.user || null;
+              updateAuthUI();
+              if (event === 'SIGNED_IN') syncDataWithSupabase();
+            });
+
+            // Verificar sesión inicial
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            currentUser = session?.user || null;
+            updateAuthUI();
 
             await syncDataWithSupabase();
             showToast("Supabase conectado y sincronizado", "success");
@@ -1540,7 +1851,7 @@
                 id: rem.id,
                 name: rem.name,
                 rarity: rem.rarity,
-                packSize: rem.pack_size || rem.packsize, // Fallback por si acaso
+                packSize: rem.pack_size || rem.packsize,
                 cost: rem.cost,
                 priceType: rem.price_type || rem.pricetype,
                 category: rem.category
@@ -1548,7 +1859,7 @@
               localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
               renderIngredients();
             } else if (ingredients.length > 0) {
-              // Mapear de local a remoto
+              // Mapear de local a remoto e incluir user_id si existe
               const toUpload = ingredients.map(ing => ({
                 id: ing.id,
                 name: ing.name,
@@ -1556,7 +1867,8 @@
                 pack_size: ing.packSize,
                 cost: ing.cost,
                 price_type: ing.priceType,
-                category: ing.category
+                category: ing.category,
+                user_id: currentUser?.id || null
               }));
               const { error: upsertError } = await supabaseClient.from('ingredients').upsert(toUpload);
               if (upsertError) throw upsertError;
@@ -1590,7 +1902,8 @@
                 instructions: rec.instructions,
                 cost: rec.cost,
                 service_percentage: rec.servicePercentage,
-                profit_percentage: rec.profitPercentage
+                profit_percentage: rec.profitPercentage,
+                user_id: currentUser?.id || null
               }));
               const { error: upsertBookError } = await supabaseClient.from('recipes').upsert(toUpload);
               if (upsertBookError) throw upsertBookError;
@@ -1725,6 +2038,11 @@
           // Actualizar URL para SPA
           const tabName = tabId.replace('tab-', '');
           history.pushState({ tab: tabName }, '', `#${tabName}`);
+
+          // Refresh Dashboard stats if opening account tab
+          if (tabId === 'tab-cuenta' && typeof updateAuthUI === 'function') {
+            updateAuthUI();
+          }
         }
 
         // Manejar navegación con el botón atrás/adelante
@@ -4154,13 +4472,13 @@
           document.getElementById('service-percentage').value = servicePercentage.toFixed(1);
           document.getElementById('profit-percentage').value = profitPercentage.toFixed(1);
 
-          // Inicializar Supabase si hay credenciales
+          // Inicializar Supabase y Auth
           if (sb_url && sb_key) {
             document.getElementById('sb-url').value = sb_url;
             document.getElementById('sb-key').value = sb_key;
-            document.getElementById('btn-sb-disconnect').classList.remove('hidden');
-            syncDataWithSupabase().then(() => {
-              console.log("Sincronización inicial completada");
+            // Conectar para inicializar cliente y listeners de auth
+            connectSupabase(sb_url, sb_key).then(() => {
+              console.log("Supabase inicializado en carga");
             });
           }
 
