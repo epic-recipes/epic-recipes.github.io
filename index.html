@@ -14,6 +14,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="cookie.svg">
   <title>Recetario Épico</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       --primary: #7C9D8E;
@@ -672,7 +673,8 @@
               <h2 class="text-xl font-bold text-gray-800 mb-6" data-i18n="recipe.title">Creador de Recetas</h2>
               <div class="space-y-6">
                 <!-- Resumen de Receta (Solo lectura) -->
-                <div class="bg-gray-50 rounded-2xl p-5 flex justify-between items-center border border-gray-100 rec-summary"
+                <div
+                  class="bg-gray-50 rounded-2xl p-5 flex justify-between items-center border border-gray-100 rec-summary"
                   style="background-color: var(--bg); border-color: var(--border-soft)">
                   <div>
                     <h3 class="text-2xl font-black" style="color: var(--text)" id="display-rec-name"
@@ -860,6 +862,39 @@
               </div>
             </div>
 
+
+            <!-- Supabase Sync Section -->
+            <div class="border-t border-gray-100 pt-8 mb-8">
+              <h3 class="text-xs font-black text-primary uppercase tracking-widest mb-4" style="color: var(--primary)">
+                Sincronización en la Nube (Supabase)</h3>
+              <div class="space-y-4">
+                <div id="sb-credentials-ui" class="hidden">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Project
+                        URL</label>
+                      <input type="text" id="sb-url"
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+                        placeholder="https://your-project.supabase.co">
+                    </div>
+                    <div>
+                      <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Anon
+                        Key</label>
+                      <input type="password" id="sb-key"
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+                        placeholder="sb_publishable_...">
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <button id="btn-sb-sync" class="flex-1 btn btn-primary py-3 px-4 rounded-xl"
+                    onclick="manualSync()">Sincronizar ahora</button>
+                  <button id="btn-sb-disconnect" class="hidden btn btn-secondary py-3 px-4 rounded-xl text-red-500"
+                    onclick="disconnectSupabase()">Desconectar</button>
+                </div>
+                <div id="sb-status" class="text-[10px] text-gray-400 font-medium ml-1">Sincronización activa</div>
+              </div>
+            </div>
 
             <div class="bg-gray-50 rounded-2xl p-5 mt-8 border border-gray-100"
               style="background-color: var(--bg); border-color: var(--border-soft)">
@@ -1417,6 +1452,160 @@
       </div>
 
       <script>
+        // ====== Supabase Integration ======
+        let supabaseClient = null;
+        const DEFAULT_SB_URL = 'https://fgiopvnkwkrlzmolrwop.supabase.co';
+        const DEFAULT_SB_KEY = 'sb_publishable_tKAxO8kLkwoAoXwsgiE94A_o0rhy0iF';
+
+        let sb_url = localStorage.getItem('sb_url') || DEFAULT_SB_URL;
+        let sb_key = localStorage.getItem('sb_key') || DEFAULT_SB_KEY;
+
+        async function manualSync() {
+          if (!supabaseClient) {
+            await connectSupabase(sb_url, sb_key);
+          } else {
+            await syncDataWithSupabase();
+            showToast("Sincronización completada", "success");
+          }
+        }
+
+        async function connectSupabase(url, key) {
+          const targetUrl = url || document.getElementById('sb-url').value.trim() || DEFAULT_SB_URL;
+          const targetKey = key || document.getElementById('sb-key').value.trim() || DEFAULT_SB_KEY;
+
+          if (!targetUrl || !targetKey) {
+            return showToast("Faltan credenciales de Supabase", "error");
+          }
+
+          try {
+            supabaseClient = supabase.createClient(targetUrl, targetKey);
+            // Probar conexión intentando leer (asumiendo que hay una tabla o simplemente validando auth)
+            // Realmente validamos guardando las credenciales primero
+            localStorage.setItem('sb_url', targetUrl);
+            localStorage.setItem('sb_key', targetKey);
+            sb_url = targetUrl;
+            sb_key = targetKey;
+
+            // Actualizar campos ocultos por si acaso
+            document.getElementById('sb-url').value = targetUrl;
+            document.getElementById('sb-key').value = targetKey;
+
+            document.getElementById('btn-sb-disconnect').classList.remove('hidden');
+            document.getElementById('sb-status').textContent = "Pulsando sincronización...";
+            document.getElementById('sb-status').style.color = "var(--primary)";
+
+            await syncDataWithSupabase();
+            showToast("Supabase conectado y sincronizado", "success");
+          } catch (e) {
+            console.error("Supabase Error:", e);
+            showToast("Error al conectar con Supabase", "error");
+            document.getElementById('sb-status').textContent = "Error de conexión";
+            document.getElementById('sb-status').style.color = "var(--danger)";
+          }
+        }
+
+        async function disconnectSupabase() {
+          localStorage.removeItem('sb_url');
+          localStorage.removeItem('sb_key');
+          sb_url = '';
+          sb_key = '';
+          supabaseClient = null;
+          document.getElementById('sb-url').value = '';
+          document.getElementById('sb-key').value = '';
+          document.getElementById('btn-sb-disconnect').classList.add('hidden');
+          document.getElementById('sb-status').textContent = "No conectado";
+          document.getElementById('sb-status').style.color = "var(--text-muted)";
+          showToast("Desconectado de Supabase");
+        }
+
+        async function syncDataWithSupabase() {
+          if (!supabaseClient) {
+            if (sb_url && sb_key) {
+              supabaseClient = supabase.createClient(sb_url, sb_key);
+            } else {
+              return;
+            }
+          }
+
+          document.getElementById('sb-status').textContent = "Sincronizando...";
+
+          try {
+            // 1. Sincronizar Ingredientes
+            const { data: remoteIng, error: ingError } = await supabaseClient.from('ingredients').select('*');
+            if (ingError) throw ingError;
+
+            if (remoteIng && remoteIng.length > 0) {
+              // Mapear de remoto (snake_case) a local (camelCase)
+              ingredients = remoteIng.map(rem => ({
+                id: rem.id,
+                name: rem.name,
+                rarity: rem.rarity,
+                packSize: rem.pack_size || rem.packsize, // Fallback por si acaso
+                cost: rem.cost,
+                priceType: rem.price_type || rem.pricetype,
+                category: rem.category
+              }));
+              localStorage.setItem('rpg_ing', JSON.stringify(ingredients));
+              renderIngredients();
+            } else if (ingredients.length > 0) {
+              // Mapear de local a remoto
+              const toUpload = ingredients.map(ing => ({
+                id: ing.id,
+                name: ing.name,
+                rarity: ing.rarity,
+                pack_size: ing.packSize,
+                cost: ing.cost,
+                price_type: ing.priceType,
+                category: ing.category
+              }));
+              const { error: upsertError } = await supabaseClient.from('ingredients').upsert(toUpload);
+              if (upsertError) throw upsertError;
+            }
+
+            // 2. Sincronizar Recetas
+            const { data: remoteBook, error: bookError } = await supabaseClient.from('recipes').select('*');
+            if (bookError) throw bookError;
+
+            if (remoteBook && remoteBook.length > 0) {
+              recipeBook = remoteBook.map(rem => ({
+                id: rem.id,
+                name: rem.name,
+                items: rem.items,
+                price: rem.price,
+                portions: rem.portions,
+                instructions: rem.instructions,
+                cost: rem.cost,
+                servicePercentage: rem.service_percentage || rem.servicepercentage,
+                profitPercentage: rem.profit_percentage || rem.profitpercentage
+              }));
+              localStorage.setItem('rpg_book', JSON.stringify(recipeBook));
+              renderBook();
+            } else if (recipeBook.length > 0) {
+              const toUpload = recipeBook.map(rec => ({
+                id: rec.id,
+                name: rec.name,
+                items: rec.items,
+                price: rec.price,
+                portions: rec.portions,
+                instructions: rec.instructions,
+                cost: rec.cost,
+                service_percentage: rec.servicePercentage,
+                profit_percentage: rec.profitPercentage
+              }));
+              const { error: upsertBookError } = await supabaseClient.from('recipes').upsert(toUpload);
+              if (upsertBookError) throw upsertBookError;
+            }
+
+            document.getElementById('sb-status').textContent = "Conectado y sincronizado";
+            document.getElementById('sb-status').style.color = "var(--primary)";
+          } catch (e) {
+            console.error("Sync Error Details:", e);
+            document.getElementById('sb-status').textContent = "Error: " + (e.message || "Sincronización fallida");
+            document.getElementById('sb-status').style.color = "var(--danger)";
+            throw e;
+          }
+        }
+
         // ====== I18N Multilenguaje System ======
         let currentLanguage = localStorage.getItem('appLanguage') || 'es';
         let i18nData = {};
@@ -3964,6 +4153,16 @@
           // Inicializar valores de porcentajes
           document.getElementById('service-percentage').value = servicePercentage.toFixed(1);
           document.getElementById('profit-percentage').value = profitPercentage.toFixed(1);
+
+          // Inicializar Supabase si hay credenciales
+          if (sb_url && sb_key) {
+            document.getElementById('sb-url').value = sb_url;
+            document.getElementById('sb-key').value = sb_key;
+            document.getElementById('btn-sb-disconnect').classList.remove('hidden');
+            syncDataWithSupabase().then(() => {
+              console.log("Sincronización inicial completada");
+            });
+          }
 
           // Registrar Service Worker para PWA
           if ('serviceWorker' in navigator) {
