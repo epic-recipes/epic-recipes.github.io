@@ -51,19 +51,19 @@
       "name": "Mis Recetas",
       "short_name": "Recetas",
       "description": "Ver tus recetas guardadas",
-      "url": "/index.html#libro",
+      "url": "/index.html#libro"
     },
     {
       "name": "Crear Receta",
       "short_name": "Nueva",
       "description": "Crear una nueva receta",
-      "url": "/index.html#receta",
+      "url": "/index.html#receta"
     },
     {
       "name": "Ingredientes",
       "short_name": "Despensa",
       "description": "Gestionar ingredientes",
-      "url": "/index.html#ingredientes",
+      "url": "/index.html#ingredientes"
     }
   ]
 }
